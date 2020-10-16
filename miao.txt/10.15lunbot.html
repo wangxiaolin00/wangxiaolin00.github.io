@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+
+
+    }
+
+    ul {
+      list-style: none;
+    }
+
+
+    section {
+      width: 400px;
+      height: 300px;
+      border: 1px solid red;
+    }
+
+    section>ul {
+      width: 100%;
+      height: 100%;
+      position: relative;
+
+    }
+
+    section ul img {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+
+    }
+
+    section ul li {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+
+    }
+
+    section ul li label {
+      z-index: 10;
+    }
+
+    section ul li label:nth-last-child(2) {
+      position: absolute;
+      top: 110px;
+      left: 0;
+
+    }
+
+    section ul li label:nth-last-child(1) {
+      position: absolute;
+      top: 110px;
+      right: 0;
+
+    }
+
+
+
+    input:nth-child(1):checked~ul li:nth-child(1),
+    input:nth-child(2):checked~ul li:nth-child(2),
+    input:nth-child(3):checked~ul li:nth-child(3),
+    input:nth-child(4):checked~ul li:nth-child(4),
+    input:nth-child(5):checked~ul li:nth-child(5) {
+      opacity: 1;
+      z-index: 20;
+
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <input type="radio" value="fa" id="p1" checked>
+    <input type="radio" value="fa" id="p2">
+    <input type="radio" value="fa" id="p3">
+    <input type="radio" value="fa" id="p4">
+    <input type="radio" value="fa" id="p5">
+    <ul>
+      <li><a href=""><img
+            src="https://travel.12306.cn/imgs/resources/uploadfiles/images/6d77d0ea-53d0-4518-b7e9-e53795b4920c_product_W572_H370.jpg"
+            alt=""></a><label for="p5">ka</label><label for="p1">j</label></li>
+      <li><a href=""><img
+            src="https://travel.12306.cn/imgs/resources/uploadfiles/images/c7c03732-3c86-4308-aea7-df747d4999e8_product_W572_H370.jpg"
+            alt=""></a><label for="p1">ka</label><label for="p2">j</label></li>
+      <li><a href=""><img
+            src="https://travel.12306.cn/imgs/resources/uploadfiles/images/d9ae79de-2f3f-4e9f-ad6e-bdc291dda92a_product_W572_H370.jpg"
+            alt=""></a><label for="p3">ka</label><label for="p4">j</label></li>
+      <li><a href=""><img
+            src="https://travel.12306.cn/imgs/resources/uploadfiles/images/8b36f9a7-f780-4e71-b719-9300109a9ff2_product_W572_H370.jpg"
+            alt=""></a><label for="p4">ka</label><label for="p5">j</label></li>
+      <li><a href=""><img
+            src="https://travel.12306.cn/imgs/resources/uploadfiles/images/fcd7173f-7651-46e7-a126-bdc199e1f6f7_product_W572_H370.jpg"
+            alt=""></a><label for="p5">ka</label><label for="p1">j</label></li>
+    </ul>
+
+
+</body>
+
+</html>
