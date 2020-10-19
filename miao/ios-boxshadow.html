@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    label {
+      display: inline-block;
+      height: 160px;
+      width: 270px;
+      border: 2px solid gray;
+      position: relative;
+      border-radius: 9999px;
+      box-sizing: border-box;
+      transition: .5s;
+
+
+
+    }
+
+    input {
+      display: none;
+    }
+
+
+
+    .aad {
+      display: inline-block;
+      height: 156px;
+      width: 156px;
+      position: absolute;
+      border: cornsilk solid 1px;
+      border-radius: 9999px;
+      top: 0;
+      bottom: 0;
+      margin: 0;
+      left: 0;
+      transition: .5s;
+      background-color: white;
+
+
+
+    }
+
+    input:checked+label {
+      box-shadow: 0 0 0 80px green inset;
+    }
+
+    input:checked+label span {
+      left: 88px;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="radio" value="da" id="off">
+  <label for="off"><span class="aad"></span></label>
+
+</body>
+
+</html>
