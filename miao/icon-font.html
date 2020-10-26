@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="fontawesome.css">
+
+</head>
+<style>
+  div {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  span {
+    font-family: FontAwesome;
+  }
+
+  .fa-star-o:hover::before {
+    content: "\f005";
+  }
+
+  .fa-star-o:hover~.fa-star-o::before {
+    content: "\f006";
+  }
+</style>
+
+<body>
+  <div>
+    <span class="fa fa-star-o"></span>
+    <span class="fa fa-star-o"></span>
+    <span class="fa fa-star-o"></span>
+    <span class="fa fa-star-o"></span>
+    <span class="fa fa-star-o"></span>
+  </div>
+
+
+
+</body>
+
+</html>
