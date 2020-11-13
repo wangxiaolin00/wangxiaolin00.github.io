@@ -637,31 +637,496 @@ console.log(d);
   // if((1+k/100)**d*200==n*d) {
   //   console.log(d);
   // }
-  var sum=0;
+  var price=200;
+  var sum=50;
   for(i=1;i<=20;i++) {
-    var sum=(1+k/100)**i*200;
-    if(n*i>sum) {
+     price*=(1+k/100)
+     sum+=n;
+    if(sum>price) {
       console.log(i);
+      break;
     }else{
-      console.log(n*i,sum);
+      console.log('Impossible');
+      break;
     }
       
     }
   </script>
   <script type="xx" id="ch0105/17">
   var k=parseInt(prompt('正整数k。（1 <= k <= 46）'));
-  var a=(1/Math.sqrt(5))*(((1+Math.sqrt(5))/2)**k-((1-Math.sqrt(5))/2)**k);
-  var b=parseInt(a);
-  console.log(b);
+  // var a=(1/Math.sqrt(5))*(((1+Math.sqrt(5))/2)**k-((1-Math.sqrt(5))/2)**k);
+  // var b=parseInt(a);
+  // console.log(b);
+  var a=1;
+  var b=0;
+  for(i=0;i<k;i++) {
+    var c=a+b
+    a=b;
+    b=c;
+  }
+  console.log(c);
 
   </script>
-  <script type="" id="ch0105/18">
+  <script type="xx" id="ch0105/18">
   var n=parseInt(prompt('整数n（ 1 < n <= 20）'));
   var arr=[];
   var brr=[];
   for(i=1;i<=n;n++) {
-    arr.push(parseInt(prompt('')))
+    arr.push(parseInt(prompt('第'+i+'行鸡尾酒疗法的数据')));
+    brr.push(parseInt(prompt('第'+i+'行鸡尾酒疗法的数据')));
   }
+ var x=arr[0]/(arr[0]+arr[0]);
+ var y=arr[0]/(arr[0]+arr[0]);
+ if(y-x>0.05) {
+   console.log('better');
+ }
+ 
+
+  </script>
+  <script type="xx" id="ch0105/19">
+  var n=parseInt(prompt('表示屋顶数n'));
+  var arr=[];
+  var brr=[];
+  var crr=[];
+  for(i=1;i<=n;i++) {
+    arr.push(parseInt(prompt('第'+i+'个屋顶的x坐标')));
+    brr.push(parseInt(prompt('第'+i+'个屋顶的y坐标')));
+    crr.push(parseInt(prompt('第'+i+'个屋顶人数')));
+  }
+  var d=Math.sqrt(arr[0]**2+brr[0]**2);
+  var s=Math.ceil(d/50*2 +crr[0]*1.5);
+  console.log(s);
+
+  </script>
+  <script type="xx" id="ch0105/20">
+  var h=parseInt(parseInt(prompt('一个整数h，表示球的初始高度')));
+  var sum=h;
+  for(i=1;i<=10;i++) {
+     h=(1/2)**i*h
+     sum+=2*h;                           
+  }
+  console.log(sum);
+  console.log(h);
+  
+  </script>
+  <script type="xx" id="ch0105/21">
+  var n=parseInt(prompt('一个正整数N(N <= 2,000,000)'));
+  var str='';
+  var spp='';
+  var ssp='';
+  var q1='';
+  var q2='';
+  if(n%2==1) {
+    var a=n*3+1
+  str+=n+'*'+3+'+'+1+'='+a
+  console.log(str);
+  var c=a/2;
+  spp+=a+'/'+2+'='+c;
+  console.log(spp);
+  if(c%2==0) {
+    var d=c/2;
+    ssp+=c+'/'+2+'='+d;
+    console.log(ssp);
+    if(d%2==0) {
+      var e=d/2;
+      q1+=d+'/'+2+'='+c;
+      console.log(q1);
+      if(e%2==0) {
+        var f=e/2;
+        q2+=e+'/'+2+'='+f;
+        console.log(q2);
+        if(f==1) {
+          console.log('end');
+        }
+      }
+    }
+  }
+  
+   
+  }
+
+
+  </script>
+  <script type="xxx" id="ch0105/22">
+  var arr=[];
+  for(i=1;i<=12;i++) {
+    arr.push(parseInt(prompt('第'+i+'个月的开销')))
+  }
+  var sum=0;
+  for(j=0;j<12;j++) {
+    sum+=arr[j]
+  }
+  var num=3600-sum;
+  if(num>=0) {
+    var ss=num*(1+20/100);
+    console.log(ss);
+  }else {
+    console.log(num);
+  }
+
+  </script>
+  <script type="xx" id="ch0105/23">
+  var m=parseInt(prompt('每天开始时的药品总量m'));
+  var n=parseInt(prompt('这一天取药的人数n（0 < n <= 100）'));
+  var arr=[];
+  for(i=1;i<=n;i++) {
+    arr.push(parseInt(prompt('第'+i+'个人要取的药品数量')));
+  }
+  console.log(arr);
+  var sum=0;
+  var nu=0;
+  for(j=0;j<arr.length;j++) {
+    sum+=arr[j];
+    if(sum-m>=0) {
+      nu++;
+    }
+  }
+   var s=n-nu;
+   console.log(s);
+  </script>
+  <script type="xx" id="ch0105/24">
+  var n=parseInt(prompt('正整数n'));
+  var arr=[];
+  var brr=[];
+  var nn=0;;
+  for(i=1;i<=n;i++) {
+    arr.push(parseInt(prompt('请输入第'+i+'次的收缩压')));
+    brr.push(parseInt(prompt('请输入第'+i+'次的舒张压')));
+    for(j=0;j<n;j++) {
+      if((arr[j]>90&&arr[j+1]<140)&&(brr[j]>=60&&brr[j+1]<=90)) {
+         nn++;
+      }
+    }
+  }
+  console.log(nn);
+  </script>
+  <script type="buhui" id="ch0105/25">
+  // 49*a+7*b+c=81*c+9*b+a
+  // var abc=a*7**2+b*7**1+c*7**0;
+  // var cba=c*9**2+b*9**1+d*9**0;
+  var a=0,b=0,c=0,m=0,s=[];
+  for(a=1;a<7&&m==0;a++) {
+    for(b=1;b<7&&m==0;b++) {
+      for(c=1;c<7&&m==0;c++) {
+        if((49*a+7*b+c)==(81*c+9*b+a)) {
+             var m=1;
+             s[0]=a;
+             s[1]=b;
+             s[2]=c;
+        }
+      }
+    }
+  }
+  console.log(s);
+
+  </script>
+  <script type="xx" id="ch0105/26">
+  var n=parseInt(prompt('四位数的个数n'));
+  var s=[];
+  for(i=1;i<=n;i++) {
+    s.push(parseInt(prompt('请输入第'+i+'四位数')));
+  }
+  var nu=0;
+  for(j=0;j<s.length;j++) {
+    var a=s[j]%10;;
+    var b=(s[j]%100-s[j]%10)/10;
+    var c=(s[j]%100-s[j]%100)/100;
+    var e=(s[j]-s[j]%1000)/1000;
+    var d=a-b-c-e;
+    if(d>0) {
+      nu++;
+    }
+  }
+  console.log(nu);
+  
+
+  </script>
+  <script type="xx" id="ch0105/27">
+   var k=parseInt(prompt('整数K（1<=k<=15）'));
+   var sum=0;
+   var s=[];
+   
+   for(i=1;i<=16;i++) {
+     sum+=1/i;
+     if(sum>k) {
+       s.push(i)
+     }
+   }
+   var b=s[0];
+   console.log(b);
+  </script>
+  <script type="xx" id="ch0105/28">
+   var n=parseInt(prompt('整数在1到100000000之间'));
+   var c=n%10;
+   var b=(n%100-n%10)/10;
+   var a=(n-n%100)/100;
+   console.log(c+" "+b+' '+a);
+  </script>
+  <script type="xx" id="ch0105/29">
+   var n=parseInt(prompt('-1,000,000,000 ≤ N≤ 1,000,000,000'));
+   var x=n.toString().split('');    
+   var s=x.reverse();
+   var a=Number(s[0]);
+   var b=Number(s[1]);
+   var c=Number(s[2]);
+   console.log(a+""+b+''+c);
+  </script>
+  <script type="xx" id="ch0105/30">
+  var m=parseInt(prompt('1 < m < 100000'));
+  var k=parseInt(prompt('1 < k < 5'));
+  var x=m.toString().split('');
+  var nu=0;
+  var y=x.map(Number);
+  for(i=0;i<y.length;i++) {
+    if(y[i]==3) {
+      nu++;
+      
+    }
+  }
+  if(m%19==0&&nu==k) {
+    console.log('YES');
+  }else {
+    console.log('NO');
+  }
+  </script>
+  <script type="xx" id="ch0105/31">
+   var n=parseInt(prompt('N盏灯(N为不大于5000的正整数)'));
+   var m=parseInt(prompt('为不大于N的正整数'));
+   var s=[];
+   for(i=1;i<=n;i++) {
+     for(j=1;j<=m;j++) {
+       if(j*2<m) {
+         s.push(j)
+       }
+       }
+     }
+     var a=s[0]**2;
+     var b=s[1]**2;
+     var c=s[2]**2;
+     console.log(a+''+b+''+c);
+  </script>
+  <script type="xx" id="ch0105/32">
+   var n=parseInt(prompt(''))
+   var sum=0;
+   var s=1/(Math.sqrt(5));
+   var a=1+Math.sqrt(5);
+   var b=1-Math.sqrt(5);
+   for(i=0;i<=n;i++) {
+     sum+=s*(((a/2)**i)-((b/2)**i))
+   }
+   console.log(sum);//斐波那契数列求和
+  </script>
+  <script type="xx" id="ch0105/33">
+   var n=parseInt(prompt('正整数n。1 <= n <= 1000'))
+   var sum=0;
+   for(i=1;i<=n;i++) {
+     sum+=(-1)**(i-1)*(1/i)
+   }
+   var s=sum.toFixed(4);
+   console.log(s);
+
+  </script>
+  <script type="xx" id="ch0105/34">
+  var nn=parseInt(prompt('正整数n（1 < n < 12）'));//阶乘公式n * jieCheng(n-1)
+  var sum=0;
+  for(i=1;i<=nn;i++) {
+    function jieCheng(n){
+    return n > 1 ? n * jieCheng(n-1) : 1;
+}
+var q=jieCheng(i);
+sum+=q;
+  }
+  console.log(sum);
+
+  </script>
+  <script type="xx" id="ch0105/35">
+  var n=parseInt(prompt('整数n（2<=n<=15）'));
+  var sum=1;
+  for(i=1;i<=n;i++) {
+    function jieCheng(n) {
+      return n>1?n*jieCheng(n-1):1;
+    }
+    var q=jieCheng(i);
+    sum+=1/q;
+  }
+  var ss=sum.toFixed(10);
+  console.log(ss);
+
+  </script>
+  <script type="xxx" id="ch0105/36">
+  var x=parseFloat(prompt('输入x'));
+  var n=parseInt(prompt('正整数n'));
+  var sum=1;
+  for(i=1;i<=n;i++) {
+    sum+=x**n
+  }
+  var s=sum.toFixed(2);
+  console.log(s);
+
+  </script>
+  <script type="xxxx" id="ch0105/37">
+   var m=parseInt(prompt('不超过10000的正整数'));
+   var n=parseInt(prompt('不超过10000的正整数'));
+   var x=parseInt(prompt('不超过10000的正整数'));
+
+  </script>
+  <script type="xxxx" id="ch0105/38">
+  var n=parseInt(prompt('一个整数n（0 <= n <= 100）表明多项式的最高次幂为n。'));
+  var s=[];
+  var sum=0;
+  var c=C;
+  for(i=0;i<=n;i++) {
+    s.push(parseInt(prompt('请输入第'+(i+1)+'个非负整数')))
+  }
+  for(j=0;j<=s.length;j++) {
+    sum+=c*n*i**(n-1)
+  }
+
+  </script>
+  <script type="xx" id="ch0105/39">
+  var n=parseInt(prompt('正整数n(n < 100)'));
+  // var d=[];
+  // var s=d.toString().split('');
+  // var x=s.map(Number);
+  var sum=0;
+  for(i=1;i<=n;i++) {
+   if(i%7!=0&&i%10!=7&&i%100!=7&&i!=7) {
+     sum+=i**2
+   }
+  }
+  
+  console.log(sum);
+
+  </script>
+  <script type="xx" id="ch0105/40">
+  var n=parseInt(prompt('十进制正整数n1 <= n <= 10000。'));
+  var nu=0;
+  for(i=1;i<=n;i++) {
+    if((i-i%10)/10==1||i%10==1||i==1||(i%100-i%10)/10==1||(i%1000-i%100)/100==1||(i%10000-i%1000)/1000==1||i/10==1) {
+      nu++;
+      if(i==11) {
+        nu=nu+1;
+        if(i==111) {
+          nu=nu+2
+          if(i=1111) {
+            nu=nu+3;
+          }
+        }
+      }
+    }
+  }
+  console.log(nu);
+
+  </script>
+  <script type="xx" id="ch0105/41">
+  var n=parseInt(prompt('L'));
+  var m=parseInt(prompt('R'));
+  var nu=0;
+  for(i=n;i<=m;i++) {
+    if((i-i%10)/10==2||i%10==2||i==2||(i%100-i%10)/10==2||(i%1000-i%100)/100==2||(i%10000-i%1000)/1000==2||i/10==2) {
+       nu++;
+       if(i=22) {
+         nu=nu+2;
+       }
+      
+       
+    }
+    
+  }
+  console.log(nu);
+
+  </script>
+  <script type="xx" id="ch0105/42">
+   var a=parseInt(prompt('矩形的高'));
+   var b=parseInt(prompt('矩形的宽'));
+   var c=prompt('字符');
+   var d=parseInt(prompt('第四个参数为1或0，0代表空心1代表实心。'))
+   var str='';
+   var s=' ';
+   for(i=1;i<=b;i++) {
+     for(j=1;j<=a;j++) {
+      str+=c
+     }
+     str+='\n'
+   }
+   if(d==1) {
+     console.log(str);
+   }
+    var sep=c+c+c+c+c+c+c+'\n'+c+s+s+s+s+s+c+'\n'+c+s+s+s+s+s+c+'\n'+c+s+s+s+s+s+c+'\n'+c+s+s+s+s+s+c+'\n'+c+s+s+s+s+s+c+'\n'+c+c+c+c+c+c+c;
+   if(d==0) {
+     console.log(sep);
+   }
+
+  </script>
+  <script type="xx" id="ch0105/43">
+    var n=parseInt(prompt('正整数 n 是两个不同的质数的乘积，6 ≤ n ≤ 1000'))
+    var s=[];
+    // function isPrime(num) {
+    //   if(num==1) {
+    //     return false;
+    //   }
+    //   for(j=2;i<num;j++) {
+    //     if(num%j==0) {
+    //       return false;
+    //     }
+    //     return true;
+    //   }
+    // }
+    for(i=1;i<=n;i++) {                                                                                                                                                                                        
+      if(n%i==0&&i!=1&&i!=n) {
+        s.push(i)
+      }
+    }
+    
+    var max=s[0];
+    for(c=0;c<s.length;c++) {
+      if(s[c]>s[0]) {
+        max=s[c]
+      }
+    }
+    console.log(max);
+  </script>
+  <script type="xx" id="ch0105/44">
+    var n=parseInt(prompt('一个不超过10000的正整数n'));
+    var s=[];
+    function isPrime(num) {
+      if(num==2) {
+        return true;
+      }else if(num%2==0) {
+        return false;
+      }
+      var ss=Math.sqrt(num);
+      for(j=3;j<=ss;j+=2) {
+        if(num%j==0) {
+          return false;
+        }
+      }
+      return true;
+    }
+    for(i=2;i<=10000;i++) {
+      if(isPrime(i)) {
+        s.push(i)
+      }
+    }
+    console.log(s[n-1]);
+  </script>
+  <script type="" id="ch0105/45">
+  var n=parseInt(prompt('一个整数（范围1到10000），表示天数。'));
+  var sum=0;
+  var str='';
+  for(i=1;i<=1000;i++) {
+    for(j=1;j<=i;j++) {
+       str+=i;
+    }
+  }
+  var num=0;
+  var s=str.split('');
+  var x=s.map(Number);
+  for(k=0;k<=n-1;k++) {
+    num+=Number(s[k])
+  }
+  console.log(num);
+
 
   </script>
 
