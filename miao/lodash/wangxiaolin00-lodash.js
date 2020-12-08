@@ -28,19 +28,19 @@ var wangxiaolin00 = {
     return result
   },
   drop: function (ary, n = 1) {
-    if (n == 0) {
-      return ary
-    }
+
     if (n > ary.length) {
       return []
     }
-    while (n > 0) {
-      ary.splice(0, 1)
-      n--
+    var res = [...ary]
+    while (n) {
+      res.shift();
+      n--;
     }
-    return ary
+    return res
+
   },
-  drop: function (ary, n = 1) {
+  dropRight: function (ary, n = 1) {
     if (n == 0) {
       return ary
     }
@@ -48,7 +48,8 @@ var wangxiaolin00 = {
       return []
     }
     while (n > 0) {
-      ary.splice(ary.length - 1, 1)
+      ary.pop();
+      n--;
     }
     return ary
   },
@@ -68,7 +69,7 @@ var wangxiaolin00 = {
   },
   findLastIndex: function (ary, predicate = _.identity, fromindex = ary.length - 1) {
     for (var i = fromindex; i >= 0; i--) {
-      if (predicate(arr[i])) {
+      if (predicate(ary[i])) {
         return i
       }
     }
@@ -95,9 +96,10 @@ var wangxiaolin00 = {
   },
   join: function (ary, separator = ',') {
     var str = ''
-    for (var i = 0; i < ary.length; i++) {
-      str += ary[i] + separator
+    for (var i = 0; i < ary.length - 1; i++) {
+      str += ary[i] + '' + separator
     }
+    str = str + ary[ary.length - 1]
     return str
   },
   last: function (ary) {
