@@ -142,8 +142,16 @@
   }
   // 画一个大小合适的sin(x)的图像
   for (var x = 0; x <= 400; x++) {
-    var y = 200 + (Math.sin(5 * x / 180 * Math.PI)) * 50
+    var y = 200 + (Math.sin(x / 180 * Math.PI)) * 50
     dot(x, y, 'black')
+  }
+  // 画一个实心的圆
+  for (let i = 300; i <= 400; i++) {
+    for (let j = 50; j <= 150; j++) {
+      if (Math.pow(i - 350, 2) + Math.pow(j - 100, 2) <= 1600) {
+        dot(i, j, 'yellow');
+      }
+    }
   }
 
 
