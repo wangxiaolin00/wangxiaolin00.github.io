@@ -19,9 +19,15 @@ var wangxiaolin00 = {
   },
   difference: function (ary, ...ary1) {
     var result = []
-    var a = [...ary1]
+    var o = {}
+    for (var i = 0; i < ary1.length; i++) {
+      for (var j = 0; j < ary1[0].length; j++) {
+        var k = ary1[i][j]
+        o[k] = 1
+      }
+    }
     for (var i = 0; i < ary.length; i++) {
-      if (!a.includes(ary[i])) {
+      if (!(ary[i] in o)) {
         result.push(ary[i])
       }
     }
@@ -74,6 +80,22 @@ var wangxiaolin00 = {
       }
     }
   },
+  flatten: function (array) {
+    var ss = array.flat()
+    return ss
+
+  },
+  flattenDeep: function (array) {
+    var ss = array.flat(Infinity)
+    return ss
+  },
+  flattenDepth: function (array, depth = 1) {
+    var ss = array.flat(depth)
+    return ss
+  },
+  toPairs: function (obj) {//Object.entries 返回值是可以枚举的键值对组成的数组
+    return Object.entries(obj)
+  },
   head: function (ary) {
     if (ary.length == 0) {
       return undefined
@@ -94,6 +116,14 @@ var wangxiaolin00 = {
     ary.splice(ary.length - 1, 1)
     return ary
   },
+  // intersection: function (...ary) {
+  //   var res = []
+  //   for (var i = 0; i < ary.length; i++) {
+  //     res.push(...ary[i].filter(x => ary[i].includes))
+  //   }
+  //   return res
+
+  // },
   join: function (ary, separator = ',') {
     var str = ''
     for (var i = 0; i < ary.length - 1; i++) {
@@ -225,6 +255,99 @@ var wangxiaolin00 = {
     }
     return res
   },
+  every: function (arr, predicate = _.identity) {
+    for (var k of arr) {
+      if (!predicate(i)) {
+        return false
+      }
+    }
+    return true
+  },
+  filter: function (array, predicate = _.identity) {
+    var res = []
+    if (typeof predicate == 'Array') {
+      for (var k of array) {
+        if (predicate(k)) {
+          res.push(k)
+        }
+      }
+      return res
+    } else if (typeof predicate == 'object') {
+      for (var i in array) {
+        if (predicate[i] in array) {
+          res.push(i)
+        }
+      }
+    } else if (typeof predicate == 'string') {
+      for (var i of array) {
+        if (i[predicate]) {
+          res.push(i)
+        }
+      }
+    } else {
+      for (var k of array) {
+        if (predicate(k)) {
+          res.push(k)
+        }
+      }
+      return res
+    }
+  },
+  toArray: function (value) {
+    if (typeof value == 'object') {
+      return Object.values(value)
+    } else if (typeof value == 'string') {
+      return value.split('')
+    } else if (value == 1 || value == null) {
+      return []
+    } else {
+      return value.split('')
+    }
+  },
+  includes: function (collection, value, fromindex = 0) {
+    if (typeof collection == 'Array') {
+      for (var i = fromindex; i < collection.length; i++) {
+        if (collection[i] == value) {
+          return true
+        }
+      }
+      return false
+    } else if (typeof collection == 'object') {
+      for (var i in collection) {
+        if (collection[i] == value) {
+          return true
+        }
+      }
+      return false
+    } else if (typeof collection == 'string') {
+      var reg = new RegExp(value)
+      if (collection.match(reg)) {
+        return true
+      }
+      return false
+    }
+
+  },
+  map: function (collection, iteratee = _.identity) {
+    var res = []
+    if (typeof collection == 'Array') {
+      for (var i = 0; i < collection.length; i++) {
+        res.push(iteratee(collection[i]))
+      }
+      return res
+    } else if (typeof collection == 'object' && typeof iteratee == 'string') {
+      for (var i in collection) {
+        if (i == iteratee) {
+          res.push(collection[i])
+        }
+      }
+      return res
+    }
+
+  },
+
+
+
 
 
 
