@@ -116,14 +116,38 @@ var wangxiaolin00 = {
     ary.splice(ary.length - 1, 1)
     return ary
   },
-  // intersection: function (...ary) {
-  //   var res = []
-  //   for (var i = 0; i < ary.length; i++) {
-  //     res.push(...ary[i].filter(x => ary[i].includes))
-  //   }
-  //   return res
+  intersection: function (...ary) {
+    var res = []
+    ary.forEach(i => {
+      minArr = i
+      if (minArr.length < i.length) {
+        minArr = i
+      }
+    })
+    minArr.forEach(i => {
+      var s = []
+      ary.forEach(j => {
+        if (j.includes(i)) {
+          s.push(true)
+        } else {
+          s.push(false)
+        }
+      })
+      let dd = s.every(i => i === true)
+      if (dd && !(res.includes(i))) {
+        res.push(i)
+      }
+    })
+    return res
 
-  // },
+  },
+  fromPairs: function (ary) {
+    var res = {}
+    for (var i = 0; i < ary.length; i++) {
+      res[ary[i][0]] = ary[i][0]
+    }
+    return res
+  },
   join: function (ary, separator = ',') {
     var str = ''
     for (var i = 0; i < ary.length - 1; i++) {
@@ -156,20 +180,19 @@ var wangxiaolin00 = {
       return ary[ary.length + n]
     }
   },
-  pull: function (ary, value) {
-    for (var i = 0; i < ary.length; i++) {
-      if (ary[i] == value) {
-        ary.splice(i, 1)
+  pull: function (ary, ...values) {
+    for (var k of values) {
+      while (ary.includes(k)) {
+        ary.splice(ary.indexOf(k), 1)
       }
     }
     return ary
+
   },
   pullAll: function (ary, value) {
-    for (var i = 0; i < ary.length; i++) {
-      for (var j = 0; j < value.length; j++) {
-        if (ary[i] == value[j]) {
-          ary.splice(i, 1)
-        }
+    for (var k of value) {
+      while (ary.includes(k)) {
+        ary.splice(ary.indexOf(k), 1)
       }
     }
     return ary
@@ -201,13 +224,20 @@ var wangxiaolin00 = {
     return newarr
 
   },
-  sortedindex: function (array, value) {
+  sortedIndex: function (array, value) {
     var arr = array.sort((a, b) => a - b)
     for (var i = 0; i < arr.length; i++) {
       if (value > arr[i]) {
         return i + 1
       }
     }
+  },
+  sortedUniq: function (array) {
+    return [...new Set(array)]
+  },
+  tail: function (arr) {
+    arr.shift()
+    return arr
   },
   uniq: function (array) {
     var arr = []
@@ -265,7 +295,7 @@ var wangxiaolin00 = {
   },
   filter: function (array, predicate = _.identity) {
     var res = []
-    if (typeof predicate == 'Array') {
+    if (Array.isArray(array)) {
       for (var k of array) {
         if (predicate(k)) {
           res.push(k)
@@ -305,7 +335,7 @@ var wangxiaolin00 = {
     }
   },
   includes: function (collection, value, fromindex = 0) {
-    if (typeof collection == 'Array') {
+    if (Array.isArray(collection)) {
       for (var i = fromindex; i < collection.length; i++) {
         if (collection[i] == value) {
           return true
@@ -330,7 +360,7 @@ var wangxiaolin00 = {
   },
   map: function (collection, iteratee = _.identity) {
     var res = []
-    if (typeof collection == 'Array') {
+    if (Array.isArray(collection)) {
       for (var i = 0; i < collection.length; i++) {
         res.push(iteratee(collection[i]))
       }
