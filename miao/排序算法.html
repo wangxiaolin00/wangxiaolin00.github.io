@@ -1,0 +1,315 @@
+<script>
+
+  function bubbleSort(ary) {
+    for (var i = ary.length - 2; i >= 0; i--) {
+      var swapped = false
+      for (var j = 0; j <= i; j++) {
+        if (ary[j] > ary[j + 1]) {
+          swap(ary, j, j + 1)
+          swapped = true
+        }
+      }
+      if (swapped == false) {
+        break
+      }
+    }
+    return ary
+  }
+
+  function swap(ary, i, j) {
+    var t = ary[i]
+    ary[i] = ary[j]
+    ary[j] = t
+  }
+
+  function insertSort(ary) {
+    for (var i = 1; i < ary.length; i++) {
+      for (var j = i; j >= 1; j--) {
+        if (ary[j] < ary[j - 1]) {
+          swap(ary, j, j - 1)
+        } else {
+          break
+        }
+      }
+    }
+    return ary
+  }
+
+  // 归并排序
+  // 主体思想：将数组一分为二，各自排序，之后合并起来
+  function mergeSort(ary) {
+    if (ary.length == 0 || ary.length == 1) {
+      return [...ary]
+    }
+    var mid = ary.length >> 1
+    var leftAry = ary.slice(0, mid)
+    var rightAry = ary.slice(mid)
+    var leftSorted = mergeSort(leftAry)
+    var rightSorted = mergeSort(rightAry)
+    var result = []
+    var i = 0, j = 0
+    while (i < leftSorted.length && j < rightSorted.length) {
+      if (leftSorted[i] < rightSorted[j]) {
+        result.push(leftSorted[i++])
+      } else {
+        result.push(rightSorted[j++])
+      }
+    }
+    while(i < leftSorted.length) {
+      result.push(leftSorted[i++])
+    }
+    while(j < rightSorted.length) {
+      result.push(rightSorted[j++])
+    }
+    return result
+  }
+
+  // 选择排序
+  // 主要思想：每轮选择无序范围内最小的元素放入有序范围的最后
+  function selectSort(ary) {
+    //控制要找到最小的数放入i位置
+    for (var i = 0; i < ary.length - 1; i++) {
+      var minIdx = i//把当前范围的第一个数当成最小数，但只记录其下标
+      for (var j = i; j < ary.length; j++) {
+        if (ary[j] < ary[minIdx]) {
+          minIdx = j
+        }
+      }
+      swap(ary, minIdx, i)
+    }
+    return ary
+  }
+
+  // 快速排序
+  // 主要思想：随机选择数组中的一个数字，将数组分为三部分：小于该数的，等于该数的，大于该数的
+  // 对于小于该数的部分和大于该数的部分进行排序，然后拼接
+  function quickSort(ary) {
+    if (ary.length < 2) {
+      return ary.slice()
+    }
+    var randomIdx = Math.floor(Math.random() * ary.length)
+    var pivot = ary[randomIdx]
+    var left = []
+    var middle = []
+    var right = []
+
+    for (var i = 0; i < ary.length; i++) {
+      if (ary[i] < pivot) {
+        left.push(ary[i])
+      }
+      if (ary[i] > pivot) {
+        right.push(ary[i])
+      }
+      if (ary[i] == pivot) {
+        middle.push(ary[i])
+      }
+    }
+
+    left = quickSort(left)
+    right = quickSort(right)
+
+    return left.concat(middle, right)
+  }
+
+  //对数组的left到right之间（包含）的数进行快速排序
+  //存在的问题：对于所有元素都相同的数组会导致递归爆栈
+  function qSort(ary, left = 0, right = ary.length - 1) {
+    if (right - left < 1) {
+      return ary
+    }
+    var pivotIdx = Math.floor(Math.random() * (right - left + 1) + left)
+    var pivot = ary[pivotIdx]
+    swap(ary, pivotIdx, right)
+
+    var i = left
+    for (var j = left; j < right; j++) {
+      if (ary[j] < pivot) {
+        swap(ary, i, j)
+        i++
+      }
+    }
+    swap(ary, i, right)
+
+    qSort(ary, left, i - 1)
+    qSort(ary, i + 1, right)
+
+    return ary
+  }
+// 时间复杂度：n*log(n)
+// 空间复试度：log（n），因为递归过程没有创建数组
+  function qSort2(ary, left = 0, right = ary.length - 1) {
+    if (right - left < 1) {
+      return ary
+    }
+    var pivotIdx = Math.floor(Math.random() * (right - left + 1) + left)
+    var pivot = ary[pivotIdx]
+    swap(ary, pivotIdx, right)
+
+    var i = left - 1
+    var k = i
+
+    for (var j = left; j < right; j++) {
+      if (ary[j] == pivot) {
+        k++
+        swap(ary, k, j)
+      } else if (ary[j] < pivot) {
+        i++
+        k++
+        swap(ary, i, j)
+
+        if (k !== i) {//如果k跟i相同，会被下一行换回去
+          swap(ary, k, j)
+        }
+      }
+    }
+
+    k++
+    swap(ary, k, j)
+
+    //小于等于i位置的都是小pivot的
+    //大于k位置的都是大于pivot的
+    //在i+1到k位置之间的都是跟pivot相同的
+
+    qSort2(ary, left, i)
+    qSort2(ary, k + 1, right)
+
+    return ary
+  }
+
+  function randomArray(l) {
+    return Array(l).fill(0).map(it => Math.random() * l | 0)
+  }
+
+  function isSorted(ary) {
+    for (var i = 0; i < ary.length - 1; i++) {//遍历除最后一项以外的项
+      if (ary[i] > ary[i + 1]) {
+        return false
+      }
+    }
+    return true
+  }
+
+
+  function range(start, end) {
+    var result = []
+    for (var i = start; i <= end; i++) {
+      result.push(i)
+    }
+    return result
+  }
+
+  function range(start, end, step = 1) {
+    var result = []
+    for (var i = start; i <= end; i += step) {
+      result.push(i)
+    }
+    return result
+  }
+
+
+  function range(start, end, step = 1) {
+    if (arguments.length == 1) {
+      end = start
+      start = 0
+    }
+    var result = []
+    for (var i = start; step > 0 ? i <= end : i >= end; i += step) {
+      result.push(i)
+    }
+    return result
+  }
+
+
+  function sum(ary) {
+    var result = 0
+    for (var i = 0; i < ary.length; i++) {
+      result += ary[i]
+    }
+    return result
+  }
+
+  function reverseArray(ary) {
+    var result = []
+    for (var i = ary.length - 1; i >= 0; i--) {
+      result.push(ary[i])
+    }
+    return result
+  }
+
+  function reverseArrayInPlace(ary) {
+    var l = ary.length
+    var mid = l >> 1
+    for (var i = 0; i < mid; i++) {
+      var j = l - i - 1
+      var t = ary[i]
+      ary[i] = ary[j]
+      ary[j] = t
+    }
+    return ary
+  }
+
+  function deepEqual(a, b) {
+    if (a === b) {
+      return true
+    }
+    if (a !== a && b !== b) {//同为NaN
+      return true
+    }
+    var typeA = typeof a
+    var typeB = typeof b
+
+    if (typeA !== typeB) {
+      return false
+    } else {
+      if (typeA == 'object') {//两个都是对象
+        if (Array.isArray(a) == Array.isArray(b)) {//都是数组或都不是数组
+          if (Array.isArray(a)) {//都是数组
+             if (a.length == b.length) {
+               for (var i = 0; i < a.length; i++) {
+                 if (!deepEqual(a[i], b[i])) {
+                   return false
+                 }
+               }
+               return true
+             } else {
+               return false
+             }
+          } else {//都是对象
+            var keysa = Object.keys(a)
+            var keysb = Object.keys(b)
+
+            if (keysa.length == keysb.length) {
+              var keys = Array.from(new Set(keysa.concat(keysb)))//keys合并后去重
+              if (keys.length == keysa.length) {
+                for (var i = 0; i < keys.length; i++) {
+                  var key = keys[i]
+                  if (!deepEqual(a[key], b[key])) {
+                    return false
+                  }
+                }
+                return true
+              } else {
+                return false
+              }
+            } else {
+              return false
+            }
+          }
+        } else {//不同时为数组
+          return false
+        }
+      } else {//同为原始类型
+        return a === b
+      }
+    }
+  }
+
+  // 返回obj的所有属性名组成的数组
+  function keys(obj) {
+    var result = []
+    for (var key in obj) {
+      result.push(key)
+    }
+    return result
+  }
+</script>
