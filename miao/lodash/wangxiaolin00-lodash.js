@@ -1,5 +1,5 @@
 var wangxiaolin00 = {
-  chunk: function (ary, size = 1) {
+  chunk: function (ary, size = 1) {//将数组ary拆分成多个长度为size的数组返回一个包含拆分数组的二维数组
     var len = ary.length
     var r = len / size || 0
     var res = []
@@ -8,7 +8,7 @@ var wangxiaolin00 = {
     }
     return res
   },
-  compact: function (ary) {
+  compact: function (ary) {//将数组ary里面为假值的元素过滤掉 返回一个新的数组不包含假值
     var result = []
     for (var i = 0; i < ary.length; i++) {
       if (ary[i]) {
@@ -17,7 +17,7 @@ var wangxiaolin00 = {
     }
     return result
   },
-  difference: function (ary, ...ary1) {
+  difference: function (ary, ...ary1) {//返回一个新数组 ary元素里面除了 ary1数组元素中不包含的值 的元素组成的新数组 差集 
     var result = []
     var o = {}
     for (var i = 0; i < ary1.length; i++) {
@@ -164,7 +164,7 @@ var wangxiaolin00 = {
     }
 
   },
-  lastIndexOf: function (ary, value, fromindex = array.length - 1) {
+  lastIndexOf: function (ary, value, fromindex = ary.length - 1) {
     for (var i = fromindex; i >= 0; i--) {
       if (ary[i] == value) {
         return i
