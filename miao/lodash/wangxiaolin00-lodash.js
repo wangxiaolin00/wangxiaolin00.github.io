@@ -1,4 +1,66 @@
 var wangxiaolin00 = {
+  isShallowEqual: function (a, b) {
+    if (a === b) return true;
+
+    if (a == null || typeof a != "object" ||
+      b == null || typeof b != "object")
+      return false;
+
+    var propsInA = 0,
+      propsInB = 0;
+
+    for (var prop in b)
+      propsInB += 1;
+
+    for (var prop in a) {
+      propsInA += 1;
+      if (!(prop in b) || !this.isShallowEqual(a[prop], b[prop]))
+        return false;
+    }
+
+    return propsInA <= propsInB;
+  },
+
+  isEqual: function (a, b) {
+    if (a === b)
+      return true
+    if (a == null || typeof a != "object" || b == null || typeof b != "object")
+      return false
+    var propsInA = 0,
+      propsInB = 0
+    for (var prop in a) {
+      propsInA += 1
+    }
+    for (var prop in b) {
+      propsInB += 1
+      if (!(prop in a) || !this.isEqual(a[prop], b[prop]))
+        return false
+    }
+    return propsInA == propsInB
+  },
+
+  baseIteratee: function (iteratee) {
+    if (iteratee === null) {
+      return val => val;
+    }
+    if (typeof iteratee === "string") {
+      return val => val[iteratee];
+    }
+    if (typeof iteratee === "function") {
+      return iteratee;
+    }
+    if (iteratee instanceof Array) {
+      return function (obj) {
+        return obj[iteratee[0]] === iteratee[1];
+      }
+    } else if (typeof iteratee === "object") {
+      if (Object.prototype.toString.call(iteratee) === "[object RegExp]")
+        return val => iteratee.test(val);
+      else
+        return this.isShallowEqual.bind(null, iteratee);
+    }
+  },
+
   chunk: function (ary, size = 1) {//将数组ary拆分成多个长度为size的数组返回一个包含拆分数组的二维数组
     var len = ary.length
     var r = len / size || 0
@@ -75,6 +137,26 @@ var wangxiaolin00 = {
       ary[i] = value
     }
     return ary
+  },
+  findIndex: function (ary, predicate, fromIndex = 0) {
+    var dd = this.baseIteratee(predicate)
+    for (let i = fromIndex; i < ary.length; i++) {
+      if (dd(ary[i])) {
+        return i
+      }
+    }
+    return -1
+
+
+  },
+  findLastIndex: function (ary, predicate, fromIndex = ary.length - 1) {
+    let dd = this.baseIteratee(predicate)
+    for (var i = fromIndex; i >= 0; i--) {
+      if (dd(ary[i])) {
+        return i
+      }
+    }
+    return -1
   },
   flatten: function (array) {
     var ss = array.flat()
