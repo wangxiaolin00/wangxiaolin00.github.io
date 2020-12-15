@@ -106,6 +106,32 @@ var wangxiaolin00 = {
     }
     return result
   },
+  differenceBy: function (ary, values, predicate) {
+    let dd = this.baseIteratee(predicate)
+    var m = new Map()
+    var res = []
+    for (let i = 0; i < values.length; i++) {
+      m.set(dd(values[i]), true)
+    }
+    for (let k of ary) {
+      if (!m.has(dd(k))) {
+        res.push(k)
+      }
+    }
+    return res
+  },
+  differenceWith: function (ary, value, comparator) {
+    var res = []
+    for (var k of ary) {
+      for (var key of value) {
+        if (!(comparator(k, key))) {
+          res.push(k)
+        }
+      }
+    }
+    return res
+
+  },
   drop: function (ary, n = 1) {
 
     if (n > ary.length) {
@@ -129,6 +155,15 @@ var wangxiaolin00 = {
     while (n > 0) {
       ary.pop();
       n--;
+    }
+    return ary
+  },
+  dropWhile: function (ary, predicate) {
+    let dd = this.baseIteratee(predicate)
+    for (var i = 0; i < ary.length; i++) {
+      if (dd(ary[i])) {
+        ary.splice(i, 1)
+      }
     }
     return ary
   },
@@ -363,43 +398,36 @@ var wangxiaolin00 = {
     }
     return res
   },
-  every: function (arr, predicate = _.identity) {
-    for (var k of arr) {
-      if (!predicate(i)) {
+  every: function (arr, predicate) {
+    var dd = this.baseIteratee(predicate)
+    for (let k of arr) {
+      if (!dd(k)) {
         return false
       }
     }
     return true
+
+
   },
-  filter: function (array, predicate = _.identity) {
+  filter: function (array, predicate) {
+    let dd = this.baseIteratee(predicate)
     var res = []
-    if (Array.isArray(array)) {
-      for (var k of array) {
-        if (predicate(k)) {
-          res.push(k)
-        }
+    for (let k of array) {
+      if (dd(k)) {
+        res.push(k)
       }
-      return res
-    } else if (typeof predicate == 'object') {
-      for (var i in array) {
-        if (predicate[i] in array) {
-          res.push(i)
-        }
-      }
-    } else if (typeof predicate == 'string') {
-      for (var i of array) {
-        if (i[predicate]) {
-          res.push(i)
-        }
-      }
-    } else {
-      for (var k of array) {
-        if (predicate(k)) {
-          res.push(k)
-        }
-      }
-      return res
     }
+    return res
+  },
+  find: function (ary, predicate, fromIndex = 0) {
+    let dd = this.baseIteratee(predicate)
+    for (let i = fromIndex; i < ary.length; i++) {
+      if (dd(ary[i])) {
+        return ary[i]
+        break
+      }
+    }
+    return undefined
   },
   toArray: function (value) {
     if (typeof value == 'object') {
