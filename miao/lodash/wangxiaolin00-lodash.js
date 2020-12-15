@@ -1,5 +1,5 @@
 var wangxiaolin00 = {
-  lightEqual: function lightEqual(a, b) {
+  lightEqual: function (a, b) {
     if (a === b) return true;
 
     if (a == null || typeof a != "object" ||
@@ -21,7 +21,7 @@ var wangxiaolin00 = {
     return propsInA <= propsInB;
   },
 
-  isEqual: function isEqual(a, b) {
+  isEqual: function (a, b) {
     if (a === b)
       return true
     if (a == null || typeof a != "object" || b == null || typeof b != "object")
@@ -38,7 +38,7 @@ var wangxiaolin00 = {
     }
     return propsInA == propsInB
   },
-  vardictIteratee: function vardictIteratee(iteratee) {
+  vardictIteratee: function (iteratee) {//判断类型处理
     if (iteratee === null) {
       return val => val;
     }
@@ -76,6 +76,17 @@ var wangxiaolin00 = {
       }
     }
     return result
+  },
+  concat: function (ary, ...values) {//将数组里面的元素和后面的值链接成一个新的数组返回,valus二位数组默认会展平一层
+    var res = []
+    var s = values.flat()
+    ary.forEach(it => {
+      res.push(it)
+    })
+    s.forEach(it => {
+      res.push(it)
+    })
+    return res
   },
   difference: function (ary, ...ary1) {//返回一个新数组 ary元素里面除了 ary1数组元素中不包含的值 的元素组成的新数组 差集 
     var result = []
@@ -126,7 +137,7 @@ var wangxiaolin00 = {
     return ary
   },
   findIndex: function (ary, predicate, fromindex = 0) {
-    let predicate = vardictIteratee(predicate)
+    let predicate = this.vardictIteratee(predicate)
     for (var i = fromindex; i < ary.length; i++) {
       if (predicate(ary[i])) {
         return i
@@ -135,7 +146,7 @@ var wangxiaolin00 = {
     return -1
   },
   findLastIndex: function (ary, predicate, fromindex = ary.length - 1) {
-    let predicate = vardictIteratee(predicate)
+    let predicate = this.vardictIteratee(predicate)
     for (var i = fromindex; i >= 0; i--) {
       if (predicate(ary[i])) {
         return i
