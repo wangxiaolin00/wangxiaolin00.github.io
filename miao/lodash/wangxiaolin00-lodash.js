@@ -1,64 +1,4 @@
 var wangxiaolin00 = {
-  lightEqual: function (a, b) {
-    if (a === b) return true;
-
-    if (a == null || typeof a != "object" ||
-      b == null || typeof b != "object")
-      return false;
-
-    var propsInA = 0,
-      propsInB = 0;
-
-    for (var prop in b)
-      propsInB += 1;
-
-    for (var prop in a) {
-      propsInA += 1;
-      if (!(prop in b) || !this.lightEqual(a[prop], b[prop]))
-        return false;
-    }
-
-    return propsInA <= propsInB;
-  },
-
-  isEqual: function (a, b) {
-    if (a === b)
-      return true
-    if (a == null || typeof a != "object" || b == null || typeof b != "object")
-      return false
-    var propsInA = 0,
-      propsInB = 0
-    for (var prop in a) {
-      propsInA += 1
-    }
-    for (var prop in b) {
-      propsInB += 1
-      if (!(prop in a) || !this.isEqual(a[prop], b[prop]))
-        return false
-    }
-    return propsInA == propsInB
-  },
-  vardictIteratee: function (iteratee) {
-    if (iteratee === null) {
-      return val => val;
-    }
-    if (typeof iteratee === "string") {
-      return val => val[iteratee];
-    }
-    if (typeof iteratee === "function") {
-      return iteratee;
-    }
-    if (iteratee instanceof Array) {
-      return function (obj) {
-        return obj[iteratee[0]] === iteratee[1];
-      }
-    } else if (typeof iteratee === "object") {
-      if (Object.prototype.toString.call(iteratee) === "[object RegExp]")
-        return val => iteratee.test(val);
-      else
-        return this.lightEqual.bind(null, iteratee);
-    }
-  },
   chunk: function (ary, size = 1) {//将数组ary拆分成多个长度为size的数组返回一个包含拆分数组的二维数组
     var len = ary.length
     var r = len / size || 0
@@ -135,23 +75,6 @@ var wangxiaolin00 = {
       ary[i] = value
     }
     return ary
-  },
-  findIndex: function (ary, predicate, fromindex = 0) {
-    let predicate = this.vardictIteratee(predicate)
-    for (var i = fromindex; i < ary.length; i++) {
-      if (predicate(ary[i])) {
-        return i
-      }
-    }
-    return -1
-  },
-  findLastIndex: function (ary, predicate, fromindex = ary.length - 1) {
-    let predicate = this.vardictIteratee(predicate)
-    for (var i = fromindex; i >= 0; i--) {
-      if (predicate(ary[i])) {
-        return i
-      }
-    }
   },
   flatten: function (array) {
     var ss = array.flat()
