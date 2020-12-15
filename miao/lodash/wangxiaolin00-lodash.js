@@ -1,4 +1,64 @@
 var wangxiaolin00 = {
+  lightEqual: function lightEqual(a, b) {
+    if (a === b) return true;
+
+    if (a == null || typeof a != "object" ||
+      b == null || typeof b != "object")
+      return false;
+
+    var propsInA = 0,
+      propsInB = 0;
+
+    for (var prop in b)
+      propsInB += 1;
+
+    for (var prop in a) {
+      propsInA += 1;
+      if (!(prop in b) || !lightEqual(a[prop], b[prop]))
+        return false;
+    }
+
+    return propsInA <= propsInB;
+  },
+
+  isEqual: function isEqual(a, b) {
+    if (a === b)
+      return true
+    if (a == null || typeof a != "object" || b == null || typeof b != "object")
+      return false
+    var propsInA = 0,
+      propsInB = 0
+    for (var prop in a) {
+      propsInA += 1
+    }
+    for (var prop in b) {
+      propsInB += 1
+      if (!(prop in a) || !isEqual(a[prop], b[prop]))
+        return false
+    }
+    return propsInA == propsInB
+  },
+  vardictIteratee: function vardictIteratee(iteratee) {
+    if (iteratee === null) {
+      return val => val;
+    }
+    if (typeof iteratee === "string") {
+      return val => val[iteratee];
+    }
+    if (typeof iteratee === "function") {
+      return iteratee;
+    }
+    if (iteratee instanceof Array) {
+      return function (obj) {
+        return obj[iteratee[0]] === iteratee[1];
+      }
+    } else if (typeof iteratee === "object") {
+      if (Object.prototype.toString.call(iteratee) === "[object RegExp]")
+        return val => iteratee.test(val);
+      else
+        return lightEqual.bind(null, iteratee);
+    }
+  },
   chunk: function (ary, size = 1) {//将数组ary拆分成多个长度为size的数组返回一个包含拆分数组的二维数组
     var len = ary.length
     var r = len / size || 0
@@ -65,7 +125,8 @@ var wangxiaolin00 = {
     }
     return ary
   },
-  findIndex: function (ary, predicate = _.identity, fromindex = 0) {
+  findIndex: function (ary, predicate, fromindex = 0) {
+    let predicate = vardictIteratee(predicate)
     for (var i = fromindex; i < ary.length; i++) {
       if (predicate(ary[i])) {
         return i
@@ -73,7 +134,8 @@ var wangxiaolin00 = {
     }
     return -1
   },
-  findLastIndex: function (ary, predicate = _.identity, fromindex = ary.length - 1) {
+  findLastIndex: function (ary, predicate, fromindex = ary.length - 1) {
+    let predicate = vardictIteratee(predicate)
     for (var i = fromindex; i >= 0; i--) {
       if (predicate(ary[i])) {
         return i
@@ -144,7 +206,7 @@ var wangxiaolin00 = {
   fromPairs: function (ary) {
     var res = {}
     for (var i = 0; i < ary.length; i++) {
-      res[ary[i][0]] = ary[i][0]
+      res[ary[i][0]] = ary[i][1]
     }
     return res
   },
@@ -328,7 +390,7 @@ var wangxiaolin00 = {
       return Object.values(value)
     } else if (typeof value == 'string') {
       return value.split('')
-    } else if (value == 1 || value == null) {
+    } else if (value === 1 || value === null) {
       return []
     } else {
       return value.split('')
