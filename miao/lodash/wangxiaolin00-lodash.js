@@ -106,20 +106,44 @@ var wangxiaolin00 = {
     }
     return result
   },
-  differenceBy: function (ary, predicate) {
-    let dd = this.baseIteratee(predicate)
-    var m = new Map()
-    var res = []
-    var arr = ary.flat(Infinity)
-    for (k of arr) {
-      m.set(dd(k), true)
-    }
-    for (let k of ary) {
-      if (!m.has(dd(k))) {
-        res.push(k)
+  differenceBy: function (ary, ...values) {
+    let res = []
+    let m = new Map()
+    if (Array.isArray(values[values.length - 1])) {
+      for (let i = 0; i < values.length; i++) {
+        for (let j = 0; j < values[i].length; j++) {
+          m.set(values[i][j], true)
+        }
       }
+      for (let k of ary) {
+        if (!m.has(k)) {
+          res.push(k)
+        }
+      }
+      return res
     }
-    return res
+    let iteratee = values.pop()
+    let dd = baseIteratee(iteratee)
+    let value = values.flat(Infinity)
+    if (Object.prototype.toString.call(iteratee) === '[object String]') {
+      for (let i = 0; i < ary.length; i++) {
+        for (let j = 0; j < value.length; j++) {
+          if (ary[i][iteratee] == value[j][iteratee]) {
+            ary.splice(i, 1)
+          }
+        }
+      }
+      return ary
+    } else if (Object.prototype.toString.call(iteratee) === '[object Function]') {
+      for (let i = 0; i < ary.length; i++) {
+        for (let j = 0; j < value.length; j++) {
+          if (iteratee(ary[i]) == iteratee(value[j])) {
+            ary.splice(i, 1)
+          }
+        }
+      }
+      return ary
+    }
   },
   differenceWith: function (ary, value, comparator) {
     var res = []
@@ -619,7 +643,7 @@ var wangxiaolin00 = {
       }
     }
     for (let m of ary) {
-      s.unshift(m)
+      s.push(m)
     }
 
 
@@ -669,6 +693,74 @@ var wangxiaolin00 = {
       }
     }
     return res.concat(s)
+  },
+  without: function (ary, ...values) {
+    return ary.filter(x => {
+      return !values.includes(x)
+    })
+  },
+  xor: function (...ary) {
+    var s = ary.flat(Infinity)
+    var o = {}
+    for (let i of s) {
+      if (o[i]) {
+        o[i]++
+      } else {
+        o[i] = 1
+      }
+    }
+    var res = []
+    for (let i in o) {
+      if (o[i] == 1) {
+        res.push(Number(i))
+      }
+    }
+    return res
+  },
+  xorBy: function (...ary) {
+    let s = ary.pop()
+    var m = new Map()
+    var res = []
+    if (Object.prototype.toString.call(s) === '[object Function]') {
+      for (let i = 0; i < ary.length; i++) {
+        for (let j = 0; j < ary[i].length; j++) {
+          let it = s(ary[i][j])
+          if (m.has(it)) {
+            m.set(it, m.get(it) + 1)
+          } else {
+            m.set(it, 1)
+          }
+        }
+      }
+      var arr = ary.flat(Infinity)
+      for (let k of arr) {
+        let d = s(k)
+        if (m.get(d) == 1) {
+          res.push(k)
+        }
+      }
+      return res
+
+    } else if (Object.prototype.toString.call(s) === '[object String]') {
+      var arr = ary.flat(Infinity)
+      arr.forEach(i => {
+        let it = i[s]
+        if (m.has(it)) {
+          m.set(it, m.get(it) + 1)
+        } else {
+          m.set(it, 1)
+        }
+      })
+      for (let k of arr) {
+        let d = k[s]
+        if (m.get(d) == 1) {
+          res.push(k)
+        }
+      }
+      return res
+
+    }
+
   },
   max: function (array) {
     if (array.length == 0) {
