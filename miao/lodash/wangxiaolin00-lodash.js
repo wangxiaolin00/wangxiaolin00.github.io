@@ -106,7 +106,7 @@ var wangxiaolin00 = {
     }
     return result
   },
-  differenceBy: function (ary, ...values, predicate) {
+  differenceBy: function (ary, predicate) {
     let dd = this.baseIteratee(predicate)
     var m = new Map()
     var res = []
