@@ -106,12 +106,13 @@ var wangxiaolin00 = {
     }
     return result
   },
-  differenceBy: function (ary, values, predicate) {
+  differenceBy: function (ary, ...values, predicate) {
     let dd = this.baseIteratee(predicate)
     var m = new Map()
     var res = []
-    for (let i = 0; i < values.length; i++) {
-      m.set(dd(values[i]), true)
+    var arr = ary.flat(Infinity)
+    for (k of arr) {
+      m.set(dd(k), true)
     }
     for (let k of ary) {
       if (!m.has(dd(k))) {
@@ -158,13 +159,29 @@ var wangxiaolin00 = {
     }
     return ary
   },
+  dropRightWhile: function (ary, predicate) {
+    let dd = this.baseIteratee(predicate)
+    var res = []
+
+    for (var i = ary.length - 1; i >= 0; i--) {
+      if (dd(ary[i])) {
+        res.push(ary[i])
+      }
+
+    }
+    ary = res
+    return ary
+
+  },
   dropWhile: function (ary, predicate) {
     let dd = this.baseIteratee(predicate)
+    var res = []
     for (var i = 0; i < ary.length; i++) {
       if (dd(ary[i])) {
-        ary.splice(i, 1)
+        res.push(ary)
       }
     }
+    ary = res
     return ary
   },
   fill: function (ary, value, start = 0, end = ary.length) {
@@ -193,6 +210,13 @@ var wangxiaolin00 = {
     }
     return -1
   },
+  first: function (ary) {
+    if (ary.length == 0) {
+      return undefined
+    } else {
+      return ary[0]
+    }
+  },
   flatten: function (array) {
     var ss = array.flat()
     return ss
@@ -217,7 +241,7 @@ var wangxiaolin00 = {
     }
 
   },
-  indexOf: function (ary, value, fromindex = 0) {
+  indexOf: function (ary, value, fromindex = 0) {//对应value在数组中索引
     for (var i = fromindex; i < ary.length; i++) {
       if (ary[i] == value) {
         return i
@@ -229,7 +253,7 @@ var wangxiaolin00 = {
     ary.splice(ary.length - 1, 1)
     return ary
   },
-  intersection: function (...ary) {
+  intersection: function (...ary) {//求多个数组的交集
     var res = []
     ary.forEach(i => {
       minArr = i
@@ -254,6 +278,36 @@ var wangxiaolin00 = {
     return res
 
   },
+  intersectionBy: function (...ary) {///
+    if (Array.isArray(ary[ary.length - 1])) {
+      return this.intersection(...ary)
+    }
+    var res = []
+    var m = new Map()
+    var dd = this.baseIteratee(ary.pop())
+    for (let i = 0; i < ary.length; i++) {
+      for (let j = 0; j, ary[i].length; j++) {
+        let it = dd(ary[i][j])
+        if (m.has) {
+          res.push(m.get(it))
+        } else {
+          m.set(it, ary[i][j])
+        }
+      }
+    }
+  },
+  intersectionWith: function (ary, value, comparator) {//用comparator的方法求数组ary和value的交集
+    var res = []
+    for (let k of ary) {
+      for (let i of value) {
+        if (comparator(k, i)) {
+          res.push(k)
+        }
+      }
+    }
+    return res
+
+  },
   fromPairs: function (ary) {
     var res = {}
     for (var i = 0; i < ary.length; i++) {
@@ -261,7 +315,7 @@ var wangxiaolin00 = {
     }
     return res
   },
-  join: function (ary, separator = ',') {
+  join: function (ary, separator = ',') {//将数组转化为字符串
     var str = ''
     for (var i = 0; i < ary.length - 1; i++) {
       str += ary[i] + '' + separator
@@ -269,7 +323,7 @@ var wangxiaolin00 = {
     str = str + ary[ary.length - 1]
     return str
   },
-  last: function (ary) {
+  last: function (ary) {//返回数组最后一个元素
     if (ary.length == 0) {
       return undefined
     } else {
@@ -277,7 +331,7 @@ var wangxiaolin00 = {
     }
 
   },
-  lastIndexOf: function (ary, value, fromindex = ary.length - 1) {
+  lastIndexOf: function (ary, value, fromindex = ary.length - 1) {//查索引
     for (var i = fromindex; i >= 0; i--) {
       if (ary[i] == value) {
         return i
@@ -285,7 +339,7 @@ var wangxiaolin00 = {
     }
     return -1
   },
-  nth: function (ary, n = 0) {
+  nth: function (ary, n = 0) {//获取数组总第n个元素.如果n为负,则获取倒数第n个
     if (n >= 0) {
       return ary[n]
     }
@@ -309,6 +363,47 @@ var wangxiaolin00 = {
       }
     }
     return ary
+  },
+  pullAllBy: function (ary, value, iteratee) {
+    var dd = this.baseIteratee(iteratee)
+    var m = new Map()
+    var res = []
+    for (let i = 0; i < value.length; i++) {
+      let it = dd(value[i])
+      m.set(it, value[i])
+    }
+    for (let j = 0; j < ary.length; j++) {
+      if (!m.has(dd(ary[j]))) {
+        res.push(ary[j])
+      }
+    }
+    ary = res
+    return ary
+  },
+  pullAllWith: function (ary, values, comparator) {
+    var res = []
+    for (let k of ary) {
+      for (let i of values) {
+        if (!comparator(k, i)) {
+          res.push(k)
+        }
+      }
+    }
+    ary = res
+    return ary
+  },
+  pullAt: function (ary, ...indexs) {
+    var res = []
+    for (let i = 0; i < indexs.length; i++) {
+      res.push(ary[indexs[i]])
+    }
+    ary = ary.filter(x => {
+      !(res.includes(x))
+    })
+    return res
+
+
+
   },
   remove: function (array, predicate = _.identity) {
     var result = []
@@ -345,12 +440,190 @@ var wangxiaolin00 = {
       }
     }
   },
+  sortedIndexBy: function (ary, value, iteratee) {
+    var dd = Object.prototype.toString.call(iteratee)
+    if (dd === '[object Function]') {
+      for (let i = 0; i < ary.length; i++) {
+        if (iteratee(value) <= iteratee(ary[i])) {
+          return i
+        }
+      }
+    } else if (dd === '[object String]') {
+      for (var i = 0; i < ary.length; i++) {
+        if (value[iteratee] <= ary[i][iteratee]) {
+          return i
+        }
+      }
+    }
+  },
+  sortedIndexOf: function (ary, value) {
+    for (var i = 0; i < ary.length; i++) {
+      if (ary[i] == value) {
+        return i
+        break;
+      }
+    }
+    return -1
+  },
+  sortedLastIndex: function (ary, value) {
+    for (let i = ary.length - 1; i >= 0; i--) {
+      if (value < ary[i]) {
+        return i
+      }
+    }
+  },
+  sortedLastIndexBy: function (ary, value, iteratee) {
+    let dd = this.baseIteratee(iteratee)
+    for (let i = ary.length - 1; i >= 0; i--) {
+      if (dd(value) < dd(ary[i])) {
+        return i
+      }
+    }
+    return -1
+  },
+  sortedLastIndexOf: function (ary, value) {
+    for (let i = ary.length - 1; i >= 0; i--) {
+      if (value == ary[i]) {
+        return i
+        break
+      }
+    }
+    return -1
+
+  },
   sortedUniq: function (array) {
     return [...new Set(array)]
+  },
+  sortedUniqBy: function (ary, iteratee) {
+    let dd = this.baseIteratee(iteratee)
+    var m = new Map()
+    var res = []
+    for (let i = 0; i < ary.length; i++) {
+      let it = dd(ary[i])
+      if (m.has(it)) {
+        res.push(m.get(it))
+      } else {
+        m.set(it, ary[i])
+      }
+
+    }
+    return res
+
   },
   tail: function (arr) {
     arr.shift()
     return arr
+  },
+  take: function (ary, n = 1) {
+
+    if (n == 0) {
+      return []
+    }
+    return ary.slice(0, n)
+
+
+  },
+  takeRight: function (ary, n = 1) {
+
+    if (n == 0) {
+      return []
+    }
+    if (n > ary.length) {
+      return ary
+    }
+    return ary.slice(ary.length - n)
+  },
+  takeRightWhile: function (ary, predicate) {
+    if (Object.prototype.toString.call(predicate) === '[object String]') {
+      return []
+    }
+    let dd = this.baseIteratee(predicate)
+    var res = []
+    for (let i = 0; i < ary.length; i++) {
+      if (dd(ary[i])) {
+        res.push(ary[i])
+      }
+    }
+    return res
+  },
+  takeWhile: function (ary, predicate) {
+    if (Object.prototype.toString.call(predicate) === '[object String]') {
+      return []
+    }
+    let dd = this.baseIteratee(predicate)
+    var res = []
+    for (let i = 0; i < ary.length; i++) {
+      if (dd(ary[i])) {
+        res.push(ary[i])
+      }
+    }
+    return res
+  },
+  union: function (...arys) {//求并集
+    var res = []
+    arys.forEach(it => {
+      it.forEach(i => {
+        res.push(i)
+      })
+    })
+    return [...new Set(res)]
+  },
+  unionBy: function (...args) {
+    let s = args.pop()
+    var l = new Set()
+    var result = []
+    let dd = this.baseIteratee(s)
+
+
+    if (Object.prototype.toString.call(s) === '[object String]') {
+      var arr = args.flat(Infinity)
+      for (let k of arr) {
+        let i = dd(k)
+        if (!l.has(i)) {
+          l.add(i)
+          result.push(k)
+        }
+      }
+      return result
+    }
+
+    var m = new Map()
+    var res = []
+    for (let i = 0; i < args.length; i++) {
+      for (let j = 0; j < args[i].length; j++) {
+        let it = dd(args[i][j])
+        if (m.has(it)) {
+          res.push(m.get(it))
+        } else {
+          m.set(it, args[i][j])
+        }
+      }
+    }
+    return res
+  },
+  unionWith: function (ary, value, comparator) {
+    let res = []
+    var s = []
+    for (let k of ary) {
+      for (let i of value) {
+        if (comparator(k, i)) {
+          res.push(k)
+        }
+      }
+    }
+    for (let j of value) {
+      for (let n of res) {
+        if (!comparator(j, n)) {
+          s.push(j)
+        }
+      }
+    }
+    for (let m of ary) {
+      s.unshift(m)
+    }
+
+
+    return s
   },
   uniq: function (array) {
     var arr = []
@@ -360,6 +633,42 @@ var wangxiaolin00 = {
       }
     }
     return arr
+  },
+  uniqBy: function (ary, iteratee) {
+    let dd = this.baseIteratee(iteratee)
+    var res = []
+    var s = new Set()
+    ary.forEach(it => {
+      let f = dd(it)
+      if (!s.has(f)) {
+        s.add(f)
+        res.push(it)
+      }
+    })
+    return res
+  },
+  uniqWith: function (ary, comparator) {
+    let l = 0
+    let r = ary.length - 1
+    var res = []
+    while (l < r) {
+      if (comparator(ary[l], ary[r])) {
+        res.push(ary[l])
+      }
+      l++
+      r--
+    }
+    var s = []
+    for (let j of ary) {
+      for (let n of res) {
+        if (comparator(j, n)) {
+          break
+        } else {
+          s.push(j)
+        }
+      }
+    }
+    return res.concat(s)
   },
   max: function (array) {
     if (array.length == 0) {
