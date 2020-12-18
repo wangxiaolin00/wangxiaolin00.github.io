@@ -123,7 +123,7 @@ var wangxiaolin00 = {
       return res
     }
     let iteratee = values.pop()
-    let dd = baseIteratee(iteratee)
+    let dd = this.baseIteratee(iteratee)
     let value = values.flat(Infinity)
     if (Object.prototype.toString.call(iteratee) === '[object String]') {
       for (let i = 0; i < ary.length; i++) {
@@ -309,16 +309,17 @@ var wangxiaolin00 = {
     var res = []
     var m = new Map()
     var dd = this.baseIteratee(ary.pop())
-    for (let i = 0; i < ary.length; i++) {
-      for (let j = 0; j, ary[i].length; j++) {
-        let it = dd(ary[i][j])
-        if (m.has) {
+    for (var i = 0; i < ary.length; i++) {
+      for (let j = 0; j < ary[i].length; j++) {
+        var it = dd(ary[i][j])
+        if (m.has(it)) {
           res.push(m.get(it))
         } else {
           m.set(it, ary[i][j])
         }
       }
     }
+    return res
   },
   intersectionWith: function (ary, value, comparator) {//用comparator的方法求数组ary和value的交集
     var res = []
