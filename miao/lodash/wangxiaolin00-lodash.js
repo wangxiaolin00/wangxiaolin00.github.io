@@ -43,22 +43,33 @@ var wangxiaolin00 = {
     if (iteratee === null) {
       return val => val;
     }
-    if (typeof iteratee === "string") {
-      return val => val[iteratee];
+    // if (typeof iteratee === "string") {
+    //   return val => val[iteratee];
+    // }
+    // if (typeof iteratee === "function") {
+    //   return iteratee;
+    // }
+    // if (iteratee instanceof Array) {
+    //   return function (obj) {
+    //     return obj[iteratee[0]] === iteratee[1];
+    //   }
+    // } else if (typeof iteratee === "object") {
+    //   if (Object.prototype.toString.call(iteratee) === "[object RegExp]")
+    //     return val => iteratee.test(val);
+    //   else
+    //     return this.isShallowEqual.bind(null, iteratee);
+    // }
+    let g = Object.prototype.toString.call(iteratee)
+    if (g === '[obejct String]') {
+      return this.Property(iteratee)
     }
-    if (typeof iteratee === "function") {
-      return iteratee;
+    if (g === '[object Array]') {
+      return this.matchesProperty(iteratee[0], iteratee[1])
     }
-    if (iteratee instanceof Array) {
-      return function (obj) {
-        return obj[iteratee[0]] === iteratee[1];
-      }
-    } else if (typeof iteratee === "object") {
-      if (Object.prototype.toString.call(iteratee) === "[object RegExp]")
-        return val => iteratee.test(val);
-      else
-        return this.isShallowEqual.bind(null, iteratee);
+    if (g === '[object Object]') {
+      return this.matches(iteratee)
     }
+    return iteratee
   },
 
   chunk: function (ary, size = 1) {//将数组ary拆分成多个长度为size的数组返回一个包含拆分数组的二维数组
@@ -991,6 +1002,63 @@ var wangxiaolin00 = {
     }
 
 
+  },
+  isMatch: function (object, source) {
+    for (let i in source) {
+      if (!this.isEqual(object[i], source[i])) {
+        return false
+      }
+    }
+    return true
+
+
+  },
+  matches: function (source) {
+    return object => {
+      return wangxiaolin00.isMatch(object, source)
+    }
+
+  },
+  Property: function (path) {
+    var names = this.toPath(path)
+    return function (obj) {
+      for (let k of names) {
+        obj = obj[k]
+      }
+      return obj
+    }
+  },
+  matchesProperty: function (path, src) {
+    return function (obj) {
+      return wangxiaolin00.isEqual(wangxiaolin00.get(obj, path), src)
+    }
+  },
+  toPath: function (value) {
+    value.match(/\w+/gi)
+
+  },
+  get: function (object, path, defaultvalue = 'default') {
+    if (Array.isArray(path) && object) {
+      for (let k of path) {
+        if (k in Object(object)) {
+          object = object[k]
+        } else {
+          return defaultvalue
+        }
+      }
+      return object
+    } else if (Object.prototype.toString.call(path) === '[object String]') {
+      let names = this.toPath(path)
+      for (let i of names) {
+        if (i in Object(object)) {
+          object = object[i]
+
+        } else {
+          return defaultvalue
+        }
+      }
+      return object
+    }
   },
   max: function (array) {
     if (array.length == 0) {
