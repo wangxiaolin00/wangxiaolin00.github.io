@@ -61,7 +61,7 @@ var wangxiaolin00 = {
     // }
     let g = Object.prototype.toString.call(iteratee)
     if (g === '[obejct String]') {
-      return this.Property(iteratee)
+      return this.property(iteratee)
     }
     if (g === '[object Array]') {
       return this.matchesProperty(iteratee[0], iteratee[1])
@@ -1019,8 +1019,8 @@ var wangxiaolin00 = {
     }
 
   },
-  Property: function (path) {
-    var names = this.toPath(path)
+  property: function (path) {
+    let names = this.toPath(path)
     return function (obj) {
       for (let k of names) {
         obj = obj[k]
@@ -1034,10 +1034,13 @@ var wangxiaolin00 = {
     }
   },
   toPath: function (value) {
-    value.match(/\w+/gi)
+    value.match(/\w+/g)
 
   },
   get: function (object, path, defaultvalue = 'default') {
+    if (Object.prototype.toString.call(path) === '[object String]') {
+      path = this.toPath(path)
+    }
     if (Array.isArray(path) && object) {
       for (let k of path) {
         if (k in Object(object)) {
@@ -1048,8 +1051,7 @@ var wangxiaolin00 = {
       }
       return object
     } else if (Object.prototype.toString.call(path) === '[object String]') {
-      let names = this.toPath(path)
-      for (let i of names) {
+      for (let i of path) {
         if (i in Object(object)) {
           object = object[i]
 
