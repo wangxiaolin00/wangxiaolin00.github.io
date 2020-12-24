@@ -763,6 +763,235 @@ var wangxiaolin00 = {
     }
 
   },
+  zip: function (...arys) {
+    var res = []
+    for (let i = 0; i < arys[0].length; i++) {
+      res.push([])
+    }
+    for (let i = 0; i < arys.length; i++) {
+      for (let j = 0; j < arys[i].length; j++) {
+        res[j][i] = arys[i][j]
+      }
+    }
+    return res
+  },
+  zipObject: function (ary, value) {
+    var o = {}
+    for (i = 0; i < ary.length; i++) {
+      o[ary[i]] = value[i]
+
+    }
+    return o
+  },
+  zipWith: function (...arys) {
+    let s = arys.pop()
+    var res = []
+    var nu = []
+    if (Object.prototype.toString.call(s) === '[object Function]') {
+      for (let i = 0; i < arys[0].length; i++) {
+        res.push([])
+      }
+      for (let i = 0; i < arys.length; i++) {
+        for (let j = 0; j < arys[i].length; j++) {
+          res[j][i] = arys[i][j]
+        }
+      }
+      for (let i = 0; i < res.length; i++) {
+        nu.push(s(...res[i]))
+      }
+
+    }
+    return nu
+  },
+  countBy: function (ary, iteratee) {
+    var o = {}
+    if (Object.prototype.toString.call(iteratee) === '[object Function]') {
+      for (let k of ary) {
+        let it = iteratee(k)
+        if (o[it]) {
+          o[it]++
+        } else {
+          o[it] = 1
+        }
+      }
+      return o
+    } else if (Object.prototype.toString.call(iteratee) === '[object String]') {
+      for (let j = 0; j < ary.length; j++) {
+        let item = ary[j].length
+        if (o[item]) {
+          o[item]++
+        } else {
+          o[item] = 1
+        }
+      }
+      return o
+    }
+  },
+  forEach: function (ary, iteratee) {
+    if (Array.isArray(ary)) {
+      for (let i = 0; i < ary.length; ++i) {
+        iteratee(ary[i], i, ary)
+      }
+    } else if (ary instanceof Object) {
+      for (let k in ary) {
+        let temp = iteratee(ary[k], k, ary)
+        if (temp == false) {
+          break
+        }
+      }
+    }
+    return ary
+  },
+  groupBy: function (ary, iteratee) {
+    let type = Object.prototype.toString.call(iteratee)
+    var o = {}
+    if (type === '[object Function]') {
+      for (let k of ary) {
+        let it = iteratee(k)
+        if (o[it]) {
+          o[it].push(k)
+        } else {
+          o[it] = [k]
+        }
+      }
+      return o
+    } else if (type === '[object String]') {
+      for (var k of ary) {
+        let item = k[iteratee]
+        if (o[item]) {
+          o[item].push(k)
+        } else {
+          o[item] = [k]
+        }
+      }
+      return o
+    }
+  },
+  includes: function (ary, value, fromIndex = 0) {
+    let t = Object.prototype.toString.call(value)
+    if (t === '[object Number]' && Array.isArray(ary)) {
+      for (let i = fromIndex; i < ary.length; i++) {
+        if (value == ary[i]) {
+          return true
+        }
+      }
+      return false
+    } else if (t === '[object String]' && ary instanceof Object) {
+      for (let k in ary) {
+        if (ary[k] === value) {
+          return true
+        }
+      }
+      return false
+    } else if (t === '[object String]' && Object.prototype.toString.call(ary) === '[object String]') {
+      var re = new RegExp(value)
+      return re.test(ary)
+    }
+  },
+  invokeMap: function (ary, path, ...args) {
+    let t = Object.prototype.toString.call(path)
+    if (t === '[object String]') {
+      return ary.map(it => {
+        return it[path](...args)
+      })
+    } else if (t === '[object Function]') {
+      return ary.map(it => path.call(it, ...args))
+    }
+  },
+  keyBy: function (ary, iteratee) {
+    let t = Object.prototype.toString.call(iteratee)
+    var o = {}
+    if (t === '[object Function]') {
+      for (let k of ary) {
+        let it = iteratee(k)
+        if (!(o[it])) {
+          o[it] = k
+        }
+
+      }
+      return o
+    } else if (t === '[object String]') {
+      for (let i of ary) {
+        let item = i[iteratee]
+        if (!(o[item])) {
+          o[item] = i
+        }
+      }
+      return o
+    }
+  },
+  map: function (ary, iteratee) {
+    let t = Object.prototype.toString.call(iteratee)
+    var res = []
+    if (t === '[object Function]' && Array.isArray(ary)) {
+      for (let k of ary) {
+        res.push(iteratee(k))
+      }
+      return res
+    } else if (t === '[object Function]' && ary instanceof Object) {
+      for (let k in ary) {
+        res.push(iteratee(ary[k]))
+      }
+      return res
+    } else if (t === '[object String]' && iteratee.includes(".")) {
+      let arr = iteratee.split('.')
+      for (let k of ary) {
+        res.push(k[arr[0]][arr[1]])
+      }
+      return res
+
+    } else if (t === '[object String]') {
+      for (let k of ary) {
+        res.push(k[iteratee])
+      }
+      return res
+    }
+  },
+  partition: function (ary, predicate) {
+    var res = [[], []]
+    let t = Object.prototype.toString.call(predicate)
+    if (t === '[object Function]') {
+      for (let k of ary) {
+        let it = predicate(k)
+        if (it) {
+          res[0].push(k)
+        } else {
+          res[1].push(k)
+        }
+      }
+      return res
+    } else if (t === '[object Object]') {
+      let dd = this.baseIteratee(predicate)
+      for (let k of ary) {
+        if (dd(k)) {
+          res[0].push(k)
+        } else {
+          res[1].push(k)
+        }
+      }
+      return res
+    } else if (t === '[object Array]') {
+      for (let k of ary) {
+        if (k[predicate[0]] === predicate[1]) {
+          res[0].push(k)
+        } else {
+          res[1].push(k)
+        }
+      }
+      return res
+    } else if (t === '[object String]') {
+      for (let k of ary) {
+        if (k[predicate]) {
+          res[0].push(k)
+        } else {
+          res[1].push(k)
+        }
+      }
+      return res
+    }
+
+
+  },
   max: function (array) {
     if (array.length == 0) {
       return undefined
@@ -801,13 +1030,23 @@ var wangxiaolin00 = {
     return res
   },
   every: function (arr, predicate) {
-    var dd = this.baseIteratee(predicate)
-    for (let k of arr) {
-      if (!dd(k)) {
-        return false
+    let t = Object.prototype.toString.call(predicate)
+    if (t === '[object Function]') {
+      for (let k of arr) {
+        if (!predicate(k)) {
+          return false
+        }
       }
+      return true
+    } else {
+      let dd = this.baseIteratee(predicate)
+      for (let i of arr) {
+        if (!dd(i)) {
+          return false
+        }
+      }
+      return true
     }
-    return true
 
 
   },
@@ -842,47 +1081,13 @@ var wangxiaolin00 = {
       return value.split('')
     }
   },
-  includes: function (collection, value, fromindex = 0) {
-    if (Array.isArray(collection)) {
-      for (var i = fromindex; i < collection.length; i++) {
-        if (collection[i] == value) {
-          return true
-        }
-      }
-      return false
-    } else if (typeof collection == 'object') {
-      for (var i in collection) {
-        if (collection[i] == value) {
-          return true
-        }
-      }
-      return false
-    } else if (typeof collection == 'string') {
-      var reg = new RegExp(value)
-      if (collection.match(reg)) {
-        return true
-      }
-      return false
+  ary: function (func, n = func.length) {
+    return function (...args) {
+      return func(...args.slice(0, n))
     }
-
   },
-  map: function (collection, iteratee = _.identity) {
-    var res = []
-    if (Array.isArray(collection)) {
-      for (var i = 0; i < collection.length; i++) {
-        res.push(iteratee(collection[i]))
-      }
-      return res
-    } else if (typeof collection == 'object' && typeof iteratee == 'string') {
-      for (var i in collection) {
-        if (i == iteratee) {
-          res.push(collection[i])
-        }
-      }
-      return res
-    }
 
-  },
+
 
 
 
