@@ -40,9 +40,9 @@ var wangxiaolin00 = {
   },
 
   baseIteratee: function (iteratee) {
-    if (iteratee === null) {
-      return val => val;
-    }
+    // if (iteratee === null) {
+    //   return val => val;
+    // }
     // if (typeof iteratee === "string") {
     //   return val => val[iteratee];
     // }
@@ -1020,9 +1020,11 @@ var wangxiaolin00 = {
 
   },
   property: function (path) {
-    let names = this.toPath(path)
+    if (!Array.isArray(path)) {
+      path = this.toPath(path)
+    }
     return function (obj) {
-      for (let k of names) {
+      for (let k of path) {
         obj = obj[k]
       }
       return obj
@@ -1034,8 +1036,7 @@ var wangxiaolin00 = {
     }
   },
   toPath: function (value) {
-    value.match(/\w+/g)
-
+    return value.match(/\w+/g)
   },
   get: function (object, path, defaultvalue = 'default') {
     if (Object.prototype.toString.call(path) === '[object String]') {
