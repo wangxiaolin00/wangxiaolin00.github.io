@@ -60,6 +60,9 @@ var wangxiaolin00 = {
     //     return this.isShallowEqual.bind(null, iteratee);
     // }
     let g = Object.prototype.toString.call(iteratee)
+    if (g === '[object Function]') {
+      return iteratee
+    }
     if (g === '[obejct String]') {
       return this.property(iteratee)
     }
@@ -69,7 +72,6 @@ var wangxiaolin00 = {
     if (g === '[object Object]') {
       return this.matches(iteratee)
     }
-    return iteratee
   },
 
   chunk: function (ary, size = 1) {//将数组ary拆分成多个长度为size的数组返回一个包含拆分数组的二维数组
@@ -1061,6 +1063,206 @@ var wangxiaolin00 = {
         }
       }
       return object
+    }
+  },
+  sortBy: function (ary, ...iteratee) {
+    let t = Object.prototype.toString.call(iteratee[0])
+    if (t === '[object Function]' && iteratee.length == 1) {
+      var f = iteratee[0]
+      var arr = ary.slice()
+      return arr.sort((a, b) => {
+        return f(a).charCodeAt(0) - f(b).charCodeAt(0)
+      })
+
+    } else if (t === '[object Array]' && iteratee.length == 1) {
+      var f = iteratee[0]
+      var arr = ary.slice()
+      return arr.sort((a, b) => {
+        return a[f[0]].charCodeAt(0) - b[f[0]].charCodeAt(0)
+      }).sort((a, b) => {
+        return a[f[1]] - b[f[1]]
+      })
+
+    } else if (t === '[object String]' && iteratee.length == 2) {
+      var f1 = iteratee[0]
+      var f2 = iteratee[1]
+      var arr = ary.slice()
+      return arr.sort((a, b) => {
+        return a[f1].charCodeAt(0) - b[f1].charCodeAt(0)
+      }).sort((x, y) => {
+        return f2(x) - f2(y)
+      })
+    }
+  },
+  camelCase: function (str) {
+    var ssr = ""
+    var s = str.match(/[a-z]+/gi)
+    var res = []
+    for (let i = 0; i < s.length; i++) {
+      res.push(s[i].toLowerCase())
+    }
+    for (let j = 0; j < res.length; j++) {
+      if (j > 0) {
+        res[j] = res[j].replace(res[j][0], res[j][0].toUpperCase())
+      }
+      ssr += res[j]
+    }
+    return ssr
+  },
+  capitalize: function (str) {
+    var s = str.toLowerCase()
+    return s.replace(s[0], s[0].toUpperCase())
+  },
+  endsWith: function (str, target, position = str.length) {
+    if (str && str[position - 1] == target) {
+      return true
+    } else {
+      return false
+    }
+
+  },
+  pad: function (str, len = 0, chars = " ") {
+    while (str.length < len) {
+      str = str + chars
+      if (str.length >= 8) {
+        break
+      }
+      str = chars + str
+
+    }
+    return str.slice(0, len)
+
+  },
+  padEnd: function (str, len = 0, chars = " ") {
+    while (str.length < len) {
+      str = str + chars
+    }
+    return str.slice(0, len)
+  },
+  padStart: function (str, len = 0, chars = " ") {
+    while (str.length < len) {
+      str = chars + str
+    }
+    return str.slice(0, len)
+  },
+  parseInt: function (str, radix = 10) {
+    var r = /^0x/
+    var e = /^0b/
+    if (r.test(str)) {
+      return parseInt(str, 16)
+    } else if (e.test(str)) {
+      return parseInt(str, 8)
+    } else {
+      return parseInt(str, 10)
+    }
+  },
+  repeat: function (str, n = 1) {
+    var s = ''
+    for (let i = 0; i < n; i++) {
+      s += str
+    }
+    return s
+  },
+  replace: function (str, pattern, ment) {
+    return str.replace(pattern, ment)
+
+  },
+  split: function (str, separator, limit) {
+    var s = str.split(separator)
+    s.length = limit
+    return s
+  },
+  startsWith: function (str, target, position = 0) {
+    return str[position] === target
+  },
+  toLower: function (str) {
+    return str.toLowerCase()
+  },
+  toUpper: function (str) {
+    return str.toUpperCase()
+  },
+  upperFirst: function (str) {
+    return str.replace(str[0], str[0].toUpperCase())
+  },
+  words: function (str, pattern) {
+    if (pattern == null) {
+      pattern = /[a-z]+/gi
+    }
+    return str.match(pattern)
+  },
+  assign: function (obj, ...sources) {//将多个实例对象拷贝到原来的对象上 浅拷贝
+    for (let k of sources) {
+      Object.assign(obj, k)
+    }
+    return obj
+
+  },
+  assignIn: function (obj, ...sources) {
+    for (let k of sources) {
+      for (let i in k) {
+        obj[i] = k[i]
+      }
+    }
+    return obj
+  },
+  at: function (obj, ary) {
+    var res = []
+    ary = ary.map(it => wangxiaolin00.toPath(it))
+    for (let i of ary) {
+      var b = obj
+      for (let k of i) {
+        b = b[k]
+      }
+      res.push(b)
+    }
+    return res
+  },
+  defaults: function (obj, ...sources) {//将对象来源source中 在obj中没有的属性名拷贝到obj上,已经有的不更改
+    for (let k of sources) {
+      for (let i in k) {
+        if (obj[i]) {
+          continue
+        } else {
+          obj[i] = k[i]
+        }
+      }
+    }
+    return obj
+  },
+  toPairsIn: function (obj) {
+    var o = {}
+    for (let i in obj) {
+      o[i] = obj[i]
+    }
+    return Object.entries(o)
+  },
+  findKey: function (obj, predicate) {
+    var d = baseIteratee(predicate)
+    var t = Object.prototype.toString.call(predicate)
+    if (t === '[object Function]') {
+      for (let i in obj) {
+        if (d(obj[i])) {
+          return i
+          break
+        }
+      }
+      return undefined
+    } else if (t === '[object String]') {
+      for (let i in obj) {
+        if (obj[i][predicate]) {
+          return i
+          break
+        }
+      }
+      return undefined
+    } else {
+      for (let i in obj) {
+        if (d(obj[i])) {
+          return i
+          break
+        }
+      }
+      return undefined
     }
   },
   max: function (array) {
