@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="refresh" content="3"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      display: block;
+      margin: auto;
+      height: 385px;
+      width: 641px;
+    }
+  </style>
+</head>
+
+<body>
+  <img data-src="imgqin/1m.jpg" alt="">
+  <img data-src="imgqin/2m.jpg" alt="">
+  <img data-src="imgqin/3m.jpg" alt="">
+  <img data-src="imgqin/4m.jpg" alt="">
+  <img data-src="imgqin/5m.jpg" alt="">
+  <img data-src="imgqin/6m.jpg" alt="">
+  <img data-src="imgqin/7m.jpg" alt="">
+  <img data-src="imgqin/8m.jpg" alt="">
+  <img data-src="imgqin/9m.jpg" alt="">
+  <script>
+    var imgs = Array.from(document.querySelectorAll('img'))
+    window.addEventListener('scroll', function (event) {
+      var visibleimgs = imgs.filter(it => it.dataset.src).filter(i => {
+        var top = i.getBoundingClientRect().top
+        return top < window.innerHeight && top >= 0
+      })
+      visibleimgs.forEach(item => {
+        item.src = item.dataset.src
+        delete item.dataset.src
+        item.style.opacity = '0'
+        item.onload = function () {
+          requestAnimationFrame(() => {
+            item.style.transition = '0.6s'
+            item.style.opacity = '1'
+          })
+        }
+      })
+    })
+    window.dispatchEvent(new Event('scroll'))
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

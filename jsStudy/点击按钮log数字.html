@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>第一个</button>
+  <button>第二个</button>
+  <button>第二个</button>
+  <script>
+    var btns = document.querySelectorAll('button')
+    // for (let i = 0; i < btns.length; i++) {//循环体运行多少次 let就有多少个就产生多少个作用域
+    //   btns[i].onclick = function () {
+    //     console.log(i + 1);
+    //   }
+    // }
+    for (var j = 0; j < btns.length; j++) {
+      (function (j) {
+        btns[j].onclick = function () {
+          console.log((j + 1));
+        }
+      })(j)
+    }
+
+  </script>
+
+</body>
+
+</html>

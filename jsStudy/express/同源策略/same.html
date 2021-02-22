@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2>同源策略</h2>
+  <button class="btn">我是按钮</button>
+  <script>
+    /*同源策略(same Origin policy)
+        最早由netscape 公司提出的 是浏览器的一种安全策略
+        同源:协议 域名 端口号 必须完全相同
+        违背同源策略就是跨域
+        ajax 发送请求时默认遵循同源策略
+        */
+    const btn = document.querySelector('.btn')
+    btn.addEventListener('click', function () {
+      const xhr = new XMLHttpRequest()
+      //xhr.resopnseType = 'json' //设置响应体的类型
+      //初始化 设置请求方法 路径url 异步
+      xhr.open('GET', '/data')//这里因为满足同源策略url 可以简写
+      //设置请求头
+      //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+      //发送
+      xhr.send()//get 请求不需要发送请求体 post 请求需要发送请求体
+      //xhr.onabort()取消请求的方法
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            console.log(xhr.response);
+
+          }
+        }
+      }
+
+    })
+  </script>
+</body>
+
+</html>

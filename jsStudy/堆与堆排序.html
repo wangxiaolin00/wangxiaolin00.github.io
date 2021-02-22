@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //假定ary的是一个合法的堆
+    //pop函数删除堆顶的元素并维护堆的性质
+    function pop(ary) {
+      if (ary.length == 0) {
+        return
+      }
+      if (ary.length == 1) {
+        return ary.pop()
+      }
+      var result = ary[0]
+      ary[0] = ary.pop()
+      heapDown(ary, 0)
+      return result
+    }
+    function push(ary, val) {
+      ary.push(val)
+      heapUp(ary, ary.length - 1)
+      return ary
+
+    }
+    function heapDown(ary, pos) {//从堆的pos位置开始执行从顶部向下调整
+      let l = pos * 2 + 1
+      let r = pos * 2 + 2
+      var len = ary.length
+      var maxidx = pos
+      if (l < len && ary[l] < ary[r]) {
+        maxidx = r
+      }
+      if (r < len && ary[l] > ary[r]) {
+        maxidx = l
+      }
+      if (maxidx != pos) {
+        var temp = ary[pos]
+        ary[pos] = ary[maxidx]
+        ary[maxidx] = temp
+        heapDown(ary, maxidx)
+      }
+
+    }
+    function heapDown2(ary, pos) {
+      let len = ary.length
+      let leftidx = pos * 2 + 1
+      let rightidx = pos * 2 + 2
+      let maxidx = pos
+      while (pos < len) {
+        if (rightidx < len && ary[leftidx] > ary[rightidx]) {
+          maxidx = leftidx
+        }
+        if (leftidx < len && ary[leftidx] < ary[rightidx]) {
+          maxidx = rightidx
+        }
+        if (maxidx != pos) {
+          var temp = ary[pos]
+          ary[pos] = ary[maxidx]
+          ary[maxidx] = temp
+
+        } else {
+          break
+        }
+
+
+
+
+      }
+
+    }
+    function heapUp(ary, pos) {//从底部向上
+      let pindex = (pos - 1) >> 1
+      if (pindex >= 0 && ary[pos] > ary[pindex]) {
+        var temp = ary[pos]
+        ary[pos] = ary[pindex]
+        ary[pindex] = temp
+        heapUp(ary, pindex)
+      }
+    }
+    function heapUp2(ary, pos) {
+      while (p > 0) {
+        var pindex = (p - 1) >> 1
+        if (pindex >= 0 && ary[pos] > ary[pindex]) {
+          var temp = ary[pos]
+          ary[pos] = ary[pindex]
+          ary[pindex] = temp
+        } else {
+          break
+        }
+
+      }
+    }
+    //堆PriorityQueue
+    function PriorityQueue() {
+      this.elements = []
+    }
+    PriorityQueue.prototype.pop = function () {
+      if (this.elements.length == 0) {
+        return
+      }
+      if (this.elements.length == 1) {
+        return this.elements.pop()
+      }
+      let res = this.elements[0]
+      this.elements[0] = this.elements.pop()
+      heapDown(0)
+      return res
+
+    }
+    PriorityQueue.prototype.push = function (val) {
+      this.elements.push(val)
+      this.heapUp(this.elements.length - 1)
+      return this
+
+    }
+    PriorityQueue.prototype.peak = function () {
+      return this.elements[0]
+    }
+    PriorityQueue.prototype.heapDown = function (pos) {
+      let leftidx = pos * 2 + 1
+      let rightidx = pos * 2 + 2
+      let maxidx = pos
+      let len = this.elements.length
+      if (leftidx < len && this.elements[leftidx] > this.elements[rightidx]) {
+        maxidx = leftidx
+      }
+      if (rightidx < len && this.elements[rightidx] > this.elements[leftidx]) {
+        maxidx = rightidx
+      }
+      if (maxidx != pos) {
+        let temp = this.elements[maxidx]
+        this.elements[maxidx] = this.elements[pos]
+        this.elements[pos] = temp
+        this.heapDown(maxidx)
+      }
+
+    }
+    PriorityQueue.prototype.heapUp = function (pos) {
+      let pindex = (pos - 1) >> 1
+      if (pindex >= 0 && this.elements[pos] > this.elements[pindex]) {
+        let temp = this.elements[pos]
+        this.elements[pos] = this.elements[pindex]
+        this.elements[pindex] = temp
+        this.heapUp(pindex)
+      }
+
+
+    }
+    PriorityQueue.prototype.size = function () {
+      return this.elements.length
+    }
+
+    //new Array(20).fill(0).map(it=>Math.random*20|0)
+    //将一个不是堆性质的数组排成堆性质的数组
+    function heapify(ary) {
+      var n = ary.length
+      var idx = Math.floor(n / 2) - 1
+      for (i = idx; i >= 0; i--) {
+        heapDown(ary, n)
+      }
+      return ary
+
+    }
+    function heapSort2(ary) {
+      heapify(ary)
+      for (let i = ary.length - 1; i > 1; i--) {
+        var temp = ary[i]
+        ary[i] = ary[0]
+        ary[0] = temp
+        heapDown(ary, 0, i)
+      }
+    }
+  </script>
+  排序算法的稳定性:
+  指排序算法在排序前后是否会改变相同元素的相对位置
+  不改变相同元素的相对位置,则为稳定的排序算法
+
+  选择排序:不稳定
+  归并排序:稳定
+
+  冒泡:稳定;
+  快排:不稳定;
+  插入:稳定;
+  bst:稳定
+  堆排序:不稳定;
+  计数排序;只能排数字,不能排对象
+  总分相同的按语文成绩排序,语文成绩相同的按数学成绩排序, 并且要要采用稳定的排序算法
+  这样要先排数学成绩,再排语文成绩,再排总分成绩
+  排序稳定性
+
+</body>
+
+</html>

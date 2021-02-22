@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function Star(uname, age, sex) {
+      this.uname = uname,
+        this.age = age,
+        this.sex = sex
+    }
+    var ldh = new Star('刘德华', 55, '男')
+    console.log(ldh.__proto__);//返回等价于Star.prototype
+    console.log(ldh.__proto__.__proto__);//返回是是Object.prototype
+    console.log(ldh.__proto__.__proto__.__proto__);//返回值是null
+    console.log(Star.prototype);
+    console.log(ldh.__proto__ === Star.prototype);//返回true
+    console.log(ldh.__proto__.__proto__ === Object.prototype)
+    console.log(Object.prototype.__proto__)//返回值是null
+    console.log(Array.prototype)
+    function isArray(val) {
+      return Object.prototype.toString.call(val) === '[object Array]'
+    }
+    function forOwn(obj, iterator) {
+      for (let k in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, k)) {
+          iterator(obj[key], key, obj)
+        }
+      }
+      return obj
+    }
+    //原型对象的应用 prototype 扩展内置对象的方法
+    Array.prototype.sum = function () {
+      var sum = 0
+      for (var i = 0; i < this.length; i++) {
+        sum += this[i]
+      }
+      return sum
+    }
+    // Array.prototype = {//不推荐使用这个方法
+    //   consructor: Array,
+    //   sum: function () {
+    //     var sum = 0
+    //     for (var i = 0; i < this.length; i++) {
+    //       sum += this[i]
+    //     }
+    //     return sum
+    //   },
+
+    // }
+    var arr = [1, 2, 3]
+    console.log(arr.sum())
+    //继承 es6之前并没有提供 extends继承 我们可以通过构造函数+原型对象的模拟实现继承被称为组合继承
+    //call 方法
+    //call(thisargs,...args)//后面的参数是普通参数
+    //可以调用函数f 还以改变this的指向
+    function f(x, y) {
+      console.log('我想喝咖啡')
+      console.log(this)//没用call之前this指向的window
+      console.log(x + y)
+    }
+    var o = {
+      name: 'andy'
+    }
+    f(1, 2)
+    f.call(null, 1, 2)//这时起到调用函数的作用
+    f.call(o, 1, 2)//第一个参数是this指向的对象
+    //借用构造函数继承属性
+    //父构造函数
+    function Father(uname, age) {
+      //this指向的父构造函数的对象实例
+      this.uname = uname;
+      this.age = age;
+
+    }
+    Father.prototype.money = function () {
+      console.log(10000)
+    }
+    // Son.prototype = Father.prototype 把父构造函数Father的地址给了子构造函数Son,此时修改了子类构造函数的prototype父构造函数的原型也会更改
+    //子构造函数
+    function Son(uname, age, score) {
+      //这里的this指向的是子构造函数的对象实例
+      // this.uname=uname;
+      // this.age=age;
+      this.score = score;
+      Fa.call(this, uname, age, score)//把构造函数Fa中this指向子构造函数中this,拿到Fa中属性
+
+    }
+    Son.prototype = new Father()//让子类的原型对象指向Farter的实例对象,来继承父构造函数的对象
+    //这样开辟了另外的内存空 每一个都要new 一下父构造函数
+    Son.prototype.constructor = Son
+
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>二叉树</title>
+</head>
+
+<body>
+  <script>
+    // function keyBy(ancestry, prop) {//以prop的属性作为整个映射
+    //   var obj = {}
+    //   for (var i = 0; i < ancestry.length; i++) {
+    //     var people = ancestry[i]
+    //     obj[people[prop]] = people
+    //   }
+    //   return obj
+    // }
+    // var buName = keyBy(ancestry, prop)
+    // //计算名为name的人和pvh人共享的基因比列
+    // function genwithpvh(name) {
+    //   var people = byName[name]
+    //   if (name == 'pau') {
+    //     return 1
+    //   }
+    //   if (!people) {
+    //     return 0
+    //   }
+
+
+    //   return (genwithpvh(people.father) + genwithpvh(people.monther)) / 2
+    // }
+    // function bind(f, ...fixedArgs) {
+    //   return function (...args) {
+    //     return f(...fixedArgs, ...args)
+    //   }
+    // }
+  </script>
+  <script>
+    //二叉树的定义
+    //空节点 或者一个节点有一个左节点;和一个右节点
+    //没有子节点的叫跟节点
+    //没有父节点的叫叶子节点
+    //二叉树又叫二叉链表;每一个链表存有下一个节点的指向
+    //完全二叉树:从上到下从左往右每一个节点都有俩个左右节点
+    //满二叉树 :除了最后一排的每一个叶子节点都有2个左右节点
+    //满二叉树 一个节点的俩个子节点 是 2n+1和2n+2 根节点是从0开始编号
+    //对于一个给定的二叉树.其闲置指针正好比节点的数量多1
+    //证明 :如果有x个节点;则正好有2x个指针
+    //根节点没有指针指向;其他所有节点都有俩个节点
+    //二叉链表
+    //数组:松散型;将二叉树的所节点,空节点的自己节点的也要画得到一个完全二叉树;
+    //将处理结果保留在数组中
+    //下标有i置的值,其俩个子节点的位置分别为2I+1和2i+2
+    //紧凑型 所有空节点的节点不写
+    function createTreeNode(val) {
+      return {
+        val,
+        left: null,
+        right: null
+      }
+
+
+    }
+    //将存储在数组的跟节点在rootpos的位置的二叉树转化为二叉树链表的形式
+    function arraytotree(array, rootPos = 0) {
+      if (array[rootPos] == null) {
+        return null
+      }
+      var root = createTreeNode(array[rootPos])
+      var left = arraytotree(array, rootPos * 2 + 1)
+      var right = arraytotree(array, rootPos * 2 + 2)
+      root.left = left
+      root.right = right
+      return root
+
+    }
+    //把一个二叉链表表示的二叉树转化为数组形式;其中根节点在0的位置
+    function treeToArray(root, pos = 0, array = []) {
+      if (!root) {
+        return array
+      }
+      array[pos] = root.val
+      treeToArray(root.left, pos * 2 + 1, array)
+      treeToArray(root.right, pos * 2 + 2, array)
+      return array
+    }
+    function condensedarraytotree(array) {//将一个用紧凑的形式的数组转化为二叉树链表
+      if (array.length == 0) {
+        return null
+      }
+      var root = createTreeNode(array[0])
+
+      var nodes = [root]
+      var j = 0
+      var node
+      for (var i = 1; i < array.length; i++) {
+        node = null
+        if (array[i] != null) {
+          node = createTreeNode(array[i])
+          nodes.push(node)
+        }
+        nodes[j].left = node
+
+        i++
+        // if (i == array.length) {
+        //   break
+        // }
+
+        node = null
+        if (array[i] != null) {
+          node = createTreeNode(array[i])
+          nodes.push(node)
+        }
+        nodes[j].right = node
+        j++
+      }
+
+      return root
+    }
+
+
+
+
+  </script>
+
+</body>
+
+</html>

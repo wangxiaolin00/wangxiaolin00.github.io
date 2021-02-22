@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // function plus(a, b) {
+    //   while (b) {
+    //     let temp = a ^ b
+    //     b = (a & b) << 1
+    //     a = temp
+    //   }
+    //   return a
+    // }
+    // console.log(plus(11, 20));
+    function Set1(v) {
+      if (v) {
+        let res = []
+        for (let i = 0; i < v.length; i++) {
+          if (res.includes(v[i])) {
+            continue
+          } else {
+            res.push(v[i])
+          }
+        }
+        this.item = res
+      } else {
+        this.item = []
+      }
+    }
+    Set1.prototype.has = function (val) {
+      if (this.item.includes(val)) {
+        return true
+      } else {
+        return false
+      }
+    }
+    Set1.prototype.add = function (val) {
+      if (this.item.includes(val)) {
+        return
+      } else {
+        this.item.push(val)
+        return true
+      }
+    }
+    Set1.prototype.delete = function (val) {
+      if (!this.item.includes(val)) {
+        return false
+      } else {
+        for (let i = 0; i < this.item.length; i++) {
+          if (this.item[i] === val) {
+            this.item.splice(i, 1)
+            return true
+          }
+        }
+      }
+    }
+    Set1.prototype.size = function () {
+      return this.item.length
+    }
+    Set1.prototype.clear = function () {
+      this.item = []
+    }
+    Object.defineProperty(Set1.prototype, 'size', {
+      get: function () {
+        return this.item.length
+      }
+    })
+    function indexof(ary, val) {
+      if (val != val) {
+        for (let i = 0; i < ary.length; i++) {
+          if (ary[i] != ary[i]) {
+            return i
+          }
+        }
+        return -1
+      }
+      for (let i = 0; i < ary.length; i++) {
+        if (ary[i] === val) {
+          return i
+        }
+      }
+      return -1
+    }
+    //_element //用下划线开头表示是私有属性,表示不希望被访问,这是一种约定
+    class Set2 {
+      constructor(v = []) {
+        this.item = []
+        for (let i = 0; i < v.length; i++) {
+          if (!this.item.includes(v[i])) {
+            this.item.push(v[i])
+          }
+        }
+
+      }
+      has(val) {
+        return this.item.includes(val)
+      }
+      add(val) {
+        if (!this.item.includes(val)) {
+          this.includes.push(val)
+        }
+      }
+      clear() {
+        this.item.length = 0
+      }
+      delete(val) {
+        if (!this.includes(val)) {
+          return false
+        }
+        if (val != val) {
+          for (let i = 0; i < this.item.length; i++) {
+            if (this.item[i] != item[i]) {
+              this.item.splice(i, 1)
+              return true
+            }
+          }
+        }
+        for (let i = 0; i < this.item.length; i++) {
+          if (this.item[i] === val) {
+            this.item.splice(i, 1)
+            return true
+          }
+        }
+
+      }
+
+
+
+
+    }
+    Object.defineProperty(Set2.ptototype, 'size', {
+      get: function () {
+        return this.item.length
+      }
+    })
+    // class Map2 {
+    //   constructor() {
+    //     this.item = {}
+    //   }
+    //   has(val) {
+    //     return Object.prototype.hasOwnProperty(Map2, val)
+    //   }
+    //   set(val, value) {
+    //     this.item[val] = value
+    //   }
+    //   get(val) {
+    //     return this.item[val]
+    //   }
+    //   clear() {
+    //     this.item = {}
+    //   }
+    //   remove(val) {
+    //     if (!Object.prototype.hasOwnProperty(Map2, val)) {
+    //       return false
+    //     } else {
+    //       delete this.item[val]
+    //       return true
+    //     }
+    //   }
+    // }
+    class Map2 {
+      constructor() {
+        this._keys = []
+        this._values = []
+      }
+      has(val) {
+        return this._keys.includes(val)
+      }
+      get(val) {
+        if (!this._keys.includes(val)) {
+          return false
+        }
+        let s = this._keys.indexOf(val)
+        if (s >= 0) {
+          return this._values[s]
+        }
+      }
+
+    }
+    //findIndex(it=>it!==it)//找出数组中满足(条件的)第一的下标
+    function MyMap(initialMaps = []) {
+      this._keys = []
+      this._vals = []
+
+      for (var i = 0; i < initialMaps.length; i++) {
+        var map = initialMaps[i]
+        this.set(map[0], map[1])
+      }
+    }
+    // 返回key在_keys中的下标，支持key为NaN
+    MyMap.prototype._keyIdx = function (key) {
+      if (key !== key) {
+        return this._keys.findIndex(it => it !== it)//找出满足条件的元素的下标，找不到返回-1
+      }
+      return this._keys.indexOf(key)
+    }
+    MyMap.prototype.set = function (key, val) {
+      var idx = this._keyIdx(key)
+      if (idx >= 0) {
+        this._vals[idx] = val
+      } else {
+        this._keys.push(key)
+        this._vals.push(val)
+      }
+      return this
+    }
+    MyMap.prototype.get = function (key) {
+      var idx = this._keyIdx(key)
+      if (idx >= 0) {
+        return this._vals[idx]
+      } else {
+        return undefined
+      }
+    }
+    MyMap.prototype.has = function (key) {
+      return this._keys.includes(key)
+    }
+    MyMap.prototype.delete = function (key) {
+      var idx = this._keyIdx(key)
+      if (idx >= 0) {
+        this._keys.splice(idx, 1)
+        this._vals.splice(idx, 1)
+        return true
+      } else {
+        return false
+      }
+    }
+    MyMap.prototype.clear = function () {
+      this._keys.length = 0
+      this._vals.length = 0
+    }
+    Object.defineProperty(MyMap.prototype, 'size', {
+      get: function () {
+        return this._keys.length
+      }
+    })
+    function bind(f, thisArg, ...partials) {
+      return function (...args) {
+        var copy = partials.slice()
+        for (var i = 0; i < copy.length; i++) {
+          if (copy[i] === window) {
+            copy[i] = args.shift()
+          }
+        }
+        return f.call(thisArg, ...copy, ...args)
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

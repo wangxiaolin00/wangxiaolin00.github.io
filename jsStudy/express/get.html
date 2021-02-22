@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box {
+      height: 300px;
+      width: 300px;
+      border: 1px solid black;
+
+    }
+  </style>
+</head>
+
+<body>
+  <button class="btn">我是按钮</button>
+  <div id="box"></div>
+  <script>
+    var btn = document.querySelector('.btn')//获取事件元素
+    var div = document.querySelector('#box')
+    btn.onclick = function () {
+      //创建对象
+      const xhr = new XMLHttpRequest()
+      //初始化 设置请求的方法 和url
+      xhr.open('GET', 'http://127.0.0.1:8001/server?a=100&b=200&c=300')
+      //发送
+      xhr.send()
+      //事件绑定  处理服务端返回的结果
+      //readystate 是xhr对象中的属性 表示状态 0,1,2,3,4
+
+      //0表示初始值 
+      //1表示 open方法调用结束 
+      //2表示 send()方法调用结束
+      //3表示 服务端返回部分数据
+      //4表示 服务端返回所有的请求
+      //总功5个值 触发4次onreadystatechange事件
+      xhr.onreadystatechange = function () {
+        //判断
+        if (xhr.readyState === 4) {
+          //判断响应状态码200 404 403 401 500
+          //以2开头的三位数 状态码都表示成功
+          if (xhr.status >= 200 && xhr.status < 300) {
+            //处理结果 行 头 空行 体
+            //1.响应行
+            console.log(xhr.status);//状态码
+            console.log(xhr.statusText);//状态字符串
+            console.log(xhr.getAllResponseHeaders());//所有响应头
+            console.log(xhr.response);//响应体
+            div.innerHTML = xhr.response
+          }
+        }
+
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

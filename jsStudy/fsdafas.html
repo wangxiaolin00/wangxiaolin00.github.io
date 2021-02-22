@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script>
+  var ggr = {
+    x: 1,
+    y: 2,
+    name: 11,
+    age: 16,
+    sayhi: function () {
+      console.log('冰雨');
+    }
+  }
+  var obj = new Object();
+  obj.name = 'liudehua';
+  obj.age = 55;
+  obj.sex = '男';
+  function Star() {
+    this.name = name;
+    this.age = age;
+    this.sex = sex;
+
+  }
+  var arr = [1, 2, 4, 5, 6, 7, , 84, 7, 22, 3];
+  for (i = 0; i <= arr.length - 1; i++) {
+    for (j = 0; j <= arr.length - i - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        var temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
+    }
+  }
+  console.log(arr);
+  var max = arr[0];
+  for (i = 0; i < arr.length; i++) {
+    if (arr[i] > max) {
+      max = arr[i];
+    }
+  }
+  console.log(max);
+  var newArr = [];
+  for (i = arr.length - 1; i >= 0; i--) {
+    newArr[newArr.length] = arr[i];
+  }
+  console.log(newArr);
+  var min = newArr[0];
+  for (i = 0; i < newArr.length; i++) {
+    if (newArr[i] < min) {
+      min = newArr[i];
+
+    }
+  }
+  console.log(min);
+  var str = '';
+  for (i = 0; i <= 9; i++) {
+    for (j = 0; j <= 9; j++) {
+      str += '★';
+
+    }
+    str += '\n';
+  }
+  console.log(str);
+  var sp = '';
+  for (i = 0; i <= 9; i++) {
+    for (j = i; j <= 9; j++) {
+      sp += '★';
+
+    }
+    sp += '\n';
+  }
+  console.log(sp);
+  var sd = '';
+  for (b = 1; b <= 9; b++) {
+    for (f = 1; f <= b; f++) {
+      sd += b + '*' + f + '=' + b * f;
+    }
+    sd += '\n';
+  }
+  alert(sd)
+  console.log(sd);
+  var so = '';
+  for (i = 0; i <= 9; i++) {
+    for (j = 0; j <= i; j++) {
+      so += '★';
+
+    }
+    so += '\n';
+  }
+  console.log(so);
+
+
+
+
+
+
+
+</script>
+
+<body>
+
+</body>
+
+</html>

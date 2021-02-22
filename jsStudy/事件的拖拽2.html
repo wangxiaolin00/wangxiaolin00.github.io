@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      position: fixed;
+      height: 100px;
+      width: 100px;
+      border: 2px solid black;
+
+    }
+  </style>
+</head>
+
+<body style="height: 2000px;">
+  <div class="box" style="left:0;top:0;background-color: red;"></div>
+  <div class="box" style="left:0;top:0;background-color: blue;"></div>
+  <div class="box" style="left:0;top:0;background-color: cyan;"></div>
+  <script>
+    var moveE = null
+    var ol
+    var ot
+    var maxz = 2
+    window.addEventListener('mousedown', function (e) {
+      if (e.target.matches('body div.box')) {//判断某个元素是否匹配某一个选择器
+        //console.log('an');
+        moveE = e.target
+        moveE.style.zIndex = maxz++
+        ol = e.clientX - e.target.offsetLeft
+        ot = e.clientY - e.target.offsetTop
+        window.addEventListener('mousemove', move)
+      }
+
+
+
+
+    })
+    function move(e) {
+      if (e.which == 0) {
+        window.removeEventListener('mousemove', move)
+      } else if (e.which == 1) {
+        var x = e.clientX - ol
+        var y = e.clientY - ot
+        // var sl = document.documentElement.scrollLeft
+        // var st = document.documentElement.scrollTop
+        if (x <= 50) {
+          x = 0
+        }
+        if (x > window.innerWidth - moveE.offsetWidth - 5) {
+          x = window.innerWidth - moveE.offsetWidth
+        }
+        if (y > window.innerHeight - moveE.offsetHeight - 5) {
+          y = window.innerHeight - moveE.offsetHeight
+        }
+        if (y <= 50) {
+          y = 0
+        }
+        moveE.style.left = x + 'px'
+        moveE.style.top = y + 'px'
+      }
+    }
+
+  </script>
+
+
+</body>
+
+</html>

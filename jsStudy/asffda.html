@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      height: 306px;
+      width: 306px;
+      margin: 100px auto;
+      background: url(image111/clock.png) no-repeat center center;
+      border-radius: 50%;
+      border: 1px solid red;
+      position: relative;
+    }
+
+    .dd1 {
+      display: block;
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      background-color: black;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50% -50%);
+    }
+
+    @keyframes move {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hours {
+      position: absolute;
+      top: 118px;
+      left: 153px;
+      height: 40px;
+      width: 10px;
+      transform: rotate(30deg);
+      transform-origin: 50% 100%;
+      background-color: black;
+      animation: move 2160s linear infinite;
+    }
+
+
+    .minutes {
+      position: absolute;
+      top: 78px;
+      left: 149px;
+      width: 6px;
+      height: 80px;
+      transform: rotate(-30deg);
+      background-color: black;
+      transform-origin: 50% 100%;
+      animation: move 360s linear infinite;
+    }
+
+    .seconds {
+      position: absolute;
+      top: 55px;
+      left: 150px;
+      width: 3px;
+      height: 100px;
+      transform: rotate(60deg);
+
+      background-color: black;
+      transform-origin: 50% 100%;
+      animation: move 60s steps(60) infinite 1s;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <span class="dd1"></span>
+    <div class="hours"></div>
+    <div class="minutes"></div>
+    <div class="seconds"></div>
+  </div>
+  </div>
+
+</body>
+
+</html>

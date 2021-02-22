@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function deepClone(obj) {//深度拷贝不带环的对象
+      var res = {}
+      for (let key in obj) {
+        let val = obj[key]
+        if (typeof val === 'objcet') {
+          res[key] = deepClone(val)
+        } else {
+          res[key] = val
+        }
+      }
+      return res
+
+    }
+    function deepClonescroll(obj, map = new Map()) {//深度拷贝带环的对象
+      if (map.has(obj)) {
+        return map.get(obj)
+      }
+      var res = {}
+      map.set(obj, res)
+      for (let key in obj) {
+        let val = obj[key]
+        if (typeof val === 'object') {
+          res[key] = deepClone(val, map)
+        } else {
+          res[key] = val
+        }
+      }
+      return res
+
+    }
+
+  </script>
+
+</body>
+
+</html>

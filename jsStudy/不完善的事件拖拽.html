@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      border: 2px solid black;
+    }
+
+    .box1 {
+      height: 100px;
+      width: 100px;
+      background-color: cyan;
+      position: fixed;
+    }
+
+    .box2 {
+      height: 100px;
+      width: 100px;
+      background-color: red;
+      position: fixed;
+    }
+
+    .box3 {
+      height: 100px;
+      width: 100px;
+      background-color: blue;
+      position: fixed;
+    }
+  </style>
+</head>
+
+<body style="height: 2000px;">
+  <div class="box1"></div>
+  <div class="box2"></div>
+  <div class="box3"></div>
+  <script>
+    var div1 = document.querySelector('.box1')
+    var div2 = document.querySelector('.box2')
+    var div3 = document.querySelector('.box3')
+    div1.onmousedown = function (e) {
+      var ol = e.clientX - div1.offsetLeft
+      var ot = e.clientY - div1.offsetTop
+      document.onmousemove = function (e) {
+        var x = e.clientX - ol
+        var y = e.clientY - ot
+        // var sl = document.documentElement.scrollLeft
+        // var st = document.documentElement.scrollTop
+        if (x <= 100) {
+          x = 0
+        }
+        if (y <= 100) {
+          y = 0
+        }
+        div1.style.left = x + 'px'
+        div1.style.top = y + 'px'
+      }
+
+
+    }
+    document.onmouseup = function () {
+      document.onmousemove = null
+      document.onmouseup = null
+    }
+    div2.onmousedown = function (e) {
+      var ol = e.clientX - div2.offsetLeft
+      var ot = e.clientY - div2.offsetTop
+      document.onmousemove = function (e) {
+        var x = e.clientX - ol
+        var y = e.clientY - ot
+        var sl = document.documentElement.scrollLeft
+        var st = document.documentElement.scrollTop
+        if (x <= 100) {
+          x = 0
+        }
+        if (y <= 100) {
+          y = 0
+        }
+        div2.style.left = x + sl + 'px'
+        div2.style.top = y + st + 'px'
+      }
+
+
+    }
+    document.onmouseup = function () {
+      document.onmousemove = null
+      document.onmouseup = null
+    }
+    div3.onmousedown = function (e) {
+      var ol = e.clientX - div3.offsetLeft
+      var ot = e.clientY - div3.offsetTop
+      document.onmousemove = function (e) {
+        var x = e.clientX - ol
+        var y = e.clientY - ot
+        var sl = document.documentElement.scrollLeft
+        var st = document.documentElement.scrollTop
+        if (x <= 100) {
+          x = 0
+        }
+        if (y <= 100) {
+          y = 0
+        }
+        div3.style.left = x + sl + 'px'
+        div3.style.top = y + st + 'px'
+      }
+
+
+    }
+    document.onmouseup = function () {
+      document.onmousemove = null
+      document.onmouseup = null
+    }
+    // window.addEventListener('mousedown', function (event) {
+    //   var ol = event.clientX - event.target.offsetLeft
+    //   var ot = event.clientY - event.target.offsetTop
+    //   window.addEventListener('mousemove', function (e) {
+    //     var x = e.clientX - ol
+    //     var y = e.clientY - ot
+    //     var sl = document.documentElement.scrollLeft
+    //     var st = document.documentElement.scrollTop
+    //     if (x <= 50) {
+    //       x = 0
+    //     }
+    //     if (y <= 50) {
+    //       y = 0
+    //     }
+    //     e.target.style.left = x + sl + 'px'
+    //     e.target.style.top = y + st + 'px'
+
+    //   })
+    // })
+    // window.addEventListener('mouseup', function (e) {
+    //   e.target.removeEventListener()
+    // })
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //闭包应用 -计算打车价格
+    //打车起步价是13(3公里以内,)之后每多一公里增加5块钱,用户输入公里数就可以计算打车价格
+    //如果拥堵情况,总价格多收10块钱拥堵费
+    var car = (function () {
+      var start = 13;//起步价
+      var total = 0;
+      return {
+        price: function (n) {//正常打车价格
+          if (n <= 3) {
+            total = start;
+          } else {
+            total = start + (n - 3) * 5
+          }
+          return total
+        },
+        yongdu: function (flag) {//拥堵打车价格
+          return flag ? total + 10 : total
+        }
+      }
+    })();
+    car.price(5)
+    console.log(car.price(5));
+    console.log(car.yongdu(true));
+    var name = 'da'
+    var object = {
+      name: "蛮三刀",
+      getName: function () {
+        var that = this;
+        return function () {
+          return that.name;
+        }
+      }
+    }
+    console.log(object.getName()());//返回值是"蛮三刀"
+
+    function jiecheng(n) {
+      return n > 1 ? n * jiecheng(n - 1) : 1;
+    }
+    console.log(jiecheng(5));
+    var obj1 = [
+      {
+        id: 1,
+        name: '张飞',
+        goods: [
+          {
+            id: 11,
+            name: '张包'
+          }
+          ,
+          {
+            id: 12,
+            name: '张宇'
+          }
+        ]
+      },
+      {
+        id: 2,
+        name: '赵云',
+      }
+      ,
+      {
+        id: 3,
+        name: '关羽'
+
+      }
+    ]
+    function getId(obj, id) {
+      let o = {}
+      obj.forEach(it => {
+        if (it.id === id) {
+          o = it
+        } else if (it.goods && it.goods.length > 0) {
+          o = getId(it.goods, id)
+        }
+      })
+      return o
+    }
+    console.log(getId(obj1, 1));
+    console.log(getId(obj1, 11));
+    console.log(getId(obj1, 2));
+
+
+  </script>
+
+</body>
+
+</html>

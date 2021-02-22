@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img {
+      display: block;
+      height: 300px;
+      width: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <button class="ldh">刘德华</button>
+  <button class="zxy">张学友</button>
+  <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=13650387,3855911795&fm=26&gp=0.jpg" alt=""
+    title="刘德华">
+  <script>
+    //修改元素的属性 
+    //1获取元素
+    var ldh = document.querySelector('.ldh')
+    var zxy = document.querySelector('.zxy')
+    var img = document.querySelector('img')
+    //注册事件
+    zxy.onclick = function () {
+      img.src = 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1672610833,1542953891&fm=26&gp=0.jpg'
+      img.title = '张学友'
+    }
+    ldh.onclick = function () {
+      img.src = 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=13650387,3855911795&fm=26&gp=0.jpg'
+      img.title = '刘德华'
+    }
+
+  </script>
+
+</body>
+
+</html>

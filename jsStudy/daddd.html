@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>封装对象</title>
+</head>
+<script>
+  console.log(Math.max());//-infinity
+  console.log(Math.min());//infinity
+
+  var myMath = {
+    PI: 3.1415926,
+    max: function () {
+      var max = arguments[0];
+      for (i = 0; i < arguments.length; i++) {
+        if (arguments[i] > max) {
+          max = arguments[i];
+        }
+      }
+      return max;
+    },
+    min: function () {
+      var min = arguments[0];
+      for (i = 0; i < arguments.length; i++) {
+        if (arguments[i] < min) {
+          min = arguments[i];
+        }
+      }
+      return min;
+    }
+  }
+  console.log(myMath.PI);
+  console.log(myMath.max(3, 59, 5));
+  console.log(myMath.min(3, 55, 66));
+  console.log(Math.abs(-39));
+  console.log(Math.round(-3.5));
+  console.log(Math.round(4.4));
+  console.log(Math.abs('-1'));//隐式转换将字符串'-1'转换为数字1
+  console.log(Math.floor(3.3));//取比3.3小的整数
+  console.log(Math.ceil(3.3));//取比3.3大的整数
+  console.log(Math.floor(-3.1));//取比-3.1小的整数
+  console.log(Math.ceil(-3.2));//取比-3.2大的整数
+  console.log(Math.round(-1.9));
+  console.log(Math.random());//取0到1之间的随机小数但不包括1
+  function getRandom(min, max) {
+    Math.ceil(min);
+    Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;//随机出min 和max之间的随机数公式,
+  }
+  var rr = getRandom(1, 10);  //猜数字游戏
+  ;
+  while (true) {
+    var n = parseInt(prompt('请随机输入1到10之间的整数'));
+    if (n > rr) {
+      alert('你猜的值过大');
+    } else if (n < rr) {
+      alert('你猜的值过小');
+    } else {
+      alert('你猜对了');
+      break;
+    }
+  }
+
+
+
+</script>
+
+<body>
+
+</body>
+
+</html>

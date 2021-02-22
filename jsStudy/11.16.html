@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script>
+  function jishu(m) {
+    if (m % 2 == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  function isPrime(n) {//判断是否为一个素数的函数 
+    if (n == 2) {
+      return ture;
+
+    } else if (n % 2 == 0) {
+      return false;
+    }
+    var ss = Math.sqrt(n)
+    for (i = 3; i <= ss; i++) {
+      if (n % i == 0) {
+        return flase
+      }
+    }
+    return ture
+  }
+  //返回n数值的十进制位宽
+  function weiK(num) {
+    var s = String(num)
+    return s.length
+  }
+  console.log(weiK(1234));
+  var digitWidth = function (n) {
+    var c = 0
+
+    do {
+      var digit = n % 10
+      c++
+      n = (n - digit) / 10
+    } while (n > 0)
+
+    return c
+  }
+
+
+  function getqiPan(size) {
+    var a = ''
+    var b = ''
+    for (var i = 0; i < size; i++) {
+      if (i % 2) {
+        a += ' '//空字符里面打一个空格
+        b += '#'
+      } else {
+        a += '#'
+        b += ' '
+      }
+    }
+
+    var result = ''
+    for (var i = 0; i < size; i++) {
+      if (i % 2) {
+        result += a
+      } else {
+        result += b
+      }
+      result += '\n'
+    }
+    return result
+  }
+  console.log(getqiPan(8));
+  //函数里面没有声明直接使用的变量是全局变量
+  //函数里面可以调用其他的函数
+  //var 声明的变量属于全局变量
+  //函数内部用var 声明的属于局部变量
+  //作用域由函数内部往外找
+  //变量从书写位置往外逐级查找; 作用域链就近原则
+  //let块局部作用域
+  //函数表达式在;在函数表达式里面调用自己叫递归
+  //函数声明放在括号里面是表达式
+  //函数声明定义被移动到最顶部预解析
+  //预解析会将全局变量和函数声明提升
+  //var 变量声明提前和函数声明声明提升
+  //函数里面没有声明直接赋值的变量属于全局变量
+  //赋值会留着原来的位置
+  //let 定义的变量在定义完成之前不能使用它
+  //规范代码 先定义再使用
+  //TDZ  Temper Dead Zone 暂时性死区//
+  //函数表达式不存在函数提升
+  //for in 可以遍历字符串 for(i in str ) {
+       //str[i]
+  //}
+  //let不能重复定义变量 let没有提升 但是有tdz指在声明之前不能使用 能解决闭包问题
+  //let定义的变量在块级作用域 没有将定义提升,但存在tdz 即在定义之前不能使用变量
+  //let定义过的变量也不能用 var 定义 
+  //函数声明不能写在if语句里面;函数表达式可以写在if语句里面
+  //作用域的最外层定义函数,  函数表达式可以放在if语句里面 因为函数表达式不可以提升
+  //小写转大写 -32   'a~z'的charCode() 相当于97~122 'A~Z'的charCode()相当于65~90
+  //大写字母转小写 +32 
+  //栈stack
+  //嵌套在最里面的函数先出
+  //调用栈的俩个语义
+  //计算内部用于存储函数返回位置.函数的局部变量的内存空间,叫调用栈
+  //函数间的相互的逻辑关系的
+  //Rang Mainum 报错栈空间用完
+  //Scope  显示当前作用域
+  //call stack 调用栈
+
+
+
+</script>
+
+<body>
+
+</body>
+
+</html>

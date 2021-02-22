@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1 {
+      height: 300px;
+      width: 300px;
+      border: 1px solid black;
+    }
+
+    .box2 {
+      height: 100px;
+      width: 300px;
+      border: 1px solid black;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      var div1 = document.querySelector('.box1')
+      var div2 = document.querySelector('.box2')
+      div1.onmousemove = function (e) {//ie8不支持event对象
+        // console.log(e);
+        /*在IE8中,响应函数被触发时,浏览器不会传递事件对象
+           在IE8及以下浏览器中,是将事件对象作为window对象的属性保存的
+         *
+         */
+        if (!e) {
+          e = window.e
+        }
+        //   e==e||window.e       这俩个方法解决兼容性                                                                                                  
+
+        var x = e.clientX//event对象的clientX获取鼠标指针的水平坐标
+        var y = e.clientY//envent对象的clientY获取鼠标指针的垂直坐标
+        div2.innerHTML = 'x:' + x + ' , y:' + y
+      }
+
+    }
+  </script>
+</head>
+
+<body>
+  <div class="box1"></div>
+  <div class="box2"></div>
+
+</body>
+
+</html>

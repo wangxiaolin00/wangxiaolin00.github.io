@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //call方法调用匿名函数
+    var animals = [
+      { species: 'Lion', name: 'King' },
+      { species: 'Whale', name: 'Fail' }
+    ];
+
+    for (var i = 0; i < animals.length; i++) {
+      (function (i) {
+        console.log('#' + i + ' ' + this.species + ': ' + this.name)
+      }
+      ).call(animals[i], i);
+    }
+   //对函数调用call和apply时候都会执行函数
+   //call和apply的第一个是谁 函数调用的时候就指向谁
+
+
+
+   //1.bind 不会调用原来的函数,可以改变原来函数的this
+   //返回的是原函数的改变this后产生的新函数
+   //3
+
+
+
+  </script>
+
+</body>
+
+</html>

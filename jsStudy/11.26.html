@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var obj = {
+      bar: 2,
+      baz: 3,
+      foo: 1,
+      'foo, bar, baz': 999,
+      s: 888,
+      undefined: "udf"
+
+    }
+    for (var k in obj) {
+      console.log(obj[k]);
+    }
+    var s = 'foo' in obj//这会儿in是运算符
+    console.log(s);
+    // 5 in [1, 2, 3, 3, , 4, 5]//作为数字in数组的时候判断是的索引
+    //===判断对象的时候判断对象是不是同一个即同一个堆地址
+    function fill(ary, val) {
+      for (var i = 0; i > ary.length; i++) {
+        ary[i] = val
+      }
+      return ary
+    }
+    function twosum(nums, target) {
+      var map = {}
+      for (var i = 0; i < nums.length; i++) {
+        var cur = nums[i]
+        var need = target - cur
+        if (need in map) {
+          return [map[need], i]
+        } else {
+          map[nums[i]] = i
+        }
+      }
+    }
+    function dssd(ary, strat, end) {
+      var a = []
+      for (var i = strat; i < end; i++) {
+        a.push(ary[i])
+      }
+      return a
+    }
+    //slice(2)表示从索引2开始到索引结束全部截取//原数组不变
+    //slice(2,-1)表示索引从2开始到倒数第1一项 
+    function slice(ary, start = 0, end = ary.length) {
+      if (start < 0) start += ary.length
+      if (end < 0) end += ary.length
+      var result = []
+      for (var i = start; i < end; i++) {
+        result.push(ary[i])
+      }
+      return result
+    }
+    //concat()连接俩个俩个数组或者字符串返回新数组;
+    function concata(a, b) {//concat()
+      var c = []
+      for (var i = 0; i < a.length; i++) {
+        a.push(a[i])
+      }
+      for (var j = 0; j < b.length; j++) {
+        a.push(b[j])
+      }
+      return a
+    }
+    function cloneDeep(obj) {
+      var b = {}
+      for (var k in obj) {
+        b[k] = obj[k]
+
+      }
+      return b
+    }
+    //普通数据类型;在读取其对象的属性的时候;浏览器会临时把普通数据类型转换为临时对象读出其属性值然后再销毁
+    //字符的slice 返回值还是字符串;数组的slice()返回值是数组
+    //字符的indexOf的参数可以不止一个字符
+    function trim(str) {
+      for (var i = 0; i < str.length; i++) {
+        if (str[i] !== ' ') {
+          break
+        }
+      }
+      return slice(i)
+    }
+    //trim()去除字符串中的空格
+    //a.fill()填充
+    //a.includes()判断数组中包含就返回true
+    //es6才加的includes
+    function ddd(ary, val) {
+      if (val !== val) {
+        for (var i = 0; i < ary.length; i++) {
+          if (ary[i] === val) {
+            return true
+          }
+        }
+      }
+
+    }
+    //s.anchor()//将字符串用a标签包着返回
+    //s.bink()
+    //s.charAt(i) 返会字符串第一i个字符
+    //s.endswith()以什么结尾
+    //s.startswith()以什么开头
+    //padEnd(20)在字符串结尾的候补到20个字符
+    //s.repeat(3)将字符s重复3次
+    //s.substr(2,4)从索引2开始截取长度为4的
+    //number.toFixed(2)小数点保留俩位
+    //toPrecision(100)//判断小数精度
+    function sum() {
+      var sum = 0
+      for (var i = 0; i < arguments.lentgh; i++) {
+        sum += arguments[i]
+      }
+      return sum
+    }
+    //arguments 不具备数组的任何方法
+    function concat(ary) {///concat函数的写法
+      var result = ary.slice()
+
+      for (var i = 1; i < arguments.length; i++) {
+        if (Array.isArray(arguments[i])) {
+          for (var j = 0; j < arguments[i].length; j++) {
+            result.push(arguments[i][j])
+          }
+        } else {
+          result.push(arguments[i])
+        }
+      }
+      return result
+    }
+    var isPalindrome = function (s) {//验证字符的回文串
+      var a = s.replace(/[\W|_]/g, '').toLowerCase()//\W匹配非数字和非字母和非下划线 [\W|_]匹配非数字和下换线
+      var left = 0;
+      var right = a.length - 1
+      while (left < right) {
+        if (a[left++] != a[right--]) {
+          return false
+        }
+      }
+      return true
+
+    };
+    //...c表示接收多个参数形成伪数组
+    var array = [1, 2, 3, 4, 5, 6]
+    Math.max(...array)//用在这表示展开语法;将数组的各项展开
+    //潜复制只复制一层;深拷贝;拷贝多层
+    //...obj展开对象
+    //过多的全局变量会污染命名空间;
+    //就是全局变量变多,就有可能一不小心某些变量的值覆盖掉
+    //数组的所有子序列集合
+    function zixulie(arr) {
+      var val = 0
+      for (var i = 0; i <= arr.length; i++) {
+        for (var j = i + 1; j < arr.length; j++) {
+          val = arr.slice(i, j)
+        }
+      }
+      return val
+    }
+    //用let和const定义的变量不能定义第二次
+    //Math.PI全部大写表示常量
+    //Math.ceil上取整
+    //Math.exp(3)自然底数e的3次方
+    //Math.flood(5)返回一个数的精度浮点数
+    //Math.random()返回0到1之间的随机数包含0不包含1
+    //Math.trunc(-2.5)对一个数只取整数部分
+    //Math.trunc(2.3)对一个数只获取整数部分
+    //全局变量直接用var声明的变量属于全局变量
+    //或者在函数中没有声明就只直接使用的变量也是全局变量
+    //作用域也是对象'全局变量都存储在变量window中   
+    function isObjectValueEqual(a, b) {//判断俩个对象的属性值是否相等
+
+      //取对象a和b的属性名
+
+      var aProps = Object.getOwnPropertyNames(a);
+
+      var bProps = Object.getOwnPropertyNames(b);
+
+      //判断属性名的length是否一致
+
+      if (aProps.length != bProps.length) {
+
+        return false;
+
+      }
+
+      //循环取出属性名，再判断属性值是否一致
+
+      for (var i = 0; i < aProps.length; i++) {
+
+        var propName = aProps[i];
+
+        if (a[propName] !== b[propName]) {
+
+          return false;
+
+        }
+
+      }
+
+      return true;
+
+    }
+
+  </script>
+
+</body>
+
+</html>

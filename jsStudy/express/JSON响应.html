@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON响应</title>
+  <style>
+    #box {
+      width: 300px;
+      height: 300px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="box"></div>
+  <script>
+    var div = document.querySelector('#box')
+    window.onkeydown = function () {
+      //console.log('test');
+      //创建实例对象
+      const xhr = new XMLHttpRequest()
+      //设置自动转换后端发过来的响应报文的字符串
+      xhr.responseType = 'json'
+      //初始化 设置请求方法 url 
+      xhr.open('GET', 'http://127.0.0.1:8001/json.server')
+      //设置请求头
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+      xhr.send()
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            console.log(xhr.response);
+            div.innerHTML = xhr.response.age
+            // //手动将服务器端发过来的JSON格式的字符串转化为对象
+            // let data = JSON.parse(xhr.response)
+            // console.log(data);
+            // div.innerHTML = data.name
+          }
+        }
+      }
+
+    }
+  </script>
+
+</body>
+
+</html>

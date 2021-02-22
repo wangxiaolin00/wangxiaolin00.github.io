@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    span img {
+      height: 25px;
+      width: 25px;
+    }
+
+    .s1,
+    .s2,
+    .s3 {
+      position: fixed;
+      height: 25px;
+      width: 25px;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+
+<body>
+  <span class="s1"><img src="img1/x1.png" alt=""></span>
+  <span class="s2"><img src="img1/x1.png" alt=""></span>
+  <span class="s3"><img src="img1/x1.png" alt=""></span>
+  <script>
+    var s1 = document.querySelector('.s1')
+    var s2 = document.querySelector('.s2')
+    var s3 = document.querySelector('.s3')
+    document.onmousemove = function (e) {
+      var x = e.clientX
+      var y = e.clientY
+      var angle = 0
+      var lasttime = null
+      function an(time) {
+        if (lasttime != null) {
+          angle += (time - lasttime) * 0.01
+        }
+        lasttime = time
+        s1.style.left = Math.sin(angle * 3.14) * 60 + x + 'px'
+        s1.style.top = Math.cos(angle * 3.14) * 60 + y + 'px'
+
+        s2.style.left = Math.sin(angle * 3.14 * 0.6666) * 60 + x + 'px'
+        s2.style.top = Math.cos(angle * 3.14 * 0.6666) * 60 + y + 'px'
+
+        s3.style.left = Math.sin(angle * 3.14 * 0.6666 * 2) * 60 + x + 'px'
+        s3.style.top = Math.cos(angle * 3.14 * 0.6666 * 2) * 60 + y + 'px'
+        requestAnimationFrame(an)
+      }
+      requestAnimationFrame(an)
+    }
+  </script>
+
+</body>
+
+</html>

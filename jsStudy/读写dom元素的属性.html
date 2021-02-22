@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1 {
+      width: 300px;
+      height: 300px;
+      margin: 50px auto;
+      background-color: cyan;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <ul class="ul1">
+    <li>dada</li>
+    <li>dasdad</li>
+    <li>dadsa</li>
+    <li>fsadfsgf</li>
+  </ul> -->
+  <button class="btn1"></button>
+  <div class="box1"></div>
+  <script>
+    // var allLi = document.querySelector('.ul1').getElementsByTagName('li')
+    // for (let i = 0; i < allLi.length; i++) {
+    //   allLi[i].onclick = function () {
+    //     var that = this
+    //     setTimeout(function () {
+    //       console.log(that.innerHTML);
+    //     }, 1500)
+    //   }
+    // }
+    var btn = document.querySelector('.btn1')
+    var div1 = document.querySelector('.box1')
+    btn.onclick = function () {
+      //currentStyle 语法:元素对象.currentStyle.width  只能支持ie浏览器
+
+      //div1.style.width 这个只能获取内联样式 不能获取样式表里面的样式 可以修改属性
+
+      //getComputeStyle() 该方法不支持ie 8 级以下  只能支持ie9及以上浏览器
+      //接俩个参数 第一个参数 为要查找属性的对象, 第二参数 为before after 伪元素,一般写null
+      //
+
+      //div1.currentStyle.width 和 getComputedStyle(div1).width只能读 不能更改
+      getComputedStyle(div1).width//获取的实时的宽度
+    }
+    function getStyle(obj, name) {
+      if (window.getComputedStyle) {//判读浏览器有没有getComputeStyle的方法,如果有时正常的浏览器
+        return getComputedStyle(obj, null)[name]
+      } else {//如果没有 则是ie8级以下的浏览器
+        return obj.currentStyle[name]
+      }
+      return window.getComputedStyle ? getComputedStyle(obj, numm)[name] : obj.currentStyle[name];
+    }
+
+    //clientWidth  语法:Element.clientWidith
+    //clientHeight
+    // 这俩个属性可以获取元素的可见宽度和高度
+    // 这些属性都是不带px的返回的都是一个数字, 可以直接计算
+    // 会获取元素的宽度, 包括内容区域和内边距 不包括边框
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // class Star {
+    //   constructor(uname, age) {
+    //     this.uname = uname;
+    //     this.age = age
+
+    //   }
+    // }
+    // class A extends Star {
+    //   constructor(uname, age) {
+    //     super(uname, age)
+    //     this.uname = uname;
+    //     this.age = age;
+    //   }
+    // }
+    // function Star(uname) {
+    //   this.uname = uname
+    // }
+    // Star.prototype.sing = function () {
+    //   console.log('冰雨');
+    // }
+    // // Object.setPrototypeOf(Sd.prototype, Star.prototype)
+    // // Sd.prototype = Object.create(Star.prototype)
+    // Sd.prototype = Star.prototype
+    // function Sd(uname) {
+    //   Star.call(this, uname)
+    //   this.uname = uname;
+    // }
+    // Sd.prototype.pp = function () {
+    //   console.log('10000');
+    // }
+
+
+    // var person = new Sd()
+    // var dd = new Star()
+    // person.sing()
+    // person.pp()
+    // dd.pp()
+    // function InstanceOf(val, Ctor) {
+    //   if (val == null) {
+    //     return false
+    //   }
+    //   if (val.__proto__ == Ctor.prototype) {
+    //     return true
+    //   } else {
+    //     return InstanceOf(val.__proto__, Ctor)
+    //   }
+    // }
+    // //除了几个原始类型,所有的元素 intanceof Object 都为 true
+    // function Kin(uname) {
+    //   if (!(this instanceof Kin)) {//不使用new 关键字创建实例的方法
+    //     return new Kin(uname)
+    //   }
+    //   this.uname = uname
+    // }
+    function Complex(x, y) {
+      this.real = x
+      this.imag = y
+
+
+
+
+    }
+    Complex.prototype.minus = function (val) {//减
+      return new Complex(this.real - val.real, this.imag - val.imag)
+    }
+    Complex.prototype.plus = function (val) {//加
+      let a = this.real + val.real
+      let b = this.imag + val.imag
+      return new Complex(a, b)
+    }
+    Complex.prototype.multiple = function (val) {
+      let a = this.real * val.real
+      let b = this.imag * val.imag
+      return new Complex(a, b)
+    }
+    Complex.prototype.division = function (val) {
+      let a = this.real / val.real
+      let b = this.imag / val.imag
+      return new Complex(a, b)
+    }
+    Complex.prototype.tostring = function () {
+      return this.real + '+' + this.imag + 'i'
+    }
+    var a = new Complex(5, 3)
+    var b = new Complex(3, -2)
+    console.log(a);
+    var c = a.minus(b)
+    var d = a.plus(b)
+    console.log(c);
+    console.log(d);
+    console.log(a.tostring());
+    function Vector(x, y) {
+      this.x = x
+      this.y = y
+    }
+    // Object.defineProperties(Vector.prototype, {
+    //   plus: {
+    //     value: function (v) {
+    //       var x = this.x + v.x
+    //       var y = this.y + v.y
+    //       return new Vector(x, y)
+    //     }
+    //   },
+    //   minus: {
+    //     value: function (v) {
+    //       var x = this.x - v.x
+    //       var y = this.y - v.y
+    //       return new Vector(x, y)
+    //     }
+    //   },
+    //   length: {
+    //     get: function () {
+    //       var x = this.x
+    //       var y = this.y
+    //       return Math.sqrt(x * x + y * y)
+    //     }
+    //   }
+    // })
+    Vector.prototype.plus = function (val) {
+      let a = this.x + val.x
+      let b = this.y + val.y
+      return new Vector(a, b)
+    }
+    Vector.prototype.minus = function (val) {
+      let a = this.x - this.x
+      let b = this.y - this.y
+      return new Vector(a, b)
+    }
+    Object.defineProperty(Vector.prototype, 'length', {//Object.defineProperty设置的属性都是默认不可读写,不可枚举,不可修改
+      get: function () {
+        return Math.sqrt(this.x * this.x + this.y * this.y)
+      }
+      //enumerable:false ;不可枚举
+      //writable:false;不可读写
+      //configurable:false;不能重新被定义
+    })
+    var ff = new Vector(3, 4)
+    console.log(ff.length);
+    ff.length = 100
+    console.log(ff.length);
+    // function Set1() {
+    //   this.item = {}
+    // }
+    // Set1.prototype.has = function (val) {
+    //   return this.item.hasOwnProperty(val)
+    // }
+    // Set1.prototype.add = function (val) {
+    //   if (this.item.hasOwnProperty(val)) {
+    //     return false
+    //   }
+    //   this.item[val] = val
+    // }
+    // Set1.prototype.delete = function (val) {
+    //   if (!this.item.hasOwnProperty(val)) {
+    //     return false
+    //   }
+    //   delete this.item[val]
+    //   return true
+
+
+
+    // }
+    // Set1.prototype.size = function () {
+    //   var nu = 0
+    //   for (let k in this.item) {
+    //     if (k) {
+    //       nu++
+    //     }
+    //   }
+    //   return nu
+    // }
+    // var gb = new Set1()
+    // gb.add('a')
+    // gb.add('b')
+    // gb.add('c')
+    function Set2() {
+      this.item = []
+    }
+    Set2.prototype.has = function (val) {
+      if (this.item.includes(val)) {
+        return true
+      } else {
+        return false
+      }
+    }
+    Set2.prototype.add = function (val) {
+      if (this.item.includes(val)) {
+        return false
+
+      } else {
+        this.item.push(val)
+        return true
+      }
+
+    }
+    Set2.prototype.delete = function (val) {
+      if (!this.item.includes(val)) {
+        return false
+      } else {
+        for (let i = 0; i < this.item.length; i++) {
+          if (this.item[i] === val) {
+            this.item.splice(i, 1)
+            return true
+          }
+        }
+      }
+    }
+    Set2.prototype.size = function () {
+      return this.item.length
+    }
+    var v = new Set2()
+    v.add(2)
+    v.add(3)
+    v.add(4)
+    v.add(5)
+    v.add(6)
+    v.size()
+    v.delete(2)
+    function Map1() {
+      this.item = {}
+    }
+    Map1.prototype.has = function (val) {
+      return this.item.hasOwnProperty(val)
+    }
+    Map1.prototype.set = function (a, b) {
+      this.item[a] = b
+      return true
+    }
+    Map1.prototype.get = function (val) {
+      if (!this.item.hasOwnProperty(val)) {
+        return false
+      }
+      return this.item[val]
+    }
+    Map1.prototype.size = function () {
+      let nu = 0
+      for (let i in this.item) {
+        if (i) {
+          nu++
+        }
+
+      }
+      return nu
+    }
+    Map1.prototype.clear = function () {
+      this.item = {}
+    }
+    Map1.prototype.keys = function () {
+      var res = []
+      for (let k in this.item) {
+        res.push(k)
+      }
+      return res
+    }
+    Map1.prototype.values = function () {
+      var res = []
+      for (let key in this.item) {
+        res.push(this.item[key])
+      }
+      return res
+    }
+    Map1.prototype.remove = function (val) {
+      if (!this.item.hasOwnProperty(val)) {//Object.propertype.hasOwnProperty.call(this.item,val)
+        return false
+      } else {
+        delete this.item[val]
+        return true
+      }
+
+    }
+    var mm = new Map1()
+
+
+
+
+  </script>
+
+</body>
+
+</html>

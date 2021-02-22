@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .s1 {
+      position: fixed;
+      background-color: cyan;
+      text-align: center;
+    }
+
+    .s2 {
+      position: relative;
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <span style="left:20px;top:20px;" class="s1">^_^</span>
+  <span style="left:20px;top:20px;" class="s2">^^^</span>
+
+  <script>
+    var span = document.querySelector('.s1')
+    var angle = 0
+    var latime = null
+    function an(time) {
+      if (latime != null) {
+        angle += (time - latime) * 0.001
+      }
+      latime = time
+      span.style.left = (Math.sin(angle) * 200 + 200) + 'px'
+      span.style.top = (Math.cos(angle) * 200 + 200) + 'px'
+      requestAnimationFrame(an)
+    }
+    requestAnimationFrame(an)
+    var pp = document.querySelector('.s2')
+    var nu = 0
+    var last = null
+    function an2(time) {
+      if (last != null) {
+        nu += (time - last) * 0.001
+      }
+      last = time
+      pp.style.top = (Math.sin(nu) * 20 + 200) + 'px'
+      pp.style.left = (Math.cos(nu) * 200 + 200) + 'px'
+      requestAnimationFrame(an2)
+
+    }
+    requestAnimationFrame(an2)
+  </script>
+
+</body>
+
+</html>

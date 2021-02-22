@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // function abqiuhe(a, b) {//不使用运算符求和
+    //   while (b != 0) {
+    //     var temp = a ^ b
+    //     b = (a & b) << 1
+    //     a = temp
+    //   }
+    //   return a
+
+    // }
+    // console.log(abqiuhe(1, 2));
+    // const arr11 = [1, 2, 3, 5, 6, 7, 7, 8, 9, 5]
+    // console.log(Math.max(...arr11));//...展开语法求数组的最大值
+    // console.log(Math.min(...arr11));//求数组的最小值
+    // function longsonxuliezhihe(s) {
+    //   var o = new Set()
+    //   var rk = -1
+    //   var nu = 0
+    //   for (var i = 0; i < s.length; i++) {
+    //     if (i != 0) {
+    //       o.delete(s.charAt(i - 1))
+    //     }
+    //     while (rk + 1 < s.length && !o.has(s.charAt(rk + 1))) {
+    //       o.add(s.charAt(rk + 1))
+    //       ++rk
+    //     }
+    //     nu = Math.max(nu, rk - i + 1)
+    //   }
+    //   return nu
+    // }
+    // console.log(longsonxuliezhihe("abcabcbb"));
+    function lightEqual(a, b) {
+      if (a === b) return true;
+
+      if (a == null || typeof a != "object" ||
+        b == null || typeof b != "object")
+        return false;
+
+      var propsInA = 0,
+        propsInB = 0;
+
+      for (var prop in b)
+        propsInB += 1;
+
+      for (var prop in a) {
+        propsInA += 1;
+        if (!(prop in b) || !lightEqual(a[prop], b[prop]))
+          return false;
+      }
+
+      return propsInA <= propsInB;
+    }
+
+    function isEqual(a, b) {
+      if (a === b)
+        return true
+      if (a == null || typeof a != "object" || b == null || typeof b != "object")
+        return false
+      var propsInA = 0,
+        propsInB = 0
+      for (var prop in a) {
+        propsInA += 1
+      }
+      for (var prop in b) {
+        propsInB += 1
+        if (!(prop in a) || !isEqual(a[prop], b[prop]))
+          return false
+      }
+      return propsInA == propsInB
+    }
+    function vardictIteratee(iteratee) {
+      if (iteratee === null) {
+        return val => val;
+      }
+      if (typeof iteratee === "string") {
+        return val => val[iteratee];
+      }
+      if (typeof iteratee === "function") {
+        return iteratee;
+      }
+      if (iteratee instanceof Array) {
+        return function (obj) {
+          return obj[iteratee[0]] === iteratee[1];
+        }
+      } else if (typeof iteratee === "object") {
+        if (Object.prototype.toString.call(iteratee) === "[object RegExp]")
+          return val => iteratee.test(val);
+        else
+          return lightEqual.bind(null, iteratee);
+      }
+    }
+    function concat(ary, ...values) {
+      var res = []
+      var s = values.flat()
+      ary.forEach(it => {
+        res.push(it)
+      })
+      s.forEach(it => {
+        res.push(it)
+      })
+      return res
+    }
+    // console.log(concat([1], 2, [3], [[4]]))
+    function isShallowEqual(a, b) {
+      if (a === b) return true;
+
+      if (a == null || typeof a != "object" ||
+        b == null || typeof b != "object")
+        return false;
+
+      var propsInA = 0,
+        propsInB = 0;
+
+      for (var prop in b)
+        propsInB += 1;
+
+      for (var prop in a) {
+        propsInA += 1;
+        if (!(prop in b) || !isShallowEqual(a[prop], b[prop]))
+          return false;
+      }
+
+      return propsInA <= propsInB;
+    }
+
+    function isEqual(a, b) {
+      if (a === b)
+        return true
+      if (a == null || typeof a != "object" || b == null || typeof b != "object")
+        return false
+      var propsInA = 0,
+        propsInB = 0
+      for (var prop in a) {
+        propsInA += 1
+      }
+      for (var prop in b) {
+        propsInB += 1
+        if (!(prop in a) || !isEqual(a[prop], b[prop]))
+          return false
+      }
+      return propsInA == propsInB
+    }
+
+    function baseIteratee(iteratee) {
+      // if (iteratee === null) {
+      //   return val => val;
+      // }
+      // if (typeof iteratee === "string") {
+      //   return val => val[iteratee];
+      // }
+      // if (typeof iteratee === "function") {
+      //   return iteratee;
+      // }
+      // if (iteratee instanceof Array) {
+      //   return function (obj) {
+      //     return obj[iteratee[0]] === iteratee[1];
+      //   }
+      // } else if (typeof iteratee === "object") {
+      //   if (Object.prototype.toString.call(iteratee) === "[object RegExp]")
+      //     return val => iteratee.test(val);
+      //   else
+      //     return isShallowEqual.bind(null, iteratee);
+      // }
+      let g = Object.prototype.toString.call(iteratee)
+      if (g === '[obejct String]') {
+        return property(iteratee)
+      }
+      if (g === '[object Array]') {
+        return matchesProperty(iteratee[0], iteratee[1])
+      }
+      if (g === '[object Object]') {
+        return matches(iteratee)
+      }
+      return iteratee
+    }
+
+    // function filter(array, predicate) {
+    //   let dd = baseIteratee(predicate)
+    //   var res = []
+    //   for (let k of array) {
+    //     if (dd(k)) {
+    //       res.push(k)
+    //     }
+    //   }
+    //   return res
+    // }
+    // var users = [
+    //   { 'user': 'barney', 'age': 36, 'active': true },
+    //   { 'user': 'fred', 'age': 40, 'active': false },
+    //   { 'user': 'pebbles', 'age': 1, 'active': true }
+    // ];
+    // console.log(filter(users, function (o) { return !o.active; }))
+    // console.log(filter(users, { 'age': 36, 'active': true }))
+    // console.log(filter(users, ['active', false]))
+    // function find(ary, predicate, fromIndex = 0) {
+    //   let dd = this.baseIteratee(predicate)
+    //   for (let i = fromIndex; i < ary.length; i++) {
+    //     if (dd(ary[i])) {
+    //       return ary[i]
+    //       break
+    //     }
+    //   }
+    //   return undefined
+    // }
+    // console.log(find(users, function (o) { return o.age < 40; }))
+    // console.log(find(users, { 'age': 1, 'active': true }))
+    // function differenceBy(ary, values, predicate) {
+    //   let dd = this.baseIteratee(predicate)
+    //   var m = new Map()
+    //   var res = []
+    //   for (let i = 0; i < values.length; i++) {
+    //     m.set(dd(values[i]), true)
+    //   }
+    //   for (let k of ary) {
+    //     if (!m.has(dd(k))) {
+    //       res.push(k)
+    //     }
+    //   }
+    //   return res
+    // }
+    // console.log(differenceBy([3.1, 2.2, 1.3], [4.4, 2.5], Math.floor))
+    // console.log(differenceBy([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }], 'x'))
+    // function differenceWith(ary, value, comparator) {
+    //   var res = []
+    //   for (var k of ary) {
+    //     for (var key of value) {
+    //       if (!(comparator(k, key))) {
+    //         res.push(k)
+    //       }
+    //     }
+    //   }
+    //   return res
+    // }
+    // var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }]
+    // console.log(differenceWith(objects, [{ 'x': 1, 'y': 2 }], isEqual))
+    // var users = [
+    //   { 'user': 'barney', 'active': false },
+    //   { 'user': 'fred', 'active': false },
+    //   { 'user': 'pebbles', 'active': true }
+    // ];
+    function dropRightWhile(ary, predicate) {
+      let dd = baseIteratee(predicate)
+      var res = []
+      for (let i = ary.length - 1; i >= 0; i--) {
+        if (dd(ary[i])) {
+          res.push(ary[i])
+        }
+      }
+
+      return res
+    }
+    // console.log(dropRightWhile(users, function (o) { return !o.active }))
+    // console.log(dropRightWhile(users, { 'user': 'barney', 'active': false }))
+    // console.log(dropRightWhile(users, ['active', false]))
+    // console.log(dropRightWhile(users, 'active'))
+    function intersection(...ary) {
+      var res = []
+      ary.forEach(i => {
+        minArr = i
+        if (minArr.length < i.length) {
+          minArr = i
+        }
+      })
+      minArr.forEach(i => {
+        var s = []
+        ary.forEach(j => {
+          if (j.includes(i)) {
+            s.push(true)
+          } else {
+            s.push(false)
+          }
+        })
+        let dd = s.every(i => i === true)
+        if (dd && !(res.includes(i))) {
+          res.push(i)
+        }
+      })
+      return res
+
+    }
+    function intersectionBy(...ary) {
+      if (Array.isArray(ary[ary.length - 1])) {
+        return intersection(...ary)
+      }
+      var res = []
+      var m = new Map()
+      var dd = baseIteratee(ary.pop())
+      for (var i = 0; i < ary.length; i++) {
+        for (let j = 0; j < ary[i].length; j++) {
+          var it = dd(ary[i][j])
+          if (m.has(it)) {
+            res.push(m.get(it))
+          } else {
+            m.set(it, ary[i][j])
+          }
+        }
+      }
+      return res
+
+
+
+
+    }
+    // console.log(intersectionBy([2.1, 1.2], [4.3, 2.4], Math.floor))
+    // console.log(intersectionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x'))
+    // var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+    // var others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
+    // // [[{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }], [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }]]
+    // function intersectionWith(ary, value, comparator) {
+    //   var res = []
+    //   for (let k of ary) {
+    //     for (let i of value) {
+    //       if (comparator(k, i)) {
+    //         res.push(k)
+    //       }
+    //     }
+    //   }
+
+
+    //   return res
+    // }
+    // console.log(intersectionWith(objects, others, isEqual))
+    // function pullAllBy(ary, value, iteratee) {
+    //   var dd = baseIteratee(iteratee)
+    //   var m = new Map()
+    //   var res = []
+    //   for (let i = 0; i < value.length; i++) {
+    //     let it = dd(value[i])
+    //     m.set(it, value[i])
+    //   }
+    //   for (let j = 0; j < ary.length; j++) {
+    //     if (!m.has(dd(ary[j]))) {
+    //       res.push(ary[j])
+    //     }
+    //   }
+    //   ary = res
+    //   return ary
+    // }
+    // var array = [{ 'x': 1 }, { 'x': 2 }, { 'x': 3 }, { 'x': 1 }];
+    // console.log(pullAllBy(array, [{ 'x': 1 }, { 'x': 3 }], 'x'))
+    // function pullAllWith(ary, values, comparator) {
+    //   var res = []
+    //   for (let k of ary) {
+    //     for (let i of values) {
+    //       if (!comparator(k, i)) {
+    //         res.push(k)
+    //       }
+    //     }
+    //   }
+    //   ary = res
+    //   return ary
+    // }
+    // var array = [{ 'x': 1, 'y': 2 }, { 'x': 3, 'y': 4 }, { 'x': 5, 'y': 6 }];
+    // console.log(pullAllWith(array, [{ 'x': 3, 'y': 4 }], isEqual))
+    // function pullAt(ary, ...indexs) {
+    //   var res = []
+    //   for (let i = 0; i < indexs.length; i++) {
+    //     res.push(ary[indexs[i]])
+    //   }
+    //   ary = ary.filter(x => {
+    //     return !(res.includes(x))
+    //   })
+    //   return res
+
+
+
+    // }
+    // var array = [5, 10, 15, 20];
+    // var evens = pullAt(array, 1, 3)
+    // var bb = array.filter(x => {
+    //   return !evens.includes(x)
+    // })
+    // console.log(bb)
+
+
+    // console.log(evens);
+    // console.log(array)
+    // function sortedIndexBy(ary, value, iteratee) {
+    //   var dd = Object.prototype.toString.call(iteratee)
+    //   if (dd === '[object Function]') {
+    //     for (let i = 0; i < ary.length; i++) {
+    //       if (iteratee(value) <= iteratee(ary[i])) {
+    //         return i
+    //       }
+    //     }
+    //   } else if (dd === '[object String]') {
+    //     for (var i = 0; i < ary.length; i++) {
+    //       if (value[iteratee] <= ary[i][iteratee]) {
+    //         return i
+    //       }
+    //     }
+    //   }
+    // }
+    // var objects = [{ 'x': 4 }, { 'x': 5 }];
+    // console.log(sortedIndexBy(objects, { 'x': 4 }, function (o) { return o.x; }))
+    // console.log(sortedIndexBy(objects, { 'x': 4 }, 'x'))
+    // var f = function () {
+    //   return 1
+    // }
+    // var dd = Object.prototype.toString.call(f)
+    // console.log(dd)//'[object Function]'
+    // var ds = Object.prototype.toString.call('x')
+    // console.log(ds)//[object String]
+    // function sortedIndexOf(ary, value) {
+    //   for (var i = 0; i < ary.length; i++) {
+    //     if (ary[i] == value) {
+    //       return i
+    //       break;
+    //     }
+    //   }
+    //   return -1
+    // }
+    // console.log(sortedIndexOf([4, 5, 5, 5, 6], 5))
+    // function sortedLastIndex(ary, value) {
+    //   for (let i = ary.length - 1; i >= 0; i--) {
+    //     if (value < ary[i]) {
+    //       return i
+    //     }
+    //   }
+    // }
+    // console.log(sortedLastIndex([4, 5, 5, 5, 6], 5))
+    // function sortedLastIndexBy(ary, value, iteratee) {
+    //   let dd = this.baseIteratee(iteratee)
+    //   for (let i = ary.length - 1; i >= 0; i--) {
+    //     if (dd(value) < dd(ary[i])) {
+    //       return i
+    //     }
+    //   }
+    //   return -1
+    // }
+    // var objects = [{ 'x': 4 }, { 'x': 5 }];
+    // console.log(sortedLastIndexBy(objects, { 'x': 4 }, function (o) { return o.x; }))
+    // console.log(sortedLastIndexBy(objects, { 'x': 4 }, 'x'))
+    // function sortedLastIndexOf(ary, value) {
+    //   for (let i = ary.length - 1; i >= 0; i--) {
+    //     if (value == ary[i]) {
+    //       return i
+    //       break
+    //     }
+    //   }
+    //   return -1
+
+    // }
+    // console.log(sortedLastIndexOf([4, 5, 5, 5, 6], 5))
+    // function sortedUniqBy(ary, iteratee) {
+    //   let dd = baseIteratee(iteratee)
+    //   var m = new Map()
+    //   var res = []
+    //   for (let i = 0; i < ary.length; i++) {
+    //     let it = dd(ary[i])
+    //     if (m.has(it)) {
+    //       res.push(m.get(it))
+    //     } else {
+    //       m.set(it, ary[i])
+    //     }
+
+    //   }
+    //   return res
+
+    // }
+    // console.log(sortedUniqBy([1.1, 1.2, 2.3, 2.4], Math.floor))
+    // function takeRight(ary, n = 1) {
+
+    //   if (n == 0) {
+    //     return []
+    //   }
+    //   if (n > ary.length) {
+    //     return ary
+    //   }
+    //   return ary.slice(ary.length - n)
+
+
+    // }
+    // console.log(take([1, 2, 3]))
+    // console.log(take([1, 2, 3], 2))
+    // console.log(take([1, 2, 3], 5))
+    // console.log(take([1, 2, 3], 0))
+    // function takeRightWhile(ary, predicate) {
+    //   if (Object.prototype.toString.call(predicate) === '[object String]') {
+    //     return []
+    //   }
+    //   let dd = baseIteratee(predicate)
+    //   var res = []
+    //   for (let i = 0; i < ary.length; i++) {
+    //     if (dd(ary[i])) {
+    //       res.push(ary[i])
+    //     }
+    //   }
+    //   return res
+    // }
+    // function takeWhile(ary, predicate) {
+    //   if (Object.prototype.toString.call(predicate) === '[object String]') {
+    //     return []
+    //   }
+    //   let dd = baseIteratee(predicate)
+    //   var res = []
+    //   for (let i = 0; i < ary.length; i++) {
+    //     if (dd(ary[i])) {
+    //       res.push(ary[i])
+    //     }
+    //   }
+    //   return res
+    // }
+    // var users = [
+    //   { 'user': 'barney', 'active': false },
+    //   { 'user': 'fred', 'active': false },
+    //   { 'user': 'pebbles', 'active': true }
+    // ];
+    // console.log(takeWhile(users, function (o) { return !o.active; }))
+    // console.log(takeWhile(users, { 'user': 'barney', 'active': false }))
+    // console.log(takeWhile(users, ['active', false]))
+    // console.log(takeWhile(users, 'active'))
+    // function union(...arys) {//求并集
+    //   var res = []
+    //   arys.forEach(it => {
+    //     it.forEach(i => {
+    //       res.push(i)
+    //     })
+    //   })
+    //   return [...new Set(res)]
+    // }
+    // console.log(union([2], [1, 2]))
+    // function unionBy(...args) {
+    //   let s = args.pop()
+    //   var l = new Set()
+    //   var result = []
+    //   let dd = baseIteratee(s)
+
+
+    //   if (Object.prototype.toString.call(s) === '[object String]') {
+    //     var arr = args.flat(Infinity)
+    //     for (let k of arr) {
+    //       let i = dd(k)
+    //       if (!l.has(i)) {
+    //         l.add(i)
+    //         result.push(k)
+    //       }
+    //     }
+    //     return result
+    //   }
+
+    //   var m = new Map
+    //   var res = []
+    //   for (let i = 0; i < args.length; i++) {
+    //     for (let j = 0; j < args[i].length; j++) {
+    //       let it = dd(args[i][j])
+    //       if (m.has(it)) {
+    //         res.push(m.get(it))
+    //       } else {
+    //         m.set(it, args[i][j])
+    //       }
+    //     }
+    //   }
+    //   return res
+
+    // }
+    // console.log(unionBy([2.1], [1.2, 2.3], Math.floor))
+    // console.log(unionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x'))
+    // function unionWith(ary, value, comparator) {
+    //   let res = []
+    //   var s = []
+    //   for (let k of ary) {
+    //     for (let i of value) {
+    //       if (comparator(k, i)) {
+    //         res.push(k)
+    //       }
+    //     }
+    //   }
+    //   for (let j of value) {
+    //     for (let n of res) {
+    //       if (!comparator(j, n)) {
+    //         s.push(j)
+    //       }
+    //     }
+    //   }
+    //   for (let m of ary) {
+    //     s.unshift(m)
+    //   }
+
+
+    //   return s
+    // }
+    // var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
+    // var others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
+    // console.log(unionWith(objects, others, isEqual))
+    // function uniqBy(ary, iteratee) {
+    //   let dd = baseIteratee(iteratee)
+    //   var res = []
+    //   var s = new Set()
+    //   ary.forEach(it => {
+    //     let f = dd(it)
+    //     if (!s.has(f)) {
+    //       s.add(f)
+    //       res.push(it)
+    //     }
+    //   })
+    //   return res
+    // }
+    // console.log(uniqBy([2.1, 1.2, 2.3], Math.floor));
+    // console.log(uniqBy([{ 'x': 1 }, { 'x': 2 }, { 'x': 1 }], 'x'));
+    // function uniqWith(ary, comparator) {
+    //   let l = 0
+    //   let r = ary.length - 1
+    //   var res = []
+    //   while (l < r) {
+    //     if (comparator(ary[l], ary[r])) {
+    //       res.push(ary[l])
+    //     }
+    //     l++
+    //     r--
+    //   }
+    //   var s = []
+    //   for (let j of ary) {
+    //     for (let n of res) {
+    //       if (comparator(j, n)) {
+    //         break
+    //       } else {
+    //         s.push(j)
+    //       }
+    //     }
+    //   }
+    //   return res.concat(s)
+
+
+    // }
+    // var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }, { 'x': 1, 'y': 2 }]
+    // console.log(uniqWith(objects, isEqual));
+    // function difference(ary, ...ary1) {//返回一个新数组 ary元素里面除了 ary1数组元素中不包含的值 的元素组成的新数组 差集 
+    //   var result = []
+    //   var o = {}
+    //   for (var i = 0; i < ary1.length; i++) {
+    //     for (var j = 0; j < ary1[0].length; j++) {
+    //       var k = ary1[i][j]
+    //       o[k] = 1
+    //     }
+    //   }
+    //   for (var i = 0; i < ary.length; i++) {
+    //     if (!(ary[i] in o)) {
+    //       result.push(ary[i])
+    //     }
+    //   }
+    //   return result
+    // }
+    // function differenceBy(ary, ...values) {
+    //   let res = []
+    //   let m = new Map()
+    //   if (Array.isArray(values[values.length - 1])) {
+    //     for (let i = 0; i < values.length; i++) {
+    //       for (let j = 0; j < values[i].length; j++) {
+    //         m.set(values[i][j], true)
+    //       }
+    //     }
+    //     for (let k of ary) {
+    //       if (!m.has(k)) {
+    //         res.push(k)
+    //       }
+    //     }
+    //     return res
+    //   }
+    //   let iteratee = values.pop()
+    //   let dd = baseIteratee(iteratee)
+
+    //   let value = values.flat(Infinity)
+
+
+
+
+    //   if (Object.prototype.toString.call(iteratee) === '[object String]') {
+    //     for (let i = 0; i < ary.length; i++) {
+    //       for (let j = 0; j < value.length; j++) {
+    //         if (ary[i][iteratee] == value[j][iteratee]) {
+    //           ary.splice(i, 1)
+    //         }
+    //       }
+    //     }
+    //     return ary
+    //   } else if (Object.prototype.toString.call(iteratee) === '[object Function]') {
+    //     for (let i = 0; i < ary.length; i++) {
+    //       for (let j = 0; j < value.length; j++) {
+    //         if (iteratee(ary[i]) == iteratee(value[j])) {
+    //           ary.splice(i, 1)
+    //         }
+    //       }
+    //     }
+    //     return ary
+    //   }
+
+
+
+
+
+    // }s
+    // ;
+    // console.log(differenceBy([2, 1], [2, 3]));
+    // console.log(differenceBy([1, 2, 3, 4], [2, 3, 4, 5]))
+    // console.log(differenceBy([1, 2, 3, 4], [1, 3], [4]));
+    // console.log(differenceBy([1, 2, 3, 4, 5, 6, 7, 8], [1, 3], [4, 8], [6]));
+    // console.log(differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor));
+    // console.log(differenceBy([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }], 'x'));
+    // function without(ary, ...values) {
+    //   console.log(values);
+    //   return ary.filter(x => {
+    //     return !values.includes(x)
+    //   })
+    // }
+    // console.log(without([2, 1, 2, 3], 1, 2));
+    // function xor(...ary) {
+    //   var s = ary.flat(Infinity)
+    //   var o = {}
+    //   for (let i of s) {
+    //     if (o[i]) {
+    //       o[i]++
+    //     } else {
+    //       o[i] = 1
+    //     }
+    //   }
+    //   var res = []
+    //   for (let i in o) {
+    //     if (o[i] == 1) {
+    //       res.push(Number(i))
+    //     }
+    //   }
+    //   return res
+    // }
+    // console.log(xor([2, 1], [2, 3]));
+    // console.log(xor([2, 1], [2, 3]));
+    // console.log(xor([1, 2, 3, 4], [2, 3, 4, 5], [2, 4, 5, 6, 7], [5, 6, 7, 8]));\
+    // function xorBy(...ary) {
+    //   let s = ary.pop()
+    //   var m = new Map()
+    //   var res = []
+    //   if (Object.prototype.toString.call(s) === '[object Function]') {
+    //     for (let i = 0; i < ary.length; i++) {
+    //       for (let j = 0; j < ary[i].length; j++) {
+    //         let it = s(ary[i][j])
+    //         if (m.has(it)) {
+    //           m.set(it, m.get(it) + 1)
+    //         } else {
+    //           m.set(it, 1)
+    //         }
+    //       }
+    //     }
+    //     var arr = ary.flat(Infinity)
+    //     for (let k of arr) {
+    //       let d = s(k)
+    //       if (m.get(d) == 1) {
+    //         res.push(k)
+    //       }
+    //     }
+    //     return res
+
+    //   } else if (Object.prototype.toString.call(s) === '[object String]') {
+    //     var arr = ary.flat(Infinity)
+    //     arr.forEach(i => {
+    //       let it = i[s]
+    //       if (m.has(it)) {
+    //         m.set(it, m.get(it) + 1)
+    //       } else {
+    //         m.set(it, 1)
+    //       }
+    //     })
+    //     for (let k of arr) {
+    //       let d = k[s]
+    //       if (m.get(d) == 1) {
+    //         res.push(k)
+    //       }
+    //     }
+    //     return res
+
+    //   }
+
+
+    // }
+    // console.log(xorBy([2.1, 1.2], [2.3, 3.4], Math.floor));
+    // console.log(xorBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x'));
+    // function zip(...arys) {
+    //   var res = []
+    //   for (let i = 0; i < arys[0].length; i++) {
+    //     res.push([])
+    //   }
+    //   for (let i = 0; i < arys.length; i++) {
+    //     for (let j = 0; j < arys[i].length; j++) {
+    //       res[j][i] = arys[i][j]
+    //     }
+    //   }
+    //   return res
+    // }
+    // console.log(zip(['fred', 'barney'], [30, 40], [true, false]));
+    // function zipObject(ary, value) {
+    //   var o = {}
+    //   for (i = 0; i < ary.length; i++) {
+    //     o[ary[i]] = value[i]
+
+    //   }
+    //   return o
+    // }
+    // console.log(zipObject(['a', 'b'], [1, 2]));
+    // function zipWith(...arys) {
+    //   let s = arys.pop()
+    //   var res = []
+    //   var nu = []
+    //   if (Object.prototype.toString.call(s) === '[object Function]') {
+    //     for (let i = 0; i < arys[0].length; i++) {
+    //       res.push([])
+    //     }
+    //     for (let i = 0; i < arys.length; i++) {
+    //       for (let j = 0; j < arys[i].length; j++) {
+    //         res[j][i] = arys[i][j]
+    //       }
+    //     }
+    //     for (let i = 0; i < res.length; i++) {
+    //       nu.push(s(...res[i]))
+    //     }
+
+    //   }
+    //   return nu
+    // }
+    // console.log(zipWith([1, 2], [10, 20], [100, 200], function (a, b, c) {
+    //   return a + b + c;
+    // }));
+    // function countBy(ary, iteratee) {
+    //   var o = {}
+    //   if (Object.prototype.toString.call(iteratee) === '[object Function]') {
+    //     for (let k of ary) {
+    //       let it = iteratee(k)
+    //       if (o[it]) {
+    //         o[it]++
+    //       } else {
+    //         o[it] = 1
+    //       }
+    //     }
+    //     return o
+    //   } else if (Object.prototype.toString.call(iteratee) === '[object String]') {
+    //     for (let j = 0; j < ary.length; j++) {
+    //       let item = ary[j].length
+    //       if (o[item]) {
+    //         o[item]++
+    //       } else {
+    //         o[item] = 1
+    //       }
+    //     }
+    //     return o
+    //   }
+    // }
+    // console.log(countBy([6.1, 4.2, 6.3], Math.floor));
+    // console.log(countBy(['one', 'two', 'three'], 'length'));
+    // function forEach(ary, iteratee) {
+    //   if (Array.isArray(ary)) {
+    //     for (let i = 0; i < ary.length; ++i) {
+    //       iteratee(ary[i], i, ary)
+    //     }
+    //   } else if (ary instanceof Object) {
+    //     for (let k in ary) {
+    //       let temp = iteratee(ary[k], k, ary)
+    //       if (temp == false) {
+    //         break
+    //       }
+    //     }
+    //   }
+    //   return ary
+    // }
+    // console.log(forEach([1, 2], function (value) {
+    //   console.log(value)
+    // }));
+    // console.log(forEach({ 'a': 1, 'b': 2 }, function (value, key) {
+    //   console.log(key);
+    // }));
+    // function groupBy(ary, iteratee) {
+    //   let type = Object.prototype.toString.call(iteratee)
+    //   var o = {}
+    //   if (type === '[object Function]') {
+    //     for (let k of ary) {
+    //       let it = iteratee(k)
+    //       if (o[it]) {
+    //         o[it].push(k)
+    //       } else {
+    //         o[it] = [k]
+    //       }
+    //     }
+    //     return o
+    //   } else if (type === '[object String]') {
+    //     for (var k of ary) {
+    //       let item = k[iteratee]
+    //       if (o[item]) {
+    //         o[item].push(k)
+    //       } else {
+    //         o[item] = [k]
+    //       }
+    //     }
+    //     return o
+    //   }
+    // }
+    // console.log(groupBy([6.1, 4.2, 6.3], Math.floor));
+    // console.log(groupBy(['one', 'two', 'three'], 'length'));
+    // function includes(ary, value, fromIndex = 0) {
+    //   let t = Object.prototype.toString.call(value)
+    //   if (t === '[object Number]' && Array.isArray(ary)) {
+    //     for (let i = fromIndex; i < ary.length; i++) {
+    //       if (value == ary[i]) {
+    //         return true
+    //       }
+    //     }
+    //     return false
+    //   } else if (t === '[object String]' && ary instanceof Object) {
+    //     for (let k in ary) {
+    //       if (ary[k] === value) {
+    //         return true
+    //       }
+    //     }
+    //     return false
+    //   } else if (t === '[object String]' && Object.prototype.toString.call(ary) === '[object String]') {
+    //     var re = new RegExp(value)
+    //     return re.test(ary)
+    //   }
+    // }
+    // console.log(includes('pebbles', 'eb'));
+    // console.log(includes({ 'user': 'fred', 'age': 40 }, 'fred'));
+    // console.log(includes([1, 2, 3], 1, 2));
+    // console.log(includes([1, 2, 3], 1));
+    // function invokeMap(ary, path, ...args) {
+    //   let t = Object.prototype.toString.call(path)
+    //   if (t === '[object String]') {
+    //     return ary.map(it => {
+    //       return it[path](...args)
+    //     })
+    //   } else if (t === '[object Function]') {
+    //     return ary.map(it => path.call(it, ...args))
+    //   }
+    // }
+    // console.log(invokeMap([[5, 1, 7], [3, 2, 1]], 'sort'));
+    // console.log(invokeMap([123, 456], String.prototype.split, ''));
+    // function keyBy(ary, iteratee) {
+    //   let t = Object.prototype.toString.call(iteratee)
+    //   var o = {}
+    //   if (t === '[object Function]') {
+    //     for (let k of ary) {
+    //       let it = iteratee(k)
+    //       if (!(o[it])) {
+    //         o[it] = k
+    //       }
+
+    //     }
+    //     return o
+    //   } else if (t === '[object String]') {
+    //     for (let i of ary) {
+    //       let item = i[iteratee]
+    //       if (!(o[item])) {
+    //         o[item] = i
+    //       }
+    //     }
+    //     return o
+    //   }
+    // }
+    // var array = [
+    //   { 'dir': 'left', 'code': 97 },
+    //   { 'dir': 'right', 'code': 100 }
+    // ];
+    // console.log(keyBy(array, function (o) {
+    //   return String.fromCharCode(o.code);
+    // }));
+    // console.log(keyBy(array, 'dir'));
+    // function map(ary, iteratee) {
+    //   let t = Object.prototype.toString.call(iteratee)
+    //   var res = []
+    //   if (t === '[object Function]' && Array.isArray(ary)) {
+    //     for (let k of ary) {
+    //       res.push(iteratee(k))
+    //     }
+    //     return res
+    //   } else if (t === '[object Function]' && ary instanceof Object) {
+    //     for (let k in ary) {
+    //       res.push(iteratee(ary[k]))
+    //     }
+    //     return res
+    //   } else if (t === '[object String]' && iteratee.includes(".")) {
+    //     let arr = iteratee.split('.')
+    //     for (let k of ary) {
+    //       res.push(k[arr[0]][arr[1]])
+    //     }
+    //     return res
+
+    //   } else if (t === '[object String]') {
+    //     for (let k of ary) {
+    //       res.push(k[iteratee])
+    //     }
+    //     return res
+    //   }
+    // }
+    // function square(n) {
+    //   return n * n;
+    // }
+    // var users = [
+    //   { 'user': 'barney' },
+    //   { 'user': 'fred' }
+    // ];
+    // console.log(map([4, 8], square));
+    // console.log(map({ 'a': 4, 'b': 8 }, square));
+    // console.log(map(users, 'user'));
+    // console.log(map([{ "a": { "b": 1 } }, { "a": { "b": 2 } }], "a.b"))//返回值是[1,2]
+    // function partition(ary, predicate) {
+    //   var res = [[], []]
+    //   let t = Object.prototype.toString.call(predicate)
+    //   if (t === '[object Function]') {
+    //     for (let k of ary) {
+    //       let it = predicate(k)
+    //       if (it) {
+    //         res[0].push(k)
+    //       } else {
+    //         res[1].push(k)
+    //       }
+    //     }
+    //     return res
+    //   } else if (t === '[object Object]') {
+    //     let dd = baseIteratee(predicate)
+    //     for (let k of ary) {
+    //       if (dd(k)) {
+    //         res[0].push(k)
+    //       } else {
+    //         res[1].push(k)
+    //       }
+    //     }
+    //     return res
+    //   } else if (t === '[object Array]') {
+    //     for (let k of ary) {
+    //       if (k[predicate[0]] === predicate[1]) {
+    //         res[0].push(k)
+    //       } else {
+    //         res[1].push(k)
+    //       }
+    //     }
+    //     return res
+    //   } else if (t === '[object String]') {
+    //     for (let k of ary) {
+    //       if (k[predicate]) {
+    //         res[0].push(k)
+    //       } else {
+    //         res[1].push(k)
+    //       }
+    //     }
+    //     return res
+    //   }
+
+    // }
+    // var users = [
+    //   { 'user': 'barney', 'age': 36, 'active': false },
+    //   { 'user': 'fred', 'age': 40, 'active': true },
+    //   { 'user': 'pebbles', 'age': 1, 'active': false }
+    // ];
+    // // console.log(partition(users, function (o) { return o.active; }));
+    // console.log(partition(users, { 'age': 1, 'active': false }));
+    // console.log(partition(users, ['active', false]));
+    // console.log(partition(users, 'active'));
+    function isMatch(object, source) {
+      for (let i in source) {
+        if (!isEqual(object[i], source[i])) {
+          return false
+        }
+      }
+      return true
+
+
+    }
+    // var object = { 'a': 1, 'b': 2 };
+    // console.log(isMatch({ 'a': 1, 'b': { c: 2, d: 3 } }, { 'b': { c: 2 } }));
+    // console.log(isMatch(object, { 'b': 1 }));
+    function get(object, path, defaultvalue = 'default') {
+      if (Object.prototype.toString.call(path) === '[object String]') {
+        path = toPath(path)
+      }
+      if (Array.isArray(path) && object) {
+        for (let k of path) {
+          if (k in Object(object)) {
+            object = object[k]
+          } else {
+            return defaultvalue
+          }
+        }
+        return object
+      } else if (Object.prototype.toString.call(path) === '[object String]') {
+        for (let i of path) {
+          if (i in Object(object)) {
+            object = object[i]
+
+          } else {
+            return defaultvalue
+          }
+        }
+        return object
+      }
+    }
+    // var object = { 'a': [{ 'b': { 'c': 3 } }] };
+    // console.log(get(object, 'a[0].b.c'));
+    // console.log(get(object, ['a', '0', 'b', 'c']));
+    // console.log(get(object, 'a.b.c', 'default'));
+    function toPath(value) {
+      return value.match(/\w+/g)
+
+    }
+
+    // console.log(toPath('a.b.c'));
+    // console.log(toPath('a[0].b.c'));
+    function matches(source) {
+      return object => {
+        return isMatch(object, source)
+      }
+
+    }
+    function property(path) {
+      if (!Array.isArray(path)) {
+        path = toPath(path)
+      }
+      return function (obj) {
+        let temp = obj
+        for (let k of path) {
+          if (temp === undefined) {
+            return undefined
+          }
+
+          temp = temp[k]
+        }
+
+        return temp
+      }
+
+    }
+    // console.log(property('active'));
+    // var ssr = property('active')
+    // console.log(ssr(property('active')));
+    function matchesProperty(path, src) {
+      return function (obj) {
+        return isEqual(get(obj, path), src)
+      }
+    }
+    function camelCase(str) {
+      var ssr = ""
+      var s = str.match(/[a-z]+/gi)
+      var res = []
+      for (let i = 0; i < s.length; i++) {
+        res.push(s[i].toLowerCase())
+      }
+      for (let j = 0; j < res.length; j++) {
+        if (j > 0) {
+          res[j] = res[j].replace(res[j][0], res[j][0].toUpperCase())
+        }
+        ssr += res[j]
+      }
+      return ssr
+    }
+    // console.log(camelCase('Foo Bar'));
+    // console.log(camelCase('--foo-bar--'));
+    // console.log(camelCase('__FOO_BAR__'));
+    function capitalize(str) {
+      var s = str.toLowerCase()
+      return s.replace(s[0], s[0].toUpperCase())
+    }
+    // console.log(capitalize('FRED'));
+    // function deburr(str) {
+    //   return str
+    // }
+    // console.log(deburr('déjà vu'));
+    function endsWith(str, target, position = str.length) {
+      if (str && str[position - 1] == target) {
+        return true
+      } else {
+        return false
+      }
+
+    }
+    // console.log(endsWith('abc', 'c'));
+    // console.log(endsWith('abc', 'b'));
+    // console.log(endsWith('abc', 'b', 2));
+    function pad(str, len = 0, chars = " ") {
+      while (str.length < len) {
+        str = str + chars
+        if (str.length >= 8) {
+          break
+        }
+        str = chars + str
+
+      }
+      return str.slice(0, len)
+
+    }
+    // console.log(pad('abc', 8));
+    // console.log(pad('abc', 8, '_-'));
+    // console.log(pad('abc', 3));
+    function padEnd(str, len = 0, chars = " ") {
+      while (str.length < len) {
+        str = str + chars
+      }
+      return str.slice(0, len)
+    }
+    function padStart(str, len = 0, chars = " ") {
+      while (str.length < len) {
+        str = chars + str
+      }
+      let a = str.length - len
+      return str.substr(a, len)
+    }
+    // console.log(padStart('abc', 6));
+    // console.log(padStart('abc', 6, '_-'));
+    // console.log(padStart('abc', 3));
+    function parseInt1(str, radix = 10) {
+      var r = /^0x/
+      var e = /^0b/
+      if (r.test(str)) {
+        return parseInt(str, 16)
+      } else if (e.test(str)) {
+        return parseInt(str, 8)
+      } else {
+        return parseInt(str, 10)
+      }
+    }
+    // console.log(parseInt1('0x42314'));
+    function repeat(str, n = 1) {
+      var s = ''
+      for (let i = 0; i < n; i++) {
+        s += str
+      }
+      return s
+    }
+    // console.log(repeat('*', 3));
+    // console.log(repeat('abc', 2));
+    // console.log(repeat('abc', 0));
+    function replace(str, pattern, ment) {
+      return str.replace(pattern, ment)
+
+    }
+    // console.log(replace('Hi Fred', 'Fred', 'Barney'));
+    function split(str, separator, limit) {
+      var s = str.split(separator)
+      s.length = limit
+      return s
+    }
+    // console.log(split('a-b-c', '-', 2));
+    function startsWith(str, target, position = 0) {
+      return str[position] === target
+    }
+    function words(str, pattern) {
+      if (pattern == null) {
+        pattern = /[a-z]+/gi
+      }
+      return str.match(pattern)
+    }
+    // console.log(words('fred, barney, & pebbles'));
+    // console.log(words('fred, barney, & pebbles', /[^, ]+/g));
+    function sortBy(ary, ...iteratee) {
+      let t = Object.prototype.toString.call(iteratee[0])
+      if (t === '[object Function]' && iteratee.length == 1) {
+        var f = iteratee[0]
+        var arr = ary.slice()
+        return arr.sort((a, b) => {
+          return f(a).charCodeAt(0) - f(b).charCodeAt(0)
+        })
+
+      } else if (t === '[object Array]' && iteratee.length == 1) {
+        var f = iteratee[0]
+        var arr = ary.slice()
+        return arr.sort((a, b) => {
+          return a[f[0]].charCodeAt(0) - b[f[0]].charCodeAt(0)
+        }).sort((a, b) => {
+          return a[f[1]] - b[f[1]]
+        })
+
+      } else if (t === '[object String]' && iteratee.length == 2) {
+        var f1 = iteratee[0]
+        var f2 = iteratee[1]
+        var arr = ary.slice()
+        return arr.sort((a, b) => {
+          return a[f1].charCodeAt(0) - b[f1].charCodeAt(0)
+        }).sort((x, y) => {
+          return f2(x) - f2(y)
+        })
+      }
+
+    }
+    // var users = [
+    //   { 'user': 'fred', 'age': 48 },
+    //   { 'user': 'barney', 'age': 36 },
+    //   { 'user': 'fred', 'age': 40 },
+    //   { 'user': 'barney', 'age': 34 }
+    // ];
+    // console.log(sortBy(users, function (o) { return o.user; }));
+    // console.log(sortBy(users, ['user', 'age']));
+    // console.log(sortBy(users, 'user', function (o) {
+    //   return Math.floor(o.age / 10);
+    // }));
+    function assign1(obj, ...sources) {//将多个实例对象拷贝到原来的对象上 浅拷贝
+      for (let k of sources) {
+        Object.assign(obj, k)
+      }
+      return obj
+
+    }
+    // function Foo() {
+    //   this.a = 1;
+    // }
+
+    // function Bar() {
+    //   this.c = 3;
+    // }
+
+    // Foo.prototype.b = 2;
+    // Bar.prototype.d = 4;
+    // console.log(assign1({ 'a': 0 }, new Foo, new Bar));
+    function assignIn(obj, ...sources) {
+      for (let k of sources) {
+        for (let i in k) {
+          obj[i] = k[i]
+        }
+      }
+      return obj
+    }
+    // console.log(assignIn({ 'a': 0 }, new Foo, new Bar));
+    function at(obj, ary) {
+      var res = []
+      ary = ary.map(it => toPath(it))
+      for (let i of ary) {
+        var b = obj
+        for (let k of i) {
+          b = b[k]
+        }
+        res.push(b)
+      }
+      return res
+    }
+    // var object = { 'a': [{ 'b': { 'c': 3 } }, 4] };
+    // console.log(at(object, ['a[0].b.c', 'a[1]']));
+    function defaults(obj, ...sources) {
+      for (let k of sources) {
+        for (let i in k) {
+          if (obj[i]) {
+            continue
+          } else {
+            obj[i] = k[i]
+          }
+        }
+      }
+      return obj
+    }
+    // console.log(defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 }));
+    function findKey(obj, predicate) {
+      var d = baseIteratee(predicate)
+      var t = Object.prototype.toString.call(predicate)
+      if (t === '[object Function]') {
+        for (let i in obj) {
+          if (d(obj[i])) {
+            return i
+            break
+          }
+        }
+        return undefined
+      } else if (t === '[object String]') {
+        for (let i in obj) {
+          if (obj[i][predicate]) {
+            return i
+            break
+          }
+        }
+        return undefined
+      } else {
+        for (let i in obj) {
+          if (d(obj[i])) {
+            return i
+            break
+          }
+        }
+        return undefined
+      }
+    }
+    // var users = {
+    //   'barney': { 'age': 36, 'active': true },
+    //   'fred': { 'age': 40, 'active': false },
+    //   'pebbles': { 'age': 1, 'active': true }
+    // };
+    // console.log(findKey(users, function (o) { return o.age < 40; }));
+    // console.log(findKey(users, { 'age': 1, 'active': true }));
+    // console.log(findKey(users, ['active', false]));
+    // console.log(findKey(users, 'active'));
+    function mapKeys(obj, iteratee) {
+      var o = {}
+      for (let k in obj) {
+        o[iteratee(obj[k], k)] = obj[k]
+      }
+      return o
+    }
+    // console.log(mapKeys({ 'a': 1, 'b': 2 }, function (value, key) {
+    //   return key + value;
+    // }));
+    function mapValues(obj, iteratee) {
+      var o = {}
+      let t = Object.prototype.toString.call(iteratee)
+      if (t === '[object Function]') {
+        for (let k in obj) {
+          o[k] = iteratee(obj[k])
+        }
+        return o
+      } else if (t === '[object String]') {
+        for (let k in obj) {
+          o[k] = obj[k][iteratee]
+        }
+        return o
+      }
+    }
+    // var users = {
+    //   'fred': { 'user': 'fred', 'age': 40 },
+    //   'pebbles': { 'user': 'pebbles', 'age': 1 }
+    // };
+    // console.log(mapValues(users, function (o) { return o.age; }));
+    // console.log(mapValues(users, 'age'));
+    function pick(obj, values) {
+      var o = {}
+      for (let key in obj) {
+        if (values.includes(key)) {
+          o[key] = obj[key]
+        } else {
+          continue
+        }
+      }
+      return o
+    }
+    // var object = { 'a': 1, 'b': '2', 'c': 3 }
+    // console.log(pick(object, ['a', 'c']));
+    function isNumber(val) {
+      return Object.prototype.toString.call(val) === '[object Number]'
+    }
+    // console.log(isNumber(3));
+    // console.log(isNumber(Number.MIN_VALUE));
+    // console.log(isNumber(Infinity));
+    // console.log(isNumber('3'));
+    function pickBy(obj, iteratee) {
+      var o = {}
+      for (let i in obj) {
+        if (iteratee(obj[i])) {
+          o[i] = obj[i]
+        } else {
+          continue
+        }
+      }
+      return o
+    }
+    // var object = { 'a': 1, 'b': '2', 'c': 3 }
+    // console.log(pickBy(object, isNumber));
+    function constant(val) {
+      return function () {
+        return val
+      }()
+    }
+    function result(obj, path, defaultValue) {
+      var temp = obj
+      path = path.match(/\w+/g)
+      for (let i of path) {
+        temp = temp[i]
+      }
+      if (temp === undefined) {
+        return defaultValue
+      }
+      return temp
+    }
+    // var object = { 'a': [{ 'b': { 'c1': 3, 'c2': constant(4) } }] };
+    // console.log(result(object, 'a[0].b.c1'));
+    // console.log(result(object, 'a[0].b.c2'));
+    // console.log(result(object, 'a[0].b.c3', 'default'));
+    // console.log(result(object, 'a[0].b.c3', constant('default')));
+    function set(obj, path, value) {
+      var temp = obj
+      path = (Array.isArray(path) ? path : path.match(/\w+/g))
+      for (let k of path) {
+        temp = temp[k]
+        if (temp === undefined) {
+          temp = value
+        }
+        obj[k] = temp
+
+      }
+
+      return obj
+
+    }
+    // var object = { 'a': [{ 'b': { 'c': 3 } }] };
+    // console.log(set(object, 'a[0].b.c', 4));
+    // console.log(set(object, ['x', '0', 'y', 'z'], 5));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

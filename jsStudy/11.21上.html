@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // var name = '全局'
+    // function fun() {
+    //   console.log(this.name);
+    // }
+    // var obj = {
+    //   name: '孙悟空',
+    //   age: 16,
+    //   sayhi: fun
+    // }
+    // var obj2 = {
+    //   name: '沙和尚',
+    //   age: 16,
+    //   sayhi: fun
+    // }
+    // fun()//函数调用时this指向的是window 此时函数内部没有定义name变量往外查找到全局变量
+    // obj.sayhi()//用方法的方式调用函数的时候this指向正在调用的对象
+    // obj2.sayhi()
+    // function Creatperson(name, age, gender) {//用构造函数创建对象首字母要大写,构造函数没有return
+    //   this.name = name
+    //   this.age = age
+    //   this.gender = gender
+    //   this.sayname = function () {
+    //     alert(this.name)
+    //   }
+    // }
+    // var obj3 = new Creatperson('猪八戒', 28, '男') //创建新的对象要用 new来调用构造函数
+    // var obj4 = new Creatperson('购', 12, '男')
+    // console.log(obj3);
+    // console.log(obj4);
+    // obj3.sayname()
+    // obj4.sayname()
+    // function creatanimaton(name, age, sex) {//利用普通函数创建对象
+    //   var obj = new Object()
+    //   obj.name = name
+    //   obj.age = age
+    //   obj.sayw = function () {
+    //     console.log(this.name);
+    //   }
+    //   return obj
+    // }
+    // var d1 = creatanimaton('蜘蛛精', 20, '女')//用普通函数创建对象不用再用new
+    // var d2 = creatanimaton('排骨精', 20, '女')
+    // console.log(d1);
+    // console.log(d2);
+    // d1.sayw()
+    // d2.sayw()
+    //只要的是一个函数,解析器都会给函数添加一个prototype属性
+    //这个属性对应着一对象,这个对象就是所谓的原型对象
+    //如果函数当做普通函数调用那么这个prototype没有任何作用
+    //方法在构造函数内部构造,每一次调用new一下构造函数一下就会创建一个新的方法
+    //当通过构造函数 创建一个对象的时候,这时的对象会有一个隐含的属性叫prototype 可以通过对象名加__proto__访问该属性 该属性和原构造函数的ptototype属性一样
+    //原型对象相当于一个公有的区域,所有的同一个实列都可以访问到这个原型对象
+    //当我们访问一个属性或者方法适合会在自己对象里找,如果有就直接使用,如果没有就到原型对象里找,找到就直接使用
+    //在创建构造函数时候将公有的属性和方法添加到属性和方法中
+    // function MaClass(name, age, sex) {
+    //   this.name = name;
+    //   this.age = age;
+    //   this.sex = sex;
+    //   this.sayhai = function () {
+    //     console.log(this.name);
+    //   }
+    // }
+    // MaClass.prototype.garden = this.garden
+    // MaClass.prototype.name = name;
+    // MaClass.prototype.age = age;
+    // MaClass.prototype.sex = sex;
+    // MaClass.prototype.sayhai = function () {
+    //   alert('hello')
+    // }
+    //使用 in检查对象中是否含有某种属性  name in 对象 可以检查对象里面有没有name属性,如果没有但是原型对象中有也会返回true
+    //使用对象.hasOwnProperty("age")当对象自身中含有age属性才会返回true
+    //原型对象也是对象,所有原型对象也有原型;
+    //.hasOwnproperty("name")先在对象中查找有没有name属性假如没有再到原型对象中查找;还没有的话再到原型对象的原型中查找;有就会返回true没有就返回false
+    //当我们
+    // var hhk = new MaClass('孙悟空', 22, '男')
+    // MaClass.prototype.toString = function () {
+    //   return "MaClass[name=" + this.name + ",age=" + this.age + ",sex=" + this.sex + "]"
+    // }
+    // console.log(hhk);
+    //对象.toSring方法可以改变对象的值
+    //forEach()方法需要调用一个函数
+    // var arr = [1, 2, 3, 45]
+    // arr.forEach()
+    // var arr = [-13, -17, -8, -10, -20, 2, 3, -19, 2, -18, -5, 7, -12, 18, -17, 12, -1]
+    // if (arr.length == 2) {
+    //   console.log(true);
+    // }
+    // arr.sort((a, b) => (a - b))
+    // console.log(arr);
+    // for (var i = 0; i < arr.length; i++) {
+    //   if (arr[i + 1] - arr[i] == arr[i + 2] - arr[i + 1]) {
+    //     console.log(true);
+    //   } else {
+    //     console.log(false);
+    //   }
+    // }
+    // var searchRange = function(nums, target) {
+    var nums = [1, 3], target = 1
+    var s = nums.indexOf(target)
+    //  if(s==-1) {
+    //      return [-1,-1]
+    //  }
+    //  if(nums.length==1&&nums[0]==target) {
+    //      return [0,0]
+    //  }
+    var a = []
+    var nu = 0
+    while (s != -1) {
+      console.log(s);
+      a.push(s)
+      nu++
+      s = nums.indexOf(target, s + 1)
+    }
+    if (nu == 1) {
+      a.push(0)
+    }
+    console.log(a);
+
+
+
+// };
+
+
+  </script>
+
+</body>
+
+</html>

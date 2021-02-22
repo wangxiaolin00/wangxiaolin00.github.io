@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var obj = {
+      'a': 1,
+      'b': 2
+    }
+    var s = Object.prototype.hasOwnProperty.call(obj, 'a')//判断obj上有没有可以枚举的属性'a'
+    var s1 = obj.hasOwnProperty('a')//判断对象上有没有可枚举的属性
+    console.log(s);
+    console.log(s1);
+  </script>
+
+</body>
+
+</html>

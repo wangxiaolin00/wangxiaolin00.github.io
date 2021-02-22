@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* .box {
+      background-color: aqua;
+      height: 100px;
+      width: 300px;
+    } */
+    div {
+      width: 300px;
+      height: 200px;
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <button class="btn">hdfhdfh</button>
+  <div class="box"></div>
+  <script>
+    var btn = document.querySelector('.btn')
+    var div1 = document.querySelector('.box')
+    btn.onclick = function () {
+      div1.innerHTML = getDate()
+    }
+    function getDate() {
+      var date = new Date();
+      var year = date.getFullYear()
+      var month = date.getMonth() + 1
+      var dates = date.getDate()
+      var arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+      var day = date.getDay()
+      return '今天是' + year + '年' + month + '月' + dates + '日' + arr[day]
+    } -->
+  <!-- //innerText 不识别html标签 去除空格和换行
+    //inenerHTML 识别html标签的  保留空格和换行以及html
+    //这俩个属性是可以读写的
+    //主要用innnerHTML
+    //常用的元素的属性操作  src id title herf -->
+
+  <!-- </script> -->
+  <button class="but1">asgfaf</button>
+  <input class="input1" type="password">
+  <div>fadf</div>
+  <script>
+    var btn = document.querySelector('.but1')
+    var input = document.querySelector('.input1')
+    var d = document.querySelector('div')
+    var flag = 0
+    btn.onclick = function () {
+      // this.disbaled = true;
+      // d.style.backgroundColor = 'blue'
+      // d.style.width = '100px'
+      // d.style.height = '100px'
+      // d.style.border = '20px solid black'
+      if (flag == 0) {
+        input.type = 'text'
+        d.style.backgroundColor = 'blue'
+        d.style.width = '100px'
+        d.style.height = '100px'
+        d.style.border = '20px solid black'
+        d.innerHTML = getDate()
+        flag = 1
+
+      } else {
+        input.type = 'password';
+        d.style.width = '300px'
+        d.style.height = '200px'
+        d.style.backgroundColor = 'red'
+        flag = 0
+      }
+    }
+    function getDate() {
+      var date = new Date()
+      var year = date.getFullYear()
+      var month = date.getMonth()
+      var dates = date.getDate()
+      var arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+      var day = date.getDay()
+      return '今天是:' + year + '年' + month + '月' + dates + '日' + arr[day]
+    }
+    function daoJiShi(time) {
+      var nowtime = +new Date()
+      var futuretiem = +new Date(time)
+      var times = nowtime - futuretiem
+      var d = (times / 60 / 60 / 24)
+      var d = d < 10 ? '0' + d : d;
+      var h
+
+    }
+  </script>
+
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    span {
+      width: 50px;
+      height: 50px;
+      background-color: lightcoral;
+      position: fixed;
+      border-radius: 99999px;
+      text-align: center;
+      xtransform: translate(-50%, -50%);
+    }
+    #sun {
+      width: 120px;
+      height: 120px;
+      margin-left: -60px;
+      margin-top: -60px;
+    }
+    #earth {
+      width: 50px;
+      height: 50px;
+      margin-left: -25px;
+      margin-top: -25px;
+      background-color: blue;
+    }
+    #moon {
+      width: 6px;
+      height: 6px;
+      margin-left: -3px;
+      margin-top: -3px;
+    }
+  </style>
+</head>
+<body>
+  <span id="sun" style="left: 10px; top: 20px;">S</span>
+  <span id="earth" style="left: 10px; top: 20px;">E</span>
+  <span id="moon" style="left: 10px; top: 20px;"></span>
+  <script>
+    var sun = document.querySelector('#sun')
+    var earth = document.querySelector('#earth')
+    var moon = document.querySelector('#moon')
+
+    var angle = 0
+    var lastTime = null
+
+    function ani(time) {
+      // time = Date.now()
+      if (lastTime !== null) {
+        angle += (time - lastTime) * 0.001
+      }
+      lastTime = time
+      // console.log(time)
+      sun.style.left = Math.sin(angle * 0.5) * 180 + 300 + 'px'
+      sun.style.top = Math.cos(angle * 0.5) * 180 + 300 + 'px'
+
+      earth.style.left = Math.sin(angle + 0.02) * 200 + Math.sin(angle * 0.5) * 180 + 300 + 'px'
+      earth.style.top  = Math.cos(angle + 0.02) * 200 + Math.cos(angle * 0.5) * 180 + 300 + 'px'
+
+      moon.style.left = Math.sin(angle * 2) * 50 + Math.sin(angle + 0.02) * 200 + Math.sin(angle * 0.5) * 180 + 300 + 'px'
+      moon.style.top  = Math.cos(angle * 2) * 50 + Math.cos(angle + 0.02) * 200 + Math.cos(angle * 0.5) * 180 + 300 + 'px'
+
+      requestAnimationFrame(ani)
+    }
+
+    requestAnimationFrame(ani)
+
+  </script>
+  <button onclick="requestAnimationFrame(ani)">start</button>
+</body>
+</html>

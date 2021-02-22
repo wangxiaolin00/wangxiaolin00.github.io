@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1 {
+      width: 300px;
+      height: 300px;
+      background-color: cyan;
+
+    }
+  </style>
+</head>
+
+<body>
+  <button id="btn">我是一个按钮</button>
+  <div class="box1">蛮三刀</div>
+  <script>
+    //DOM (Document Object Model)文档对象模型
+    //JS 中通过DOM来对Html页面文档进行操作,只要理解了 DOM就可以随心所欲的操作web页面
+    //节点:Node 构成HTML文档最基本的单元
+    /// 常用的节点分为四类:
+    // 文档节点 整个Html 文档
+    // 元素节点  html文档中的html标签
+    //属性节点: 元素的属性
+    //文本节点: html标签中的文本内容
+    var btn = document.getElementById("btn")
+    var b1 = document.querySelector('.box1')
+    btn.onclick = function () {
+      b1.innerHTML = getTime()
+      b1.style.backgroundColor = 'red'
+    }
+    function getTime() {
+      var date = new Date()
+      var year = date.getFullYear()
+      var month = date.getMonth() + 1
+      var days = date.getDate()
+      var day = date.getDay()
+      var arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+      return year + '年' + month + '月' + days + '日' + arr[day]
+    }
+    function has5(root) {
+      if (root) {
+        if (root.val == 5) {
+          return true
+        } else {
+          return has5(root.left) || has5(root.right)
+
+        }
+
+      }
+      return false
+    }
+    function talkAbout(node, str) {//判断文本节点中是否含有某个字串
+      if (node.nodeType == document.ELEMENT_NODE) {//元素节点
+        for (let k of node.childNodes) {
+          if (talkAbout(k, str)) {
+            return true
+          }
+        }
+        return false
+      } else if (node.nodeType == document.TEXT_NODE) {//如果是文本节点
+        return node.nodeValue.indexOf(str) > -1
+      }
+
+    }
+
+    var ary = []
+    function getElementByTagName(node, tagName) {
+      var res = []
+      if (node.nodeType == document.ELEMENT_NODE) {//如果是元素节点
+        for (let k of node.childNodes.values()) {
+          if (k.nodeType == document.ELEMENT_NODE && k.tagName == tagName) {
+            res.push(k)
+
+          }
+          res.push(...getElementByTagName(node, tagName))
+
+        }
+        return res
+      } else {
+        return []
+      }
+    }
+    function getElementById(id, startNode = document.documentElement) {//遍历页面中所有id的属性值为id的节点
+      if (startNode.id == id) {
+        return startNode
+      } else {
+        for (let child of startNode.children) {
+          var res = getElementById(id, child)
+          if (res) {
+            return res
+          }
+        }
+      }
+      return null
+
+    }
+
+    function getElementsByTagName(node, tagName, result = []) {//遍历页面中所有标签是名tagName的节点,返回一个类数组对象
+      if (node.nodeType == document.ELEMENT_NODE) {
+        for (var child of node.childNodes.values()) {
+          if (child.nodeType == document.ELEMENT_NODE && child.tagName == tagName) {
+            result.push(child)
+          }
+          getElementsByTagName(child, tagName, result)
+        }
+        return result
+      } else {
+        return []
+      }
+    }
+    function searchNode(node, str) {
+      if (node.nodeType == document.ELEMENT_NODE) {//假如搜索的是元素节点
+        for (let i = 0; i < node.childNodes.length; i++) {
+          if (searchNode(node.childNodes[i], str)) {
+            return true
+          }
+        }
+        return false
+      } else if (node.nodeType == document.TEXT_NODE) {//假如搜索的是元素节点
+        return node.nodeValue.includes(str)
+      }
+    }
+    function fullqueue(str) {//将一个字符串的全排列放到一个数组中取
+      var res = []
+      if (str.length == 0) {
+        return []
+      } else if (str.length == 1) {
+        return [str]
+      } else if (str.length > 1) {
+        for (let i = 0; i < str.length; i++) {
+          let d = str[i]
+          var next = str.slice(0, i) + str.slice(i + 1)
+          var nextqueue = fullqueue(next)
+          for (let j = 0; j < nextqueue.length; j++) {
+            let temp = d + nextqueue[j]
+            res.push(temp)
+          }
+        }
+      }
+      return res
+
+    }
+    console.log(fullqueue('abcd'));
+    function fullaryQueus(ary) {//将一个没有重复元素的数组的全排列输出在一个数组里返回
+      var res = []
+      function dfs1(path, set) {
+        if (path.length == ary.length) {
+          res.push(path.slice())
+          return
+        }
+        for (let i = 0; i < ary.length; i++) {
+          if (!set.has(i)) {
+            path.push(ary[i])
+            set.add(i)
+            dfs1(path, set)
+            path.pop()
+            set.delete(i)
+          }
+        }
+      }
+      dfs1([], new Set())
+      return res
+    }
+    console.log(fullaryQueus([1, 2, 3]));
+    //将js写在html中 如 <button onclick="alert('hello')">按钮</button>
+     //这种写法低耦合性,不方便维护
+
+  </script>
+
+</body>
+
+</html>

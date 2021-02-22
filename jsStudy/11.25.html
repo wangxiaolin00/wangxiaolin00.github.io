@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //数字,字符串和布尔值的值不可变性
+    //obj1和obj2引用同一个对象判断===的时候才会返回真才会返回真
+    //基础数据类型存储在栈里面//而引用数据类型存在堆里面
+    //javascript js解析器 js解析语言它有预解析;而c是编译语言
+    var s = "   okay \n  "
+    console.log(s.trim());//s.trim()去掉字符串中空格,换行符和制表符等符号
+    function indexOF(ary, val) {
+      for (var i = 0; i < ary.length; i++) {
+        if (ary[i] === val) {
+          return i
+        }
+        return -1
+      }
+    }
+    //ary.indexof()查找元素只要元素存在就不会返回-1假如元素不存在就会返回-1,但是除了NaN NaN!===NaN 
+    function unique(s) {//数组去重
+      return Array.from(new Set(s))
+    }
+    console.log(unique([1, 2, 3, 34, 2, 3, 4, 1]));
+    function unique1(s) {//数组去重最短语法
+      return [...new Set(s)]
+    }
+    console.log(unique1([1, 2, 3, 34, 2, 3, 4, 1, 1, 2, 3, 1, 1, 2, 5, 6]));
+    function unque11(s) {
+      var arr = []
+      for (var i = 0; i < s.length; i++) {
+        if (arr.indexOf(s[i]) === -1) {
+          arr.push(s[i])
+        }
+      }
+      return arr
+    }
+    //统计出字符'abcodoboiogokonno'中出现次数最多的字符,并就算出次数; 重点案列
+    function countmax(str) {
+      var o = {}
+      for (var i = 0; i < str.length; i++) {
+        var s = str[i]
+        if (o[s]) {
+          o[s]++
+        } else {
+          o[s] = 1
+        }
+      }
+      var max = 0
+      for (var k in o) {
+        if (o[k] > max) {
+          max = o[k]
+        }
+      }
+      return max
+    }
+    console.log(countmax('abcodoboiogokonno'));
+    function county(x, y) {//统计字符串x中y出现的次数
+      let nu = 0
+      for (var k of x) {
+        if (k === y) {
+          nu++
+        }
+      }
+      return nu
+    }
+    console.log(county('abcodoboiogokonno', 'o'));
+    //小写转大写：-32，因为在ASCII表上小写字母在大写字母的后面。
+    //大写转小写：+32，因为在ASCII表上大写字母在小写字母的前面。
+    //注：字母a-z的code为97 - 122，A-Z的code为65 - 90 这很重要。不过记不住也没关系
+    function dds(str) {//将字符串中的大写转小写.小写转大写
+      var result = ''
+      for (var i in str) {
+        var code = str.charCodeAt(i)
+        if (code >= 65 && code <= 90) {
+          result += String.fromCharCode(code + 32)
+        } else if (code >= 97 && code <= 122) {
+          result += String.fromCharCode(code - 32)
+        } else {
+          result += str[i]
+        }
+      }
+      return result
+    }
+    console.log(dds('HAa Ha BBbb'));
+    console.log('a'.charCodeAt());
+    function daxiaoxie(str) {
+      var result = ''
+      for (var i = 0; i < str.length; i++) {
+        var code = str[i].charCodeAt()//将字符str[i].charCodeAt()将字符str[i]转化为数字
+        if (code >= 65 && code <= 90) {
+          result += String.fromCharCode(code + 32)//将数字转化为字符
+        } else if (code >= 97 && code <= 122) {
+          result += String.fromCharCode(code - 32)//小写转大写要-32
+        } else {
+          result += str[i]
+        }
+      }
+      return result
+    }
+    console.log(daxiaoxie('HAa Ha BBbb'));
+    //Stirng.fromCharCode()根据字符编码返回字符
+    //str.charAt(i)根据索引返回字符
+    //str.charCodeAt(str[i])将字符串转化为字符编码或者写成str[i].charCodeAt()
+    //str.concat(b) 连接字符串 返回新的字符串
+    //concat对原字符没有影响
+    //str.indexOf()根据括号里的内容返回索引.
+    //如果没有找到指定的内容就返回-1
+    function county11(x, y) {//查找字符串x中y字符的个数
+      var index = x.indexOf(y)
+      var a = []
+      var nu = 0
+      while (index != -1) {
+        a.push(index)
+        nu++
+        index = x.indexOf(y, index + 1)
+      }
+      return nu
+    }
+    console.log(county11('abcodoboiogokonno', 'o'));
+    //lastIndexOf()从字符的后面往前查找
+    //slice ()截取字符串和数组(1,2)从索引1开始然后从索引2结束不包括结束位置
+    //slice(1,-1)表示截取到倒数第一个
+    //slice(1)只有一个参数表示从索引1开始往后全都截取
+    //str.substring()和slice()一样截取字符串包含开始索引但不包含结束索引 //不同点substirng()参数不接受负值
+    //如果为负值则默认为0
+    //substr()也是截取字符串不推荐
+    //join数组转化为字符串
+    //split()将字符串转化成数组
+    //str.toUpperCase()//将字符串改成大写
+    //str.toLowerCase()//将字符串转成小写
+    //小写的字符a-z 为97~122
+    //大写字符的编码为65~90
+    //toUpperCase()转大写
+    // var reg = new RegExp('')
+    function shoujihao(s) {//判断手机号是否符合规则
+      var reg = /^1[3-9][0-9]{9}$/
+      return reg.test(s)
+    }
+    console.log(shoujihao('18260575606'));//正则的方法 reg.test(s)判断括号里面的内容是否符合正则表达式reg 符合返回true
+    var sss = '         hel      lo          '
+    function dds(s) {
+      // var reg = /^\s*|\s*$/g
+      return s = s.replace(/^\s*|\s*$/g, '')
+
+    }
+    var sss = sss.replace(/^\s*|\s*$/g, '')
+    // console.log(sss);
+    console.log(dds(sss));
+    //var c=count
+    //var obj={}
+    //obj[c]=8
+  </script>
+
+</body>
+
+</html>

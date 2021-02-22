@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function power(x, n) {
+      if (x == 0) {
+        return 0
+      }
+      if (n == 0 && x != 0) {
+        return 1
+      }
+      if (n % 2 == 0) {
+        var t = power(x, n / 2)
+        return t * t
+      } else if (n % 2 == 1) {
+        var t = power(x, (n - 1) / 2)
+        return t * t * x
+      }
+
+    }
+    console.log(power(2, 3));
+    //f(x,y)=>Math.max(f(x,y+1),f(x+1,y+1))
+    var a = [
+      [2],//row,col
+      [1, 4],//row+1,col;row+1 ,col+1
+      [7, 4, 8],
+      [3, 6, 4, 9]
+
+    ]
+    //a[3][0]
+    function f(row, col) {//从左边,开始能收集到最大和
+      if (row == a.length - 1) {
+        return a[row][col]
+      }
+      return a[row][col] + Math.max(f(row + 1, col), f(row + 1, col + 1))
+    }
+    //上楼梯.一步可以上一级台阶或者走俩级台阶
+    // function find(currentposition, howIgetThisPosition)
+    // if (currentposition === howIgetThisPosition) {
+    //   console.log(howIgetThisPosition)
+    //   return
+    // }
+    // if (currentposition > howIgetThisPosition) {
+    //   return
+    //   find(currentposition + 1)
+    //   find(currentposition + 2)
+    // }
+    //     我们来定义一个函数 f(s)，其中传入参数 s 是一个非空字符串；该函数的功能是统计 s 中（按字典序比较）最小字母的出现频次。
+
+    // 例如，若 s = “dcce”，那么 f(s) = 2，因为最小的字母是 “c”，它出现了 2 次。
+
+    // 现在，给你两个字符串数组待查表 queries 和词汇表 words，请你返回一个整数数组 answer 作为答案，其中每个 answer[i] 是满足 f(queries[i]) < f(W) 的词的数目，W 是词汇表 words 中的词。
+
+    // 示例 1：
+
+    // 输入：queries = [“cbd”], words = [“zaaaz”]
+    // 输出：[1]
+    // 解释：查询 f(“cbd”) = 1，而 f(“zaaaz”) = 3 所以 f(“cbd”) < f(“zaaaz”)。
+    // 示例 2：
+
+    // 输入：queries = [“bbb”,“cc”], words = [“a”,“aa”,“aaa”,“aaaa”]
+    // 输出：[1,2]
+    // 解释：第一个查询 f(“bbb”) < f(“aaaa”)，第二个查询 f(“aaa”) 和 f(“aaaa”) 都 > f(“cc”)。
+
+    // 提示：
+
+    // 1 <= queries.length <= 2000
+    // 1 <= words.length <= 2000
+    // 1 <= queries[i].length, words[i].length <= 10
+    // queries[i][j], words[i][j] 都是小写英文字母
+    var numSmallerByFrequency = function (queries, words) {
+      function getTimes(str) {  //字符串取最小字符出现次数函数。。。
+        let times = 0;
+        let minChar = str[0];
+        for (let s of str) {
+          if (s < minChar) {
+            minChar = s;
+            times = 1;
+            continue;
+          }
+          if (s === minChar) {
+            times++;
+          }
+        }
+        return times;
+      }
+      let queriesTimesArr = queries.map(i => getTimes(i));  //对queries中的字符串元素逐一调用getTimes函数，并返回次数数组
+      let wordsTimesArr = words.map(i => getTimes(i));//同上
+      return queriesTimesArr.map(i => { //求第二个数组中的元素比第一个中每个元素大的个数，返回一个新数组
+        let num = 0;
+        wordsTimesArr.forEach(j => {
+          if (i < j) {
+            num++;
+          }
+        });
+        return num;
+      });
+    };
+
+
+
+  </script>
+
+</body>
+
+</html>

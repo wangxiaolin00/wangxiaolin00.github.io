@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul class="nav">
+    <li>阿飞</li>
+    <li>再不斩</li>
+    <li>佐助</li>
+    <li>卡卡西</li>
+  </ul>
+  <ol class="nnv">
+    <li>蛮子</li>
+    <li>卡特</li>
+    <li>提莫</li>
+    <li>石头</li>
+    <li>欢子</li>
+  </ol>
+  <script>
+    // function fun(val) {
+    //   console.log('ggs' + ' ' + val);
+    // }
+    // // setTimeout(fun('刘德华'), 6000)
+    // setInterval(fun('刘德华'), 3000)
+    //虚拟机提供的许多函数,由浏览器解析出来
+    //循环点击注册
+    var lis = document.querySelector('.nav').querySelectorAll('li')
+    for (var i = 0; i < lis.length; i++) {
+      // lis[i].index = i
+      // lis[i].onclick = function () {
+      //   console.log(this.index);
+      // }
+      (function (i) {
+        lis[i].onclick = function () {//利用for循环生成4个立即执行函数,立即执行函数形成闭包,点击之后就会执行,不点击不执行,这样会造成内存泄露
+          console.log(i);
+        }
+      })(i)
+    }
+    var list = document.querySelector('.nnv').querySelectorAll('li')
+    for (var i = 0; i < list.length; i++) {
+      // (function (i) {
+      //   setTimeout(function () {
+      //     console.log(list[i].innerHTML)
+      //   }, 3000)
+      // })(i)
+      // (function (i) {
+      //   setInterval(function () {
+      //     console.log(list[i].innerHTML)
+
+      //   }, 6000)
+      // })(i)
+    }
+    var a = {
+      x: 1, y: 2, z: 6, f() {
+        console.log(this);
+      }
+    }
+    with (a) {//可以调用对象a里面的属性
+      console.log(x + y * z);
+      f();//这个函数的调用的调用
+    }
+    function f() {
+      return this
+    }
+    f.call(2)//在非严格模式下返回一个对象2被Number包装成一个对象
+    'use strict'; function fx() {
+      return this
+    }
+    fx.call(2)//在严格模式下返回 2,不会返回被包装对象2
+    //在严格模式下,if语句里面不能有函数声明,但可以用函数赋值的方法,函数表达式
+
+    //有些es6语法
+
+  </script>
+  静态类型:所有变量及表达式的类型都是确定的(java,c,c++,typeScript)
+  动态类型:变量的类型不确定()
+  强类型:不会做自动类型转换的语言(python)
+  弱类型:会做自动类型转的语言(java,car,ts,js)
+
+  只要这个代码有可能运行成功,就是运行错误
+  无论如何都运行不成功的代码是语法错误
+  'use strict'在javascript标签后面加"use strict
+
+  winpty mocha.cmd js.test.js
+
+
+</body>
+
+</html>

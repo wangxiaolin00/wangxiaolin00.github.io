@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function mypow(x, n) {
+      if (x == 0) {
+        return 0
+      }
+      if (n == 0 && x != 0) {
+        return 1
+      }
+      if (n < 0) {
+        n = -n
+        x = 1 / x
+      }
+      if (n % 2 == 0) {
+        var t = mypow(x, n / 2)
+        return t * t
+      }
+      if (n % 2 == 1) {
+        var t = mypow(x, (n - 1) / 2)
+        return t * t * x
+      }
+    }
+    function isPrime(n) {
+      if (n == 1) {
+        return true
+      }
+      if (n == 2) {
+        return true
+      }
+      if (n % 2 == 0) {
+        return false
+      }
+      var s = Math.sqrt(n)
+      for (let i = 2; i < s; i++) {
+        if (n % i == 0) {
+          return false
+        }
+      }
+      return true
+    }
+    //数组的是连续的读取其中任意一项都很快;但是取出其中任意一项都很慢
+    //用箭头指向下个元素接着用箭头指向下个元素的指向关系成为拓扑结构
+    //链表是在js中是一个嵌套的对象
+    //rest剩余的
+    //数组的创建需要申请一段连续的内存空间;
+    //链表的优势:链表的内存不必是连续的空间;
+    //链表的每个元素由一个元素本身的节点和指向下一个元素的引用(有些语言称为指针)
+    //相对于数组链表的优势:
+    //内存的空间不必是连续的,可以充分利用计算机的内存;实现灵活的内存动态管理;
+    //链表不必再创建是就确定大小,并且可以无限的延伸下去
+    //链表在插入和删除数组的时候,时间复杂度达到O(1),相对于数组的效率高很多
+    //链表相对于数组的缺点:
+    //链表访问任何一个位置的元素的时候;都需要从头开始访问(无法跳过第一个元素访问任何一个元素)
+    //无法通过下班访问元素 ,需要从头开始一个个访问;知道访问到对应的元素
+    //当我们需要频繁插入元素的时候使用链表
+    //当我们需要通过下标值修改元素的时候使用数组
+    function arraytolist(ary) {//将数组转化为链表
+      if (ary.length == 0) {
+        return null
+      }
+      var nodes = []
+      for (var i = 0; i < ary.length; i++) {
+        var node = {
+          val: ary[i],
+          next: null,
+        }
+        nodes.push(node)
+      }
+      for (var i = 0; i < ary.length - 1; i++) {
+        nodes[i].next = nodes[i + 1]
+      }
+      return nodes[0]
+
+    }
+    function creatNode(val) {
+      return {
+        val: val,
+        next: null,
+      }
+    }
+    function arraylist2(ary) {//数组转化为链表的方法
+      var pre = null
+      for (var i = ary.length - 1; i >= 0; i--) {
+        var node = creatNode(ary[i])
+        node.next = pre
+        pre = node
+      }
+      return pre
+    }
+    function arrlist3(ary) {
+      var dummy = creatNode(0)
+      var prev = dummy
+      for (var i = 0; i < ary.length; i++) {
+        var node = creatNode(arr[i])
+        prev.next = node
+        prev = node
+      }
+      return dummy.next
+    }
+    function arraylist4(ary) {//递归方法
+      if (ary.length == 0) {
+        return null
+      }
+      var head = creatNode(ary[0])
+      head.next = arraylist4(ary.slice(1))
+      return head
+
+    }
+    //从数组的start的位置开始用后面的元素创建一个链表
+    function arrylist5(ary, start) {
+      if (start == ary.length == 0) {
+        return null
+      }
+      var head = creatNode(ary[start])
+      head.next = arraylist4(ary.slice(start + 1))
+      return head
+    }
+    function listarry(l) {//将链表转化为数组
+      var result = []
+      if (l == null) {
+        return []
+      }
+      while (l) {//l还指向节点的时候继续
+        result.push(l.val)
+        l = l.next
+      }
+      return result
+    }
+    //空间的复杂度:O(n)
+    //时间复杂度:O(n*n)
+    function listarry1(l) {//递归链表转数组
+      var result = [l.val]
+      if (l == null) {
+        return []
+      }
+      // result.push(l.val)
+      // l = l.next
+      var tailAry = listarry1(l.next)
+      tailAry.unshift(l.val)
+      return tailAry
+
+    }
+    function prepend(val, head) {
+      var node = creatNode(val)
+      node.next = head
+      return node
+    }
+    function append(val, head) {
+
+      var node = creatNode(val)
+      // var dummy = creatNode(0)
+      // dummy.next = head
+      // p=dummy
+      if (!head) {
+        return node
+      }
+      var p = head
+      while (p.next) {//p后面还有节点
+        p = p.next
+
+      }
+      p.next = node
+      return head
+    }
+    function append3(val, head) {
+      if (head == null) {
+        return creatNode(val)
+      }
+      if (head.next == null) {
+        head.next = creatNode(val)
+        return head.next
+      } else {
+        append3(val, head.next)
+        return head
+      }
+    }
+    function nth(l, idx) {//l是头节点;idx的索引
+      if (!l) {
+        return undefined
+      }
+      for (var i = 0; i < p.next && i < idx; i++) {
+        p = p.next
+        if (i == idx) {
+          return p.val
+        }
+      }
+
+    }
+    function nth1(l, idx) {//递归//l是链表头idx是索引 找链表中索引为idx的属性
+      if (l == null) {
+        return undefined
+      }
+      if (idx == 0) {
+        return l.val
+      }
+      return nth1(l.next, idx - 1)
+    }
+    //在链表的l中的l的idx位置插入
+    function nth3(l, val, idx) {
+      var node = creatNode(val)
+      if (head == null) {
+        return node
+      }
+      if (idx == 0) {
+        node.next = l
+        return node
+      }
+      var p = head
+      for (var i = 0; p.next && i < idx; i++) {
+        p = p.next
+      }
+      node.next = p.next//或缺p节点后面的对象
+      p.next = node//设置p节点的next的指向
+      return head
+
+
+    }
+    //delete 删除obj的属性的关键字
+    function del(head, idx) {
+      if (!head) {
+        return null
+      }
+      if (idx == 0) {
+        return head.next
+      }
+      var p = head
+      for (var i = 0; p.next && i < idx - 1; i++) {
+        p = p.next
+      }
+      if (i == idx - 1) {
+        p.next = p.next.next//让要删除的索引前的指针指向指向要删除的节点的后面的节点
+      }
+      return head
+    }
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    section {
+      height: 300px;
+      width: 400px;
+      margin: 50px auto;
+      border: 1px solid red;
+      position: relative;
+    }
+
+    div:nth-of-type(1) img {
+      object-fit: cover;
+      object-position: 0;
+
+    }
+
+    div:nth-of-type(2) img {
+      object-fit: cover;
+      object-position: -100px;
+    }
+
+    div:nth-of-type(3) img {
+      object-fit: cover;
+      object-position: -200px;
+    }
+
+    div:nth-of-type(4) img {
+      object-fit: cover;
+      object-position: -300px;
+    }
+
+    input[class^=dd] {
+      position: absolute;
+      z-index: 200;
+    }
+
+    .dd1 {
+      left: 160px;
+      bottom: 20px;
+
+    }
+
+    .dd2 {
+      left: 180px;
+      bottom: 20px;
+
+    }
+
+    .dd3 {
+      left: 200px;
+      bottom: 20px;
+    }
+
+    .dd4 {
+      left: 220px;
+      bottom: 20px;
+    }
+
+    div {
+      float: left;
+      position: relative;
+      height: 300px;
+      width: 100px;
+
+      margin: auto;
+      overflow: hidden;
+    }
+
+    @frames move {
+      0% {
+        left 0;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+    div img {
+      display: inline-block;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 100%;
+      top: 0;
+      bottom: 0;
+      transition: .6s;
+      animation-name: move;
+      animation-duration: 1s;
+    }
+
+    input:nth-child(1):checked~div img:nth-child(1),
+    input:nth-child(2):checked~div img:nth-child(2),
+    input:nth-child(3):checked~div img:nth-child(3),
+    input:nth-child(4):checked~div img:nth-child(4) {
+      left: 0;
+      z-index: 10;
+      animation: none;
+    }
+  </style>
+</head>
+
+
+<body>
+  <section>
+    <input class="dd1" type="radio" name="s1" value="1" checked>
+    <input class="dd2" type="radio" name="s1" value="2">
+    <input class="dd3" type="radio" name="s1" value="3">
+    <input class="dd4" type="radio" name="s1" value="4">
+    <div>
+      <img src="http://i1.073img.com/131108/4343693_153504_1.jpg" alt="">
+      <img src="http://2e.zol-img.com.cn/product/61_940x705/518/cel5Pr6WLGnZs.jpg" alt="">
+      <img src="https://tse1-mm.cn.bing.net/th/id/OIP.tPVR2K2O9b6CBv7KDZ3i5QHaEo?pid=Api&rs=1" alt="">
+      <img
+        src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/05/05/ChMkJ1XVcveIfqz4AAbOF7LtbFoAAAVOAOsYaUABs4v473.jpg"
+        alt="">
+    </div>
+    <div>
+      <img src="http://i1.073img.com/131108/4343693_153504_1.jpg" alt="">
+      <img src="http://2e.zol-img.com.cn/product/61_940x705/518/cel5Pr6WLGnZs.jpg" alt="">
+      <img src="https://tse1-mm.cn.bing.net/th/id/OIP.tPVR2K2O9b6CBv7KDZ3i5QHaEo?pid=Api&rs=1" alt="">
+      <img
+        src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/05/05/ChMkJ1XVcveIfqz4AAbOF7LtbFoAAAVOAOsYaUABs4v473.jpg"
+        alt="">
+    </div>
+    <div>
+      <img src="http://i1.073img.com/131108/4343693_153504_1.jpg" alt="">
+      <img src="http://2e.zol-img.com.cn/product/61_940x705/518/cel5Pr6WLGnZs.jpg" alt="">
+      <img src="https://tse1-mm.cn.bing.net/th/id/OIP.tPVR2K2O9b6CBv7KDZ3i5QHaEo?pid=Api&rs=1" alt="">
+      <img
+        src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/05/05/ChMkJ1XVcveIfqz4AAbOF7LtbFoAAAVOAOsYaUABs4v473.jpg"
+        alt="">
+    </div>
+    <div>
+      <img src="http://i1.073img.com/131108/4343693_153504_1.jpg" alt="">
+      <img src="http://2e.zol-img.com.cn/product/61_940x705/518/cel5Pr6WLGnZs.jpg" alt="">
+      <img src="https://tse1-mm.cn.bing.net/th/id/OIP.tPVR2K2O9b6CBv7KDZ3i5QHaEo?pid=Api&rs=1" alt="">
+      <img
+        src="https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/05/05/ChMkJ1XVcveIfqz4AAbOF7LtbFoAAAVOAOsYaUABs4v473.jpg"
+        alt="">
+    </div>
+  </section>
+</body>
+
+</html>

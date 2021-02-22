@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function buildTbable(items) {
+      var table = document.createElement('table')
+      if (items.length == 0) {
+        return table
+      }
+      var tr = document.createElement('tr')
+      for (let key in items[0]) {
+        var th = document.createElement('th')
+        th.appendChild(document.createElement(key))
+        tr.appendChild(th)
+      }
+      table.appendChild(tr)
+      var keys = Object.keys(items)
+      for (let item of items) {
+        let tr = document.createElement('tr')
+        table.appendChild(tr)
+        for (let key of keys) {
+          let val = item[key]
+          let td = document.createElement('td')
+          td.appendChild(document.createTextNode(val))
+          tr.appendChild(td)
+        }
+      }
+      return table
+
+
+    }
+    var bt = [
+      { name: '张三', geeder: 'asdfaf', secore: 90 }
+      , { name: '张三', geeder: 'asdfaf', secore: 90 }
+      , { name: '张三', geeder: 'asdfaf', secore: 90 }
+      , { name: '张三', geeder: 'asdfaf', secore: 90 }
+      , { name: '张三', geeder: 'asdfaf', secore: 90 }
+      , { name: '张三', geeder: 'asdfaf', secore: 90 }
+      , { name: '张三', geeder: 'asdfaf', secore: 90 }
+    ]
+    console.log(buildTbable(bt));
+
+  </script>
+
+</body>
+
+</html>

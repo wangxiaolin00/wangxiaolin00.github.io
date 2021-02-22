@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function fullqueue(str) {//获取一个字符串的所有排列放到一个数组里面
+      var res = []
+      if (str.length == 1) {
+        return [str]
+      } else if (str.length > 1) {
+        for (let i = 0; i < str.length; i++) {
+          let left = str[i]//取出一个字母
+          let next = str.slice(0, i) + str.slice(i + 1)//将其他字母取出
+          let nextqueue = fullqueue(next)//将剩下的字母全排列 递归
+          for (let j = 0; j < nextqueue.length; j++) {//将剩余字母全排列的组合起来
+            let temp = left + nextqueue[j]
+            res.push(temp)
+          }
+        }
+      }
+      return res
+    }
+    var ssp = 'abcefg'
+    console.log(fullqueue(ssp));
+  </script>
+
+</body>
+
+</html>

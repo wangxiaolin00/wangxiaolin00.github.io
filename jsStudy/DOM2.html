@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function cloneNode(node) {//实现深度克隆html元素
+      if (node.nodeType == document.TEXT_NODE) {//如果文本节点
+        return document.createTextNode(node.nodeValue)//以文本节点的内容创造文本节点返回
+      } else if (node.nodeType == document.ELEMENT_NODE) {//如果是元素节点
+        var copy = document.createElement(node.tagName)//用节点的标签名创建一个节点
+        var attrNames = node.getAttributeNames()//获得元素的属性名集合
+        for (var attrName of attrNames) {//遍历属性名集合
+          var attrVal = node.getAttribute(attrName)//根据属性名拿到属性的值
+          copy.setAttribute(attrName, attrVal)//给新的元素节点设置 (属性名,属性值)
+        }
+        for (var child of node.childNodes) {//遍历元素的所有子节点
+          copy.appendChild(cloneNode(child))//将所有字节克隆之后加入到新节点
+        }
+        return copy
+      }
+    }
+    function elt(tagName, attrs, ...children) {
+      var copy = document.createElement(tagName)
+      for (let i in attrs) {
+        copy.setAttribute(i, attrs[i])
+      }
+      for (let child of children) {
+        if (typeof c === 'string') {
+          c = document.createTextNode(c)
+        }
+        copy.appendChild(child)
+      }
+      return copy
+    }
+    function normalize(node) {//合并所有文本标签
+      var s = ''
+      var nodes = Array.from(node.childNodes)
+
+      for (var i = 0; i < nodes.length; i++) {
+        var child = nodes[i]
+        if (child.nodeType == document.ELEMENT_NODE) {//遍历到元素节点
+          node.insertBefore(document.createTextNode(s), child)//在child的节点之前插入
+          s = ''
+          normalize(child)
+        } else if (child.nodeType == document.TEXT_NODE) {
+          s += child.nodeValue
+          node.removeChild(child)
+        }
+      }
+
+      node.appendChild(document.createTextNode(s))
+      return node
+    }
+    function getTextContent(node) {//实现textContent
+      var result = ''
+      for (var i = 0; i < node.childNodes.length; i++) {
+        var child = node.childNodes[i]
+        if (child.nodeType == document.TEXT_NODE) {
+          result += child.nodeValue
+        } else if (child.nodeType == document.ELEMENT_NODE) {
+          result += getTextContent(child)
+        }
+      }
+      return result
+    }
+
+    function getOuterHTML(node) {
+      if (node.nodeType == document.TEXT_NODE) {
+        return node.nodeValue
+      } else if (node.nodeType == document.ELEMENT_NODE) {
+        var result = `<${node.tagName.toLowerCase(0)}`
+        var attrNames = node.getAttributeNames()
+        if (attrNames.length == 0) {
+          result += '>'
+        } else {
+          result += ' ' + node.getAttributeNames().map(name => name + '="' + node.getAttribute(name) + '"').join(' ') + '>'
+        }
+        result += Array.from(node.childNodes).map(getOuterHTML).join('')
+        result += `</${node.tagName.toLowerCase(0)}>`
+        return result
+      }
+    }
+
+
+  </script>
+  <script>
+    //递归下降法实现解析器
+    function parse(str) {//实现JSON.parse
+      var i = 0
+
+      function parseVal() {
+        var char = str[i]
+        if (char == '[') {
+          return parseArray()
+        }
+        if (char == '{') {
+          return parseObject()
+
+        }
+        if (char == '"') {
+          return parseString()
+        }
+        if (char == 't') {
+          return parseTrue()
+        }
+        if (char == 'f') {
+          return parseFalse()
+        }
+        if (char == 'n') {
+          return parseNull()
+        }
+        return parseNumber()
+
+      }
+
+    }
+    function parseArray() {
+      var res = []
+      i++
+      while (str[i] != ']') {
+        if (str[i] == ',') {
+          i++
+        }
+        var value = parseValue()
+        res.push(value)
+      }
+      i++
+      return res
+
+    }
+    function parseObject() {
+
+      var res = {}
+      i++
+      while (str[i] != '}') {
+        if (str[i] == ',') {
+          i++
+        }
+        var key = parseString()
+        var value = parseVal()
+        res[key] = value
+
+      }
+      i++
+      return res
+    }
+    function parseString() {
+      var res = ''
+      i++;
+      while (str[i] !== '"') {
+        res += str[i++]
+
+      }
+      i++
+      return res
+    }
+    function parseTrue() {
+      i += 4
+      return true
+    }
+    function parseFalse() {
+      i += 5
+      return false
+    }
+    function parseNull() {
+      i += 4
+      return null
+    }
+    function parseNumber() {
+      var numStr = ""
+      while (/[\de+-.]/.test(str[i])) {
+        numStr += str[i++]
+
+      }
+      return parseFloat(numStr)
+    }
+
+
+
+
+    var obj = parse('{"a":1,"b":2}')
+    function parseExpression(str) {
+      var i = 0
+      function parse1() {
+        if (str[i] == 't') {
+          return true
+        }
+        if (str[i] == 'f') {
+          return false
+        }
+        var node = {
+          name: str[i],
+          args: []
+        }
+        i += 2
+        while (str != ')') {
+          var temp = parse1()
+          node.args.push(temp)
+          if (str[i] == ',') {
+            i++
+          }
+
+        }
+      }
+    }
+
+  </script>
+
+
+</body>
+
+</html>

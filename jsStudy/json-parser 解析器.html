@@ -1,0 +1,211 @@
+<script>
+
+  // 递归下降法实现解析器
+
+  function parse(str) {
+    var i = 0
+
+    return parseValue()
+
+    function parseValue() {
+      var char = str[i]
+      if (char == '[') {
+        return parseArray()
+      }
+      if (char == '{') {
+        return parseObject()
+      }
+      if (char == '"') {
+        return parseString()
+      }
+      if (char == 't') {
+        return parseTrue()
+      }
+      if (char == 'f') {
+        return parseFalse()
+      }
+      if (char == 'n') {
+        return parseNull()
+      }
+      return parseNumber()
+    }
+
+    function parseArray() {
+      var result = []
+      i++ // skip [
+      while (str[i] != ']') {
+        if (str[i] == ',') {
+          i++ // skip ,
+        }
+        var value = parseValue() // parse a value from i
+        result.push(value)
+      }
+      i++ // skip ']'
+      return result
+    }
+
+    function parseObject() {
+      var result = {}
+      i++ // skip '{'
+      while (str[i] != '}') {
+        if (str[i] == ',') {
+          i++ // skip ,
+        }
+        var key = parseString()
+        i++ // skip ':'
+        var value = parseValue()
+        result[key] = value
+      }
+      i++ // skip '}'
+      return result
+    }
+
+    function parseString() {
+      var result = ''
+      i++ // skip first "
+      while (str[i] !== '"') {
+        result += str[i++]
+      }
+      i++ // skip second "
+      return result
+    }
+
+    function parseTrue() {
+      i += 4
+      return true
+    }
+    function parseFalse() {
+      i += 5
+      return false
+    }
+    function parseNull() {
+      i += 4
+      return null
+    }
+
+    function parseNumber() {
+      var numStr = ''
+      while (/[\de+\-.]/.test(str[i])) {
+        numStr += str[i++]
+      }
+      return parseFloat(numStr)
+    }
+
+    function isNumberChar(char) {
+
+    }
+  }
+
+  var obj = parse('{"a":null,"b":2}')
+
+
+
+  function parseExpression(str) {//|(t,&(f,f,!(f),t))
+    var i = 0
+
+    return parse1()
+
+    function parse1() {
+      if (str[i] == 't') {
+        i++
+        return {
+          type: 'Literal',
+          value: true,
+          raw: 't',
+        }
+      }
+      if (str[i] == 'f') {
+        i++
+        return {
+          type: 'Literal',
+          value: false,
+          raw: 'f',
+        }
+      }
+      var node = {
+        type: 'FunctionCall',
+        name: str[i],
+        args: [],
+      }
+      i += 2
+      while (str[i] !== ')') {
+        var tmp = parse1()
+        node.args.push(tmp)
+        if (str[i] == ',') {
+          i++
+        }
+      }
+      i++
+      return node
+    }
+  }
+
+  //把node转换为js风格的调用，&转为and函数，t转为true，，，
+  function transpile(node) {
+    if (node.type == 'FunctionCall') {
+      if (node.name == '&') {
+        return 'and(' + node.args.map(transpile).join() + ')'
+      }
+      if (node.name == '|') {
+        return 'or(' + node.args.map(transpile).join() + ')'
+      }
+      if (node.name == '!') {
+        return 'not(' + node.args.map(transpile).join() + ')'
+      }
+    }
+    if (node.type == 'Literal') {
+      return node.value + ''
+    }
+  }
+
+  // &(t,f)  ->   (true) && (false)
+  function transpile2(node) {
+    if (node.type == 'Literal') {
+      return node.value + ''
+    }
+    if (node.type == 'FunctionCall') {
+      if (node.name == '&') {
+        return node.args.map(transpile2).map(it => '(' + it + ')').join(' && ')
+      }
+      if (node.name == '|') {
+        return node.args.map(transpile2).map(it => '(' + it + ')').join(' || ')
+      }
+      if (node.name == '!') {
+        return '!' + node.args.map(transpile2).map(it => '(' + it + ')')[0]
+      }
+    }
+  }
+
+  function execute(node) {
+    if (node.type == 'Literal') {
+      return node.value
+    }
+    if (node.type == 'FunctionCall') {
+      switch (node.name) {
+        case '&':
+          return node.args.map(execute).reduce((a, b) => a && b)
+        case '|':
+          return node.args.map(execute).reduce((a, b) => a || b)
+        case '!':
+          return !execute(node.args[0])
+      }
+    }
+  }
+</script>
+
+|(t,&(f,f,!(f),t))
+
+
+|(t,&(f,f))
+{
+functionName: '|',
+arguments: [true, {functionName: '&', args: [false, false]}]
+}
+
+[]
+{}
+""
+true
+false
+null
+2323423

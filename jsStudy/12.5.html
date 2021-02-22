@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- <div id="time" class="bigbox">dadadada</div>
+  <script>
+    var time = document.getElementById('time')
+    var times = document.querySelector('bigclass')
+    console.log(typeof times == "object");
+    console.log(typeof time);
+
+  </script> -->
+  <ul class="ul1" id="liebiao">
+    <li>知否知否应是绿肥红瘦</li>
+    <li>知否知否应是绿肥红瘦</li>
+    <li>知否知否应是绿肥红瘦</li>
+    <li>知否知否应是绿肥红瘦</li>
+    <li>知否知否应是绿肥红瘦</li>
+  </ul>
+  <script>
+    //使用getElemtByTagName()方法可以返回带有指定标签的对象的集合
+    var dd = document.getElementsByTagName('li')
+    console.log(dd);
+    //getElementByTagName('li')
+    //返回值是获取过来的对象的结合以伪数组的形式存储
+    //2如果我们想要一次打印里面元素的对象我们可以采取遍历的方式
+    for (let i = 0; i < dd.length; i++) {
+      console.log(dd[i]);
+    }
+    //3 如果页面中只要一个li 返回的还是伪数组的形式
+    //4 如果页面中没有这个元素返回是空的伪数组
+    //document.getElementsByTagName('li')会把页面中所有的li标签获取过来以伪数组的形式保存
+    var ss = document.getElementById('liebiao')
+    var ddd = ss.getElementsByTagName('li')
+    for (let i = 0; i < ddd.length; i++) {
+      console.log(ddd[i]);
+    }
+    //document.getElementsByClassName('')//获取的是类名组成的集合
+    //document.getElementsByClassName('')获取的是标签名组成的集合\
+    //ie678不支持html5
+    //ie9以上版本才支持//document.getElementsByClassName('')获取的是标签名组成的集合\
+    // document.querySelector('.box')
+    //querySelector 返回的指定选择器的第一个元素
+    //querySelector()里面的字符串 类选择器要加点 id选择器要加# html标签直接加标签
+    //document.querySelectorAll('')//会选中所有的元素
+    //querySelector 和getElementsByClassName()只支持ie9以上游览器;不支持ie678
+    //querySelector()//返回指定选择器的所有对象的集合以伪数组的形式存储
+     //获取body元素
+     //document.body
+     //获取html标签
+     //document.documentElement
+     //事件是可以被js侦测到的行为.事件是触发响应的一种机制
+
+  </script>
+  <button class="btn">唐伯虎</button>
+  <script>
+    //点击一个按钮,弹出一个对话框
+    //1事件是由三个部分组成 事件源头 事件类型  事件处理程序
+    //事件三要素 :1事件源头 事件类型 事件处理程序
+    // 事件源:事件被触发的对象  谁 按钮
+    var btn = document.querySelector('.btn')
+    //事件类型 如何触发 什么事件 比如鼠标点击 (onclick)还是鼠标经过 还是键盘拿下
+    //事件处理程序  通过一个函数赋值的方式来完成
+    btn.onclick = function () {
+      alert('点秋香')
+    }
+    //执行事件的步骤
+    //1获取事件源
+    //2绑定事件 注册事件 
+    //3添加事件处理程序(采取函数赋值的形式)
+    //常见的鼠标事件
+    //1 onclick 鼠标点击
+    //2.onmouseover 鼠标经过
+    //3.onmouseout 鼠标离开
+    //4 onfocus获取鼠标焦点触发
+    //5.onblur 是去鼠标焦点触发
+    //6.onmousemove 鼠标移动触发
+    //7.onmouseup 鼠标弹起触发
+    //8.onmousedown 鼠标按下触发
+    var addBinary = function (a, b) {
+      while (a.length < b.length) {
+        a = '0' + a
+      }
+      while (a.length > b.length) {
+        b = '0' + b
+      }
+      var sum = 0
+      var carry = 0
+      var res = new Array(a.length)
+      for (var i = 0; i < a.length - 1; i++) {
+        sum = Number(a[i]) + Number(b[i]) + carry
+        if (sum >= 2) {
+          res[i] = sum - 2
+          carry = 1
+        } else {
+          res[i] = sum
+          carry = 0
+        }
+
+      }
+      if (carry) {
+        res.unshift(1)
+      }
+      return res.join('')
+    };
+    console.log(addBinary('11', '1'));
+  </script>
+
+</body>
+
+</html>

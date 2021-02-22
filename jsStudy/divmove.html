@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1,
+    .box2,
+    .box3,
+    .box4,
+    .box5 {
+      position: fixed;
+      height: 50px;
+      width: 50px;
+      background-color: red;
+      border-radius: 25px;
+      transform: translate(-50%);
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      var div1 = document.querySelector('.box1')
+      var div2 = document.querySelector('.box2')
+      var div3 = document.querySelector('.box3')
+      var div4 = document.querySelector('.box4')
+      var div5 = document.querySelector('.box5')
+      document.addEventListener('mousemove', function an(time) {
+
+
+      })
+      document.onmousemove = function (e) {
+        var sl = document.documentElement.scrollLeft
+        var st = document.documentElement.scrollTop
+        var x = e.clientX
+        var y = e.clientY
+        div1.style.left = x + sl + 'px'
+        div1.style.top = y + st + 'px'
+        div2.style.left = x + sl + 45 + 'px'
+        div2.style.top = y + st + 45 + 'px'
+        div3.style.left = x + sl + 90 + 'px'
+        div3.style.top = y + st + 90 + 'px'
+        div4.style.left = x + sl + 135 + 'px'
+        div4.style.top = y + st + 135 + 'px'
+        div5.style.left = x + sl + 200 + 'px'
+        div5.style.top = y + st + 200 + 'px'
+
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div class="box1"></div>
+  <div class="box2"></div>
+  <div class="box3"></div>
+  <div class="box4"></div>
+  <div class="box5"></div>
+
+
+</body>
+
+</html>

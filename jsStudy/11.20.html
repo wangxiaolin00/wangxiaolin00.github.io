@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function jir(n) {
+      return n > 1 ? n * jir(n - 1) : 1;
+
+    }
+    console.log(jir(7));
+    function sn(n) {
+      if (n == 1) {
+        return n
+      } else {
+        return n + sn(n - 1)
+      }
+    }
+    console.log(sn(100));
+    function isPrime(n) {
+      if (n = 1) {
+        return false
+      } else if (n == 2) {
+        return true
+      } else if (n % 2 == 0) {
+        return true
+      }
+      var ss = Math.sqrt(n)
+      for (let i = 3; i <= ss; i++) {
+        if (n % i == 0) {
+          return false
+        }
+      }
+      return true
+    }
+    function adddigits(n) {
+      if (n < 0) {
+        return n
+      }
+      var sum = 0
+      while (n > 0) {
+        var digit = n % 10
+        sum += digit
+        n = (n - digit) / 10
+      }
+      if (sum < 10) {
+        return sum
+      } else {
+        return adddigits(sum)
+      }
+    }
+    console.log(adddigits(38));
+    function happynumber(n) {//快乐数
+      var sum = 0
+      while (n > 0) {
+        var digit = n % 10
+        sum += digit * digit
+        n = (n - digit) / 10
+      }
+      if (sum == 1 || sum == 4) {
+        return false
+      } else {
+        return happynumber(sum)
+      }
+    }
+    function power(x, n) {//求x的n次方
+      if (n == 0) {
+        return 1
+      } else if (x == 0) {
+        return 0
+      } else if (n % 2 == 0) {//even
+        var t = power(x, n / 2)//n/2等于n>>1
+        return t * t
+      } else if (n % 2 == 1) {//odd奇数
+        var t = power(x, (n - 1) / 2)
+        return t * t * x
+      }
+    }
+    console.log(power(2, 3));
+    //斐波那契数列
+    // function feibo(n) {
+    //   var a = [0, 1, 1, 2, 3, 5, 8]
+    //   if (a[n] > 0) {
+    //     return a[n]
+    //   }
+    //   if (n < 3) {
+    //     return 1
+    //   }
+    //   var value = feibo(n - 1) + feibo(n - 2)
+    //   a[n] = value
+    //   return value
+    // }
+    //菲波那切数列
+    function jj(n) {
+      var a = 0
+      var b = 1
+      var sum = 0
+
+      for (var i = 1; i < n; i++) {
+        c = a + b
+        sum = c
+        a = b
+        b = c
+      }
+      return sum
+
+    }
+    //任何数&1的结果都是1 除了这个数是0
+    //任何数&0的结果都是0
+    //任何数右移一位相当于把这个数除以2
+    //~n= -(n+1)
+    var a = '11'
+    var s = parseInt(a, 2)
+    console.log(s);
+    //js其他进制转十进制parseInt(x,2)  parseInt(x,8)   parseInt(x,16)
+    //十进制转其他进制   toString()
+    //用函数的方式形式调用时, this指向的是Window
+    //用方法的形式调用,this指向的是对象
+
+  </script>
+</body>
+
+</html>

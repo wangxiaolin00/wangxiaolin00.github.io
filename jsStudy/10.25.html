@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .bo {
+      height: 300px;
+      width: 300px;
+      margin: 20px auto;
+      position: relative;
+    }
+
+    .bo li {
+      float: left;
+      height: 100px;
+      width: 100px;
+      box-sizing: border-box;
+      border: 5px solid blue;
+      margin-top: -5px;
+      margin-left: -5px;
+      position: relative;
+      line-height: 100px;
+      text-align: center;
+    }
+
+    .bo li:hover {
+
+      border-color: red;
+      z-index: 10;
+    }
+
+    .gf {
+
+      width: 300px;
+      height: 300px;
+      display: flex;
+      margin: 20px auto;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: flex-start;
+
+
+    }
+
+    .gf li {
+      height: 100px;
+      width: 100px;
+      box-sizing: border-box;
+      border: 5px solid blue;
+      margin-top: -5px;
+      margin-left: -5px;
+      line-height: 100px;
+      text-align: center;
+
+    }
+
+    .gf li:hover {
+      position: relative;
+      border-color: red;
+    }
+
+    table {
+      height: 300px;
+      width: 300px;
+      border-collapse: collapse;
+      margin: 20px auto;
+      box-sizing: border-box;
+    }
+
+    table tr td {
+      height: 100px;
+      width: 100px;
+      box-sizing: border-box;
+      border: 5px solid red;
+      line-height: 100px;
+      text-align: center;
+
+
+    }
+
+    table tr td:hover {
+      border-color: blue;
+      position: absolute;
+      margin-top: -5px;
+      margin-left: -5px;
+      width: 95px;
+      height: 100px;
+      box-sizing: content-box;
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="bo">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+  </ul>
+  <ul class="gf">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+  </ul>
+  <table>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+    </tr>
+  </table>
+
+
+</body>
+
+</html>

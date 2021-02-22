@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: 2px solid #f0f;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="1000" height="1000"></canvas>
+
+</body>
+<script>
+  var canvas = document.querySelector('canvas')
+  canvas.style.imageRendering = 'pixelated'
+  var ctx = canvas.getContext('2d')
+
+  function dot(x, y, color = 'black') {
+    x = x | 0
+    y = y | 0
+    ctx.fillStyle = color
+    ctx.fillRect(x, y, 1, 1)
+  }
+
+  function line(x1, y1, x2, y2) {
+    ctx.strokeStyle = 'black'
+    ctx.moveTo(x1, y1)
+    ctx.lineTo(x2, y2)
+    ctx.stroke()
+  }
+
+</script>
+<script src="lena.js"></script>
+<script>
+  for (var i = 0; i < lena.length; i++) {
+    for (var j = 0; j < lena[0].length; j++) {
+      var point = lena[j][i]
+      var r = point[0]
+      var g = point[1]
+      var b = point[2]
+      dot(x, y, 'rgb(' + r + ',' + g + ',' + b + ')')
+    }
+  }
+  //   * 用 `sigma(s,e,f)` 函数表示函数 `f(x)` 在 `x` 从 `s` 到 `e` 范围的和：
+  //         * 即如果 `f(x) = x*x` ，则 `sigma(1,10,f)` 将得到 1 到 10 的平方和
+  //     * 用 `factorial(x)` 表示 `x` 的阶乘
+  //     * 用 `pow(x,y)` 表示 `x` 的 `y` 次方
+  //     * 用 `division(x,y)` 表示 `x` 除以 `y`（`x/y`）
+  //     * 用 `add(x,y)` 表示 `x` 加 `y`
+  //     * 用 `mul(x,y)` 表示 `x` 乘以 `y`
+
+  //     例如等差数列前 n 项和的公式可以表达为如下形式 `division(mul(n,add(n,1)),2)`
+
+
+  // 作业：把此题目用代码实现。提示：高阶函数。
+  function f(x) {
+    return x * x
+  }
+  function sigma(s, e, f) {
+    var sum = 0
+    for (var i = s; i < e; i++) {
+      sum += f(x)
+    }
+    return sum
+  }
+  function jiecheng(n) {
+    return n > 1 ? n * jiecheng(n - 1) : 1;
+  }
+
+  function dd(n) {
+    return (-1) ** n / jiecheng(2 * n + 1)
+  }
+  function sin(x) {
+    return sigma(1, 100, n => Math.pow(-1, n) * Math.pow(x, 2 * n + 1) / jiecheng(2 * n + 1))
+  }
+  //泰勒公式Math.pow(-1, n) * Math.pow(x, 2 * n + 1) / jiecheng(2 * n + 1)
+</script>
+
+
+</html>

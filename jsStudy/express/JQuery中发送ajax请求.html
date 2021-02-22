@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jquery中发送ajax请求</title>
+  <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+    .box {
+      width: 300px;
+      height: 200px;
+      border: 1px solid blue;
+      box-shadow: 10px 10px 10px 10px cyan;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>jquery</h2>
+  <button class="btn">GET</button>
+  <button class="btn1">POST</button>
+  <button class="btn2">通用型ajax方法</button>
+  <div class="box"></div>
+  <script>
+    /*$.get(url,[data],[callback],[type])
+     url:请求的url地址
+     data:请求携带的参数
+     callback:载入成功时的回调函数
+     type:设置返回内容格式:xml,html,scriprt,json
+
+     $.post(url,[dat],[callback],[type])
+     url:请求的url地址
+     data:请求携带的参数
+     callback;载入成功时回调函数
+     
+    */
+    $('.btn').click(function () {
+      $.get('http://127.0.0.1:8001/jquery-server', { a: 100, b: 200 }, function (data) {//第三个参数是回调函数 里面data 表示响应体
+        let div = document.createElement('div')
+        div.style.color = 'red'
+        div.innerHTML = data.name
+        $('.box').append(div)
+      }, 'json')
+    })
+    $('button').eq(1).click(function () {
+      $.post('http://127.0.0.1:8001/jquery-server', { a: 100, b: 200 }, function (data) {
+        console.log(data);
+      }, 'json')
+    })
+    $('button').eq(2).click(function () {
+      $.ajax({
+        //请求方法
+        type: 'GET',
+        //url
+        url: 'http://127.0.0.1:8001/jquery-server',
+        data: { a: 100, b: 200 },
+        dataType: 'json',
+        //成功的回调
+        success: function (data) {
+          console.log(data);
+        },
+        //超时时间
+        timeout: 2000,
+        //失败的回调
+        error: function () {
+          console.log('出错啦!!');
+        },
+        headers: {
+          c: 400,
+          d: 500
+        }
+
+      })
+    })
+  </script>
+
+</body>
+
+</html>

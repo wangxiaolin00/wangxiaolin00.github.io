@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+
+    table td {
+      border: 1px solid black;
+      line-height: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    #employTable {
+      border: 1px solid black;
+      margin: 50px auto;
+    }
+
+    #formDiv {
+      text-align: center;
+      margin: auto;
+    }
+
+    #formDiv table {
+      border: 1px solid black;
+      margin: auto;
+    }
+  </style>
+  <script>
+    function deleteA() {//将相同的操作封装成函数提取出来
+      //功能 点击超链接删除所在行
+      var tr = this.parentNode.parentNode//这里的this解决异步操作问题
+      var deletefirst = tr.getElementsByTagName('td')[0]
+      var flag = confirm(`你确定删除${deletefirst.innerHTML}吗`)//confirm()用于弹出一个带有提示拍断的提示框,确定返回ture
+      if (flag) {
+        tr.parentNode.removeChild(tr)
+
+      }
+
+      /*点击超接接,超链接会跳转页面,这个是超链接的默认行为
+       *  但是我们不希望出现默认行为 可以通过响应函数的最后加 return false
+       *  或者改变 a表标签的herf 属性改为 "javacript:;"
+       */
+      return false
+    }
+    window.onload = function () {
+      /*
+       * 点击超链接删除那一行的的整体内容
+       */
+      //先获取页面中所有的超链接 a
+      var alla = document.getElementsByTagName('a')//返回的是类数组对象
+      for (var i = 0; i < alla.length; i++) {//for循环是页面加载时立即执行
+        alla[i].onclick = deleteA//响应函数的是点击的时候才执行
+      }
+      /*
+       * 需求:点击按钮将员工信心添加到表格中
+       */
+      var btn = document.querySelector("#addEmpButton")
+      btn.onclick = function () {
+        //先获取员工的信息
+        var name = document.querySelector('#empName').value
+        var email = document.querySelector('#email').value
+        var salary = document.querySelector('#salary').value
+        var table = document.querySelector('#employTable')
+        var tbody = table.getElementsByTagName('tbody')[0]
+        var tr = document.createElement('tr')
+        tr.innerHTML = `<td>${name}</td>
+                        <td>${email}</td>
+                        <td>${salary}</td>
+                        <td><a href="javascript:;">Delete</a></td>`;
+        var a = tr.getElementsByTagName('a')[0];
+        a.onclick = deleteA
+        tbody.appendChild(tr)
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <table id="employTable">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Salary</th>
+      <th>&bsp</th>
+    </tr>
+    <tr>
+      <td>Tom</td>
+      <td>tom@tom.com</td>
+      <td>5000</td>
+      <td><a href="javascript:;">Delete</a></td>
+    </tr>
+    <tr>
+      <td>Jerry</td>
+      <td>jerry@sohu.com</td>
+      <td>8000</td>
+      <td><a href="javascript:;">Delete</a></td>
+    </tr>
+    <tr>
+      <td>Jquery</td>
+      <td>Jquery@qq.com</td>
+      <td>12000</td>
+      <td><a href="javascript:;">Delete</a></td>
+    </tr>
+  </table>
+  <div id="formDiv">
+    <h4>添加员工</h4>
+    <table>
+      <tr>
+        <td class="word">Name:</td>
+        <td class="inp">
+          <input type="text" name="empName" id="empName">
+        </td>
+      </tr>
+      <tr>
+        <td class="word">email:</td>
+        <td class="inp">
+          <input type="text" name="email" id="email">
+        </td>
+      </tr>
+      <tr>
+        <td class="word">salary:</td>
+        <td class="inp">
+          <input type="text" name="salary" id="salary">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <button id="addEmpButton" value="abc">Sumbit</button>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+
+</body>
+
+</html>

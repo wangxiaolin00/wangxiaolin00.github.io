@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //判断 字符串b 是不是a的子序列
+    function iszixu(a, b) {
+      if (a.indexOf(b) != -1) {
+        return true
+      }
+      var i = 0, j = 0;
+      while (i < a.length) {
+        if (a[i] === b[j]) {
+          j++
+          if (j == b.length) {
+            return true
+          }
+        }
+        i++
+      }
+      return false
+
+    }
+    console.log(iszixu('aabbdc', 'abda'));
+    var s = ['bcb', 'fdff', 'fgdgsd', 'fdsasadfg', 'as']
+    // s.sort((a, b) => (b.length - a.length))
+    // s.sort((a, b) => {
+    //   return b.length - a.length
+    // })
+
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //求'abcofoxyozzopp'中'o出现的次数以及位置
+    // var str = 'abcofoxyozzopp';
+    // var index = str.indexOf('o')
+    // while (index !== -1) {
+    //   console.log(index);
+    //   index = str.indexOf('o', index + 1)
+    // }
+    //根据位置返回字符
+    //charAt(index) 根据索引位置返回字符
+    //根据索引返回字符的ascii码  
+    //charCodeAt(index)返回相应的字符的ASCII码
+    //3.H5新增的 str[i]
+
+
+    //统计字符串中出现次数最多的次数
+    //1: 核心算法利用charAt()遍历这个字符串
+    //2 把每一个字符储存给对象,如果对象中没有该对象,就赋值为如果存在就+1
+    // var str = 'abcoefoxyzzopp';
+    // var o = {};
+    // for (var i = 0; i < str.length; i++) {
+    //   var s = str.charAt(i)
+    //   if (o[s]) {
+    //     o[s]++
+    //   } else {
+    //     o[s] = 1
+    //   }
+    // }
+    // console.log(o);
+    // var max = 0
+    // var spp = ''
+    // for (var k in o) {
+    //   //k得到是属性名
+    //   //o[k]得到是属性值
+    //   if (o[k] > max) {
+    //     max = o[k]
+    //     spp = k
+    //   }
+    // }
+    // console.log(max);
+    // console.log(spp);
+    //统计字符串中出现字符最多的字符
+    var str = 'aobcoefoxyzzopop';
+    var o = {}
+    for (var i = 0; i < str.length; i++) {
+      var s = str.charAt(i)
+      if (o[s]) {//对象o里面有没有s这个在字符串里面的字符有的话就把这个属性的属性值加1
+        o[s]++
+      } else {//没有的话把1赋值给他
+        o[s] = 1
+      }
+    }
+    var max = 0;
+    var nu = 0;
+    for (var k in o) {//for in 遍历对象 
+      if (o[k] > max) {//遍历对象之后k的返回值是对象的属性名
+        max = o[k]//k返回值为属性的属性值
+        nu = k
+      }
+    }
+    console.log('字符串中出现最多的是:' + nu, '次数为:' + max);
+    //str.slice(0,-1)删除字符串str的最后一个字符
+
+
+
+  </script>
+
+</body>
+
+</html>

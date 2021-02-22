@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // var oddCells = function (n, m, indices) {
+    //   var dd = Array.from({ length: n }, x => Array.from({ length: n }, y => 0))
+    //   dd[indices[0][0]].map(x => x + 1)
+    //   dd[indices[1][0]].map(x => x + 1)
+    //   for (var i = 0; i < n; i++) {
+    //     dd[i][indices[0][1]] = dd[i][indices[0][1]] + 1
+    //   }
+    //   for (var j = 0; j < n; j++) {
+    //     dd[j][indices[1][1]] = dd[j][indices[1][1]] + 1
+    //   }
+    //   var nu = 0
+    //   for (var i = 0; i < dd.length; i++) {
+    //     for (var j = 0; j < dd[0].length; j++) {
+    //       if (dd[i][j] % 2 == 1) {
+    //         nu++
+    //       }
+    //     }
+    //   }
+    //   return nu
+
+    // };
+    // console.log(oddCells(2, 3.[[0, 1], [1, 1]]));
+    var str = ''
+    for (var i = 0; i <= 5; i++) {
+      for (var j = 0; j <= i; j++) {
+        str += '★'
+      }
+      str += '\n'
+    }
+    console.log(str);
+
+    var intersect = function (nums1, nums2) {
+      var o = {}
+      var a = []
+      for (let k of nums1) {
+        if (o[k]) {
+          o[k]++
+        } else {
+          o[k] == 1
+        }
+      }
+      for (let i of nums2) {
+
+        if (o[i]) {
+          a.push(i)
+
+        }
+      }
+      return a
+    };
+    console.log(intersect([1, 2, 2, 1], [2, 2]));
+  </script>
+
+</body>
+
+</html>

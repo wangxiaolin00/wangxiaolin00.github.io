@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>画图</title>
+  <style>
+    canvas {
+      border: 2px solid #f0f;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="400" height="300"></canvas>
+</body>
+<script>
+  var canvas = document.querySelector('canvas')
+  canvas.style.imageRendering = 'pixelated'
+  var ctx = canvas.getContext('2d')
+
+  function dot(x, y, color = 'black') {
+    x = x | 0
+    y = y | 0
+    ctx.fillStyle = color
+    ctx.fillRect(x, y, 1, 1)
+  }
+
+  function line(x1, y1, x2, y2) {
+    ctx.strokeStyle = 'black'
+    ctx.moveTo(x1, y1)
+    ctx.lineTo(x2, y2)
+    ctx.stroke()
+  }
+  /**
+   * YOUR TASK
+画图的题：
+画一条实线
+画一条一个实点一个空点的虚线
+画一条两个实点两个空点的虚线
+画一条三个实点两个空点的虚线
+画一条45度的斜线
+画一条30度的斜线（选做）
+在四个角画分别画一条45度的斜线以让画面看起来像一个相框
+画一条跨越画布左上角和右下角的对角线
+画一个空心矩形
+画一个实心矩形
+画一个rgb色彩空间的某一面
+画一个空心的圆
+画一个实心的圆
+画一个大小合适的sin(x)的图像
+   */
+</script>
+<script>
+  // YOUR CODE GOES BELOW
+  //dot(x,y,color);
+  for (i = 1; i <= 100; i++) {
+    dot(i, 20)
+  }
+  for (i = 120; i <= 200; i++) {
+    if (i % 2 == 1) {
+      dot(i, 20, color = 'red')
+      continue;
+    }
+  }
+  for (i = 220; i <= 300; i++) {
+    if (i % 3 == 0) {
+      dot(i, 20, color = 'yellow')
+    }
+  }
+  for (i = 120; i <= 200; i++) {
+    if (i % 4 == 0) {
+      dot(i, 30, color = 'blue')
+    }
+  }
+  for (i = 200; i <= 240; i++) {
+    for (j = 200; j <= 240; j++) {
+      dot(i, j)//实心矩形
+    }
+  }
+  for (i = 0; i <= 100; i++) {
+    dot(i, i)//45度 
+  }
+  for (i = 0; i <= 100; i++) {
+    var y = i / Math.sqrt(3)
+    dot(i, y)//30度
+  }
+  for (i = 50, j = 0; i >= 0 && j <= 50; i-- && j++) {
+    dot(i, j, color = 'red')//左上
+  }
+  for (i = 350, j = 0; i <= 400 && j <= 50; i++ && j++) {
+    dot(i, j, color = 'red')//右上
+  }
+  for (i = 0, j = 250; i <= 50 && j <= 300; i++ && j++) {
+    dot(i, j, color = 'red')//左下
+  }
+  for (i = 350, j = 300; i <= 400 && j >= 250; i++ && j--) {
+    dot(i, j, color = 'red')//右下
+  }
+  for (i = 0; i <= 500; i++) {
+    dot(i, (3 / 4) * i)
+  }
+  //空矩形开始
+  for (i = 150; i <= 200; i++) {
+    dot(i, 200)
+  }
+  for (i = 150; i <= 200; i++) {
+    dot(150, i)
+  }
+  for (i = 150; i <= 200; i++) {
+    dot(200, i)
+  }
+  for (i = 150; i <= 200; i++) {
+    dot(i, 150)
+  }
+  //空矩形结束
+  // for (i = 100; i <= 150; i++) {
+  //   for (j = 100; j <= 150; j++) {
+  //     dot(i, j, 'rgba(255,i,j)')
+  //   }
+  // }
+
+
+  //空心圆
+  for (var i = 0; i < 400; i++) {
+    var y = Math.sqrt(1000 - (i - 100) * (i - 100)) + 100
+    var y2 = -Math.sqrt(1000 - (i - 100) * (i - 100)) + 100
+    dot(i, y, "lime")
+    dot(i, y2, "lime")
+    dot(y, i, "lime")
+    dot(y2, i, "lime")
+  }
+  // 画一个大小合适的sin(x)的图像
+  for (var x = 0; x <= 400; x++) {
+    var y = 200 + (Math.sin(x / 180 * Math.PI)) * 50
+    dot(x, y, 'black')
+  }
+  // 画一个实心的圆
+  for (let i = 300; i <= 400; i++) {
+    for (let j = 50; j <= 150; j++) {
+      if (Math.pow(i - 350, 2) + Math.pow(j - 100, 2) <= 1600) {
+        dot(i, j, 'yellow');
+      }
+    }
+  }
+  //rgb色彩空间的某一面
+  for (i = 0; i <= 100; i++) {
+    for (j = 0; j <= 100; j++) {
+      var color = 'rgb(255' + ',' + (i / 100 * 256) + ',' + (j / 100 * 256) + ')'
+      dot(i, j, color)
+    }
+  }
+  //
+  // var r = 150
+  // for (var x = -r; x <= r; x++) {
+  //   var y = Math.sqrt(r * r - x * x)
+  //   dot(x + 200, y + 200)
+  //   dot(x + 200, -y + 200)
+  // }
+  var r = 60
+  for (var theta = 0; theta <= 2 * Math.PI; theta += 0.001) {
+    var x = r * Math.cos(theta)
+    var y = r * Math.sin(theta)
+    dot(x + 200, y + 200)
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>

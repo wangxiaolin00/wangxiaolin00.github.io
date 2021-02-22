@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function ary(func, n = func.length) {
+      return function (...args) {
+        return func(...args.slice(0, n))
+      }
+    }
+    function before(n, func) {
+      var c = 0
+      var result
+      return function (...args) {
+        if (c < n) {
+          return result = func.call(this, ...args)
+        } else {
+          return result
+        }
+        c++
+      }
+
+    }
+    function after(n, func) {
+      var c = 0
+      var result
+      return function (...args) {
+        if (c > n) {
+          return result = func.call(this, ...args)
+        }
+        c++
+      }
+    }
+    function flip(func) {
+      return function (...args) {
+
+        return func.call(this, args.reverse())
+      }
+    }
+    function negate(func) {//对函数的求值结果取反
+      return function (...args) {
+        return !func(...args)
+      }
+    }
+    function spread(func, start = 0) {
+      return function (ary) {
+        func.apply(this, ary)
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

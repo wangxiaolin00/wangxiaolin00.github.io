@@ -1,0 +1,128 @@
+<script>
+
+  // 递归下降法实现解析器 实现JSON.parse()//将JSON.parse()将JSON字符串转成js代码
+
+  function parse(str) {
+    var i = 0
+
+    return parseValue()
+
+    function parseValue() {
+      var char = str[i]
+      if (char == '[') {
+        return parseArray()
+      }
+      if (char == '{') {
+        return parseObject()
+      }
+      if (char == '"') {
+        return parseString()
+      }
+      if (char == 't') {
+        return parseTrue()
+      }
+      if (char == 'f') {
+        return parseFalse()
+      }
+      if (char == 'n') {
+        return parseNull()
+      }
+      return parseNumber()
+    }
+
+    function parseArray() {
+      var result = []
+      i++ // skip [
+      while (str[i] != ']') {
+        if (str[i] == ',') {
+          i++ // skip ,
+        }
+        var value = parseValue() // parse a value from i
+        result.push(value)
+      }
+      i++ // skip ']'
+      return result
+    }
+
+    function parseObject() {
+      var result = {}
+      i++ // skip '{'
+      while (str[i] != '}') {
+        if (str[i] == ',') {
+          i++ // skip ,
+        }
+        var key = parseString()
+        i++ // skip ':'
+        var value = parseValue()
+        result[key] = value
+      }
+      i++ // skip '}'
+      return result
+    }
+
+    function parseString() {
+      var result = ''
+      i++ // skip first "
+      while (str[i] !== '"') {
+        result += str[i++]
+      }
+      i++ // skip second "
+      return result
+    }
+
+    function parseTrue() {
+      i += 4
+      return true
+    }
+    function parseFalse() {
+      i += 5
+      return false
+    }
+    function parseNull() {
+      i += 4
+      return null
+    }
+
+    function parseNumber() {
+      var numStr = ''
+      while (/[\de+\-.]/.test(str[i])) {
+        numStr += str[i++]
+      }
+      return parseFloat(numStr)
+    }
+  }
+
+  var obj = parse('{"a":null,"b":2}')
+  console.log(obj);
+  const decodeString = (s) => {//394
+    let numStack = [];        // 存倍数的栈
+    let strStack = [];        // 存 待拼接的str 的栈
+    let num = 0;              // 倍数的“搬运工”
+    let result = '';          // 字符串的“搬运工”
+    for (const char of s) {   // 逐字符扫描
+      if (!isNaN(char)) {   // 遇到数字
+        num = num * 10 + Number(char); // 算出倍数
+      } else if (char == '[') {  // 遇到 [
+        strStack.push(result); // result串入栈
+        result = '';           // 入栈后清零
+        numStack.push(num);    // 倍数num进入栈等待
+        num = 0;               // 入栈后清零
+      } else if (char == ']') {  // 遇到 ]，两个栈的栈顶出栈
+        let repeatTimes = numStack.pop(); // 获取拷贝次数
+        result = strStack.pop() + result.repeat(repeatTimes); // 构建子串
+      } else {
+        result += char;        // 遇到字母，追加给result串
+      }
+    }
+    return result;
+  };
+
+
+</script>
+[]
+{}
+""
+true
+false
+null
+2323423

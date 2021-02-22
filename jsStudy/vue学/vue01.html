@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="aes">
+    <h2>{{message}}{{counter}}</h2>
+    <button v-on:click="plus">+</button>
+    <button v-on:click="subtraction">-</button>
+  </div>
+  <script src="vue1/vue.js"></script>
+  <script>
+    const ads = new Vue({
+      el: '#aes',
+      data: {
+        message: '当前计数',
+        counter: 0
+      },
+      methods: {
+        plus: function () {
+          this.counter++
+
+        },
+        subtraction: function () {
+          this.counter--
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

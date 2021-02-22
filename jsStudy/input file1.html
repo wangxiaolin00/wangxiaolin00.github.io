@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="file" multiple name="" id="">
+  <script>
+    // var input = document.querySelector('input')
+    // input.addEventListener('change', function () {
+    //   if (input.files.length > 0) {
+    //     var file = input.files[0];
+    //     console.log('YOU CHANGE', file.name);
+    //     if (file.type) {
+    //       console.log('It has type', file.type);
+    //     }
+    //   }
+    // })
+    var input = document.querySelector('input')
+    input.addEventListener('change', function () {
+      Array.prototype.forEach.call(input.files, function (file) {
+        var reader = new FileReader()
+        reader.addEventListener('load', function () {
+          console.log('File', file.name, 'starts with', reader.result);
+          var div = document.createElement('div')
+          div.innerHTML = reader.result//上传的文件的内容
+          document.body.append(div)
+        })
+        reader.readAsText(file)
+        console.log(1);
+      })
+    })
+  </script>
+
+</body>
+
+</html>

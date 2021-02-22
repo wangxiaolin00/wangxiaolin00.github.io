@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //编写一个函数将10.3.3.3转成32bit数字
+    function zhuan(str) {
+      var s = parseInt(str.split('.').map(it => Number(it).toString(2))
+        .map(i => i.padStart(8, '0')).join(''), 2)
+      return s
+    }
+    var b = zhuan('10.3.3.3')
+    console.log(zhuan('10.3.3.3'));
+    var a = (10 << 24) | (3 << 16) | (3 << 8) | 3
+    console.log(a == b);
+    function plus(a, b) {
+      while (b) {
+        var temp = a ^ b
+        b = (a & b) << 1
+        a = temp
+      }
+      return a
+    }
+    console.log(plus(11, 21));
+
+
+  </script>
+</body>
+
+</html>

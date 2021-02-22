@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // sqrt: 求一个正数的平方根
+    // function sqrt(n) {
+    //   var a = 0;
+    //   var b = n;
+    //   var m = (a + b) / 2
+    //   while (b - a > 0.00001) {//2分法
+    //     if (m * m == n) {
+    //       return m
+    //     }
+    //     if (m * m < n) {
+    //       a = m
+    //     } else if (m * m > n) {
+    //       b = m
+    //     }
+
+    //   }
+    //   return (a + b) / 2
+    // }
+    // console.log(sqrt(2));
+    function sqrt(n) {
+      var x = n
+      while (Math.abs(x * x - n) >= 0.00001) {//牛顿法
+        x = (x + n / x) / 2
+      }
+      return x
+    }
+    console.log(sqrt(4));
+    // narcissistic: 写一个函数判断一个数是否为水仙花数
+    function narcissistic(x) {
+      var s = String(x)
+      var sum = 0
+      for (var i = 0; i < s.length; i++) {
+        var ss = Number(s.charAt(i))
+        sum += ss ** weikun(x)
+      }
+      if (x == sum) {
+        return true
+      } else {
+        return false
+      }
+    }
+    // function isnarcissistic(n) {
+    //   var width = 0;
+    //   var m = n;
+    //   do {
+    //     var digit = m % 10
+    //     m = (m - digit) / 10
+    //     width++
+    //   } while (m > 0)
+    //   m = n;
+    //   var sum = 0;
+    //   do {
+    //     var digit = n % 10
+    //     var exp = 1
+    //   }
+    // }
+    function power(x, n) {//求x**n
+      var exp = 1
+      for (var i = 0; i < n; i++) {
+        exp *= i
+      }
+      return exp
+    }
+    function weikun(n) {
+      var c = 0
+
+      do {
+        var digit = n % 10
+        c++
+        n = (n - digit) / 10
+      } while (n > 0)
+
+      return c
+    }
+    console.log(weikun(123));
+    // console.log(narcissistic(153));
+    // narcissistics: 输出10000以内的所有水仙花数
+
+    // for (var i = 1; i <= 10000; i++) {
+    //   if (narcissistic(i)) {
+    //     console.log(i);
+    //   }
+    // }
+
+
+
+
+
+    // palindrom: 写函数求阶乘
+    function jieCheng(n) {
+      return n > 1 ? n * jieCheng(n - 1) : 1;
+    }
+    function jiecheng1(n) {
+      var result = 1
+      for (var i = n; i > 0; i--) {
+        result *= i
+      }
+      return result
+    }
+    //判断一个数是不是回文数
+    function isPalindrom(n) {
+      var m = n
+      var revert = 1;
+      while (m > 0) {
+        var digit = m % 10
+        revert = revert * 10 + digit
+        m = (m - digit) / 10
+      }
+      if (revert == n) {
+        return true
+      } else {
+        return false
+      }
+    }
+    function ii(n) {//判断一个数是不是回文数
+      var width = weikun(n)
+      for (var i = 0; i < width - 1 / 2; i++) {
+        var j = width - i - 1
+        var di = Math.floor(n / Math.pow(10, i)) % 10
+        var dj = Math.floor(n / Math.pow(10, j)) % 10
+        if (di !== dj) {
+          return false
+        }
+      }
+      return true
+    }
+    console.log(weikun(123421));
+    // weekday: 给写年和月，计算这个月的第一天是星期几
+    function weekDay(year, month) {
+      var date = new Date();
+      var thisday = date.setFullYear(year, month - 1, 1)//date.setFullYear(a,b,c)设置对象的年份a,月份b,第几天c
+      var days = date.getDay()
+      var brr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+      return '这个月的第一天是' + brr[days]
+    }
+    console.log(weekDay(1972, 10));
+    function weekday1(year, month) {
+      var totalday = (year - 1) * 365 - Math.floor((year - 1) / 4) - Math.floor((year - 1) / 100) + Math.floor((year - 1) / 400)
+      for (var i = 1; i < year; i++) {
+
+      }
+
+    }
+    function isrunnian(n) {
+      if (n % 4 == 0 && n % 100 != 0 || n % 400 == 0) {
+        return true
+      } else {
+        return false
+      }
+    }
+    function ismonthday(month, year) {
+      switch (month) {
+        case 2:
+          if (isrunnian(year) == true) {
+            return 29
+          } else {
+            return 28
+          }
+        case 3: return 31
+        case 5: return 31
+        case 7: return 31
+        case 8: return 31
+        case 10: return 31
+        case 12: return 31
+        case 4: return 30
+        case 6: return 30
+        case 9: return 30
+        case 11: return 30
+
+      }
+    }
+
+
+    // complete-number: 写一个函数求一个数是否为完全数（它的因子之和等于它自己）
+    function completeNumber(x1) {
+      var sum = 0
+      for (var i = 1; i < x1; i++) {
+        if (x1 % i == 0) {
+          sum += i
+        }
+      }
+      if (sum == x1) {
+        return true
+      }
+    }
+    function iscompleteNumber(x1) {
+      var sum = 1
+      for (var i = 2; i * i <= x1; i++) {
+        if (x1 % i == 0) {
+          var j = x1 / i
+          if (i == j) {
+            sum += i
+          } else {
+            sum += i + j
+          }
+          if (sum > x1) {
+            return false
+          }
+        }
+      }
+      if (sum == x1) {
+        return true
+      }
+    }
+
+    // complete-numbers: 输出1000以内的所有完数
+    for (var j = 1; j < 1000; j++) {
+      if (completeNumber(j)) {
+        console.log(j);
+      }
+    }
+    // prime: 判断素数
+    function isPrime(dd) {
+      if (dd == 2) {
+        return true;
+      } else if (dd % 2 == 0) {
+        return false;
+      }
+      var sss = Math.sqrt(dd)
+      for (var i = 3; i <= sss; i++) {
+        if (dd % i == 0) {
+          return false
+        }
+      }
+      return true
+    }
+    // primes: 输出1000以内的素数
+    for (var j = 0; j <= 100; j++) {
+      if (isPrime(j)) {
+        console.log(j);
+      }
+    }
+    // itob: 不使用隐式类型转换将一个数字转换为字符串
+    function itob(nnn) {
+      var sepp = String(nnn)
+      return sepp
+    }
+    function n2c(n) {
+      if (n == 1) {
+        return '1'
+      }
+      if (n == 0) {
+        return '0'
+      }
+      if (n == 2) {
+        return '2'
+      }
+      if (n == 3) {
+        return '3'
+      }
+      if (n == 4) {
+        return '4'
+      }
+      if (n == 5) {
+        return '5'
+      }
+      if (n == 6) {
+        return '6'
+      }
+    }
+
+    // lcf: 写函数求出两个数的最大公约数
+    function gongYueShu(a, b) {
+      var arr = []
+      for (var i = 1; i <= b; i++) {
+        if (a % i == 0 && b % i == 0) {
+          arr.push(i)
+        }
+      }
+      return arr[arr.length - 1]
+
+    }
+    // console.log(gongYueShu(12, 24));
+
+
+    // lcm: 写函数求出两个数的最小公倍数
+    function lcm(c, d) {
+      if (c % d == 0) {
+        return c
+      } else if (d % c == 0) {
+        return d
+      } else if (isPrime(c) && isPrime(d)) {
+        return c * d
+      } else {
+        var jj = c * d / (gongYueShu(c, d))//最小公倍数=两数的乘积/最大公约数
+        return jj
+      }
+    }
+    // console.log(lcm(4, 6));
+    //辗转相减
+    function xiangjianF(a, b) {
+      var x = Math.max(a, b)
+      var y = Math.min(a, b)
+      var z = y
+      var c = x - z
+
+      while (c > 0) {
+        x = Math.max(z, c)
+        z = Math.min(z, c)
+        c = x - z
+      }
+      return z
+    }
+    console.log(xiangjianF(14, 21));
+    function icm(m, n) {
+      if (m == n) {
+        return m
+      }
+      while (m != n) {
+        if (m < n) {
+          var t = m
+          m = n
+          n = t
+          //m=m+n
+          //n=m-n//只用俩个变量交换俩个变量
+          //m=m-n
+        }
+        var o = m - n
+        m = o
+      }
+      return m
+    }
+    console.log(icm(14, 21));
+    //辗转相除法
+    function ICMP() {
+      while (m != n) {
+        if (m < n) {
+          var t = m
+          m = n
+          n = t
+          //m=m+n
+          //n=m-n//只用俩个变量交换俩个变量
+          //m=m-n
+        }
+        var o = m - n
+        m = o
+      }
+      return m
+    }
+    function gcd(a, b) {//辗转相除法
+      if (a % b == 0) return b;
+      return gcd(b, a % b);
+    }
+
+  </script>
+
+</body>
+
+</html>

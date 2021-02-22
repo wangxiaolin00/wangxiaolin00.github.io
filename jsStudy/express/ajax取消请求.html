@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button class="btn1">提交请求</button><br>
+  <button class="btn2">取消请求</button><br>
+  <div id="dd"></div>
+  <script>
+    const btn1 = document.querySelector('.btn1')
+    const btn2 = document.querySelector('.btn2')
+    const div = document.querySelector('#dd')
+    var x = null
+    btn1.addEventListener('click', function () {
+      x = new XMLHttpRequest()
+      //x.timeout = 2000
+      //x.responseType = 'json'
+      x.open('GET', 'http://127.0.0.1:8001/delay')
+      x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+      x.send()
+    })
+    btn2.addEventListener('click', function () {
+      x.abort()//取消请求
+    })
+
+
+  </script>
+
+</body>
+
+</html>

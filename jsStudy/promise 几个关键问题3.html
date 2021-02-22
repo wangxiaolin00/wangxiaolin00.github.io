@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+    Promise.then()返回一个新的promise对象的状态由 有then()指定的回调函数的执行结果决定
+    Promise.then()函数里面指定回调函数是异步执行的
+    判断方法 :在then()函数 后面 加一个console.log('-----------------')
+     */
+    new Promise((resolve, reject) => {
+      //resolve(1)
+      reject(2)
+    }).then(value => {
+      console.log(value);
+    }, reason => {
+      console.log(reason);
+    }).then(value1 => {
+      console.log('then onResolved' + value1);//此时会输出value1 为undefined
+    }, reason1 => {
+      console.log('then onRjected' + reason1);
+    })
+    new Promise((resolve, reject) => {
+      //resolve(1)
+      reject(3)
+    }).then(value => {
+      console.log(value);
+
+    }, reason => {
+      console.log(reason);
+      return Promise.reject(4)
+    }).then(value1 => {
+      console.log('then onResolved' + value1);
+    }, reason1 => {
+      console.log('then onRjected' + reason1);
+    })
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var combinationSum4 = function (nums, target) {
+      var res = []
+      function dfs(path, start, sum) {
+        if (sum >= target) {
+          if (sum == target) {
+            res.push(path.slice())
+          }
+          return
+        }
+        for (let i = start; i < nums.length; i++) {
+          path.push(nums[i])
+          dfs(path, i, sum + nums[i])
+          path.pop()
+        }
+      }
+      dfs([], 0, 0)
+      return res
+
+    };
+    console.log(combinationSum4([1, 2, 3], 4))
+    var generateParenthesis = function (n) {//回溯算法括号
+      var res = []
+      function dfs1(cur = "", l, r) {
+        if (r == n) {
+          res.push(cur)
+          return
+        }
+        if (l < n) {
+          dfs1(cur + '(', l + 1, r)
+        }
+        if (r < l) {
+          dfs1(cur + ')', l, r + 1)
+        }
+      }
+      dfs1("", 0, 0)
+      return res
+
+    };
+  </script>
+
+</body>
+
+</html>

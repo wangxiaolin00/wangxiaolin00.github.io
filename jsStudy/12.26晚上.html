@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function distinct(arr) {
+      return arr.join('').replace(/(.)(?<=\1.*?\1)/g, '').split('')
+    }
+    console.log(distinct(['aa', 'aa', 'bb', 'cc', 'hh', 'bb', 'dd', 'cc', 'hh']));
+    function fullqueue(str) {//将一个字符串的所有排列放到一个数组里面
+      var res = []
+      if (str.length == 1) {
+        return str
+      } else if (str.length > 1) {
+        for (let i = 0; i < str.length; i++) {
+          let d = str[i]
+          let next = str.slice(0, i) + str.slice(i + 1)
+          var nextqueue = fullqueue(next)
+          for (let j = 0; j < nextqueue.length; j++) {
+            let temp = d + nextqueue[j]
+            res.push(temp)
+
+
+          }
+        }
+      }
+      return res
+    }
+    console.log(fullqueue('abc'));
+    function ics(s1, s2, m, n) {//求字符串s1,s2,的最大公共子串的长度
+
+      if (m == 0 || n == 0) {
+        return 0
+      }
+      if (s1.charAt(m - 1) == s2.charAt(n - 1)) {
+        return 1 + ics(s1, s2, m - 1, n - 1)
+      } else {
+        return Math.max(ics(s1, s2, m, n - 1), ics(s1, s2, m - 1, n))
+      }
+    }
+    console.log(ics("sea", "eat", 3, 3));
+    function find(str1, str2) {
+      //创建一个二维数组
+      let temp = new Array()
+      let max = 0
+      let index = null
+      for (let i = 0; i < str1.length; i++) {
+        //初始化为二维数组
+        temp[i] = new Array()
+        for (let j = 0; j < str2.length; j++) {
+          //比较两个位置是否相等，相等就将让temp[i][j]相对于temp[i-1][j-1]加一（前提是temp[i-1][j-1]存在）
+          if (str1.charAt(i) === str2.charAt(j)) {
+            if (i > 0 && j > 0 && temp[i - 1][j - 1] > 0) {
+              temp[i][j] = 1 + temp[i - 1][j - 1]
+            } else {
+              temp[i][j] = 1
+            }
+            //保存当前temp中最大的数字，并
+            if (max < temp[i][j]) {
+              max = temp[i][j]
+              index = i
+            }
+          } else {
+            temp[i][j] = 0
+          }
+        }
+      }
+      console.log(max + "+" + index)
+      console.log(temp)
+      return str1.substr(index - max + 1, max)
+    }
+    (function () {
+      find("wdw32efew4332", "efer32e2wd2332")
+    })()
+
+  </script>
+
+</body>
+
+</html>

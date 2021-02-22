@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .second {
+      height: 200px;
+      width: 5px;
+      background-color: red;
+      margin: 300px;
+      transform-origin: bottom center;
+      animation: move 360s steps(60) infinite;
+
+    }
+
+    @keyframes move {
+      0% {
+        transform: rotate(0deg)
+      }
+
+      100% {
+        transform: rotate(360deg)
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="second"></div>
+  <script>
+    var second = document.querySelector('.second')
+    second.style.animationDelay = '-' + new Date().getSeconds() + 's'
+    setTimeout(() => {
+      second.style.animationDelay = '-' + new Date().getSeconds() + 's'
+    }, 1000 - Date.now() % 1000)
+
+
+  </script>
+
+</body>
+
+</html>

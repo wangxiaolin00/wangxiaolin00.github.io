@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 20px;
+      height: 20px;
+      position: fixed;
+      background-color: red;
+      border-radius: 10px;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      document.onmousemove = function (event) {
+        // event = event || window.event  //解决兼容性问题
+        var divs = document.getElementsByTagName('div')
+        var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+        var x = event.clientX || window.clientX//在IE8中没有event对象
+        var y = event.clientY || window.clientY
+        var x1 = x + scrollLeft
+        var y1 = y + scrollTop
+        for (let i = divs.length - 1; i > 0; i--) {
+          divs[i].style.left = divs[i - 1].offsetLeft + 'px'
+          divs[i].style.top = divs[i - 1].offsetTop + 'px'
+        }
+        divs[0].style.left = x1 + 'px'
+        divs[0].style.top = y1 + 'px'
+
+      }
+
+    }
+  </script>
+</head>
+
+<body>
+  <div style="background-color: yellow;"></div>
+  <div style="background-color: cyan;"></div>
+  <div style="background-color: burlywood;"></div>
+  <div style="background-color: dodgerblue;"></div>
+  <div style="background-color: gray;"></div>
+  <div style="background-color: blue;"></div>
+  <div style="background-color: #cc00cc;"></div>
+  <div style="background-color: #cccc00;"></div>
+  <div style="background-color: red;"></div>
+  <div style="background-color: green;"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <div>fafafaf</div>
+  <div>sdadaff</div>
+  <script>
+    // var ss = 'ab AS dc'
+    // var s = ss.toUpperCase().split('').join('')
+    // console.log(s);
+    // var arr = []
+    // for (var i in s) {
+    //   if (s[i] != '') {
+    //     arr.push(s[i])
+    //   }
+    // }
+    // var ssp = arr.join('')
+    // console.log(ssp);
+    //str.concat ()将一个或者多个字符串与原字符串连接合并
+    // let greetList = ['Hello', ' ', 'Venkat', '!']
+    // let ss = "".concat(...greetList)
+    // console.log(ss);
+    // var x = new String('Hello world')
+    // console.log(x);//此时x是一个字符串对象
+    var s = ['113', 'dasdfa', 'sfas']
+    var a = ['hun', 'zi']
+    var d = [...s, ...a]//...是展开语法
+    console.log(d);
+    // for (const value of a) {
+    //   s.push(value)
+    // }
+    // for (let i of a) {
+    //   s.push(i)
+    // }
+    // console.log(s);
+    function sum(...arr) {
+      return arr.reduce((s, v) => {
+        return (s += v)
+      }, 0)
+    }
+
+    console.log(sum(1, 2, 34, 5));
+    let aa = Array.of(6)
+    console.log(aa);
+    var divs = document.querySelectorAll('div')
+    console.log(Array.from(divs, function (item) {///Array.from(index)将括号里面的元素转化为数组
+      item.style.backgrounColor = 'red';
+      return item
+    }));
+    // Array.prototype.map.call(divs, fucntion(item) {
+    //原型链语法
+    // })
+    // [...divs]//...语法将dom节点转化为为数组
+    var countPrimes2 = function (n) {
+      var count = 0
+      for (var i = 2; i < n; i++) {
+        if (isPrime(i)) {
+          count++
+        }
+      }
+      return count
+    };
+
+    var primes = []
+
+    function isPrime(n) {
+      // var sqrt_n = Math.sqrt(n)
+      for (var i = 0; primes[i] * primes[i] <= n; i++) {
+        if (n % primes[i] == 0) {
+          return false
+        }
+      }
+      if (primes.length == 0 || n > primes[primes.length - 1]) {
+        primes.push(n)
+      }
+      return true
+    }
+
+
+
+  </script>
+
+
+
+
+
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button class="b1">按钮</button>
+  <input class="input1" type="text" value="输入内容">
+  <script>
+    //利用DOM 可以操作如下表单属性
+    //type value checked selected disabled
+    var b1 = document.querySelector('.b1')
+    var input1 = document.querySelector('.input1')
+    b1.onclick = function () {
+      input1.value = '被点击了'
+      //如果想要某个表单被禁用 不能再点击 disabled 
+      this.disabled = true
+      //this 指向的是事件函数的调用者
+    }
+  </script>
+
+</body>
+
+</html>

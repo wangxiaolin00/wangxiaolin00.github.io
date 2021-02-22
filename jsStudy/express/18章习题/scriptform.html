@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="po.js"></script>
+</head>
+
+<body>
+  <textarea name="" id="code" cols="30" rows="10">
+    var a=1;
+    var b=2;
+    console.log(a+b)
+  </textarea>
+  <button class="btn">RUN</button>
+  <pre id="pr"></pre>
+  <script>
+    const btn = document.querySelector('.btn')
+    const textBox = document.querySelector('#code')
+    const pre = document.querySelector('#pr')
+    btn.addEventListener('click', function () {
+      try {
+        var res = textBox.value
+        pre.innerHTML = eval(res)
+      } catch (e) {
+        pre.innerHTML = new Error(e)
+      }
+    })
+    function runcode() {
+      var console = {
+        log: function (...args) {
+          window.console.log(...args)
+          pre.innerHTML = args.join(' ')
+
+        }
+      }
+    }
+  </script>
+
+
+</body>
+
+</html>

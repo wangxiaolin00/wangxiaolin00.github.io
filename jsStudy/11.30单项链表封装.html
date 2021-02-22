@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //封装链表类
+    function Linkedlist() {
+      //内部的类:节点类
+      function Node(val) {
+        this.val = val
+        this.next = null
+
+      }
+      //属性
+      this.head = null
+      this.length = 0
+      //追加方法append
+      Linkedlist.prototype.append = function () {
+        //判断是否添加第一个节点
+        var newNode = new Node(val)
+        if (this.length == 0) {//是第一个节点
+          this.head = newNode
+        } else {
+          var current = this.head
+          while (current.next) {//不是第一个节点
+            current = current.next
+          }
+          current.next = newNode
+        }
+        //length+1
+        this.length += 1
+      }
+      Linkedlist.prototype.toString = function () {
+        //定义变量
+        var current = this.head
+        var listString = ""
+        //循环截取每一个节点
+        while (current) {
+          listString += current.val + ""
+          current = current.next
+        }
+        return listString
+      }
+      //insert方法
+      Linkedlsit.prototype.insert = function (position, val) {
+        //对position进行越界判断不能为负的而且不能大于链表的长度
+        if (position < 0 || position > this.length) {
+          return false
+        }
+        var newNode = new Node()
+        //判断插入的位置是第一个
+        if (position == 0) {
+          newNode.next = this.head
+          this.head = newNode
+        } else {
+          var index = 0
+          var current = this.head
+          var previous = null
+          while (index++ < position) {
+            previous = current
+            current = current.next
+          }
+          newNode.next = current
+          previous.next = newNode
+
+        }
+        this.length += 1
+        return true
+
+
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

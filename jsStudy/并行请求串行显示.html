@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img {
+      height: 200px;
+      width: 200px;
+
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    //https://xieranmaya.github.io/images/cats/cats.json
+    function get(url) {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
+        xhr.open('GET', url)
+        xhr.onload = function () {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            resolve(JSON.parse(xhr.response))
+          } else {
+            reject(xhr.statusText)
+          }
+        }
+        xhr.onerror = function () {
+          console.log('网络出错了');
+        }
+        xhr.send()
+
+      })
+    }
+    function downloadImg(url, callback) {
+      let img = document.createElement('img')
+      img.onload = function () {
+        callback(img)
+      }
+      img.src = url
+      nu++
+
+    }
+    var nu = 0
+    get('https://xieranmaya.github.io/images/cats/cats.json').then(value => {
+      console.log(value);
+      let list = value.map(it => it.fullUrl)
+      return list.reduce((pre, next) => {
+        return pre.then((val) => {
+          downloadImg(val, (img) => {
+            document.body.append(img)
+
+          })
+
+
+          return next
+        })
+      }, Promise.resolve()).then(value => {
+        console.log('-------', nu);
+      }).catch(reason => {
+        console.log('代码错误');
+      })
+
+    })
+    // get('https://xieranmaya.github.io/images/cats/cats.json').then(value => {//所有图片一起请求
+    //   return Promise.all(value.map(it => it.fullUrl))
+
+    // }).then(val => {
+    //   val.forEach(it => {
+    //     return downloadImg(it, (ima) => {
+    //       document.body.append(ima)
+    //     })
+    //   })
+    //   return 2
+    // }).then(value => {
+    //   console.log(value);
+    // }).catch(reason => {
+    //   console.log(reason, '你好代码错误');
+    // })
+
+    //     unction downloadImg(url, cb) {
+    //   var img = document.createElement('img')
+    //   img.onload = function () {
+    //     cb(img)
+    //   }
+    //   img.src = url
+    // }
+
+    // function downloadImgPromise(url) {
+    //   return new Promise(resolve => {
+    //     downloadImg(url, img => {
+    //       resolve(img)
+    //     })
+    //   })
+    // }
+
+
+
+    // q = q.then(() => {
+    //   return downloadImgPromise(url[0])
+    // }).then((img) => {
+    //   document.body.append(img)
+    // })
+
+
+
+    // const s1 = Promise.resolve(1)
+    // const s2 = Promise.resolve(2)
+    // const s3 = Promise.resolve(3)
+    // const s4 = Promise.all([s1, s2, s3]).then(val => {
+    //   console.log(val);//返回一个由s1 s2 s3 组成的数组[1,2,3]
+    // })
+
+  </script>
+
+</body>
+
+</html>

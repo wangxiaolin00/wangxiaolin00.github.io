@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //450没做669
+    // let buildTree = (preorder, inorder) {
+    //   let map = new Map()
+    //   for (var i = 0; i < inorder.length; i++) {
+    //     map.set(inorder[i], i)
+    //   }
+    //   const helper = (pstart, pend, istart, iend){
+    //     if (pstart > pend) {
+    //       return null
+    //     }
+    //     let rootval = preorder[pstart]
+    //     let root = new TreeNode(rootval)
+    //     let mid = map.get(rootval)
+    //     let leftnum = mid - istart
+    //     root.left = helper(pstart + 1, pstart + lefnum, istart, mid - 1)
+    //     root.right = helper(pstart + leftnum + 1, pend, mid + 1, iend)
+    //     return root
+    //   }
+    //   return helper(0, preorder.length - 1, 0, inorder.length - 1)
+    // }
+    function depth(root) {//求二叉搜索树的深度
+      if (root) {
+        return 1 + Math.max(depth(root.left, root.right))
+      }
+      return 0
+    }
+    //如果一个树是平衡的,返回其深度,如果平衡返回-1
+    function dep(root) {
+      if (root) {
+        var dl = dep(root.left)
+        if (dl == -1) {
+          return -1
+
+        }
+        var dr = dep(root.right)
+        if (dr == -1) {
+          return -1
+        }
+        if (Math.abs(dl - dr) <= 1) {
+          return 1 + Math.max(dr, dl)
+        }
+      }
+    }
+    function traverse(root) {
+      if (root) {
+        path.push(root.val)
+        add += root.val
+        if (root.left == null && root.right == null) {
+          if (add == sum)
+            result.push(path.slice())
+        } else {
+          traverse(root.left)
+          traverse(root.right)
+        }
+        path.pop()
+        add -= root.val
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

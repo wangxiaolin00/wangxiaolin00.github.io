@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // function removeDuplication(arr) {//将对象数组去重
+    //   let obj = {}; //初始值为空的对象，用来存放已存在的对象的属性
+    //   let newArr = arr.reduce(function (prev, cur) {
+    //     obj[cur._id] ? '' : obj[cur._id] = true && prev.push(cur); //_id为每个对象独有的标识，即用来判断去重的标识
+    //     return prev;
+    //   }, []);
+    //   return newArr;
+    // }
+    // var sse = [{ _id: 01, name: 1 }, { _id: 02, name: 2 }, { _id: 01, name: 3 }]
+    // console.log(removeDuplication(sse));
+    var person = [
+      {
+        id: 1,
+        name: "赵一"
+      },
+      {
+        id: 2,
+        name: "陈二"
+      },
+      {
+        id: 3,
+        name: "张三"
+      },
+      {
+        id: 4,
+        name: "李四"
+      },
+      {
+        id: 5,
+        name: "王五"
+      },
+      {
+        id: 6,
+        name: "张三"
+      },
+      {
+        id: 7,
+        name: "王五"
+      },
+    ];
+    function removeDuplication(arr) {
+      var obj = {}
+      var newarr = arr.reduce((cur, next) => {
+        obj[next.name] ? "" : obj[next.name] = true && cur.push(next)
+        return cur
+      }, [])
+      return newarr
+    }
+    console.log(removeDuplication(person));
+    function uniquarr(arr) {
+      var arr = arr.reduce((pre, cur) => {
+        if (!pre.includes(cur)) {
+          return pre.concat(cur)
+        } else {
+          return pre
+        }
+      }, [])
+      return arr
+    }
+    console.log(uniquarr([1, 2, 3, 1, 2, 3, 4, 4]));
+    var sss = 'foodfoodjjgg'
+    function strcountTimes(s) {//统计字符串中各个字符出现的次数
+      var res = s.split('').reduce((pre, cur) => {
+        if (cur in pre) {
+          pre[cur]++
+        } else {
+          pre[cur] = 1
+        }
+        return pre
+      }, {})
+      return res
+
+    }
+    console.log(strcountTimes(sss));
+    function jiangweionce(arr) {//reduce 将二维数组降维成一维
+      var res = arr.reduce((pre, cur) => {
+        return pre.concat(cur)
+      }, [])
+      return res
+    }
+    console.log(jiangweionce([[1, 2], [3, 4], [5, 6]]));
+    const newArr = function (arr) {//将多维数组降转化为一维数组
+      return arr.reduce((pre, cur) => pre.concat(Array.isArray(cur) ? newArr(cur) : cur), [])
+    }
+    console.log(newArr([[[1, 3, [3]], [4], [7]], 5, 6]));
+    function reduce1(arr) {
+      return arr.reduce((pre, cur, idx) => {
+        return (pre * idx + cur) / (idx + 1)
+
+      })
+    }
+    console.log(reduce1([1, 2, 3, 4, 5]));
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var a = [1, 2, 3]
+    var b = a.map(x => x * 2)//还数组中的每一个元素还map里面的指令都*2
+    console.log(b);
+    var c = a.reduce((x, y) => (x + y))//a.reduce求数组的各个元素相加的和
+    console.log(c);
+    var ff = a.filter(x => x >= 2)//filter筛选数组中大于2的元素组成新的数组
+    console.log(ff);
+    var fff = b.reduce((x, y) => (x * y))
+    console.log(fff);
+    var paixu = [1, 3, 4, 2, 6, 5, 7, 9]
+    paixu.sort((a, b) => (a - b))
+    console.log(paixu);
+    // var b = paixu.reduceRight((x, y) => (x - y))
+    var sss = paixu.every(x => x >= 1)//数组.every看数组的每一个元素是否满足>=1的条件都满足返回true 不满足返回false
+    console.log(sss);
+    var dds = [1, 2, 3, 3, 1, 3, 5, 6, 7, 8, 9, 4, 6, 7, 8, 9]
+    var ddc = [...new Set(dds)]//数组去重最简单的语法
+    console.log(ddc);
+    function solve(arr, n) {//求数组arr中任意一个元素或多个元素的和能不能被n整除
+      const s = new Set()
+      for (let i = 0; i <= arr.length; i++) {
+        for (let j = i + 1; j <= arr.length; j++) {//双重循环第二层循环j=i+1
+          const remain = arr.slice(i, j).reduce((x, y) => x + y, 0) % n//arr.slice(i,j)找出arr中所有子序列的可能数组,然后用reduce求和看能不能被n整除
+          s.add(remain)//有的话就添加到s集合中取
+        }
+      }
+      return s.has(0)
+
+
+    }
+    //arr.splice(x,y,z) 表示从数组arr索引为x的位置删除y个元素,替换为z,假如y==0相当于插入splice会改变原来的数组
+    var bn = [1, 3, 4, 5, 6, 6]
+    bn.splice(1, 1, 'x')//从数组的1的位置替换一个元素替换为'x'
+    console.log(bn);
+    var jki = [1, 2, 3, 4, 5, 6]
+    var s = jki.length
+    for (var i = 0; i < s / 2; i++) {//翻转数组第二种方法
+      var temp = jki[i]
+      jki[i] = jki[s - i - 1]
+      jki[s - i - 1] = temp
+    }
+    console.log(jki);
+    //插入排序
+    function charupaixu(a) {
+      for (let i = 1; i < a.length; i++) {
+        let card = a[i]//抓到的牌
+        let j = i
+        while (j < 0 && card < a[j - 1]) {
+          a[j] = a[j - 1]
+          j--
+        }
+        a[j] = card
+      }
+      return a
+    }
+    const aaa = [2, 3, 5, 3]
+    const bbb = charupaixu(aaa)
+    console.log(bbb);
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

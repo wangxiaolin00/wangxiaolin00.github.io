@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // const birthday = new Date('August 19,1975 23:15:30')
+    // var year = birthday.getFullYear()
+    // const day1 = birthday.getDay()//获取的是星期几代表的索引
+    //new Date()里面的参数
+    // console.log(birthday);
+    // console.log(year);
+    //Date.getDate()根据指定日期返回对象月份中的第几天(1~31)
+    //Date.getDay()返回指定日期对象的星期中的第几天(0~6天)
+    //Date.getFullYear()返回指定日期对象的年份
+    //DAte.getHours()返回指定日期对象的小时
+    //Date.getMinuetes()返回指定日期对象的分钟
+    //Date.geMonth()返回指定日期对象的月份
+    //Date.getTime()返回1970到改日期经过的毫秒数
+    //Date.get
+    function daoJiShi(time) {
+      var nowTime = +new Date();
+      var futureTime = +new Date(time)
+      var times = (futureTime - nowTime) / 1000
+      var d = parseInt(times / 60 / 60 / 24)
+      var d = d < 10 ? '0' + d : d;
+      var h = parseInt(times / 60 / 60 % 24)//总秒数除以3600等于总的小时数 在%24等于当天的小时
+      var h = h < 10 ? '0' + h : h;
+      var m = parseInt(times / 60 % 60)
+      var m = m < 10 ? '0' + m : m;
+      var s = parseInt(times % 60)
+      var s = s < 10 ? '0' + s : s;
+      return '倒计时:' + d + '天' + h + '小时' + m + '分钟' + s + '秒'
+    }
+    console.log(daoJiShi('2020-11-20 18:00:00'))
+    //   function conutTimes(time) {
+    //   var nowTime = +new Date();//现在时间距离1970年1月1日的总毫秒数
+    //   var inputTime = +new Date(time);//将来时间距离1970年1月1日的总毫秒数
+    //   var times = (inputTime - nowTime) / 1000;
+    //   var d = parseInt(times / 60 / 60 / 24);
+    //   var d = d < 10 ? '0' + d : d;
+    //   var h = parseInt(times / 60 / 60 % 24);
+    //   var h = h < 10 ? '0' + h : h;
+    //   var m = parseInt(times / 60 % 60);
+    //   var m = m < 10 ? '0' + m : m;
+    //   var s = parseInt(times % 60);
+    //   var s = s < 10 ? '0' + s : s;
+    //   return '倒计时:' + d + '天' + h + '小时' + m + '分钟' + s + '秒';
+    // }
+    var str = ['1', '2', '3', '4']
+    console.log(str);
+    var ssp = str.map(Number)//将字符串数组转成数字数组
+    console.log(ssp);//返回是[1,2,3,4]
+    var ss = ssp.join('')
+    console.log(ss);//将数字数组1234转换成字符串1234
+    var a = ss.split('')
+    console.log(a);//将字符串转换为数组['1', '2', '3', '4']
+    var q1 = 'HKHKLvbjhg'
+    var ee = q1.toLocaleLowerCase()//将字符串大写转化成小写原数组没有影响
+    console.log(ee);
+    var eer = ee.toLocaleUpperCase()//
+    console.log(eer);
+  </script>
+
+</body>
+
+</html>

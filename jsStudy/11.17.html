@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function xiangjianF(a, b) {
+      var x = Math.max(a, b)
+      var y = Math.min(a, b)
+      var z = y
+      var c = x - z
+
+      while (c > 0) {
+        x = Math.max(z, c)
+        z = Math.min(z, c)
+        c = x - z
+      }
+      return z
+    }
+    console.log(xiangjianF(14, 21));
+    var str = '12345'
+    var ss = str.slice(1)//括号里面是1的话且只有1的话提取创建的除了第一个字符之外的所有字符
+    console.log(ss);
+    function sqrt(n) {//2分法求平方根
+      var a = 0;
+      var b = n;
+      var m = (a + b) / 2
+      while (b - a > 0.00001) {
+        if (m == 0) {
+          return m
+        } else if (m * m < n) {
+          a = m
+        } else if (m * m > n) {
+          b = m
+        }
+        return (a + b) / 2
+      }
+    }
+    console.log(sqrt(4));
+    function sqrt1(n) {
+      var x = n
+      while (Math.abs(x * x - n) > 0.0001) {
+        x = (x + n / x) / 2  //牛顿法x=(x+n/x)/2
+      }
+      return x
+    }
+    console.log(sqrt1(4));
+    //weikuan
+    function weikun(num) {
+      var s = String(num)
+      return s.length
+    }
+    console.log(weikun(123456));
+    //位宽
+    function weiKuan1(n) {
+
+      var c = 0
+      do {
+        var digit = n % 10
+        c++
+        n = (n - digit) / 10//计算位宽的第二种方法
+      } while (n > 0)
+      return c
+    }
+    console.log(weiKuan1(123456));
+    //阶乘
+    function jieCheng(n) {//求阶乘
+      return n > 1 ? n * jieCheng(n - 1) : 1
+    }
+    console.log(jieCheng(5));
+    //阶乘
+    function jieCheng1(n) {//求阶乘的第二种方法
+      if (n == 1) {
+        return n
+      }
+      var result = 1
+      for (let i = n; i > 1; i--) {
+        result *= i
+      }
+      return result
+    }
+    console.log(jieCheng1(5));
+    //判断素数
+    function isPrime(n) {
+      if (n == 1) {
+        return false
+      } else if (n == 2) {
+        return true
+      } else if (n % 2 == 0) {
+        return false
+      }
+      var ss = Math.sqrt(n)
+      for (let i = 3; i <= ss; i++) {
+        if (n % i == 0) {
+          return false
+        }
+      }
+      return true
+    }
+    console.log(isPrime(31));
+    // narcissistic: 写一个函数判断一个数是否为水仙花数
+    function narcissistic(x) {
+      var s = String(x)
+      var sum = 0
+      for (var i = 0; i < s.length; i++) {
+        var ss = Number(s.charAt(i))
+        sum += ss ** weikun(x)
+      }
+      if (x == sum) {
+        return true
+      } else {
+        return false
+      }
+    }
+    for (var i = 0; i < 10000; i++) {
+      if (narcissistic(i)) {
+        console.log(i);
+      }
+    }
+    // // weekday: 给写年和月，计算这个月的第一天是星期几
+    // function weekDay(year, month) {
+    //   var date = new Date();
+    //   var thisday = date.setFullYear(year, month - 1, 1)//date.setFullYear(a,b,c)设置对象的年份a,月份b,第几天c
+    //   var days = date.getDay()
+    //   var brr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+    //   return '这个月的第一天是' + brr[days]
+    // }
+    // console.log(weekDay(1972, 10));
+
+  </script>
+
+</body>
+
+</html>

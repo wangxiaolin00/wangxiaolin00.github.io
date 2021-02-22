@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function get(url) {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest()
+        xhr.open('GET', url)
+        xhr.onload = function () {
+          resolve(xhr.response)
+        }
+        xhr.onerror = function (e) {
+          reject(e)
+        }
+        xhr.send()
+      })
+    }
+    // Promise.resolve(2).then(value => {
+    //   console.log(value);
+    // })
+    // console.log(1);
+    //executor 执行器函数同时执行
+    //then 异步执行
+    // const p = new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     console.log(3);
+    //     resolve(2)
+    //   }, 2000)
+    // }).then(value => {
+    //   setTimeout(() => {
+    //     console.log(4);
+
+    //   }, 500)
+    //   return Promise.resolve(5)
+    // }).then(val => {
+    //   setTimeout(() => {
+    //     console.log(val);
+    //   }, 1000)
+    // })
+    // console.log(1);
+    console.log('1');
+
+    setTimeout(function () {
+      console.log('2');
+      Promise.resolve(3).then(function () {
+        console.log('3');
+      })
+      new Promise(function (resolve) {
+        console.log('4');
+        resolve();
+      }).then(function () {
+        console.log('5')
+      })
+    })
+    Promise.resolve(3).then(function () {
+      console.log('6');
+    })
+
+    new Promise(function (resolve) {
+      console.log('7');
+      resolve();
+    }).then(function () {
+      console.log('8')
+    })
+
+    setTimeout(function () {
+      console.log('9');
+      Promise.resolve(3).then(function () {
+        console.log('10');
+      })
+      new Promise(function (resolve) {
+        console.log('11');
+        resolve();
+      }).then(function () {
+        console.log('12')
+      })
+    })
+
+    //打印1 7
+    console.log('start')
+    setTimeout(() => {
+      console.log('timer1')
+      Promise.resolve().then(() => {
+        console.log('promise1')
+      })
+    }, 0)
+    setTimeout(() => {
+      console.log('timer2')
+      Promise.resolve().then(() => {
+        console.log('promise2')
+      })
+    }, 0)
+    setTimeout(() => {
+      console.log('timer3')
+      Promise.resolve().then(() => {
+        console.log('promise3')
+      })
+    }, 0)
+    new Promise(function (resolve) {
+      console.log('promise4');
+      resolve();
+    }).then(function () {
+      console.log('promise5')
+    })
+    console.log('end')
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

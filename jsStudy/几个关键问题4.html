@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject(3)
+      }, 1000)
+    }).then(value => {
+      console.log(value);
+      return Promise.resolve(2)
+    }).then(value => {
+      console.log(value);
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(13)
+        }, 2000)
+      })
+    }).then(value => {
+      console.log(value);
+
+    }).catch(reason => {
+      console.log(reason);
+    })
+    p2 = p.then(f1, f2)
+    // 如果f1或f2运行时，正常结束并返回了普通值，则p2成功，成功的值即为f1或f2返回的值
+    // 如果f1或f2运行时，抛出了一个值，则p2失败，失败的原因即为f1或f2抛出的值
+
+    // 如果f1或f2运行时，正常结束但返回的不是普通值，而是一个（类）promise对象，则p2取这个（类）promise对象的最终结果为自己的结果
+    const pp = new Promise((resolve, reject) => {
+
+    })
+  </script>
+
+</body>
+
+</html>

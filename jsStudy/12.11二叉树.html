@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //遍历二叉树可以 用栈 迭代 先把元素存到栈里面 遍历左子树 压入栈 直到左子树没有子节点,然后返回,碰到返回的有右子树
+    //给先序遍历的二叉树数组和中序遍历的二叉树数组 可以画出原本的二叉树 先序遍历的第一个就是跟节点;
+    //然后找出中序遍历的中的跟节点,左边的就是根节点的左节点 右边的就是跟节点的右边节点的
+    function preorderTraverse(root) {//前序遍历先序遍历 迭代写法 将二叉树以 先序遍历的顺序转成数组
+      if (!root) {
+        return []
+      }
+      var stack = []
+      var p = root
+      while (true) {
+        while (p) {
+          console.log(p.val);
+          stack.push(p)
+          p = p.left
+        }
+        if (stack.length) {
+          var node = stack.pop()
+          p = node.right
+        } else {
+          break
+        }
+      }
+      return stack
+    }
+    function inordertravelse(root) {//中序遍历 广度优先 迭代 将二叉树以中序遍历的顺序转成数组
+
+      var stack = []
+      var p = root
+      var result = []
+      while (true) {
+        if (p) {
+          stack.push(p)
+          p = p.left
+        } else if (stack.length) {
+          p = stack.pop()
+          result.push(p.val)
+          p = p.right
+        } else {
+          break
+        }
+      }
+      return result
+    }
+    //一个二叉树的最大深度 等于 1+左子树和右子树的深度的较大者
+    //1+Math.max(l,r)
+    function sum(root) {//求二叉树节点的总和
+      if (root) {
+        var a = sum(root.left)
+        var b = sum(root.right)
+        return root.val + a.val + b.val
+      }
+    }
+    function maxdepth(root) {//求二叉树的最大深度
+      var d = 0;
+      var max = 0;
+      function traverse(root) {
+        d++
+        max = Math.max(d, max)
+        if (root) {
+          traverse(root.left)
+          traverse(root.right)
+
+        }
+        d--
+      }
+      traverse(root)
+      return max - 1
+    }
+    function maxdepth1(root) {//求二叉树的最大深度
+      if (!root) {
+        return 0
+      }
+      if (root) {
+        var left = maxdepth1(root.left)
+        var right = maxdepth1(root.right)
+        return 1 + Math.max(left, right)
+      }
+    }
+    function mindepth(root) {//求二叉树的最小深度
+      if (root) {
+        if (root.right == null) {
+          return 1 + mindepth(root.left)
+        }
+        if (root.left == null) {
+          return 1 + mindepth(root.right)
+        }
+        if (roo.left != null && root.right != null) {
+          return 1 + Math.min(mindepth(left), mindepth(right))
+        }
+      }
+    }
+    function binaryTreePaths(root) {//打印二叉树的所有路径
+      var res = []
+      function rootpath(root, paths) {
+        if (root == null) {
+          return null
+        }
+        if (root.left == null && root.right == null) {
+          paths += String(root.val)
+          res.push(paths)
+          return
+
+        }
+        paths += root.val + '->'
+        binaryTreePaths(root.left, paths)
+        binaryTreePaths(root.right, pahts)
+      }
+      binaryTreePaths(root, '')
+      return res
+    }
+    // 从前序与中序遍历序列构造二叉树
+    // 结合前序遍历序列的定义和中序遍历的序列的定义
+    //前序遍历的第一个节点一定是二叉树的根节点
+    //中序遍历的中,根节点把中序遍历序列分成了两个部分,左边部分构成了二叉树根节点的左子树
+    //右边构成二叉树的跟节点的右子树
+    //排序二叉树 二叉搜索树 简称BST
+    //Binary Search Tree
+    //每一个节点都满足左边的节点小于右边的节点
+    //中序排序得到有序序列
+    //右根左反向中序序列
+    function insertIntoBST(tree, val) {//将val 插入到二叉排序树种并返回新的根节点
+      var node = creatTreeNode(val)
+      if (!tree) {
+        return creatTreeNode(val)
+      }
+      if (val < tree.val) {
+        tree.left = insertIntoBST(tree.left, val)
+
+      } else {
+        tree.right = insertIntoBST(tree.right, val)
+      }
+      return tree
+
+    }
+    // function insertIntoBST(tree,val) {
+    //   if(!tree) {
+    //     return creatTreeNode(val)
+    //   }
+    //   var p=tree
+    //   while(true) {
+    //     if(val<tree.val) {
+    //       if(tree.left){
+    //         tree=tree.left
+    //       }
+    //     }
+    //   } 
+    // }
+
+    function bstsort(ary) {
+      var tree = null
+      for (var i = 0; i < ary.length; i++) {
+        insertIntoBST(tree, ary[i])
+      }
+      ary.reduce((tree, item) => {
+        return insertIntoBST(tree, item)
+      }, null)
+      var i = 0
+      inordertravelse(tree, ary[i])
+    }
+
+
+  </script>
+
+</body>
+
+</html>

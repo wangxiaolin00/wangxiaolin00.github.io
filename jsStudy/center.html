@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 大盒子300*300，小盒子150*200； */
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    section {
+      width: 225px;
+      height: 250px;
+      padding-left: 75px;
+      padding-top: 50px;
+      margin: auto;
+      border: 1px solid red;
+
+    }
+
+    .dad {
+      height: 200px;
+      width: 150px;
+      border: 1px solid blue;
+    }
+
+    .box {
+      height: 300px;
+      width: 300px;
+      margin: auto;
+      border: 1px solid blue;
+      overflow: hidden;
+    }
+
+    .bx1 {
+      height: 200px;
+      width: 150px;
+      margin-top: 50px;
+      margin-left: 75px;
+      border: 1px solid red;
+    }
+
+    .we {
+      display: flex;
+      width: 300px;
+      height: 300px;
+      margin: auto;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: chartreuse;
+    }
+
+    .we1 {
+      height: 200px;
+      width: 150px;
+      background-color: crimson;
+    }
+
+    .er {
+      height: 300px;
+      width: 300px;
+      margin: auto;
+      text-align: center;
+      border: 1px solid red;
+    }
+
+    .er1 {
+      display: inline-block;
+      margin-top: 50px;
+      width: 150px;
+      height: 200px;
+      border: 1px solid blue;
+    }
+
+    .aaw {
+      position: relative;
+      height: 300px;
+      margin: auto;
+      width: 300px;
+      border: 1px soldi gold;
+    }
+
+    .aaw1 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      right: 0;
+      margin: auto;
+      border: 1px solid blue;
+    }
+
+    .ff {
+      height: 300px;
+      width: 300px;
+      position: relative;
+      border: 1px dotted red;
+      margin: auto;
+    }
+
+    .ff1 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      height: 200px;
+      width: 150px;
+      border: 1px solid purple;
+      margin-left: -75px;
+      margin-top: -100px;
+    }
+
+    .pp {
+      position: relative;
+      height: 300px;
+      width: 300px;
+      margin: auto;
+      background-color: royalblue;
+    }
+
+    .pp1 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      height: 200px;
+      width: 150px;
+      transform: translate(-50%, -50%);
+      background-color: salmon;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>padding</h3>
+  <section>
+    <div class="dad"></div>
+  </section>
+  <h3>margin</h3>
+  <div class="box">
+    <div class=bx1></div>
+  </div>
+  <h3>flex</h3>
+  <div class="we">
+    <div class='we1'></div>
+  </div>
+  <h3>text-align+margin</h3>
+  <div class="er">
+    <div class="er1"></div>
+  </div>
+  <h3>定位</h3>
+  <div class="aaw">
+    <div></div>
+  </div class="aaw1">
+  <h3>dingwei+负margin</h3>
+  <div class="ff">
+    <div class="ff1"></div>
+  </div>
+  <h3>定位+translate</h3>
+  <div class="pp">
+    <div class="pp1"></div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button>anniu</button>
+  <script>
+    // function margesort(arr) {//归并排序
+    //   if (arr.length == 0 || arr.length == 1) {
+    //     return [...arr]
+    //   }
+    //   var mid = arr.length >> 1
+    //   var leftarr = arr.slice(0, mid)
+    //   var rightarr = arr.slice(mid)
+    //   var left = margesort(leftarr)
+    //   var right = margesort(rightarr)
+    //   var i = 0, j = 0;
+    //   var result = []
+    //   while (i < left.length && j < right.length) {
+    //     if (left[i] < right[j]) {
+    //       result.push(left[i++])
+    //     } else {
+    //       result.push(right[j++])
+    //     }
+    //   }
+    //   while (i < left.length) {
+    //     result.push(left[i++])
+    //   }
+    //   while (j < right.length) {
+    //     result.push(right[j++])
+    //   }
+    //   return result
+    // }
+    // console.log(margesort([1, 3, 6, 9, 2, 5]));
+    // var a = [1, 3, 4, 5, 8, 7]
+    // var b = a.filter(item => item <= 5)
+    // console.log(b);
+    // var c = a.map(item => item * 2)
+    // console.log(c);
+    // //quicksort
+    // function quicksort(arr) {
+    //   if (arr.length < 2) {
+    //     return [...arr]
+    //   }
+    //   var baseval = arr[0]
+    //   var mid = []
+    //   var left = []
+    //   var right = []
+    //   arr.forEach(element => {
+    //     if (element == baseval) {
+    //       mid.push(element)
+    //     } else if (element < baseval) {
+    //       left.push(element)
+    //     } else if (element > baseval) {
+    //       right.push(element)
+    //     }
+
+
+    //   });
+    //   return quicksort(left).concat(mid).concat(quicksort(right))
+    // }
+    // console.log(quicksort([1, 3, 4, 6, 7, 2]));
+    //1创建类class 创建一个明显类
+    class Star {
+      //类的共有属性都放在构造器里面
+      constructor(uname, age) {
+        this.uname = uname;
+        this.age = age
+
+      }
+      sing(song) {
+        console.log(this.uname + song);
+      }
+    }
+    //利用创建对象 new
+    var ldh = new Star('刘德华')
+    var zxy = new Star('张学友')
+    ldh.sing('冰雨')
+    //通过class关键字创建类,类名首字母大写
+    //2类里面有个constructor函数,可以接受传递过来的参数;同时返回实列对象
+    //3constructor函数只要new生成实列时候;就会自动调用这个函数;如果我们不写这个函数;也会自动说呢过程这个函数
+    //4生成实列对象的
+    //class的类名后面不加括号;类里面的方法不需要加function  
+    //类里面多个函数或者方法不需要加逗号
+    //类的继承extends
+    // class Father {
+    //   constructor() { }
+    //   money() {
+    //     console.log(100);
+    //   }
+    // }
+    // class Son extends Father {//子类继承父类的
+
+    // }
+    // var son = new Son()
+    // son.money()
+    var that
+    class Father {
+      constructor(uname, x, y) {
+        that = this
+        this.uname = uname
+        this.x = x;
+        this.y = y;
+        this.btn = document.querySelector('button');
+        this.btn.onclick = this.sing
+      }
+      sum() {
+        console.log(this.x + this.y);
+      }
+      sing() {//sing里面的this指向的是btn,btn事件触发的话this指向btn
+        console.log(this);
+        console.log(that.uname);
+      }
+    }
+    class Son extends Father {//extends 继承父类
+      constructor(x, y) {//consruector里面的this指向的是创建的实列对象
+        super(x, y)//super 调用父类中的构造函数// super 调用父类的构造函数必须放在子类自己的this之前
+        this.x = x
+        this.y = y
+
+      }
+      subtract() {
+        console.log(this.x - this.y);
+      }
+    }
+    var son = new Son(5, 2)
+    var ldh = new Father('刘德华', 8, 2)
+    son.sum()
+    son.subtract()
+    //super.say() 可以调用父类的方法
+    //super 关键字用于访问和调用对象父类上的函数;可以调用父类的构造函数
+    //也可以调用父类的普通函数
+    //如果子类和父类同时拥有同样的函数;
+    //调用子类的函数时候会采用就近原则
+    //继承中;如果实列话子类的一个方法,先看子类有没有这个方法;
+    //如果有这个方法就直接输出子类的这个方法;
+    //如果子类没有这个方法就往父类的里面找父类的;父类有这个方法就执行父类的方法
+    //子类在构造函数中使用super,必须放到子类的this前面必须先调用父类的构造函数然后再调用子类的构造函数
+    //1,在es6中类没有变量提升所以必须先定义类,才能通过类实列化
+    //2,类里面的共有的属性和方法一定要加this使用
+    //3类里面方法是实列对象的放到构造函数中要加this
+    //es6 类和对象的注意点
+    //1,在类没有变量提升,所以必须先定义类才能通过实例化对象
+    //2,类里面公有的属性和方法一定要加this
+    //3,类的this指向问题
+    //constructor里面的this指向的实列对象,方法里面的this指向的这个方法调用者
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

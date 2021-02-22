@@ -1359,6 +1359,80 @@ var wangxiaolin00 = {
       return func(...args.slice(0, n))
     }
   },
+  mapKeys: function (obj, iteratee) {
+    var o = {}
+    for (let k in obj) {
+      o[iteratee(obj[k], k)] = obj[k]
+    }
+    return o
+  },
+  mapValues: function (obj, iteratee) {
+    var o = {}
+    let t = Object.prototype.toString.call(iteratee)
+    if (t === '[object Function]') {
+      for (let k in obj) {
+        o[k] = iteratee(obj[k])
+      }
+      return o
+    } else if (t === '[object String]') {
+      for (let k in obj) {
+        o[k] = obj[k][iteratee]
+      }
+      return o
+    }
+  },
+  pick: function (obj, values) {
+    var o = {}
+    for (let key in obj) {
+      if (values.includes(key)) {
+        o[key] = obj[key]
+      } else {
+        continue
+      }
+    }
+    return o
+  },
+  isNumber: function (val) {
+    return Object.prototype.toString.call(val) === '[object Number]'
+  },
+  pickBy: function (obj, iteratee) {
+    var o = {}
+    for (let i in obj) {
+      if (iteratee(obj[i])) {
+        o[i] = obj[i]
+      } else {
+        continue
+      }
+    }
+    return o
+  },
+  result: function (obj, path, defaultValue) {
+    var temp = obj
+    path = path.match(/\w+/g)
+    for (let i of path) {
+      temp = temp[i]
+    }
+    if (temp === undefined) {
+      return defaultValue
+    }
+    return temp
+  },
+  set: function (obj, path, value) {
+    var temp = obj
+    path = (Array.isArray(path) ? path : path.match(/\w+/g))
+    for (let k of path) {
+      temp = temp[k]
+      obj[k] = temp
+
+    }
+    temp = value
+    return obj
+
+  }
+
+
+
+
 
 
 

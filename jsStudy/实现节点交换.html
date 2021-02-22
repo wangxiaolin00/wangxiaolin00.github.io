@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function isInside(node, target) {
+      for (; node != null; node = node.parentNode) {
+        if (node == target) {
+          return true
+        }
+        return false
+      }
+    }
+    function swapNode(a, b) {
+      if (a == b) {
+        return
+      }
+      if (isInside(a, b) || isInside(b, a)) {
+        throw new Error('a or b contains ohter node can not swap')
+      }
+      var dummy = document.createTextNode('a')
+      b.parentNode.insertBefore(dummy, b)
+      a.parentNode.insertBefore(b, a)
+      dummy.parentNode.insertBefore(a, dummy)
+      dummy.parentNode.removeChild(dummy)
+
+    } 
+  </script>
+
+</body>
+
+</html>

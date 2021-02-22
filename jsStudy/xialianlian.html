@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    section {
+      position: relative;
+      height: 300px;
+      width: 300px;
+      border: 1px solid red;
+      margin: 100px auto;
+    }
+
+    .small-circle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      height: 5px;
+      width: 5px;
+      border-radius: 50%;
+      background-color: red;
+
+
+
+    }
+
+
+    section span {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      height: 100%;
+      width: 100%;
+      border: 1px solid rgba(0, 0, 0, .1);
+    }
+
+    span::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      height: 10px;
+      width: 5px;
+      background-color: red;
+
+    }
+
+    span:nth-child(1) {
+      transform: rotate(6deg);
+    }
+
+    span:nth-child(2) {
+      transform: rotate(12deg);
+    }
+
+    span:nth-child(3) {
+      transform: rotate(18deg);
+    }
+
+    span:nth-child(4) {
+      transform: rotate(24deg);
+    }
+
+    span:nth-child(5) {
+      transform: rotate(30deg);
+    }
+
+    span:nth-child(6) {
+      transform: rotate(36deg);
+    }
+
+    span:nth-child(7) {
+      transform: rotate(42deg);
+    }
+
+    span:nth-child(8) {
+      transform: rotate(48deg);
+    }
+
+    span:nth-child(9) {
+      transform: rotate(54deg);
+    }
+
+    span:nth-child(10) {
+      transform: rotate(60deg);
+    }
+
+    span:nth-child(11) {
+      transform: rotate(66deg);
+    }
+
+    span:nth-child(12) {
+      transform: rotate(72deg);
+    }
+
+    span:nth-child(13) {
+      transform: rotate(78deg);
+    }
+
+    span:nth-child(14) {
+      transform: rotate(84deg);
+    }
+
+    span:nth-child(15) {
+      transform: rotate(90deg);
+    }
+
+    span:nth-child(16) {
+      transform: rotate(96deg);
+    }
+
+    span:nth-child(17) {
+      transform: rotate(102deg);
+    }
+
+    span:nth-child(18) {
+      transform: rotate(108deg);
+    }
+
+    span:nth-child(19) {
+      transform: rotate(114deg);
+    }
+
+    span:nth-child(20) {
+      transform: rotate(120deg);
+    }
+
+    span:nth-child(21) {
+      transform: rotate(126deg);
+    }
+
+    span:nth-child(22) {
+      transform: rotate(132deg);
+    }
+
+    span:nth-child(23) {
+      transform: rotate(138deg);
+    }
+
+    span:nth-child(24) {
+      transform: rotate(144deg);
+    }
+
+    span:nth-child(25) {
+      transform: rotate(150deg);
+    }
+
+    span:nth-child(26) {
+      transform: rotate(156deg);
+    }
+
+    span:nth-child(27) {
+      transform: rotate(162deg);
+    }
+
+    span:nth-child(28) {
+      transform: rotate(168deg);
+    }
+
+    span:nth-child(29) {
+      transform: rotate(174deg);
+    }
+
+    span:nth-child(30) {
+      transform: rotate(180deg);
+    }
+
+    span:nth-child(31) {
+      transform: rotate(186deg);
+    }
+
+    span:nth-child(32) {
+      transform: rotate(192deg);
+    }
+
+    span:nth-child(33) {
+      transform: rotate(198deg);
+    }
+
+    span:nth-child(34) {
+      transform: rotate(204deg);
+    }
+
+    span:nth-child(35) {
+      transform: rotate(210deg);
+    }
+
+    span:nth-child(36) {
+      transform: rotate(216deg);
+    }
+
+    span:nth-child(37) {
+      transform: rotate(222deg);
+    }
+
+    span:nth-child(38) {
+      transform: rotate(228deg);
+    }
+
+    span:nth-child(39) {
+      transform: rotate(234deg);
+    }
+
+    span:nth-child(40) {
+      transform: rotate(240deg);
+    }
+
+    span:nth-child(41) {
+      transform: rotate(246deg);
+    }
+
+    span:nth-child(42) {
+      transform: rotate(252deg);
+    }
+
+    span:nth-child(43) {
+      transform: rotate(258deg);
+    }
+
+    span:nth-child(44) {
+      transform: rotate(264deg);
+    }
+
+    span:nth-child(45) {
+      transform: rotate(270deg);
+    }
+
+    span:nth-child(46) {
+      transform: rotate(276deg);
+    }
+
+    span:nth-child(47) {
+      transform: rotate(282deg);
+    }
+
+    span:nth-child(48) {
+      transform: rotate(288deg);
+    }
+
+    span:nth-child(49) {
+      transform: rotate(294deg);
+    }
+
+    span:nth-child(50) {
+      transform: rotate(300deg);
+    }
+
+    span:nth-child(51) {
+      transform: rotate(306deg);
+    }
+
+    span:nth-child(52) {
+      transform: rotate(312deg);
+    }
+
+    span:nth-child(53) {
+      transform: rotate(318deg);
+    }
+
+    span:nth-child(54) {
+      transform: rotate(324deg);
+    }
+
+    span:nth-child(55) {
+      transform: rotate(330deg);
+    }
+
+    span:nth-child(56) {
+      transform: rotate(336deg);
+    }
+
+    span:nth-child(57) {
+      transform: rotate(342deg);
+    }
+
+    span:nth-child(58) {
+      transform: rotate(348deg);
+    }
+
+    span:nth-child(59) {
+      transform: rotate(354deg);
+    }
+
+    span:nth-child(60) {
+      transform: rotate(360deg);
+    }
+  </style>
+</head>
+
+<body>
+
+  <section>
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <div class="small-circle"></div>
+  </section>
+
+</body>
+
+</html>

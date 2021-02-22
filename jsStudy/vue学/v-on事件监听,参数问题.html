@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>{{message}}</h2>
+    <!--
+      v-on:click="click1" 的语法糖是@click 
+      不需要传参数的时候 click1后面的()可以加也可以省略
+    -->
+    <button @click="click1">按钮1</button>
+    <!--
+      在v-on事件监听的时候仅需要一个传一个event对象的时候 可以省略
+    -->
+    <button @click="click2">按钮2</button>
+    <!--在事件监听 中需要传event对象又需要传其他参数的情况下 用$event-->
+    <button @click="click3(4,$event)">按钮3</button>
+  </div>
+  <script src="vue1/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: "你好"
+      },
+      methods: {
+        click1() {
+          console.log(1);
+
+        },
+        click2(event) {
+          console.log(2, event);
+
+        },
+        click3(a, b) {
+          console.log(3, a, b);
+
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

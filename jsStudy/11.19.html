@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- unicode编码在页面用的话用&+#+十进制的unicode编码符号 -->
+  <h1 style="font-size:100px">&#9760;</h1>
+  <script>
+    //unicode 编码在js中采用十六进制的方式 用转义符\u+十六进制的Unicode编码
+    console.log("\u2620");
+    //整数在计算面的表示
+    //13转成2进制1101  -5转成2进制为-101
+    // for (i = 2; i <= 100; i++) {
+    //   var flag = true
+    //   for (var j = 2; j < Math.sqrt(i); j++) {
+    //     if (i & j == 0) {
+    //       flag = false
+    //     }
+    //   }
+
+    // }
+    // if (flag = true) {
+    //   console.log(i);
+    // }
+    //-1 在2进制中用256-1的结果255转成转成2进制数
+    //八bit的2进制周期是256
+    //3-2相当于3+(256-2) 都转化成2进制进行运算然后把八bit的之外的去掉
+    //2进制正数的前导都是0
+    //2进制负数的前导都是1
+    //-2**n-1~2**n-1
+    //-2147483648~2147483647  周期是2**32
+    //-17 把17转成2进制然后再取反再加一
+    //2进制数先-1然后取反
+    //>>相当于减半下取整保留符号
+    //<<对于正数来来说是加倍
+    //无符号右移>>>左边补0 负数移动后变正数 移动完之后的数是当正数理解
+    //js中浮点数参与运算取整数部分32bit参数运算
+    //Math.trunc()取整数部分
+    //&按位与 5&8把5跟8都转成2进制按位对齐进行计算相同为1不同为0     任何数跟0与等于0
+
+    //|按位或 只要一个是1就是1
+    //按位~n=-(n+1)
+    //按位异或^      俩个数都转成二进制相同是0不同是1
+    //0b2进制
+    //0o八进制
+    //0x十六进制
+    function dadd(x, y) {
+      var c = 0
+      var z = x ^ y
+      while (z) {
+        z = z & (z - 1)
+        c++
+      }
+      return c
+    }
+    function fsdfasf(x, y) {
+      var z = x ^ y
+      var c = 0
+      var d = 1
+      while (z) {
+        if (d & z) {
+          c++
+        }
+        z >>= 1
+      }
+      return c
+    }
+    function dsadad1222() {
+      var c = 0
+      while (n) {
+        n = n & n - 1
+        c++
+      }
+      return c
+    }
+    function ddafafsdsafs(n) {//把一个数的二进制倒过来然后输出其
+      var sum = 0
+      for (var i = 0; i < 32; i++) {
+        var d = n % 2
+        sum = sum * 2 + d
+        n >>>= 1//n=(n-d)/2
+      }
+      return sum >>> 0
+
+    }
+    var ssss = new Array(1, 2, 3, 4);
+    console.log(ssss);
+    var si = '121212'
+    var r = [...si]//将字符串转为数组
+    console.log(r);
+    //.push(i)在数组后面添加一项
+    //b.pop()删除数组的最后一项
+    //b.slice(1)复制素组的除了最后一项除了第一项的的其他元素,原数组不变
+    //b.unshift()从数组前面增加一项
+    //b.shift()从数组的第一项删除
+    //var a=[]
+    //var a=[1,2,3,4,45]
+    //创建长度不为0的数组的
+    //读取数组的第i项
+    //a[i] 
+    //独处数组中的最后一项
+    //a[a.length-1]
+    //在数组的末尾删除最后一项a.pop()//返回是的删除的那一项
+    //js中华的数组的可以任意的下表赋值
+    var n = 2
+    var s = n.toString(2)
+    console.log(s);
+    var nums = [1, 2, 3]
+    var sum = 0
+    var min = nums[0]
+    for (var i = 0; i < nums.length; i++) {
+      if (nums[i] < min) {
+        min = nums[i]
+      }
+      sum += nums[i]
+    }
+    console.log(min);
+    console.log(sum);
+    var ss = sum - nums.length * min
+    //负数先把它转成2进制然后取反 加一
+    //在js元算中都是4字节运算
+    //uint8无符号整形 用这个模式存在整数和0
+    //有符号整形需要补吗
+    //>>带符号右移
+    //>>>无符号右移动总返回一个正数
+    function mathpow(x, n) {//求x的n次方
+      if (X == 0) {
+        return 0
+      }
+      if (n == 0) {
+        return 1.0
+      }
+      if (n < 0) {
+        n = -n
+        x = 1 / x
+      }
+      var res = 1
+      while (n) {
+        if (n % 2 == 1) {
+          res *= x
+          x = x * x
+        }
+        n >>= 1
+      }
+      return res
+    }
+    console.log(mathpow(2, 3));
+    function missingnumber(nums) {
+      var n = nums.length
+      var sum = n * (n + 1) / 2
+      var ssm = 0
+      for (var i = 0; i < nums.length; i++) {
+        ssm += nums[i]
+      }
+      return sum - ssm
+    }
+    function digits(digits) {
+      digits[digits.length - 1]++
+      for (var i = digits.length - 1; i > 0; i--) {
+        if (digits[i] == 10) {
+          digits[i] = 0
+          digits[i - 1]++
+        } else {
+          return digits
+        }
+      }
+      if (digits[0] == 10) {
+        digits[0] = 0
+        digits.unshift(1)
+      }
+      return digits
+    }
+    function singleNumber(nums) {//输出数组中只出现一次的数字
+      var s = []
+      for (var i = 0; i < nums.length; i++) {
+        var n = nums[i]
+        if (s[n] == 1) {
+          s[n] = 0
+        } else {
+          s[n] = 1
+        }
+      }
+      for (var j = 0; j < s.length; j++) {
+        if (s[i] == 1) {
+          return i
+        }
+      }
+    }
+    //^异或运算支持交换律和结合律
+    //^相同为0不同为1
+    function yihuo(nums) {//异或运算求出数组中只出现一次的元素
+      var sum = 0
+      for (var i = 0; i < nums.length; i++) {
+        sum ^= nums[i]
+      }
+      return sum
+    }
+    function twosum(nums, target) {//求数组中俩数之和等于target
+
+    }
+    //水位左边和右边的较小者减去自己的高度等于能存的水
+    //水位正序搞一个数组
+    //水位反许搞一个数组\
+    // function dsd(nums) {
+    //   var j = 0
+    //   for (var i = 0; i < nums.lngth; i++) {
+    //     if (nums[j] != nums[i - 1]) {
+    //       nums[j++] = nums[i]
+    //     }
+    //   }
+    // }
+    //函数可以当成字符串拼接
+    function pwoer(x, n) {
+      if (n == undefined) {
+        n == 2
+      }
+      var result = 1
+      for (var i = 0; i <= n; i++) {
+        result *= i
+      }
+      return result
+    }
+    function jir(n) {
+      return n > 1 ? n * jir(n - 1) : 1;
+
+    }
+    console.log(jir(5));
+    if (x < 2) {//2分法求平方根
+      return x
+    }
+    var left = 0;
+    var right = x
+    var mid = Math.floor((left + right) / 2)
+    var ss = mid * mid
+    while (right - left > 1) {
+      if (ss < x) {
+        left = mid
+      } else if (ss == x) {
+        return mid
+      } else if (ss > x) {
+        right = mid
+      }
+      return left
+    }
+    var findMaxAverage = function (nums, k) {//求数组nums子序列长度为k的最大平均数
+      if (nums.length == 1 && k == 1) {
+        return nums[0]
+      }
+      var max = 0
+      for (var i = 0; i < nums.length; i++) {
+        for (var j = i + 1; j <= nums.length; j++) {
+          if (nums.slice(i, j).length == k) {
+            var a = nums.slice(i, j).reduce((x, y) => (x + y)) / k
+            if (a > max) {
+              max = a
+            }
+          }
+
+        }
+      }
+      return max
+    };
+
+
+
+  </script>
+
+</body>
+
+</html>

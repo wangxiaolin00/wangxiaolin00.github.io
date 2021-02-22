@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class PriorityQueue {//不在constructor上的是实例方法 用priorityQueue.prototype 
+      constructor() {//在constructor上的是静态方法 PriorityQueue.heapify()
+        this.elements = []
+      }
+      pop() {
+        if (this.elements.length < 2) {
+          return this.elements[0]
+        }
+        let result = this.elements[0]
+        this.elements[0] = this.elements.pop()
+        this.elements.heapDown(0)
+        return result
+
+      }
+      push(val) {
+        this.elements.push(val)
+        this.heapUp(this.elements.length - 1)
+
+      }
+      peak() {
+        return this.elements[0]
+      }
+      heapDown(pos) {
+        let l = pos * 2 + 1
+        let r = pos * 2 + 2
+        let maxidx = pos
+        if (l < this.elements.length && this.elements[l] > this.elements[r]) {
+          maxidx = l
+        }
+        if (r < this.elements.length && this.elements[r] > this.elements[l]) {
+          maxidx = r
+        }
+        if (maxidx != pos) {
+          var temp = this.elements[maxidx]
+          this.elements[maxidx] = this.elements[pos]
+          this.elements[pos] = this.elements[maxidx]
+          this.heapDown(maxidx)
+        }
+      }
+      heapUp(pos) {
+        let pindex = (pos - 1) >> 1
+        if (pindex > 0 && this.elements[pindex] < this.elements[pos]) {
+          let temp = this.elements[pindex]
+          this.elements[pindex] = this.elements[pos]
+          this.elements[pos] = temp
+          this.heapUp(pindex)
+        }
+
+      }
+      get size() {
+        return this.elements.length
+      }
+
+    }
+
+    // class MultiplicatorUnitFaliure extends Error {
+    //   constructor(...args) {
+    //     super(...args)
+    //   }
+    // }
+    // function primitiveMultiply(a, b) {
+    //   if (Math.random < 0.5) {
+    //     return a * b
+    //   } else {
+    //     throw new MultiplicatorUnitFaliure()
+    //   }
+    // }
+    // function multip(a, b) {
+    //   for (; ;) {
+    //     try {
+    //       let result = primitiveMultiply(a, b)
+    //       return result
+    //     } catch (e) {
+    //       if (e instanceof MultiplicatorUnitFaliure) {
+    //         continue
+    //       } else {
+    //         throw e
+    //       }
+    //     }
+    //   }
+    // }
+    function curry(f, length = f.length) {
+      return function (...args) {
+        if (args.length < length) {
+          return curry(f.bind(null, ...args), length - args.length)
+        } else {
+          return f(...args)
+        }
+      }
+    }
+    class Set1 {
+      constructor() {
+        this.item = []
+      }
+      add(val) {
+        if (this.this.item.includes(val)) {
+          return
+        } else {
+          this.item.push(val)
+        }
+      }
+      get size() {
+        return this.item.length
+      }
+      has(val) {
+        return this.item.includes(val)
+      }
+      delete(val) {
+        if (!this.item.includes(val)) {
+          return false
+        } else {
+          for (let i = 0; i < this.item.length; i++) {
+            if (this.item[i] === val) {
+              this.item.splice(i, 1)
+              return true
+            }
+          }
+        }
+      }
+    }
+    class Map1 {
+      constructor() {
+        this.element = []
+        this.value = []
+      }
+      has(key) {
+        return this.element.includes(key)
+      }
+      get(key) {
+        let idx = this.findidx(key)
+        return this.value[idx]
+      }
+      set(key, val) {
+        if (this.element.includes(key)) {
+          let idx = this.findidx(key)
+          this.value[idx] = val
+
+        } else {
+          this.element.push(key)
+          this.value.push(val)
+        }
+      }
+      findidx(val) {
+        if (val !== val) {
+          return this.element.findIndex(val => val !== val)
+        } else {
+          return this.element.findIndex(val)
+        }
+
+      }
+
+    }
+  </script>
+  super 关键字必须放在子类的this之前,super关键字调用父类的构造函数的this
+  Son extends F 子类继承父类
+  继承之后 子类的用super 可以调用父类的方法 super.push() 调用父类的方法
+  this.#elemetns 在类中的变量不希望别人访问或者改变 ,可以在this.elements 的elements前面加上#
+  使用了继承的话 constructor 中必须要调用super 而且在子类的this的之前
+  constructor 不写的话会自动生成一个
+  class A extends Array
+  A.prototype.__proto__===Array.prototype
+  类中的私有属性可以用 #elements=null先声明
+  类中私有方法可以用 前面加#
+  内存泄露:
+
+
+
+</body>
+
+</html>

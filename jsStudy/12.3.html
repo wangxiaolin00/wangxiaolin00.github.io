@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function bubblesort(arr) {
+      for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = 0; j < arr.length - i - 1; j++) {
+          if (arr[j] > arr[j + 1]) {
+            var temp = arr[j]
+            arr[j] = arr[j + 1]
+            arr[j + 1] = temp
+          }
+        }
+      }
+      return arr
+    }
+    function insertsort(arr) {
+      for (let i = 0; i < arr.length; i++) {
+        for (var j = i; j >= 0; j--) {
+          if (arr[j - 1] > arr[j]) {
+            var temp = arr[j - 1]
+            arr[j - 1] = arr[j]
+            arr[j] = temp
+          }
+        }
+      }
+      return arr
+    }
+    function selectionsort(arr) {
+      for (let i = 0; i < arr.length; i++) {
+        var minindex = i
+        for (var j = i + 1; j < arr.length; j++) {
+          if (arr[j] < arr[minindex]) {
+            minindex = j
+          }
+        }
+        [arr[i], arr[minindex]] = [arr[minindex], arr[i]]
+
+      }
+      return arr
+    }
+    function logeach(arr) {
+      arr.forEach(element => {
+        console.log(element);
+
+      });
+    }
+    console.log(logeach([1, 2, 3, 4, 5]));
+    //document.write(val)往页面里面写东西
+    //action 是一个函数表达我们对每个元素要用的函数
+    //逗号表达式 [1,2,3][1,2]数组后面的[1,2]里面的逗号是逗号表达式;逗号表达式的结果是最后的结果 
+    //变量还需要被使用,作用域没有被销毁;这个行为成为闭包
+    function quicksort(arr) {
+      if (arr.length < 2) {
+        return [...arr]
+      }
+      var baseval = arr[0]
+      var mid = []
+      var left = []
+      var right = []
+      arr.forEach(element => {
+        if (element == baseval) {
+          mid.push(element)
+        } else if (element < baseval) {
+          left.push(element)
+        } else if (element > baseval) {
+          right.push(element)
+        }
+
+      })
+      return quicksort(left).concat(mid).concat(quicksort(right))
+
+    }
+    // function margesort(arr) {
+    //   if (arr.length < 2) {
+    //     return [...arr]
+    //   }
+    //   let mid = arr.length >> 1
+    //   let leftarr = arr.slice(0, mid)
+    //   let rightarr = arr.slice(mid)
+    //   let leftsort = margesort(leftarr)
+    //   let rightsort = margesort(rightarr)
+    //   var i = 0, j = 0;
+    //   var result = []
+    //   while (i < leftsort.length && j < rightsort.length) {
+    //     if (leftsort[i] < leftsort[j]) {
+    //       result.push(leftsort[i++])
+    //     } else {
+    //       result.push(rightsort[j++])
+    //     }
+    //   }
+    //   while (i < leftsort.length) {
+    //     result.push(leftsort[i++])
+    //   }
+    //   while (j < rightsort.length) {
+    //     result.push(rightsort[j++])
+    //   }
+    //   return result
+
+    // }
+    // console.log(margesort([1, 4, 2, 5, 7, 9, 3, 6]));
+    //es6 ...args 可以给函数定义多个参数
+    //js函数有一个方法
+    //类数组对象具有length属性;并具有对应的下标叫做类数组对象
+    //或者使用f.apply方法 参数 f.apply(null,arguments)
+    //function ss(f) 当函数的参数不知道是有多少个时候
+    //可以使用alppy.(null,arguments)
+    //或者使用...args
+    //var arr=[1,2,3,4,5]
+    //Math.max(...arr)
+    //js 中表字符串可以用单引号双引号反引号
+    //反引号里面的字符串可以有明文回车
+    //YAMl
+    //JSON 文件格式不能少逗号也不能多逗号,以js对象模型设计的文本格式
+    //eval()将一段字符串当成js代码执行
+    //JSON.parse(JSON.TEXT) 这个函数可以将json文件转成js对象
+    //json里面不能有有undifined 也不能有NaN
+    //JSON里面不能有tab符
+    //tab符的转义为\t
+    //JSON.sttingify()将括号里的字符数组转成JSON格式
+    //JSON.parse()将括号里面JSON格式的转成js模式
+    var aaa = [1, 2, 3, 423, 534323, 34, 6, 7]
+    var b = aaa.filter(item => item < 8 && item > 3)//filter()值会返回新的满足条件的数组
+    console.log(b);
+    var bb = aaa.map(item => item * 2)
+    console.log(bb);
+    var aaas = ['1', '2', '3', '4']
+    var ff = aaas.map(item => Number(item))
+    console.log(ff);
+    //filter(p,index,array)第一个参数是数组元素,第二项是数组的元素对应的索引,第三个参数是数组本身
+    //array.map(p) map是对数组里的每个元素执行括号里面的操作
+    //把括号里面的函数作用于调用map的每一个数组元素
+    function map(ary, transform) {
+      var result = []
+      for (var i = 0; i < ary.length; i++) {
+        result.push(transform(ary[i]))
+      }
+      return result
+    }
+    //forEach()对数组的每一个元素进行操作但不返回结果也不会改变原数组
+
+  </script>
+
+</body>
+
+</html>

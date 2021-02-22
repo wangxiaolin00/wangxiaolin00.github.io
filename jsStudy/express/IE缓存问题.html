@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #dd {
+      width: 300px;
+      height: 200px;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <button class="btn">我是一个按钮</button>
+  <div id="dd"></div>
+  <script>
+    const div = document.getElementById('dd')
+    const btn = document.querySelector('.btn')
+    btn.addEventListener('click', function () {
+      const xhr = new XMLHttpRequest()
+      //xhr.responseType='json' //将后端返回的json格式的字符串转化为对象
+      xhr.open('GET', 'http://127.0.0.1:8001/ie?t=' + Date.now())
+      //解决ie浏览器缓存问题 在?t= 后面加上一个时间戳
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+      xhr.send()
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            div.innerHTML = xhr.response
+          }
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

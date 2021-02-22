@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class TaskQueue {
+      #parallelLimit = 0
+      #runningCount = 0 // 当前正在运行的任务数量
+      constructor(parallelLimit = 1) {
+        this.tasks = []
+        this.#parallelLimit = parallelLimit // 最多同时运行的任务数量
+      }
+
+      next = () => {
+        if (this.tasks.length) {
+          let task = this.tasks.shift()
+          task(this.next)
+        } else {
+          this.#runningCount--
+        }
+      }
+
+      addTask(task) {
+        if (this.#runningCount < this.#parallelLimit) {
+          this.#runningCount++
+          task(this.next)
+        } else {
+          this.tasks.push(task)
+        }
+      }
+    }
+
+    var q1 = new TaskQueue()
+    q1.addTask(function (next) {
+      console.log(1)
+      next()
+    })
+    q1.addTask(function (next) {
+      console.log(2)
+      next()
+    })
+    q1.addTask(function (next) {
+      setTimeout(() => {
+        console.log(3)
+        next()
+      }, 1000)
+    })
+    q1.addTask(function (next) {
+      setTimeout(() => {
+        console.log(4)
+        next()
+      }, 1000)
+    })
+
+
+  </script>
+
+</body>
+
+</html>

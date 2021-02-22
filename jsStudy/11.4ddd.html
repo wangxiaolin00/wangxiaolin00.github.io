@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    var arr = [1, 44, 4, 2, 444, 215, 3];
+    var newArr = [];
+    for (i = arr.length - 1; i >= 0; i--) {
+      newArr[newArr.length] = arr[i];
+    }
+    alert(newArr);
+    console.log(arr);
+    console.log(newArr);
+    for (u = 0; u <= newArr.length - 1; u++) {
+      for (h = 0; h <= newArr.length - i - 1; h++) {
+        if (newArr[h] > newArr[h + 1]) {
+          var temp = newArr[h];
+          newArr[h] = newArr[h + 1];
+          newArr[h + 1] = temp;
+        }
+      }
+    }
+    console.log(newArr);
+    var str = '';
+    for (y = 0; y <= 9; y++) {
+      for (n = 0; n <= 9; n++) {
+        str += '★';
+      }
+      str += '\n';
+    }
+    console.log(str);
+    alert(str);
+    var sep = '';
+    for (gg = 0; gg <= 9; gg++) {
+      for (bg = 0; bg <= gg; bg++) {
+        sep += '★';
+
+      }
+      sep = sep + '\n';
+    }
+    alert(sep);
+    console.log(sep);
+    var spp = '';
+    for (f = 0; f <= 9; f++) {
+      for (dd = f; dd <= 9; dd++) {
+        spp += '★';
+      }
+      spp = spp + '\n';
+    }
+    alert(spp);
+    console.log(spp);
+    var ppr = '';
+    for (rr = 0; rr <= 5; rr++) {
+      ppr = ppr + '★';
+    }
+    console.log(ppr);
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

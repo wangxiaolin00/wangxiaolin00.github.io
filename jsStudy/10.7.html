@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    var date = new Date();
+    console.log(date.getFullYear());//getFullYear返回当前系统的年份;
+    console.log(date.getMonth() + 1);//getManth()返回的月份比系统月份小1个月,所以我们要记得+1!!!!!!!!!!!!
+    console.log(date.getDate());//getDate()返回系统的几号
+    var year = date.getFullYear();
+    var months = date.getMonth() + 1;
+    var da = date.getDate();
+    var arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+    var day = date.getDay();//周日返回的是0,周一返回的是1
+    console.log('今天是: ' + year + '年 ' + months + '月 ' + da + '日 ' + arr[day]);
+    function getTimes() {
+      var time = new Date();
+      var h = time.getHours();
+      var h = h < 10 ? '0' + h : h;
+      var m = time.getMinutes();
+      var m = m < 10 ? '0' + m : m;
+      var s = time.getSeconds();
+      var s = s < 10 ? '0' + s : s;
+      return h + ':' + m + ':' + s;
+    }
+    console.log(getTimes());
+
+
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

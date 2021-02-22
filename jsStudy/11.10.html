@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="foo">
+    var a = +prompt('请输入 a:')
+    var b = +prompt('请输入 b:')
+    var c = +prompt('请输入 c:')
+    var d = +prompt('请输入 d:')
+    var e = +prompt('请输入 e:')
+    var f = +prompt('请输入 f:')
+    //ax**2+bx+4ac+0 求跟公式为   (-b+-Math.sqrt(b*b-4*a*c)
+    var dalata = b * b - 4 * a * c
+
+    // var x = confirm('Are you ok?');//确定返回值是true;取消返回false
+    // console.log(x);
+    // if (x1 == NaN && x2 == NaN) {
+    //   console.log(x1 + x2 + '无解');
+
+    // }
+    if (dalata > 0) {
+      var x1 = (-b + Marh.sqrt(dalata)) / (2 * a);
+      var x2 = (-b - Marh.sqrt(dalata)) / (2 * a);
+      console.log(x1, x2);
+    } else if (
+      dalata == 0
+    ) {
+      var x1 = (-b + Marh.sqrt(dalata)) / (2 * a);
+      console.log(x1);
+    } else {
+      console.log('无解');
+    }
+  </script>
+  <script>
+
+  </script>
+</head>
+
+
+<body>
+
+</body>
+
+</html>

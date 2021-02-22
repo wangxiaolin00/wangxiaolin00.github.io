@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #res {
+      width: 300px;
+      height: 200px;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="res"></div>
+  <script>
+    var div = document.querySelector('#res')
+    div.addEventListener('mouseover', function () {
+      //console.log('test');
+      //创建对象
+      const xhr = new XMLHttpRequest()
+      //初始化 设置请求 方法 与url
+      xhr.open('POST', 'http://127.0.0.1:8001/server')
+      //设置请求头信息  把用户校验信息放在 请求头里面发给服务器   服务器对参数做提取 对身份进行校验
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+      //Content-Type 设置请求体内容的类型
+      //发送
+      xhr.send('a=100&b=200&c=300')//请求体
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {//在服务端返回全部数据的时候
+          if (xhr.status >= 200 && xhr.status < 300) {//成功的时候
+            //处理服务端响应体
+            div.innerHTML = xhr.response
+          }
+
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

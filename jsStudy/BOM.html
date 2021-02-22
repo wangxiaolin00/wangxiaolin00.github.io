@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  什么是BOM?
+  * Browser object model 浏览器对象模型
+  Dom 一般指doucument上提供的api
+  API Application Programming Interface 应用编程接口
+  一函数的 类 方法 属性等体现出来
+  Gui 图形用户界面
+  GLI 命令行接口 以命令的形式的输入为体现
+  location 读写地址信息
+  改写location中hash进行页面内跳转 页面不帅新
+  location.reload() 刷新 页面的函数, 不能直接写在script标签中
+  因为 写在script标签中会到导致页面加载 scipt里的函数运行时 ,函数直接执行,导致页面刷新 再执行,导致页面一会刷新
+  正确的做法:刷新后 改变location中的hash属性 然后判读 location中hash属性有无更改的属性,判读是否刷新
+
+  location.herf=xxx //(xxx指url地址)
+  location.assign(xxx)
+  location=xxx 三者效果相同 都是 将页面跳转到某个地址
+
+  还有一个location.replace(xxx) 效果也是将页面跳转跳转到某个地址 但是无法后退到刚刚页面 会直接会到前面的前面的页面
+  location.orgin读取到地址栏中第一个单斜杠中所有的内容
+  改变 location.hash 会触发window.onhashchange事件 可以在这个事件的 handler 里做相对应的操作
+  (如刷新 location.reload(),或者请求ajax )(一般用来做前端路由)
+  history.back() 页面后退
+  history.forward()页面前进
+  history.go(2)前进俩个页面
+  history.go(-2)后退俩项页面
+  history.pushState(null,'','/foo/bar/') 将地址栏中第一个斜杠后面的内容更换为第三个参数的内容 并且 页面不会刷新
+  点击回退键可以回到刚刚改之前的地址
+  更多的时候用的是history.pushState()
+  history.replaceState(null,'','foo/bar/')
+  将页面第一个斜杠后面的内容改为函数的第三参数的内容
+  页面不会刷新 并且无法后退到刚刚的地址
+  BOM 对象
+  window
+  -代表的是整个浏览器器窗口全局对象
+  navigator
+  -代表浏览器当前浏览器的信息,通过该对象来识别不同的浏览器
+  Location
+  -代表当前浏览器的地址信息,获取地址栏的信息,或者操作地址栏跳转页面
+
+  Hsitory
+  代表浏览器的历史记录,可以通过该对象来操作浏览器的历史记录
+  由于隐私原因 该对象不能获取具体的历史记录,只能操作当前浏览器的向前向后跳转,而且该 操作只有在当次访问的时候有效
+  Screen
+
+
+
+</body>
+
+</html>

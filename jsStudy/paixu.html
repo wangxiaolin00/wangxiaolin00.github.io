@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    section {
+      display: table;
+
+    }
+
+    div {
+
+      width: 100px;
+      background-color: yellowgreen;
+
+    }
+
+    aside {
+
+      width: 150px;
+      background-color: violet;
+    }
+
+    main {
+      overflow: hidden;
+      background-color: red;
+
+    }
+
+    main,
+    aside,
+    div {
+      display: table-cell;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translateX(0px);
+      }
+
+      100% {
+        transform: translateX(-1400px);
+      }
+    }
+
+    span {
+      float: right;
+      animation-name: move;
+      animation-timing-function: linear;
+      animation-duration: 15s;
+      animation-fill-mode: backwards;
+      animation-iteration-count: infinite;
+
+    }
+  </style>
+
+</head>
+<section>
+  <div>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate placeat vel architecto iure laboriosam nulla
+    minima magnam doloremque, tempora saepe alias tempore doloribus aliquam autem quo, sint ex nemo libero!
+  </div>
+  <main>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nam illo error exercitationem provident!
+    Consequatur odit perferendis omnis quasi in officiis ea veniam ipsum assumenda harum. Quae esse impedit modi.</main>
+  <aside>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ex culpa quis dolores delectus sequi
+    voluptatum repellendus autem voluptatibus, cum recusandae facilis illo perspiciatis laborum non deleniti nihil
+    consequuntur eligendi!
+  </aside>
+
+
+</section>
+<marquee behavior="" direction="">跑马灯</marquee>
+<span>跑马灯等</span>
+
+<body>
+
+</body>
+
+</html>

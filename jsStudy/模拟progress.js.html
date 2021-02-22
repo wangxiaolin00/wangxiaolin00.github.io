@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <textarea name="" id="" cols="30" rows="10">
+    function foo() {
+      return a + b
+    }
+  </textarea>
+
+  <link rel="stylesheet" href="https://codemirror.net/lib/codemirror.css">
+  <script src="https://codemirror.net/lib/codemirror.js"></script>
+  <script src="https://codemirror.net/mode/javascript/javascript.js"></script>
+
+  <style>
+    .progress-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      width: 100%;
+    }
+
+    .progress-wrapper>div {
+      height: 100%;
+      background-color: lightseagreen;
+      transition: 0.6s;
+      width: 0%;
+    }
+  </style>
+  <script>
+    // UI组件
+    class ProgressJS {
+      constructor() {
+        this.val = 0
+        var wrapper = document.createElement('div')
+        wrapper.className = 'progress-wrapper'
+        var inner = document.createElement('div')
+        wrapper.appendChild(inner)
+        this.wrapper = wrapper
+        this.inner = inner
+      }
+      start() {
+        this.val = 1
+        // console.log(Date.now())
+        setTimeout(() => {
+          // console.log(Date.now())
+          this.inner.style.width = this.val + '%'
+        }, 10)
+        document.body.appendChild(this.wrapper)
+      }
+      end() {
+        this.set(100)
+        setTimeout(() => {
+          document.body.removeChild(this.wrapper)
+        }, 1000)
+      }
+      set(val) {
+        if (val > 100) {
+          val = 100
+        }
+        this.val = val
+        this.inner.style.width = this.val + '%'
+      }
+      increase(val) {
+        this.set(this.val + val)
+      }
+    }
+
+    var p = new ProgressJS()
+    // p.start()
+
+    var editor = CodeMirror.fromTextArea(document.querySelector('textarea'), {
+      lineNumbers: true
+    });
+  </script>
+</body>
+
+</html>

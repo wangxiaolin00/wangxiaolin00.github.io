@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    s = "anagram"
+    var a = s.split('').sort((a, b) => {
+      if (a < b) {
+        return -1
+      }
+      if (a > b) {
+        return 1
+      } else {
+        return 0
+      }
+    }).join('')//字符串字母排序的方法
+    console.log(a);
+    str = "dog cat cat dog"
+    console.log(str.split(' '));
+    //判断俩个数组是否相等;先数组arr.sort((a,b)=>(a-b)).toSting()然后判断相等
+    function paixuzifu(str) {//将字符串中字母排序的函数;字符中只含有字母
+      return str.sort((a, b) => {
+        if (a < b) {
+          return -1
+        } else if (a > b) {
+          return 1
+        } else {
+          return 0
+        }
+      }).join('')
+    }
+    //Array.from(s)将字符串s转化为数组
+    var grounpan = function (strs) {
+      let o = {}
+      for (let i of strs) {
+        var key = i.split('').sort((a, b) => {
+          if (a < b) {
+            return -1
+          } else if (a > b) {
+            return 1
+          } else {
+            return 0
+          }
+        }).join('')
+        o[key] ? o[key].push(i) : o[key] = [i]//o对象中有key?有的话就这
+      }
+      return Object.values(o)
+    }
+    var ss = ["eat", "tea", "tan", "ate", "nat", "bat"]
+    console.log(grounpan(ss));
+    //异或^   0^4等于4 4^4等于0 疑惑相同为0不同为不为0的那个
+    var bbb = []
+    console.log(bbb.length);
+    var lengthOfLongestSubstring = function (s) {
+      // 哈希集合，记录每个字符是否出现过
+      const occ = new Set();
+      const n = s.length;
+      // 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
+      let rk = -1, ans = 0;
+      for (let i = 0; i < n; ++i) {
+        if (i != 0) {
+          // 左指针向右移动一格，移除一个字符
+          occ.delete(s.charAt(i - 1));
+        }
+        while (rk + 1 < n && !occ.has(s.charAt(rk + 1))) {
+          // 不断地移动右指针
+          occ.add(s.charAt(rk + 1));
+          ++rk;
+        }
+        // 第 i 到 rk 个字符是一个极长的无重复字符子串
+        ans = Math.max(ans, rk - i + 1);
+      }
+      return ans;
+    };
+    function noyunsuanfu(a, b) { //不使用运算符求和
+      while (b != 0) {
+        var temp = a ^ b
+        b = (a & b) << 1
+        a = temp
+      }
+      return a
+    }
+    function Stack() {//封装一个栈类;基于数组
+      this.items = []
+      Stack.prototype.push = function (element) {
+        return this.items.push(element)
+      }
+      Stack.prototype.pop = function () {
+        return this.items.pop()
+      }
+      Stack.prototype.peek = function () {
+        return this.items[this.items.length - 1]
+      }
+      Stack.prototype.isEmpty = function () {
+        return this.items.length == 0
+      }
+      Stack.prototype.size = function () {
+        return this.items.length
+      }
+      Stack.prototype.toString = function () {
+        let result = ''
+        for (let i = 0; i < this.items.length; i++) {
+          result += this.items[i] + ' '
+        }
+        return result
+      }
+    }
+    // var s = new Stack()
+    // s.push(11)
+    // s.push(22)
+    // alert(s)
+    // s.push(1, 2, 3)
+    // s.pop()
+    // console.log(s.size());
+    // console.log(s.isEempty());
+    // console.log(s.toString());
+    function dectobin(decnumber) {
+      var a = new Stack()
+      while (decnumber > 0) {
+        a.push(decnumber % 2)
+        decnumber = Math.floor(decnumber / 2)
+      }
+      var result = ''
+      while (!a.isEmpty()) {
+        result += a.pop()
+      }
+      return result
+    }
+    console.log(dectobin(100));
+    function dectobin1(decnumber) {//十进制转2进制的函数
+      var a = []
+      while (decnumber > 0) {
+        a.push(decnumber % 2)
+        decnumber = Math.floor(decnumber / 2)
+      }
+      var result = ''
+      while (a.length != 0) {
+        result += a.pop()
+      }
+      return result
+    }
+    console.log(dectobin1(100));
+    function Queue() {//封装一个队列的类
+      this.items = []
+      Queue.prototype.enqueue = function (element) {
+        return this.items.push(element)
+      }
+      Queue.prototype.dequeue = function () {
+        return this.items.shift()
+      }
+      Queue.prototype.font = function () {
+        return this.items[0]
+      }
+      Queue.prototype.isEmpty = function () {
+        return this.items.length == 0
+      }
+      Queue.prototype.size = function () {
+        return this.items.length
+      }
+      Queue.prototype.toString = function () {
+        var result = ''
+        for (var i = 0; i < this.items.length; i++) {
+          result += this.items[i] + ' '
+        }
+        return result
+      }
+
+    }
+    // var ss = new Queue()
+    // ss.enqueue('ddd')
+    // ss.enqueue('sss')
+    // ss.enqueue('ss')
+    // ss.enqueue('addd')
+    // alert(ss)
+    // ss.dequeue()
+    // alert(ss)
+    // alert(ss.size())
+    // console.log(ss.isEmpty());
+    //击鼓传花
+    function passgame(namelist, num) {//击鼓传花namelist表示人名字的数组;num表示要数的数字
+      var a = []
+      for (var i = 0; i < namelist.length; i++) {
+        a.push(namelist[i])//将人的名字存放到数组去
+      }
+      while (a.length > 1) {//当剩余的人数大于1就继续
+        for (var i = 0; i < num - 1; i++) {
+          a.push(a.shift())
+        }
+        a.shift()//把数数等于那个谁删除
+      }
+      var lastname = a[0]
+      // alert('最终剩下的人是:' + lastname)
+      return namelist.indexOf(lastname)
+    }
+    console.log(passgame(['lucy', 'liil', 'Tom', 'Lilei', 'sss'], 3));
+    function PriorityQueue() {//封装一个优先级队列
+      function QueueElement(element, priority) {//封装一个类内部类来调用优先级
+        this.element = element
+        this.priority = priority
+      }
+      //封装属性
+      this.items = []//将属性封装到数组
+      //实现插入方法
+      PriorityQueue.prototype.enqueue = function (element, priority) {
+        var queueelement = new QueueElement(element, priority)
+        //判断队列是否为空
+        if (this.items.length == 0) {
+          this.items.push(queueelement)
+        } else {
+          var flag = false
+          for (var i = 0; i < this.items.length; i++) {
+            if (queueelement.priority < this.items[i].priority) {
+              this.items.splice(i, 0, queueelement)
+              flag = true;
+              break;
+            }
+          }
+          if (!flag) {//如果前面找不到可以插入的地方放到最后
+            this.items.push(queueelement)
+          }
+        }
+
+      }
+      PriorityQueue.prototype.dequeue = function () {
+        return this.items.shift()
+      }
+      PriorityQueue.prototype.font = function () {
+        return this.items[0]
+      }
+      PriorityQueue.prototype.isEmpty = function () {
+        return this.items.length == 0
+      }
+      PriorityQueue.prototype.size = function () {
+        return this.items.length
+      }
+      PriorityQueue.prototype.toString = function () {
+        var result = ''
+        for (var i = 0; i < this.items.length; i++) {
+          result += this.items[i].element + '-' + this.items[i].priority + ' '
+        }
+        return result
+      }
+
+
+    }
+    // var pd = new PriorityQueue()
+    // pd.enqueue('abc', 11)
+    // pd.enqueue('sasabc', 40)
+    // pd.enqueue('xbsc', 3)
+    // pd.enqueue('ybcd', 15)
+    // pd.enqueue('zbd', 1)
+    // alert(pd)
+
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-size: 0;
+    }
+
+    #app {
+      font-size: 16px;
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <button id="app">按钮</button>
+  <script>
+    //下载一张图片
+    function downloadImg(url, callback) {
+      let img = document.createElement('img')
+      img.onload = function () {
+        callback(img)
+      }
+      img.src = url
+
+    }
+
+    const btn = document.querySelector('#app')
+    btn.onclick = function () {
+      const xhr = new XMLHttpRequest()
+      xhr.open('GET', 'https://xieranmaya.github.io/images/cats/cats.json')
+      xhr.send()
+      //事件绑定  处理服务端返回的结果
+      //readystate 是xhr对象中的属性 表示状态 0,1,2,3,4
+
+      //0表示初始值 
+      //1表示 open方法调用结束 
+      //2表示 send()方法调用结束
+      //3表示 服务端返回部分数据
+      //4表示 服务端返回所有的请求
+      //总功5个值 触发4次onreadystatechange事件
+      xhr.onreadystatechange = function () {
+        //判断
+        if (xhr.readyState === 4) {
+          //判断响应状态码200 404 403 401 500
+          //以2开头的三位数 状态码都表示成功
+          if (xhr.status >= 200 && xhr.status < 300) {
+            //处理结果 行 头 空行 体
+            //1.响应行
+            console.log(xhr.status);//状态码
+            console.log(xhr.statusText);//状态字符串
+            console.log(xhr.getAllResponseHeaders());//所有响应头
+            console.log(JSON.parse(xhr.response));//响应体
+            let list = JSON.parse(xhr.response)
+            let i = 0
+            function f() {
+              if (i < list.length) {
+                downloadImg(list[i++].fullUrl, function (img) {
+                  document.body.append(img)
+                  f()
+                })
+              }
+            }
+            f()
+
+
+          }
+        }
+
+      }
+    }
+  </script>
+
+</body>
+
+</html>

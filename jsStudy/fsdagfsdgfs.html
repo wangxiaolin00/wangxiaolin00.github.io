@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function margeSort(arr) {//归并排序
+      if (arr.length == 0 || arr.length == 1) {
+        return [...arr]
+      }
+      var mid = arr.length >> 1//右移一位相当于/2
+      var leftarr = arr.slice(0, mid)
+      var rightarr = arr.slice(mid)
+      var leftsorted = margeSort(leftarr)
+      var righsotred = margeSort(rightarr)
+      var i = 0, j = 0
+      var result = []
+      while (i < leftsorted.length && j < righsotred.length) {
+        if (leftsorted[i] < righsotred[j]) {
+          result.push(leftsorted[i++])
+        } else {
+          result.push(righsotred[j++])
+        }
+      }
+      while (i < leftsorted.length) {
+        result.push(leftsorted[i++])
+      }
+      while (j < righsotred.length) {
+        result.push(righsotred[j++])
+      }
+      return result
+    }
+    console.log(margeSort([1, 4, 5, 7, 2, 9, 6,]));
+    function margesort(arr) {
+      if (arr.length == 0 || arr.length == 1) {
+        return [...arr]
+      }
+      var mid = arr.length >> 1
+      var leftarr = arr.slice(0, mid)
+      var rightarr = arr.slice(mid)
+      var leftsort = margesort(leftarr)
+      var rightsort = margesort(rightarr)
+      var result = []
+      var i = 0, j = 0
+      while (i < leftsort.length && j < rightsort.length) {
+        if (leftsort[i] < rightsort[j]) {
+          result.push(leftsort[i++])
+        } else {
+          result.push(rightsort[j++])
+        }
+      }
+      while (i < leftsort.length) {
+        result.push(leftsort[i++])
+      }
+      while (j < rightsort.length) {
+        result.push(rightsort[j++])
+      }
+
+
+      return result
+
+    }
+    console.log(margesort([1, 4, 5, 7, 2, 9, 6,]));
+    var swapPairs = function (head) {
+      if (head === null) {
+        return null
+      }
+      if (head.next == null) {
+        return head
+      }
+      var dummy = new ListNode(-1)
+      dummy.next = head
+      var cur = dummy
+      while (cur.next != null && cur.next.next != null) {
+        var first = cur.next//第一个节点
+        var second = cur.next.next//第二个节点
+        first.next = second.next//第一个节点指向3
+        second.next = first//第2个节点指向1
+        cur.next = second//当前节点指向2
+        cur = cur.next.next//当前节点往后调俩个
+
+      }
+      return dummy.next
+
+    };
+  </script>
+
+</body>
+
+</html>

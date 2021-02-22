@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // var str = '72eva 97 103o 97t 116sih 97dn 115ee 104wo 121uo 100o'
+    // var h = str.replace(/\d+/g, c => String.fromCharCode(c)).split(' ')
+    // h.forEach(it => it.trim())
+    // for (let i = 0; i < h.length; i++) {
+    //   if (h[i].length >= 3) {
+    //     var a = h[i][1]
+    //     var b = h[i][h[i].length - 1]
+    //     h[i] = h[i].slice(0, 1) + b + h[i].slice(1 + 1, h[i].length - 1) + a
+    //   } else {
+    //     h[i] = h[i]
+    //   }
+    // }
+    // console.log(h.join(' '));
+    // function decipherThis(str) {
+    //   //have fun!
+    //   var h = str.replace(/\d+/g, c => String.fromCharCode(c)).split(' ')
+    //   h.forEach(it => it.trim())
+    //   for (let i = 0; i < h.length; i++) {
+    //     if (h[i].length >= 3) {
+    //       var a = h[i][1]
+    //       var b = h[i][h[i].length - 1]
+    //       h[i] = h[i].slice(0, 1) + b + h[i].slice(1 + 1, h[i].length - 1) + a
+    //     } else {
+    //       h[i] = h[i]
+    //     }
+    //   }
+    //   return h.join(' ')
+
+    // };
+    // function cutCancerCells(organism) {
+
+    //   // Cut them!
+    //   let q = organism.indexOf('c')
+    //   let w = organism.indexOf('C')
+    //   if (w != -1) {
+    //     organism = organism.slice(0, w - 1) + organism(w + 2)
+    //   }
+    //   if (q != -1) {
+    //     organism = organism.slice(0, q) + organism(q + 1)
+    //   }
+    //   return organism
+
+    // }
+    // console.log(cutCancerCells("acb"));
+    // var str = 'acCb'
+    // var q = str.indexOf('c')
+    // var w = str.indexOf('C')
+    // if (w !== -1) {
+    //   str = str.slice(0, w - 1) + str.slice(w + 2)
+    // }
+    // if (q !== -1) {
+    //   str = str.slice(0, q) + str.slice(q + 1)
+    // }
+    // console.log(str);\
+    var object = { 'a': [{ 'b': { 'c': 3 } }, 4] };
+    // var arr = ['a[0].b.c', 'a[1]']
+    // function toPath(str) {
+    //   return str.match(/\w+/g)
+    // }
+    // var res = []
+    // for (let k of arr) {
+    //   res.push(toPath(k))
+    // }
+    // var b = object
+
+    // for (let i of res) {
+    //   var b = object
+    //   for (let key of i) {
+
+    //     b = b[key]
+
+
+    //   }
+    //   console.log(b);
+    // }
+    // console.log(object['a'][0]['b']['c']);
+    function Foo() {
+      this.a = 1;
+      this.b = 2;
+    }
+
+    Foo.prototype.c = 3;
+    var a = new Foo
+    var o = {}
+    for (let i in a) {
+      o[i] = a[i]
+    }
+
+    console.log(Object.entries(o));
+
+  </script>
+
+</body>
+
+</html>

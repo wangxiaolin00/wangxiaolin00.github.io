@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script>
+  //京东活动倒计时案列;
+  function daoJishi(time) {
+    var nowTime = +new Date();
+    var futureTime = +new Date(time);
+    var times = (futureTime - nowTime) / 1000;
+    var d = parseInt(times / 60 / 60 / 24);
+    var d = d < 10 ? '0' + d : d;
+    var h = parseInt(times / 60 / 60 % 24);
+    var h = h < 10 ? '0' + h : h;
+    var m = parseInt(times / 60 % 60);
+    var m = m < 10 ? '0' + m : m;
+    var s = parseInt(times % 60);
+    var s = s < 10 ? '0' + s : s;
+    return '倒计时是:' + d + '天' + h + '小时' + m + '分钟' + s + '秒';
+  }
+  console.log(daoJishi('2020-11-9 00:00:00'));
+  //俩种判断 er 是不是数组的的办法 1:er instanceof Array 2: Array.isArray(er)   是的则返回值为ture 不是的返回值是false
+  var er = [];
+  console.log(er instanceof Array);
+  console.log(Array.isArray(er));
+  var eer = [77, 32, 55, 5];
+  console.log(eer.push(7, 2, 3, 4));
+  console.log(eer.unshift(0, 1, 9));
+  console.log(eer);
+  console.log(eer.sort(function (a, b) {
+    return a - b;//升序排列
+  }));
+  console.log(eer);
+  //ds = [1, 5, 6, 3, 99, 88, 44] 写一个函数翻转任意数组
+  function getFanzhuang(ds) {
+    for (var i = ds.length - 1; i >= 0; i--) {
+      er.push(ds[i]);
+    }
+    return er;
+  }
+  var demo1 = getFanzhuang([1, 5, 6, 3, 99, 88, 44]);
+  console.log(demo1);
+  //有一个数组[2,1,2,3,2,3,4,2,2,3,2]去除重复的元素        去重的重点案列
+  //核心思路:先遍历我们的旧数组,然后拿旧数组的中元素到新的数组中查找 ,
+  //如果旧数组的中的元素在新数组中没有则:新数组. indexOf(旧数组元素) 返回值===-1则把旧数组的元素添加给新数组
+  var fff = [2, 1, 2, 3, 2, 3, 4, 2, 2, 3, 2];
+  console.log(fff);
+  var ffs = [];
+  for (i = 0; i < fff.length; i++) {
+    if (ffs.indexOf(fff[i]) === -1) {
+      ffs.push(fff[i]);
+    }
+  }
+  console.log(ffs);
+  console.log(ffs.toString());//数组转化为字符串用逗号隔开
+  console.log(ffs);
+  console.log(ffs.join('&'));//数组转化为字符串用&隔开
+  console.log(ffs.join('-'));//数组转化为字符串用-隔开
+  //简单数据类型转化为复杂数据类型
+  var ssr = 'andy';
+  console.log(ssr.length);//返回ssr字符串的长度为4
+  //js转化过程:
+  //1: 先创建一个临时对象 var temp= new String('andy');
+  //2:给的字符串赋值  var ssr= temp;
+  //3然后销毁临时对象 temp=null;
+
+  //根据字符返回位置
+  //查找下面的字符的中出现的位置以及次数'abcodoboiogokonno';    重点案列查找字符串中的重复字符'o'出现的位置及次数
+  //核心思路先把第一'o'的位置求出来.出来,只要这个值不等-1继续往后面查找 查找出一个打印一次,次数+1
+  var d1 = 'abcodoboiogokonno';
+  var dd1 = d1.indexOf('o');
+  var nn = 0;
+  while (dd1 !== -1) {
+    console.log(dd1);
+    nn++;
+    dd1 = d1.indexOf('o', dd1 + 1);
+  }
+  console.log('o出现的次数是:' + nn);
+
+  //统计出字符'abcodoboiogokonno'中出现次数最多的字符,并就算出次数; 重点案列
+  var pps = 'abcodoboiogokonno';
+  var o = {};
+  for (i = 0; i < pps.length; i++) {
+    var chars = pps.charAt(i);
+    if (o[chars]) {
+      o[chars]++;
+    } else (
+      o[chars] = 1
+    )
+  }
+  console.log(o);
+  var max = 0;
+  var ch = '';
+  for (var k in o) {
+    // console.log(k);//返回o的属性名
+    //console.log(o[k]);//返回o的属性值
+    if (o[k] > max) {
+      max = o[k];
+      ch = k;
+    }
+  }
+  console.log('出现次数最多的字符是:' + ch);
+  console.log('出现的次数是' + max);
+  //concat('字符串1','字符串2')连接俩个字符串;
+  var ttt = 'andy';
+  console.log(ttt.concat('red'));//返回andyred
+  var sss = ttt + 'red';
+  console.log(sss);//同样返回andyred
+  console.log(sss.substr(0, 4));//返回的是截取的字符andy   .sss.substr(0,4) 表示从字符串sss索引为0的位置截取往后截取4个字符(包括第0个索引)
+  console.log(sss);//返回值依旧为andyred字符
+  console.log(sss.slice(0, 4));//slice()从索引0开始到索引4节数 [0,4)(包括索引为0的,不包括索引为4)
+  console.log(sss.charAt(4));
+  console.log(sss);//返回是andyred
+  console.log(sss.substring(0, 4));//返回值是andy
+  console.log(sss.substring(0, 0));//返回空字符
+  console.log(sss.substring(4, 0));
+  console.log(sss.substring(NaN, 4));
+  console.log(sss.substring(4, NaN));
+  console.log(sss.substring(4, -5));
+  var sppr = 'aonodoyoaonodyo';
+  console.log(sppr.replace('a', 'b'));//.replace 替换把第一个a替换为为b;
+  console.log(sppr);
+  while (sppr.indexOf('o') !== -1) {
+    var sppr = sppr.replace('o', '*');
+  }
+  console.log(sppr);
+
+</script>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<style>
+  em {
+    font-style: normal;
+  }
+
+  em:nth-of-type(odd) {
+    background-color: #c6e3ff;
+  }
+
+  em:nth-of-type(even) {
+    background-color: #74c4ff;
+  }
+
+  .box1 {
+    position: relative;
+  }
+
+  .box2 {
+    top: 20px;
+    left: 0px;
+    position: absolute;
+    z-index: -10;
+    width: 220px;
+    height: 144px;
+    padding: 5px;
+    outline: 0;
+    font-size: 12px;
+    word-wrap: break-word;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overflow-y: visible;
+    border: 1px solid black;
+  }
+</style>
+正则表达式：<br><input type="text" value="foo" id="reInput">
+<input type="checkbox" id="flagGlobal">g
+<input type="checkbox" id="flagMultiline">m
+<input type="checkbox" id="flagInsensitive">i
+<br>
+测试字符串： <div class="box1"><button onclick="run()">Run</button><br>
+  <textarea id="strInput" cols="30" rows="10"
+    style="resize: none;outline:none">abfoocdefoobafoofoorbazfoobacc</textarea>
+  <div class="box2"></div>
+  <br>
+</div>
+结果：<br>
+<div id="resultDiv"></div>
+
+
+<script>
+  var b2 = document.querySelector('.box2')
+  function run() {
+
+    var reString = reInput.value
+    var str = strInput.value
+    var g1 = flagGlobal.checked
+    var a = ''
+    if (g1) {
+      a = 'g'
+    }
+
+    var i1 = flagMultiline.checked
+    var b = ''
+    if (i1) {
+      b = 'i'
+    }
+    var m1 = flagInsensitive.checked
+    var c = ''
+    if (m1) {
+      c = 'm'
+    }
+    var val = a + b + c + ''
+    console.log(val);
+
+    try {
+      var re = new RegExp(reString, val)
+    } catch (e) {
+      resultDiv.innerHTML = e
+      return
+    }
+    var match
+    var result = ''
+    var prevLastIndex = 0
+
+    while (match = re.exec(str)) {
+      result += str.slice(prevLastIndex, match.index)
+      if (match[0] == "") {
+        result += '<li></li>'
+
+      } else {
+        result += '<em data-start-idx="' + match.index + '" data-end-idx="' + (match.index + match[0].length) + '">' + match[0] + '</em>'
+
+      }
+      prevLastIndex = re.lastIndex
+      if (match[0] == "") {
+        re.lastIndex++
+      }
+    }
+    result += str.slice(prevLastIndex)
+    // console.log(result)
+    resultDiv.innerHTML = result
+    b2.innerHTML = result
+    b2.style.zindex = 20
+
+  }
+</script>

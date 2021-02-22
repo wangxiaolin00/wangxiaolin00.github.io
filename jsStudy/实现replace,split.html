@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+
+</head>
+
+<body>
+  <script>
+    // function dds(ary, k) {
+    //   var o = new Map()
+    //   for (let i = 0; i < ary.length; i++) {
+    //     let d = ary[i]
+    //     if (o.has(d)) {
+    //       o.set(d, o.get(d) + 1)
+    //     } else {
+    //       o.set(d, 1)
+    //     }
+    //   }
+    //   var res = []
+    //   o.forEach((it, idx) => {
+
+    //     res.push(idx)
+    //   })
+    //   res.length = k
+    //   return res
+    // }
+    // console.log(dds([4, 4, 4, 5, 5, 6], 2));
+    // var a = ["i", "love", "leetcode", "i", "love", "coding"]
+    // var b = a.sort()
+    // console.log(b);
+    function longzichuang(s1, s2) {
+      var m = s1.length
+      var n = s2.length
+      var dp = Array.from(Array(m + 1), () => Array(n + 1).fill(0))
+      for (let i = 1; i < m + 1; i++) {
+        for (let j = 1; j < n + 1; j++) {
+          if (s1[i - 1] === s2[j - 1]) {
+            dp[i][j] = 1 + dp[i - 1][j - 1]
+          } else {
+            dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j])
+          }
+        }
+      }
+      return dp[m][n]
+    }
+
+    console.log(longzichuang("abcde", "ace"));
+    function replace1(str, a, b) {
+      var t = Object.prototype.toString.call(a)
+      if (t === '[object String]') {
+        var r = new RegExp(a)
+        var idx = r.exec(str).index
+        str = str.slice(0, idx) + b + str.slice(idx + a.length)
+        return str
+
+      } else if (t === '[object RegExp]') {
+        if (!a.global) {
+          var ma = a.exec(str)
+          var ssr = ''
+          ssr += str.slice(0, ma.index) + b + str.slice(ma.index + ma[0].length)
+          return ssr
+
+
+        } else {
+          var match
+          var res = ''
+          var preidx = 0
+          while (match = a.exec(str)) {
+            res += str.slice(preidx, match.index) + b
+            if (match[0] == "") {
+              break
+            }
+            preidx = a.lastIndex
+
+
+          }
+          res += str.slice(preidx)
+          return res
+        }
+
+
+
+      }
+
+    }
+    // console.log(replace1('abcdef', 'ab', 'mn'));
+    // console.log(replace1('ab1ff2c4', /\d+/, ''));
+    // console.log(replace1('ab1ff2c4', /\d+/g, ''));
+    function match1(str, a) {
+      var t = Object.prototype.toString.call(a)
+      var res = []
+      if (t === '[object RegExp]') {
+        if (!a.global) {
+          return a.exec(str)
+        } else {
+          var match
+          var preidx = 0
+          while (match = a.exec(str)) {
+            res.push(match[0])
+            preidx = match.lastIndex
+
+          }
+          return res
+        }
+      }
+    }
+    // console.log(match1('a1b2c3', /\d+/g));
+    // console.log(match1('a1b2c3', /\d+/));
+    function search1(str, a) {
+      let t = Object.prototype.toString.call(a)
+
+      var r = new RegExp(a)
+      let c = r.exec(str)
+      if (c !== null) {
+        return c.index
+      } else {
+        return -1
+      }
+
+
+    }
+    // console.log(search1('abc', 'b'));
+    // console.log(search1('abc', 'd'));
+    function test1(str, a) {
+      var a = new RegExp(a)
+      var d = a.exec(str)
+      if (d !== null) {
+        return true
+      } else {
+        return false
+      }
+    }
+    // console.log(test1('abc', 'a'));
+    function split1(str, a = '') {
+      let t = Object.prototype.toString.call(a)
+      if (t === '[object String]') {
+        var r = new RegExp('[^' + a + ']', 'g')///拷贝构造函数:构造函数接收一个该构造函数的实例,返回一个新的对象
+        return match1(str, r)
+
+      } else if (t === '[object RegExp]') {
+        if (!a.global) {
+          var a = new RegExp(a, a.flags + 'g')
+        }
+
+        var nu = match1(str, a)
+        var res = []
+        for (let k of str) {
+          if (!nu.includes(k)) {
+            res.push(k)
+          }
+
+
+        }
+        return res
+
+      }
+
+
+
+    }
+    console.log(split1('a,b,c', ','));
+    console.log(split1('a,b,c'));
+    console.log(split1('1a2b3c4', /[a-z]/));
+    console.log(split1('1a2b3c4', /[a-z]/g));
+    var x = 4
+    var fg = `abc${x}sdf${x * x}ff`
+    console.log(fg);
+    console.log('hello %d', 5);
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

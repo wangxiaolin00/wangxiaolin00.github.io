@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    section {
+      display: flex;
+      height: 100px;
+      font-size: 20px;
+      width: 300px;
+    }
+
+    .a1 {
+      width: 250px;
+      flex-basis: 100px;
+      flex-grow: 1;
+      flex-shrink: 2;
+      background-color: tan;
+    }
+
+    .a2 {
+      width: 160px;
+      flex-basis: 150px;
+      flex-grow: 3;
+      flex-shrink: 1;
+      background-color: lime;
+    }
+
+    .a3 {
+      width: 120px;
+      flex-basis: auto;
+      flex-grow: 2;
+      flex-shrink: 4;
+      background-color: olive;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div class="a1">a1</div>
+    <div class="a2">a2</div>
+    <div class="a3">a3</div>
+  </section>
+  <script>
+    // function incr(str) {
+    //   if (!str) {
+    //     return '1'
+    //   }
+    //   var s = str.replace(/\d/g, "")
+    //   var b = str.replace(/[a-z]/g, "")
+    //   var c = String(Number(b) + 1)
+    //   while (c.length < b.length) {
+    //     c = '0' + c
+    //   }
+    //   return s + c
+
+    // }
+    // console.log(incr('foo0042'));
+    // console.log(incr("foobar001"));
+    // console.log(incr("foobar099"));
+    // console.log(incr(''));
+    // var td = [1, 0, 5, 6, 7, 8]
+    // var dm = [4, 4, 5, 2, 4, 1, 0, 0, 3, 5, 0]
+    // var mo = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter(it => !isPrime(it)).reduce((a, b) => a * b, 1.5)
+    // function isPrime(n) {
+    //   if (n == 1) {
+    //     return false
+    //   } else if (n == 2) {
+    //     return true
+    //   } else if (n % 2 == 0) {
+    //     return false
+    //   }
+    //   let s = Math.sqrt(n)
+    //   for (let i = 3; i <= s; i++) {
+    //     if (s % i == 0) {
+    //       return false
+    //     }
+    //   }
+    //   return true
+    // }
+    // var telephone = dm.map(i => td[i]).reverse().join()
+    // console.log(mo);
+    // console.log(telephone);
+    // function Person(x) {
+    //   this.fullName = x
+    //   this.firstName = this.fullName.split(' ')[0]
+    //   this.lastName = this.fullName.split(' ')[1]
+    //   this.fullName = [this.firstName, this.lastName].join(' ')
+    // }
+    // var damiao = new Person('Xie Ran')
+
+    // console.log(damiao.firstName)//Xie
+    // console.log(damiao.lastName)//Ran
+
+    // damiao.fullName = 'Da Miao'
+
+    // console.log(damiao.firstName)//Da
+    // console.log(damiao.lastName)//Miao
+
+    // damiao.firstName = 'Xiao'
+
+    // console.log(damiao.fullName)// Xiao Miao
+
+  </script>
+
+</body>
+
+</html>

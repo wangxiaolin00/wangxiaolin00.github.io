@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //浅拷贝是数据值拷贝一层,更深层级对象级别的只拷贝引用
+    //深拷贝拷贝多层,每一级别的数据都会拷贝
+    let obj = {
+      id: 1,
+      name: 'andy',
+      msg: {
+        name: 'rose',
+        age: 17,
+      }
+    }
+    var o = {}
+    // for (let i in obj) {
+    //   o[i] = obj[i]
+    // }
+    // console.log(o);
+    //浅拷贝中的更深层次的拷贝是拷贝的数据的地址,此时修改对象o的o.msg.age=20;会更改原来的obj的地址中的数组
+    Object.assign(o, obj)//obj浅拷贝到o中Object.assign(o为拷贝到的对象,obj被浅拷贝的对象)
+    var p = {}
+    function deepCopy(newobj, oldobj) {//深拷贝的函数写法 用递归将oldobj拷贝到 newobj
+      for (let k in oldobj) {
+        //判断我们的属性值属于那种数组类型
+        //1获取属性值 oldobj[k]
+        let item = oldobj[k]//属性值
+        //2:判断这个值是否为数组
+        if (item instanceof Array) {
+          newobj[k] = []
+          deepCopy(newobj[k], item)
+        } else if (item instanceof Object) {
+          //3.判断这个值是否为对象
+          newobj[k] = {}
+          deepCopy(newobj[k], item)
+        } else {//属于简单数组类型
+          newobj[k] = item
+
+        }
+      }
+
+    }
+    deepCopy(p, obj)
+    console.log(p);
+    function cloneDeep(obj, map = new Map()) {//带环对象的深度拷贝
+      if (map.has(obj)) {
+        return map.get(obj)
+      }
+      var result = {}
+      map.set(obj, result)
+      for (var key in obj) {
+        var val = obj[key]
+        if (val && typeof val == 'object') {
+          result[key] = cloneDeep(val, map)
+        } else {
+          result[key] = val
+        }
+      }
+      return result
+    }
+  </script>
+
+</body>
+
+</html>

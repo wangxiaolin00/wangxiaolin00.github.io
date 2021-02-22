@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // var hammingWeight = function (n) {
+    //   var s = String(n)
+    //   var nu = 0
+    //   for (var i in s) {
+    //     if (Number(s[i]) == 1) {
+    //       nu++
+    //     }
+    //   }
+
+    //   return nu
+    // };
+    var sss = 00000000000000000000000000001011
+    var s = sss.toString(2)
+    console.log(s);
+    var hammingWeight = function (n) {
+      let count = 0;
+      let mask = 1;
+      for (let i = 0; i < 32; i++) {
+        if ((n & mask) != 0) {
+          count++;
+        }
+        mask <<= 1;
+      }
+      return count;
+    };
+    console.log(hammingWeight(sss));
+
+    // 作者：Alexer - 660
+    // 链接：https://leetcode-cn.com/problems/number-of-1-bits/solution/191-wei-1de-ge-shu-by-alexer-660/
+    // 来源：力扣（LeetCode）
+    // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+    function isPalindrom(n) {
+      var m = n
+      var revert = 0;
+      while (m > 0) {
+        var digit = m % 10
+        revert = revert * 10 + digit
+        m = (m - digit) / 10
+      }
+      if (revert == n) {
+        return true
+      } else {
+        return false
+      }
+    }
+    console.log(isPalindrom(121));
+    function fastPow(x, n) {
+      if (n == 0) {
+        return 1;
+      }
+      else if (n % 2 == 1) {
+        return fastPow(x, n - 1) * x;
+      }
+      else {
+        var r = fastPow(x, n / 2);
+        return r * r;
+      }
+
+    }
+    var myPow = function (x, n) {//Math.POW(X,N)
+      if (x == 0) {
+        return 0
+      } else if (n > 0) {
+        var sum = 1
+        for (var i = 1; i <= n; i++) {
+          sum *= x
+        }
+        return sum
+
+      } else if (n < 0) {
+        var s = -n
+        var ss = 1
+        for (var j = 1; j <= s; j++) {
+          ss *= x
+
+        }
+        return 1 / ss
+
+      } else if (n == 0) {
+        return 1
+      }
+
+
+    };
+    console.log(myPow(2, 3));
+    var [...arr] = 'fafaf'   //创建一个素组将字符串拆近进去作为数组的各个元素
+    console.log(arr);
+    var hd = ['dad', 'adsd']
+    arr.push(...hd)
+    console.log(arr);
+    function dad(bengin, end) {
+      var array = []
+      for (let i = bengin; i <= end; i++) {
+        array.push(i)
+      }
+      return array
+    }
+    console.log(dad(11, 15));
+    arr.pop()//返回值是后面移除的元素
+    var ss = [1, 2, 3, 4, 5]
+    console.log(ss.fill('houmian', 7, 78, 9))
+    const array1 = [1, 2, 3, 4]
+    const reducer = (a, b) => a + b
+    console.log(reducer);
+    console.log(array1.reduce(reducer));
+    var names = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice'];
+    var elements = [
+      'Hydrogen',
+      'Helium',
+      'Lithium',
+      'Beryllium'
+    ];
+    // var sse = elements.map(function (element) {
+    //   return element.length
+    // })
+
+    var sse = elements.map((element) => {
+      return element.length
+    })
+    console.log(sse);
+    var sss = elements.map(element => {
+      return element.length
+    })//返回值是数组各个元素的的长度
+    var sst = elements.map(({ "length": bbn }) => bbn)//获取数组中各个字符串元素的的length属性 其中bbn是变量名
+    console.log(sst);
+    //.slice(1截取除了第一元素的所有元素 原数组不改变
+    let dds = [1, 2, 3, 4]
+    //dds.splice(1, 1)//.splice(1,1)指从索引1开始移除1个元素
+    dds.splice(1, 1, 5)//第一个参数指的从索引1开始 第二参数指移除几个,第三个参数指替换的参数
+    console.log(dds);
+    let ddsa = [1, 2, 3, 4, 5, 6, 7]
+    ddsa.splice(1, 0, 565, 656, 788, 'dad')//从索引1的位置不删除内容往里面追加元素改变原数组的内容
+    console.log(ddsa);
+    function move(array, from, to) {//移动数组元素的函数
+      var newAE = [...array]
+      let item = newAE.splice(from, 1)
+      newAE.splice(to, 0, ...item)
+      return newAE
+    }
+    console.log(move(ddsa, 1, 10));
+
+  </script>
+
+</body>
+
+</html>

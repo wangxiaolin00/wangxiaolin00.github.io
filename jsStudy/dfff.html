@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      perspective: 800px;
+    }
+
+    @keyframes move {
+      0% {
+        transform: rotateY(0deg);
+      }
+
+      100% {
+        transform: rotateY(360deg)
+      }
+    }
+
+    section {
+      position: relative;
+      height: 250px;
+      width: 250px;
+      margin: 50px auto;
+      animation: move;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+      transform-style: preserve-3d;
+      animation-timing-function: linear;
+      background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603597012658&di=582a7cb22c8241a49c5312705605150f&imgtype=0&src=http%3A%2F%2F04imgmini.eastday.com%2Fmobile%2F20181108%2F20181108175202_deeb7c90cebd18df197ffb48b6a43f12_1.jpeg) no-repeat;
+    }
+
+    section:hover {
+      animation-play-state: paused;
+    }
+
+    section div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+
+    }
+
+    section div img {
+      height: 100%;
+      width: 100%;
+    }
+
+    section div:nth-child(1) {
+      transform: rotateY(0deg) translateZ(300px);
+    }
+
+    section div:nth-child(2) {
+      transform: rotateY(60deg) translateZ(300px);
+    }
+
+    section div:nth-child(3) {
+      transform: rotateY(120deg) translateZ(300px);
+    }
+
+    section div:nth-child(4) {
+      transform: rotateY(180deg) translateZ(300px);
+    }
+
+    section div:nth-child(5) {
+      transform: rotateY(240deg) translateZ(300px);
+    }
+
+    section div:nth-child(6) {
+      transform: rotateY(300deg) translateZ(300px);
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div><img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3663515019,540732866&fm=26&gp=0.jpg"
+        alt=""></div>
+    <div><img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603596051768&di=368e4871ca632535fdb6a6e4c38fb133&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn20121%2F213%2Fw2048h1365%2F20190420%2F9b5b-hvvuiyn3688757.jpg"
+        alt=""></div>
+    <div><img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603596051786&di=e79a7f6b26add54ae305f1adabb97ad6&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201709%2F10%2F20170910145522_ydZML.jpeg"
+        alt=""></div>
+    <div><img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603596051787&di=60eb688556abb35e7a73b0c4afee28d2&imgtype=0&src=http%3A%2F%2Fwx3.sinaimg.cn%2Flarge%2F0071tB9Ply1g297v5zfeuj33vg2kzkjm.jpg"
+        alt=""></div>
+    <div><img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603596051099&di=b4bbc7f879da1453450abbf75393d264&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Ffront%2F400%2Fw1280h720%2F20180429%2FPATZ-fzvpatq8530242.jpg"
+        alt=""></div>
+    <div><img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603596219128&di=90fc2aef66a2dea90fa8376758b572e1&imgtype=0&src=http%3A%2F%2Fpic.baike.soso.com%2Fugc%2Fbaikepic2%2F13854%2F20180209233312-343559690_jpg_2000_1250_208497.jpg%2F0"
+        alt=""></div>
+  </section>
+
+
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @font-face {
+      font-family: 'icomoon';
+      src: url('fonts/icomoon.eot?a0f0nc');
+      src: url('fonts/icomoon.eot?a0f0nc#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.ttf?a0f0nc') format('truetype'),
+        url('fonts/icomoon.woff?a0f0nc') format('woff'),
+        url('fonts/icomoon.svg?a0f0nc#icomoon') format('svg');
+      font-weight: normal;
+      font-style: normal;
+      font-display: block;
+    }
+
+    @keyframes move {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      50% {
+        transform: rotate(180deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .box {
+      border: 1px solid chartreuse;
+    }
+
+    .box span {
+      font-family: 'icomoon';
+      display: inline-block;
+      font-size: 35px;
+      color: pink;
+      animation-name: move;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+
+
+    }
+  </style>
+</head>
+<div class="box">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <section class="bigB">
+    <div data-tabName="Anverse"> Aconsectetur adipisicing elit. Ex, maxime neque similique mollitia qui dignissimos
+      dolore dolores, natus nihil saepe voluptatem nobis veritatis! Autem laborum facere ipsum id voluptates maxime!
+    </div>
+    <div data-tabName="Bingd"> Bconsectetur adipisicing elit. Ex, maxime neque similique mollitia qui dignissimos dolore
+      dolores, natus nihil saepe voluptatem nobis veritatis! Autem laborum facere ipsum id voluptates maxime!</div>
+    <div data-tabName="Qingte"> Qconsectetur adipisicing elit. Ex, maxime neque similique mollitia qui dignissimos
+      dolore dolores, natus nihil saepe voluptatem nobis veritatis! Autem laborum facere ipsum id voluptates maxime!
+    </div>
+  </section>
+  <script>
+    function tabs(node) {
+      var divs = document.createElement('div')
+      var btns = document.createElement('div')
+      var curidx = 0
+      var nodes = Array.from(node.children)
+      for (let i = 0; i < nodes.length; i++) {
+        divs.appendChild(nodes[i])
+        nodes[i].style.display = 'none'
+        let button = document.createElement('button')
+        button.textContent = nodes[i].dataset.tabname
+        button.addEventListener('click', e => {
+          divs.children[curidx].style.display = ''
+          btns.children[curidx].style.color = ""
+          curidx = i
+          nodes[i].style.display = 'block'
+          button.style.color = "red"
+        })
+        btns.appendChild(button)
+      }
+      node.append(btns, divs)
+      divs.children[curidx].style.display = 'block'
+      btns.children[curidx].style.color = "red"
+
+    }
+    tabs(document.querySelector('.bigB'))
+
+  </script>
+</body>
+
+</html>

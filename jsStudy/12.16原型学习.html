@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function map(ary, f, thisobj = window) {
+      var res = []
+      for (let i = 0; i < ary.length; i++) {//map 里面的是当函数调用的所以 里面的this 是window
+        res.push(f.call(thisobj, ary[i], i, ary))
+      }
+      return res
+
+    };
+    [1, 2, 3, 4].map(function (it, idx, ary) {
+
+    }.bind({ a: 1, b: 2 }))//把function的this绑定为obj({a:1,b:2})
+    //以[开头要用前面要加分号 不然前面是一个对象的时候,没有;时 [1,2,3,4]这时 会当成逗号表达式,返回4
+    //当函数在对象的时候.用另外的指针指向它的时候调用 它此时指向的是window
+    var obj = {
+      val: 1,
+      fx: function () {
+        return this.val
+      }
+    };
+    [1, 2, 3, 4].map(obj.fx)//会返回是 4个undefined组成的数组.this此时指向window
+    //此时的this调用虽然调用的是对象的方法,但只是把指针指向它,所以this是window
+    [1, 2, 3, 4].map(obj.fx, obj)//map可以接第二个参数为this的指向的对象obj
+    //此时输出的是[1,2,3,4]
+    [1, 2, 3, 4].map(obj.fx.bind(obj))//可以给函数bind(obj)改变函数的this指向obj
+    //此时返回值也是[1,1,1,1]
+    //还可以直接改变 obj;里面的fx函数的this.val改成obj.val
+    function uqstr(strs) {
+      var obj = {}
+      strs.foreach(it => {
+        obj[it] = true
+      })
+      return Object.keys(obj)
+      //Object.prototype.hasOwnProperty.call(ary[i],key)
+      //for(let key in ary[i])
+      //ary[i].hasOwnPrototy(key)
+    }
+
+
+  </script>
+
+</body>
+
+</html>

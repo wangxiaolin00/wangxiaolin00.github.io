@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>{{total}}</h2>
+    <h2>{{allTotal}}</h2>
+  </div>
+  <script src="vue1/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好2月20日',
+        firstName: 'james',
+        lastName: 'keobr',
+        books: [
+          { id: 110, name: 'Unix编程艺术', price: 100 },
+          { id: 111, name: '代码大全', price: 105 },
+          { id: 112, name: '深入理解计算机原理', price: 110 },
+          { id: 113, name: '现代操作系统', price: 88 },
+
+        ]
+      },
+      methods: {
+        getFullName: function () {
+          return this.firstName + ' ' + this.lastName
+
+        }
+
+      },
+      computed: {
+        total: function () {
+          return this.firstName + ' ' + this.lastName
+        },
+        allTotal: function () {
+          return this.books.map(it => it.price).reduce((a, b) => (a + b))
+        }
+
+      }
+
+    })
+
+    //计算属性中有缓存效率更高如果多次调用只会计算一次
+  </script>
+
+</body>
+
+</html>

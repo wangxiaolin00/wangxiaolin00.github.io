@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //冒泡排序
+    function maopaopaixu(arr) {
+      for (let i = 0; i < arr.length - 1; i++) {//外层循环决定要走的趟数
+        for (let j = 0; j < arr.length - i - 1; j++) {//内层循环决定要走的次数
+          if (arr[j] > arr[j + 1]) {
+            var temp = arr[j]
+            arr[j] = arr[j + 1]
+            arr[j + 1] = temp
+          }
+        }
+      }
+      return arr
+    }
+    // console.log(maopaopaixu([1, 4, 5, 57, 6, 8, 4, 3, 99]));
+    function charupaixu(arr) {
+      for (var i = 0; i < arr.length; i++) {//插入排序
+        for (var j = i; j > 0; j--) {
+          if (arr[j - 1] > arr[j]) {
+            var temp = arr[j - 1]
+            arr[j - 1] = arr[j]
+            arr[j] = temp
+          }
+        }
+      }
+      return arr
+    }
+    console.log(charupaixu([1, 4, 5, 57, 6, 8, 4, 3, 99]));
+    function margeSort(arr) {//归并排序
+      if (arr.length == 0 || arr.length == 1) {
+        return [...arr]
+      }
+      var mid = arr.length >> 1//右移一位相当于/2
+      var leftarr = arr.slice(0, mid)
+      var rightarr = arr.slice(mid)
+      var leftsorted = margeSort(leftarr)
+      var righsotred = margeSort(rightarr)
+      var i = 0, j = 0
+      var result = []
+      while (i < leftsorted.length && j < righsotred.length) {
+        if (leftsorted[i] < righsotred[j]) {
+          result.push(leftsorted[i++])
+        } else {
+          result.push(righsotred[j++])
+        }
+      }
+      while (i < leftsorted.length) {
+        result.push(leftsorted[i++])
+      }
+      while (j < righsotred.length) {
+        result.push(righsotred[j++])
+      }
+      return result
+    }
+    console.log(margeSort([1, 4, 2, 5, 6, 78, 5, 9, 33]));
+    //选择排序
+    function xuanzepaixu(arr) {
+      for (var i = 0; i < arr.length; i++) {
+        var minindex = i
+        for (var j = i + 1; j < arr.length; j++) {
+          if (arr[j] < [arr[minindex]]) {
+            minindex = j
+          }
+        }
+        [arr[i], arr[minindex]] = [arr[minindex], arr[i]]
+      }
+      return arr
+    }
+    console.log(xuanzepaixu([1, 4, 2, 5, 6, 78, 5, 9, 33]));
+    function abqiuhe(a, b) {//不使用运算符求和
+      while (b != 0) {
+        var temp = a ^ b
+        b = (a & b) << 1
+        a = temp
+      }
+      return a
+    }
+    console.log(abqiuhe(1, 2));
+    function selectsort(arr) {//选择排序
+      for (var i = 0; i < arr.length; i++) {
+        var minindex = i
+        for (var j = i + 1; j < arr.length; j++) {
+          if (arr[j] < arr[minindex]) {
+            minindex = j
+          }
+        }
+        [arr[i], arr[minindex]] = [arr[minindex], arr[i]]
+      }
+      return arr
+    }
+    console.log(selectsort([1, 3, 5, 6, 7, 9, 10]));
+    //快速排序;时间复杂度 n*logn 空间复杂度最大为2n
+    function kuaisusort(arr) {//快速排序;每次选择无序范围的最小放入有序的最后
+      //中心思想采用二分法实现的快速排序
+      //选择一个数组的基准值;小于基准值放左边;大于基准值得放右边;等于基准值得放中间
+      if (arr.length < 2) {
+        return arr
+      }
+      var baseval = arr[0]//设定基准值
+      var mid = []//等于基准值得数组
+      var left = []//小于基准值的数组
+      var right = []//大于基准值得数组
+      arr.forEach(element => {
+        if (element == baseval) {
+          mid.push(element)
+        } else if (element > baseval) {
+          right.push(element)
+        } else if (element < baseval) {
+          left.push(element)
+        }
+      });
+      return kuaisusort(left).concat(mid).concat(kuaisusort(right))
+
+
+    }
+    console.log(kuaisusort([1, 25, 6, 7, 3, 9, 4]));
+    ///就地快排// 就地对这个数组进行排序
+    // function qsort(arr, left = 0, right = arr.length - 1) {
+    //   var randominx = Math.floor(Math.random() * (right - left + 1) + left)
+    //   var i=left-1
+    //   for(var j=left;j<right)
+
+    // }
+    function issorted(arr) {
+      for (var i = 0; i < arr.length - 2; i++) {
+        if (arr[i] > arr[i + 1]) {
+          return false
+        }
+      }
+      return true
+    }
+    //堆排序
+    //工业级排序;数据较小时候是插入排序;
+    //双指针左边一个指针遇到奇数和右指针遇到的偶数
+    //215 905 922
+    //深度比较
+
+    //深度比较
+
+  </script>
+
+</body>
+
+</html>

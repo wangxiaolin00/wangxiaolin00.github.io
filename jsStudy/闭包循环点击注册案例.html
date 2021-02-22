@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>循环注册点击事件</title>
+</head>
+
+<body>
+  <ul class="nav">
+    <li>榴莲</li>
+    <li>臭豆腐</li>
+    <li>英雄</li>
+    <li>大猪蹄子</li>
+  </ul>
+  <ol class="nnv">
+    <li>agg</li>
+    <li>英雄</li>
+    <li>蛮族之王</li>
+    <li>蛮子</li>
+    <li>蛮三刀</li>
+  </ol>
+
+  <script>
+    //闭包应用 点击li输出当前li的索引号
+    //1.我们可以利用动态添加属性的方式
+    let lis = document.querySelector('.nav').querySelectorAll('li')
+    for (let i = 0; i < lis.length; i++) {
+      lis[i].index = i
+      lis[i].onclick = function () {
+        console.log(this.index);
+        // console.log(i);
+      }
+    }
+
+    //利用闭包的方式得到当前的索引号
+    for (var j = 0; j < lis.length; j++) {
+      //利用for循环创建4个立即执行函数
+      //立即执行函数也成为小闭包因为立即执行函数里面的任何一个函数都可以使用它的i的这个变量
+      //这样做的方法 点击事件执行完之后才会销毁.一直不点击,就一直不销毁,造成内存泄漏,所以闭包不一定的是好的,延长变量的使用范围
+      (function (j) {
+        lis[j].onclick = function () {
+          console.log(j);
+        }
+      })(j);
+    }
+    //闭包应用-定时器中的闭包
+
+    //闭包应用: 进过3秒钟后打印所有li元素的内容
+    var list = document.querySelector('.nnv').querySelectorAll('li')
+    for (var i = 0; i < list.length; i++) {
+      //在定时器的回调函数,或者事件中的回调函数 还有ajax中回调函数都是属于异步任务
+      (function (i) {
+        setTimeout(function () {
+          console.log(list[i].innerHTML)
+        }, 3000)
+      })(i);
+    }
+
+  </script>
+
+
+
+</body>
+
+</html>

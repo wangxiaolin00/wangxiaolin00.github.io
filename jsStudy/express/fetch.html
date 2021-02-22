@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fetch</title>
+</head>
+
+<body>
+  <button class="btn">我是一个按钮</button>
+  <script>
+    const btn = document.querySelector('.btn')
+    btn.onclick = function () {
+      fetch('http://127.0.0.1:8001/fetch-server?vip=7', {
+        //请求方法
+        method: 'POST',
+        //请求头
+        headers: {
+          name: 'ddd'
+        },
+        //请求体
+        body: 'username=100&dmi=200&password=400'
+
+
+      }).then(value => {
+        console.log(value);
+        return value.json()
+      }).then(value => {
+        console.log(value);
+      })
+    }
+  </script>
+</body>
+
+</html>

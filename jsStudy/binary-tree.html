@@ -1,0 +1,227 @@
+<script>
+  /*
+  二叉树的定义：
+    空结点
+    或
+    一个结点有两个子树，两个子树都为二叉树，称为左子树、右子树
+
+  二叉树又叫二叉链表，因为跟跟链表类似，每个结点存有下一个结点的指向
+    二叉树的每个结点存有其两个子结点的指向。
+
+    没有父结点的结点为根结点(root node)
+    没有子结点（或称子结点都为空）的结点，叫做叶子结点(leaf node)
+    即非根结点也非叶子结点的结点叫做非叶子结点
+
+
+    完全二叉树：
+      从上到下从左往右除最后的若干个结点以外，每个结点都有两个子结点
+
+    满二叉树：
+      除了最后一排的结点以外，所有的结点都有两个子结点
+
+    如果对完全二叉树的结点进行从上到下，从左往右从0开始编号
+    那么一个结点的两个子结点的编号分别为2n+1和2n+2，其中n为父结点的编号
+
+
+    对于一颗给定的二叉树，其闲置指针（即指向null的指针）数量正好比结点数量多1.
+      证明：
+        如果有x个结点，则正好有2x个指针
+        而根结点没有指针指向，其它所有结点正好有一个指针指向
+        2x - (x - 1)  =  x + 1
+        2x为指针数量，x-1为被指针指向的结点数量
+
+
+    二叉树的表示：
+      1.　二叉链表，即每个结点由一个对象表示，该对象有left跟right属性分别指向其左右子结点，左右子结点分别又是一个对象。
+          var tree = {
+            val: 1,
+            left: {
+              val: 2,
+              left: {
+                val: 4
+                left: null,
+                right: null
+              },
+              right: {
+                val: 5,
+                left: null,
+                right: null
+              }
+            },
+            right: {
+              val: 3,
+              left: {
+                val: 6,
+                left: null,
+                right: null
+              },
+              right: null
+            }
+          }
+
+      2. 数组。
+          顺序型：将二叉树所有结点全部按顺序画出来，空结点的后代也要画，得到一颗完全二叉树
+              按从上往下从左往右的顺序将结点的值存储在数组中。
+              下标为i位置的值，其两个子结点的位置分别在2i+1和2i+2的位置。
+              一个下标为j位置的值，其父结点在 Math.floor( (j - 1) / 2 ) 位置
+          紧凑型：
+              将二叉树的所有null结点也标出来，不标出空结点的后代。
+              然后按从上往下从左往右的顺序保存结点的值。
+              此种存储方式结点间位置的关系不存在了。
+
+  */
+
+
+  function createTreeNode(val) {
+    return {
+      val,
+      left: null,
+      right: null,
+    }
+    // return new TreeNode(val)
+  }
+
+
+  // 将存储在数组中的根结点在rootPos位置的二叉树转换为二叉链表的形式
+  function arrayToTree(array, rootPos = 0) {
+    if (array[rootPos] == null) {
+      return null
+    }
+    var root = createTreeNode(array[rootPos])
+    root.left = arrayToTree(array, rootPos * 2 + 1)
+    root.right = arrayToTree(array, rootPos * 2 + 2)
+    return root
+  }
+
+  // 把一个用二叉链表表示的二叉树转换为数组形式，其中根结点在0位置。
+  // function treeToArray(tree) {
+
+  // 把root这颗树填入数组，其中根结点的值填入pos位置
+  function treeToArray(root, pos = 0, array = []) {
+    if (!root) {
+      return array
+    }
+    array[pos] = root.val
+    treeToArray(root.left, pos * 2 + 1, array)
+    treeToArray(root.right, pos * 2 + 2, array)
+    return array
+  }
+  // }
+
+  // 将一个用紧凑形式表达在数组中的二叉树还原为二叉链表
+  function condensedArrayToTree(array) {
+    if (array.length == 0) {
+      return null
+    }
+    var root = createTreeNode(array[0])
+
+    var nodes = [root]
+    var j = 0
+    var node
+    for (var i = 1; i < array.length; i++) {
+      node = null
+      if (array[i] != null) {
+        node = createTreeNode(array[i])
+        nodes.push(node)
+      }
+      nodes[j].left = node
+
+      i++
+      // if (i == array.length) {
+      //   break
+      // }
+
+      node = null
+      if (array[i] != null) {
+        node = createTreeNode(array[i])
+        nodes.push(node)
+      }
+      nodes[j].right = node
+      j++
+    }
+
+    return root
+  }
+
+  function treeToCondensedArray(root) {//将二叉树转化为紧凑形式的数组
+    var array = []
+    if (!root) {
+      return array
+    }
+
+    var nodes = [root]
+
+    for (var i = 0; i < nodes.length; i++) {
+      var node = nodes[i]
+      if (node) {
+        array.push(node.val)
+        nodes.push(node.left)
+        nodes.push(node.right)
+      } else {
+        array.push(null)
+      }
+    }
+    return array
+  }
+
+  function treeToCondensedArray2(root) {
+    var array = []
+    if (!root) {
+      return array
+    }
+    array.push(root.val)
+
+    var nodes = [root]
+
+    for (var i = 0; i < nodes.length; i++) {
+      var node = nodes[i]
+      if (node.left) {
+        array.push(node.left.val)
+        nodes.push(node.left)
+      } else {
+        array.push(null)
+      }
+      if (node.right) {
+        array.push(node.right.val)
+        nodes.push(node.right)
+      } else {
+        array.push(null)
+      }
+    }
+    return array
+  }
+
+  function TreeNode(val) {
+    this.val = val
+    this.left = this.right = null
+  }
+
+
+
+  //左根右 中序遍历
+  function inorderTraverse(root, action) {
+    if (root) {
+      inorderTraverse(root.left, action)
+      action(root.val)
+      inorderTraverse(root.right, action)
+    }
+  }
+  //根左右 先序遍历
+  function preorderTraverse(root) {
+    if (root) {
+      console.log(root.val)
+      preorderTraverse(root.left)
+      preorderTraverse(root.right)
+    }
+  }
+  //左右根 后续遍历
+  function postorderTraverse(root) {
+    if (root) {
+      postorderTraverse(root.left)
+      postorderTraverse(root.right)
+      console.log(root.val)
+    }
+  }
+
+
+</script>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 600px;
+      height: 800px;
+      margin: auto;
+      border: 1px solid blue;
+      box-shadow: 10px 10px 10px 10px cyan;
+      cursor: pointer;
+    }
+
+    input {
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="text" name="" id="int">
+  <div class="box"></div>
+  <script>
+    const input = document.querySelector('#int')
+    const div = document.querySelector('.box')
+    var temp = []
+    for (let name in window) {
+      temp.push(name)
+    }
+    input.addEventListener('input', function () {
+      var matching = temp.filter(it => {
+        return it.indexOf(input.value) == 0
+      })
+      div.textContent = ""
+      matching.slice(0, 20).forEach(function (it) {
+        var node = document.createElement('div')
+        node.textContent = it
+        node.addEventListener('click', function () {
+          input.value = it
+          div.textContent = ""
+
+        })
+        div.appendChild(node)
+      })
+
+    })
+  </script>
+
+</body>
+
+</html>

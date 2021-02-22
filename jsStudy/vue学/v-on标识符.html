@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>{{message}}</h2>
+    <!--
+      阻止冒泡 event.stopPrapagation()
+      @click.stop
+    -->
+    <button @click.stop="click1">111111</button>
+    <!--
+      阻止默认行为:event.preventDefault()
+    -->
+    <button @click.prevent="click2">222222222</button>
+    <!--
+      串联修饰符
+    -->
+    <button @click.stop.prevent="click3">3333333</button>
+    <!--
+      键修饰符
+    -->
+    <input type="text" @keyup.enter="onenter">
+    <!--
+      .native 监听组件根元素的原生事件
+    -->
+
+    <!--
+      .once 只进行一次回调
+    -->
+    <button @click.once="fuuu">an</button>
+  </div>
+  <script src="vue1/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        message: "唐人街探案",
+      },
+      methods: {
+        /*
+        click1:function() {
+          es5写法 ,常规的写法
+        }
+
+        */
+        click1() {//es6字符量增强语法
+          console.log(1);
+
+        },
+        click2() {
+          console.log(2);
+        },
+        click3() {
+          console.log(3);
+        },
+        fuuu() {
+          console.log(8);
+        }
+
+      }
+    })
+  </script>
+
+</body>
+
+</html>

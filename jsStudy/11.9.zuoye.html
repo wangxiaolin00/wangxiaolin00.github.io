@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    // // 使用 slice 方法从 myCar 中创建一个 newCar。
+    // var myHonda = { color: 'red', wheels: 4, engine: { cylinders: 4, size: 2.2 } };
+    // var myCar = [myHonda, 2, "cherry condition", "purchased 1997"];
+    // var newCar = myCar.slice(0, 2);
+
+    // // 输出 myCar、newCar 以及各自的 myHonda 对象引用的 color 属性。
+    // console.log(' myCar = ' + JSON.stringify(myCar));
+    // console.log('newCar = ' + JSON.stringify(newCar));
+    // console.log(' myCar[0].color = ' + JSON.stringify(myCar[0].color));
+    // console.log('newCar[0].color = ' + JSON.stringify(newCar[0].color));
+
+    // // 改变 myHonda 对象的 color 属性.
+    // myHonda.color = 'purple';
+    // console.log('The new color of my Honda is ' + myHonda.color);
+
+    // //输出 myCar、newCar 中各自的 myHonda 对象引用的 color 属性。
+    // console.log(' myCar[0].color = ' + myCar[0].color);
+    // console.log('newCar[0].color = ' + newCar[0].color)
+    function fn(str) {//求出字符串中第一个不重复的字符的函数
+      var len = str.length;
+      for (var i = 0; i < len; i++) {
+        var flag = 1;
+        for (var j = 0; j < len; j++) {
+          if (i == j) {
+            continue;
+          } else {
+            if (str[i] == str[j]) {
+              flag = 0;
+              break;
+            }
+          }
+        }
+        if (flag == 1) return str[i];
+      }
+    }
+    s = 'abcabd'
+    console.log(fn(s));
+    function getSize(ss) {
+      var a = ''
+      var b = ''
+      for (let i = 0; i < ss; i++) {
+        if (i % 2) {
+          a += ' '
+          b += '#'
+        } else {
+          a += '#'
+          b += ' '
+        }
+      }
+      var result = ''
+      for (let j = 0; j < ss; j++) {
+        if (j % 2) {
+          result += a
+        } else {
+          result += b
+        }
+        result += '\n'
+      }
+      return result
+
+    }
+    console.log(getSize(8));
+    function gggP(d) {
+      var a = ''
+      var b = ''
+      for (var i = 0; i < d; i++) {
+        if (i % 2) {
+          a += '#'
+          b += ' '
+        } else {
+          a += ' '
+          b += '#'
+        }
+      }
+      var result = ''
+      for (var j = 0; j < d; j++) {
+        if (j % 2) {
+          result += a
+          result += b
+        }
+        result += '\n'
+      }
+      return result
+    }
+    console.log(gggP(8));
+    var ssi = ['1', '2', '3', '4']
+    var ssss = ssi.join('')
+    console.log(ssss);//将字符串数组转化成字符串1234
+    var f = ssss.split('')
+    console.log(f);//将字符串1234 转化为字符串数组
+    var g = f.map(Number);//将字符串数组,转化为数字数组
+    console.log(g);
+    var h = g.join('')
+    console.log(h);//将数组转化为字符串
+    var shuzhu1 = 'faskfhkaoofaoofaofoaoooo'
+    function getMaxCount(fff) {
+      var o = {}
+      for (var i = 0; i < fff.length; i++) {
+        var w = fff.charAt(i)
+        if (o[w]) {
+          o[w]++
+        } else {
+          o[w] = 1
+        }
+      }
+      var max = 0
+      var nu = 0
+      for (k in o) {
+        if (o[k] > max) {//这时的k是o对象的属性名 o[k]是对象o的属性值
+          max = o[k]
+          nu = k
+        }
+      }
+      return '该字符串出现次数最多的字符是:' + nu + ',' + '最多的次数为:' + max
+    }
+
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

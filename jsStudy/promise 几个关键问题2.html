@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+    3.改变promise 状态和指定回调函数谁先谁后?
+    (1)都有可能,正常情况下先指定回调再改变状态
+       但也可以先改状态再指定回调
+    (2)如何先改变转态再指定回调?
+        1.在执行器中直接调用resolve()或者reject()
+
+        2.延迟更长时间才调用then()
+    (3)什么时候才能得到数据?
+
+        1. 如果先指定的回调,那当状态发生改变的时候 ,回调函数就会调用得到数据
+    
+        2.如果先改变的状态,那指定回调时,回调函数执行,得到数据
+
+    */
+
+    //常规的是 先指定回调 后改变状态 
+    new Promise((resolve, reject) => {
+      setTimeout(() => {//后改变状态 同时指定数据 异步执行回调函数
+        resolve(1)
+      }, 1000)
+    }).then(value => {//先指定回调 保存回调函数并等待状态改变
+      console.log(value);
+    }, reason => {
+      console.log(reason);
+    })
+
+    ///先改变状态 再指定回调
+    new Promise((resolve, reject) => {
+      resolve(1)//先改状态 同时指定数据
+    }).then(value => {//然后指定回调,异步执行回调
+      console.log(value);
+    }, reanson => {
+      console.log(reason);
+    })
+
+    //第二种写法 先改变转态 再指定回调
+    const pp = new Promise((resolve, reanson) => {
+      setTimeout(() => {
+        resolve(2)
+      }, 1000)
+    })
+    setTimeout(() => {
+      pp.then(value => {
+        console.log(value);
+      }, reason => {
+        console.log(reason);
+      })
+    }, 1100)
+
+
+
+
+
+
+
+//event.preventDefault()阻止默认行为
+//event.stopPragation()
+  </script>
+
+</body>
+
+</html>

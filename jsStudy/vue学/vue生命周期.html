@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{message}}</h1>
+  </div>
+  <script src="vue1/vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        message: '唐人街探案'
+      },
+      //在实列初始化之后.数据观测(data obsever)和event/watcher 事件配置之前被调用
+      beforeCreate: function () {
+        console.log('beforeCreate');
+      },
+      /*
+       在实例创建完成后立即调用
+       在这一步,实例已经完成以下的配置 数据观测(data observer) 
+       属性和方法的运算,watch/event 事件回调
+       然而 挂载阶段还没开始 $el属性不可见
+      */
+      created: function () {
+        console.log('created');
+      },
+      //挂载开始之前被调用 相关的渲染函数首次被调用
+      beforeMount: function () {
+        console.log('beforeMount');
+      },
+      //el 被新创建的vm.$el 替换挂载成功
+      mounted: function () {
+        console.log('mounted', this);
+      },
+      //数据更新时调用
+      beforeUpdate: function () {
+        console.log('beforeUpdate');
+      },
+      //组件 DOM已经更新,组件更新完毕
+      updated: function () {
+        console.log('updated');
+      }
+
+
+    })
+  </script>
+
+</body>
+
+</html>

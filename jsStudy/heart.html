@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    var obj = {
+      uname: '可可',
+      type: '阿拉斯加犬',
+      age: 5,
+      color: 'red',
+
+      showFilm: function () {
+        console.log('演电影');
+
+      },
+      sayHi: function () {
+        console.log('汪汪汪');
+      }
+    }
+    console.log(obj.uname);
+    console.log(obj['age']);
+    console.log(obj.type);
+
+    obj.sayHi();
+    obj.showFilm();
+    var odd = new Object();
+    odd.uame = 'kk';
+    odd.age = 33;
+    odd.sex = '男';
+    odd.sayBb = function () {
+      console.log('ddd');
+    }
+    var huoying = new Object();
+    huoying.uname = '漩涡鸣人';
+    huoying.age = 18;
+    huoying.sex = '男';
+    huoying.jiNeng = function () {
+      console.log('螺旋丸');
+    }
+    huoying.jiNeng()
+    function Hero(name, type, boold, attack) {
+      this.name = name;
+      this.type = type;
+      this.boold = boold;
+      this.attack = attack;
+    }
+    var houYi = new Hero('后裔', '射手型', 800, '远程');
+    console.log(houYi.name);
+    var lianPo = new Hero('廉颇', '力量型', 1000, '近战');
+    console.log(lianPo.attack);
+    var arr = [12, 42, 43, 54, 1, 4, 9];
+    for (i = 0; i <= arr.length - 1; i++) {
+      for (j = 0; j <= arr.length - i - 1; j++) {
+        if (arr[j] > arr[j + 1]) {
+          var temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+        }
+      }
+    }
+    console.log(arr);
+    var newArr = [];
+    for (hh = arr.length - 1; hh >= 0; hh--) {
+      newArr[newArr.length] = arr[hh];
+    }
+    console.log(newArr);
+    var max = newArr[0];
+    for (dd = 0; dd < newArr.length; dd++) {
+      if (newArr[dd] > max) {
+        max = newArr[dd];
+      }
+    }
+    console.log(max);
+    var min = newArr[0];
+    for (ee = 0; ee < newArr.length; ee++) {
+      if (newArr[ee] < min) {
+        min = newArr[ee];
+      }
+    }
+    console.log(min);
+    var sum = 0;
+    for (dc = 0; dc < newArr.length; dc++) {
+      sum += newArr[dc];
+    }
+    console.log(sum);
+    var str = '';
+    for (g = 0; g <= 9; g++) {
+      for (lp = 0; lp <= 9; lp++) {
+        str += '★';
+      }
+      str += '\n';
+    }
+    console.log(str);
+    var spp = '';
+    for (s = 0; s <= 9; s++) {
+      for (sd = s; sd <= 9; sd++) {
+        spp += 'x★'
+      }
+    }
+  </script>
+
+</head>
+
+<body>
+  <div></div>
+</body>
+
+</html>

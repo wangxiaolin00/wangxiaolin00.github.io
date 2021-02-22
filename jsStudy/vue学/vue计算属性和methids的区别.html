@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      color: red;
+      font-size: larger;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <ul>
+      <li v-for="item in movies" :class="{active:isActive}" v-on:click="getClick">{{item}}</li>
+    </ul>
+  </div>
+  <script src="vue1/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        firstName: 'james',
+        lastName: 'bind',
+        movies: ['盗梦空间', '战狼2', '你好,李焕英', '唐人街探案'],
+        isActive: true
+      },
+      methods: {
+        getFullName: function () {
+          console.log(1);
+          return this.firstName + ' ' + this.lastName
+        },
+        getClick: function () {
+          this.isActive = !this.isActive
+        }
+      },
+      computed: {//computed计算属性 内部执行的函数存在缓存 假如数据不发生变化就只会触发一次
+        fullName: {
+          get: function () {
+            console.log(2);
+            return this.firstName + ' ' + this.lastName
+          }
+        }
+      }
+
+    })
+  </script>
+
+</body>
+
+</html>

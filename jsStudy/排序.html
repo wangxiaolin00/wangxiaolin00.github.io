@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //冒泡排序
+    function bubblesort(arr) {
+      for (var i = 0; i < arr.length - 1; i++) {
+        for (var j = 0; j < arr.length - i - 1; j++) {
+          if (arr[j] > arr[j + 1]) {
+            var temp = arr[j]
+            arr[j] = arr[j + 1]
+            arr[j + 1] = temp
+          }
+        }
+      }
+      return arr
+    }
+    // console.log(bubblesort([1, 6, 7, 5, 9, 4]));
+    //插入排序
+    function insertsort(arr) {
+      for (var i = 0; i < arr.length; i++) {
+        for (var j = i; j >= 0; j--) {
+          if (arr[j - 1] > arr[j]) {
+            var temp = arr[j - 1]
+            arr[j - 1] = arr[j]
+            arr[j] = temp
+          }
+        }
+      }
+      return arr
+    }
+    // console.log(insertsort([1, 6, 7, 5, 9, 4]));
+    //选择排序
+    function selectionsort(arr) {
+      for (var i = 0; i < arr.length; i++) {
+        var minindex = i
+        for (var j = i + 1; j < arr.length; j++) {
+          if (arr[j] < arr[minindex]) {
+            minindex = j
+          }
+        }
+        [arr[i], arr[minindex]] = [arr[minindex], arr[i]]
+      }
+      return arr
+    }
+    // console.log(selectionsort([1, 6, 7, 5, 9, 4]));
+    //快速排序
+    function quicksort(arr) {//快速排序的主题思想是二分分而治之
+      //设定一个基准值;小于基准的放到左边的数组的里面;等于基准值得放到一个数组一个;大于基准值得放入到一个数组里面
+      if (arr.length < 2) {
+        return [...arr]
+      }
+      var baseval = arr[0]
+      var left = []
+      var mid = []
+      var right = []
+      arr.forEach(element => {
+        if (element == baseval) {
+          mid.push(element)
+        } else if (element < baseval) {
+          left.push(element)
+        } else if (element > baseval) {
+          right.push(element)
+        }
+      });
+      return quicksort(left).concat(mid).concat(quicksort(right))
+    }
+    console.log(quicksort([1, 6, 7, 55, 44, 5, 9, 4]));
+    //归并排序
+    function margesort(arr) {//
+      if (arr.length < 2) {
+        return [...arr]
+      }
+      var mid = arr.length >> 1
+      var leftarr = arr.slice(0, mid)
+      var rightarr = arr.slice(mid)
+      var leftsort = margesort(leftarr)
+      var rightsort = margesort(rightarr)
+      var i = 0, j = 0
+      var result = []
+      while (i < leftsort.length && j < rightsort.length) {
+        if (leftsort[i] < rightsort[j]) {
+          result.push(leftsort[i++])
+        } else {
+          result.push(rightsort[j++])
+        }
+      }
+      while (i < leftsort.length) {
+        result.push(leftsort[i++])
+      }
+      while (j < rightsort.length) {
+        result.push(rightsort[j++])
+      }
+      return result
+    }
+    console.log(margesort([1, 6, 7, 5, 9, 4]));
+
+  </script>
+
+</body>
+
+</html>

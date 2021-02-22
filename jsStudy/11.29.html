@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function dds(A) {
+      var left = 0
+      var right = A.length - 1
+      while (left < right) {
+        if (A[left] % 2 == 0 && A[right] % 2 == 1) {
+          var temp = A[left]
+          A[left] = A[right]
+          A[right] = temp
+        }
+        left++
+        right--
+      }
+      return A
+    }
+    console.log([3, 1, 2, 4]);
+    function reverse(arr) {
+      var result = []
+      for (var i = arr.length - 1; i >= 0; i--) {
+        result.push(arr[i])
+      }
+      return result
+    }
+    function reverse1(arr) {
+      var left = 0
+      var right = arr.length - 1
+      while (left < right) {
+        [arr[left], arr[right]] = [arr[right], arr[left]]
+        left++
+        right--
+      }
+      return arr
+    }
+    console.log(reverse1([1, 2, 3, 4, 5]));
+    var o = {
+      name: 'zhangfei',
+      age: 18,
+      sex: '男',
+    }
+    console.log(Object.keys(o));
+    //Array.from(ddd)将ddd转为数组
+
+
+
+  </script>
+
+</body>
+
+</html>

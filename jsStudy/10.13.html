@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script type="xx" id="ch0106/01">
+    var n=Number(prompt(''))
+    var m=Number(prompt('指定的数'))
+    s=[]
+    var nu=0;
+    for(i=1;i<=n;i++) {
+      s.push(Number(prompt('请输入第'+i+'个数')))
+    }
+    for(j=0;j<s.length;j++) {
+       if(s[j]==m) {
+         nu++
+       }
+    }
+    console.log(nu);
+
+  </script>
+  <script type="xx" id="ch0106/02">
+   s=[]
+   for(i=1;i<=10;i++) {
+     s.push(Number(prompt('请输入第'+i+'个苹果的高度')))
+     
+   }
+   var n=parseInt(prompt('表示陶陶把手伸直的时候能够达到的最大高度'))
+   var b=n+30;
+   var nu=0;
+   for(j=0;j<s.length;j++) {
+     if(s[j]<=b) {
+       nu++;
+     }
+   }
+   console.log(nu);
+  </script>
+  <script type="xx" id="ch0106/03">
+  var s=[];
+  var sum=0;
+   for(i=1;i<=10;i++) {
+     s.push(parseInt(prompt('请输入第'+i+'种书的本书')))
+   }
+   sum=28.9*s[0]+32.7*s[1]+45.6*s[2]+78*s[3]+35*s[4]+86.2*s[5]+27.8*s[6]+43*s[7]+56*s[8]+65*s[9]
+   var sss=sum.toFixed(1)
+   console.log(sss);
+
+  </script>
+  <script type="xx" id="ch0106/04">
+  var n=parseInt(prompt('（1<n<100)'))
+  var s=[];
+  for(i=1;i<=n;i++) {
+     s.push(Number(prompt('请输入第'+i+'个整数')))
+  }
+  var p=s.reverse()
+  for(j=0;j<p.length;j++) {
+    console.log(p[j]);
+  }
+
+  </script>
+  <script type="xx" id="ch0106/05">
+  var n=parseInt(prompt('过往病人的数目n（0 < n <= 100)'))
+  s=[]
+  for(i=1;i<=n;i++) {
+      s.push(Number(prompt('请输入第'+i+'个病人的年龄')))
+  }
+  var a=0
+  var b=0
+  var c=0
+  var d=0
+  for(j=0;j<s.length;j++) {
+    var x=s[j]
+    if(x>1&&x<=18){
+      a++
+    }else if(x>=19&&x<=35) {
+      b++
+    }else if(x>=36&&x<=60) {
+      c++
+    }else if(x>=61) {
+      d++
+    }
+  }
+  var a1=(a/n*100).toFixed(2) +'%'
+  var b1=(b/n*100).toFixed(2)+'%'
+  var c1=(c/n*100).toFixed(2)+'%'
+  var d1=(d/n*100).toFixed(2)+'%'
+  console.log(a1);
+  console.log(b1);
+  console.log(c1);
+  console.log(d1);
+  </script>
+  <script type="xx" id="ch0106/06">
+  var l=parseInt(prompt('L代表马路的长度'))
+  var m=parseInt(prompt('M代表区域的数目'))
+  a=[]
+  b=[]
+  var sum=l+1;
+  for(i=1;i<=m;i++) {
+     a.push(Number(prompt('第'+i+'组的起始点')))
+     b.push(Number(prompt('第'+i+'组的结束点')))
+  }
+  var ss=sum-(b[0]-a[1]+1)-(b[2]-a[2]+1)
+  console.log(ss);
+
+
+  </script>
+  <script type="xx" id="ch0106/07">
+  var n=parseInt(prompt(''))
+  s=[]
+  for(var i=1;i<=n;i++) {
+    s.push(parseInt(prompt('请输入第'+i+'个数')))
+  }
+  var a=[];
+  for(var j=0;j<s.length;j++) {
+    if(Math.abs(s[j+1]-s[j])>0) {
+      a.push(Math.abs(s[j+1]-s[j]))
+    }
+  }
+ var b=[];
+ for(var d=0;d<a.length;d++) {
+   if(b.indexOf(a[d])===-1) {
+     b.push(a[d])
+   }
+ }
+ for(var q=0;q<b.length;q++) {
+   if(Math.abs(b[q+1]-b[q])==1) {
+     console.log('Jolly');
+     break;
+   }
+   else {
+     console.log('Not jolly');
+     break;
+   }
+ }
+ 
+  </script>
+  <script type="xx" id="ch0106/08">
+  var n=parseInt(prompt('别表示比了N轮'))
+  var a=parseInt(prompt('小A出拳的周期长度'))
+  var b=parseInt(prompt('小B出拳的周期长度'))
+  var s=[]
+  var q=[]
+  for(i=0;i<a;i++) {
+    s.push(parseInt(prompt('小A出拳的规律')))
+  }
+  for(i=0;i<b;i++) {
+     q.push(parseInt(prompt('小b出拳的规律')))
+  }
+   var d=n;
+  var x=[]
+  var y=[]
+  while(d>0) {
+    x.push(s[0],s[1],s[2])
+    y.push(q[0],q[1],1[3])
+    d--
+  }
+  var num=0;
+  var nu=0;
+  for(var k=0;k<n;k++) {
+    if(x[k]<y[k]) {
+      num++
+    }else if(x[k]>y[k]) {
+      nu++
+    }
+  }
+  if(num>nu) {
+    console.log('A');
+  }else if(num==nu) {
+    console.log('draw');
+  }else{
+    console.log('B');
+  }
+  
+  
+
+  </script>
+  <script type="xx" id="ch0106/09">
+   var n=parseInt(prompt('一个整数n。1 <= n <= 1000。'));
+    var a=[]
+    var b=[]
+   var sum=0
+   for(i=0;i<n;i++) {
+     a.push(parseInt(prompt('')))
+   }
+   for(i=0;i<n;i++) {
+     b.push(parseInt(prompt('')))
+   }
+   for(i=0;i<n;i++) {
+     sum+=a[i]*b[i]
+   }
+   console.log(sum);
+
+  </script>
+  <script type="xx" id="ch0106/10">
+
+  </script>
+  <script type="xx" id="ch0106/11">
+
+  </script>
+  <script type="xx" id="ch0106/12">
+  var n=parseInt(prompt('一个正整数N'))
+  var c=2**n
+  console.log(c);
+
+  </script>
+  <script type="xx" id="ch0106/13">
+  var c=parseInt(prompt('非负整数c，c的位数<=30。'))
+  for(var i=2;i<=9;i++) {
+    if(c%i==0) {
+      console.log(i);
+    }
+  }
+
+
+  </script>
+  <script type="xx" id="ch0106/14">
+  var n=parseInt(prompt('整数n（0<=n<=10000）'))
+  function jieCheng(n){
+    return n > 1 ? n * jieCheng(n-1) : 1;
+}
+   var c=jieCheng(n)
+   console.log(c);
+  
+  </script>
+  <script type="xx" id="ch0106/15">
+  var n=parseInt(prompt('一个正整数N。'))
+  function jieCheng(w){
+    return w > 1 ? w * jieCheng(w-1) : 1;
+}
+  var sum=0
+  for(i=1;i<=n;i++) {
+    sum+=jieCheng(i)
+  }
+  console.log(sum);
+
+  </script>
+  <script type="xx" id="ch0107/01">
+  var n=prompt('')
+  var s=n.match(/\d+/g)//提取额字符串里面的整数 ,为数组的形式,隔开保存
+  var x=+s.join('')//将数组的数字的拼接成数字
+  var y=x.toString().split('')//将数字转化为字符串让后转化为数组
+  console.log(y.length);
+  
+  </script>
+  <script type="xx" id="ch0107/02">
+  var n=prompt('给定一个只包含小写的字符串');
+  function getFirst(str) {
+    var len=str.length
+    for (var i = 0; i < len; i++) {
+        var flag = 1;
+        for (var j = 0; j < len; j++) {
+          if (i == j) {
+            continue;
+          } else {
+            if (str[i] == str[j]) {
+              flag = 0;
+              break;
+            }
+          }
+        }
+        if (flag == 1) return str[i];
+      }
+  }
+  var s=getFirst(n)
+  console.log(s);
+  
+
+  </script>
+  <script type="xx" id="ch0107/03">
+  var n=parseFloat(prompt('阈值'))
+  var x=prompt('DNA序列')
+  var y=prompt('DNA序列')
+  var nu=0
+  for(i=0;i<x.length;i++) {
+    if(x.charAt(i)==y.charAt(i)) {
+      nu++
+    }
+  }
+  if(nu/x.length>=n) {
+    console.log('yes');
+  }else {
+    console.log('no');
+  }
+
+
+  </script>
+  <script type="xxxx" id="ch0107/04">
+  var n=parseInt(prompt(''))
+  var s1=[]
+  var s2=[]
+  for(i=1;i<=n;i++) {
+    s1.push(prompt(''))
+    s2.push(prompt(''))
+  }
+  for(var j=0;j<s1.length;j++) {
+    if(s1[j].length<s2[j].length) {
+      console.log('Player1')
+    }else if(s1[j].length=s2[j].length) {
+      console.log('Tie');
+    }else if(s1[j].length>s2[j].length){
+      console.log('Player2');
+    }
+  }
+
+  </script>
+  <script type="xx" id="ch0107/05">
+  var n=prompt('一个长度大于等于2，小于等于100的字符串。字符串中每个字符的ASCII值不大于63。')
+  var s=[]
+  for(var i=0;i<n.length;i++) {
+    var b=n.charAt(0).charCodeAt()+n.charAt(n.length-1).charCodeAt()
+    if(i<=n.length-2) {
+      s[i]=n.charAt(i).charCodeAt()+n.charAt(i+1).charCodeAt()
+      s.push(b)
+    }
+  }
+  var spp=''
+  for(j=0;j<s.length;j++) {
+    spp+=String.fromCharCode(s[j])
+  }
+  console.log(spp);
+  
+ 
+
+  </script>
+  <script type="xx" id="ch0107/06">
+
+  </script>
+  <script type="xx" id="ch0107/07">
+  var n=prompt('一个字符串，表示一条碱基链。这个字符串只含有大写字母A、T、G、C，分别表示腺瞟呤、胸腺嘧啶、鸟嘌呤和胞嘧啶。字符串长度不超过255。')
+  var s=[]
+  for(i=0;i<n.length;i++) {
+    if(n[i]==='A') {
+      s.push('T')
+    }else if(n[i]==='T') {
+      s.push('A')
+    }else if(n[i]==='G') {
+      s.push('C')
+    }else if(n[i]==='C') {
+      s.push('G')
+    }
+  }
+  var a=s.join('')
+  console.log(a);
+  </script>
+  <script type="xx" id="ch0107/08">
+  var n=prompt('')
+  var a=prompt('')
+  var b=prompt('')
+  var s=n.replaceAll(a,b)
+  console.log(s);                                                           
+  
+    
+  </script>
+  <script type="xx" id="ch0107/09">
+  var ss=prompt('')
+  function getH(n) {
+   for(let i in n) {
+     let code=n[i].charCodeAt()
+      if((code>64&&code<90)) {
+        n=n.replaceAll(n[i],String.fromCharCode(code+1))
+      }else if(code==122||code==90){ 
+        n=n.replaceAll(n[i],String.fromCahrCode(code-25))
+      }else if((code>96&&code<122)) {
+        n=n.replaceAll(n[i],String.fromCharCode(code+1))
+      }
+   }
+   return n
+  }
+  console.log(getH(ss));
+
+  </script>
+  <script type="" id="ch0107/10">
+
+  </script>
+  <script type="" id="ch0107/11">
+
+  </script>
+  <script type="xx" id="ch0107/12">
+  var n=prompt('')
+  //  var n='GSOOWFASOq'
+  // var a=str.charAt(0)
+  // console.log(a);
+  // var s=str.charCodeAt(a)//将字符转为对的ACCII码中的数字
+  // console.log(s);
+  // var x=s+35
+  // var b=String.fromCharCode(x)//将数字转成ASCII码
+  // console.log(b);
+  //知识点：
+    //小写转大写：-32，因为在ASCII表上小写字母在大写字母的后面。
+    //大写转小写：+32，因为在ASCII表上大写字母在小写字母的前面。
+    //注：字母a-z的code为97 - 122，A-Z的code为65 - 90 这很重要。不过记不住也没关系
+    // var n=prompt('')
+    function countABC(str) {//将数组str中大写转小写.小写转大写
+       
+        for (let i in str) {
+            let code = str[i].charCodeAt()
+            if (code > 96 && code < 123) {
+                str=str.replace(str[i],String.fromCharCode(code-29))
+            } else if (code > 64 && code < 91) {
+               str=str.replace(str[i],String.fromCharCode(code+35))
+            }
+        }
+        return str
+    }
+    var spp =countABC(n).split('')//将字符串转数组, str.split('')
+    <!-- console.log(countABC(n)); -->
+    // console.log(spp);
+    var sep=[]
+    for(j=spp.length-1;j>=0;j--) {
+      sep.push(spp[j])
+    }
+    // console.log(sep);
+    var result =sep.join('')//将数组转字符串 ,sep.join('')
+    console.log(result);
+    // console.log(result);
+    // console.log('q'.charCodeAt());
+    // console.log(String.fromCharCode(113-35));
+    
+
+  </script>
+  <script type="xx" id="ch0107/13">
+  var n=prompt('')
+  function upCase(s) {
+    var s=n.toUpperCase()//将字符串中的字母全部转为大写
+    return s
+  }
+  console.log(upCase(n));
+
+  </script>
+  <script type="xx" id="ch0107/14">
+  var n=prompt('')
+  // function huZhuan(ss) {
+  //   for(let i in ss) {//字母a-z的code为97 - 122，A-Z的code为65 - 90
+  //     let code=ss[i].charCodeAt()
+  //     if(code>96&&code<123) {
+  //       ss=ss.replaceAll(ss[i],String.fromCharCode(code-32))
+  //     }else if(code>64&&code<91) {
+  //       ss=ss.replaceAll(ss[i],String.fromCharCode(code+32))
+  //     }
+  //   }
+  //   return ss
+  // }
+  function countABC(str) {//将数组str中大写转小写.小写转大写
+       
+       for (let i in str) {
+           let code = str[i].charCodeAt()
+           if (code > 96 && code < 123) {
+               str=str.replace(str[i],String.fromCharCode(code-32))
+           } else if (code > 64 && code < 91) {
+              str=str.replace(str[i],String.fromCharCode(code+32))
+           }
+       }
+       return str
+   }
+  console.log(countABC(n));
+
+  </script>
+  <script type="xx" id="ch0107/15">
+  var n=parseInt(prompt(''))
+  var arr=[]
+  for(let i=1;i<=n;i++) {
+       arr.push(prompt('请输入第'+i+'个药品'))
+  }
+  
+  var ssp=arr.join(',')
+  var sep=ssp.toLowerCase()
+  var sss=sep.split(',')
+  console.log(sss);
+  for(let j=0;j<sss.length; j++) {
+    sss[j]=sss[j].slice(0,1).toUpperCase()+sss[j].slice(1)
+  }
+  console.log(sss.join(''));
+  
+
+  </script>
+  <script type="" id="ch0107/16">
+
+  </script>
+  <script type="" id="ch0107/17">
+  var n=prompt()
+  var x=prompt()
+  var a=n.toUpperCase().
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    header {
+
+      min-width: 600px;
+      background-color: black;
+    }
+
+    nav {
+      color: aliceblue;
+      margin: auto;
+      width: 600px;
+    }
+
+    main {
+      width: 600px;
+      margin: auto;
+    }
+
+    ul {
+      list-style: none;
+      margin-left: -40px;
+    }
+
+    li {
+      width: 180px;
+      height: 40px;
+      border: 3px solid black;
+      box-sizing: border-box;
+      background-color: pink;
+      line-height: 40px;
+      text-align: center;
+
+
+
+    }
+
+    li:hover {
+      background: red;
+    }
+
+    li:nth-child(5),
+    li:nth-child(6),
+    li:nth-child(7),
+    li:nth-child(8) {
+      margin-left: 210px;
+    }
+
+    li:nth-child(9),
+    li:nth-child(10),
+    li:nth-child(11),
+    li:nth-child(12) {
+      margin-left: 420px;
+    }
+
+    li:nth-child(4n):not(last-child) {
+      margin-bottom: -220px;
+    }
+
+    main ul li {
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      width: 600px;
+      border-bottom: 0.5px dotted black;
+    }
+
+    .secondbox {
+      margin: 250px auto 1px;
+      width: 600px;
+
+
+
+    }
+
+    span {
+      display: inline-block;
+
+      width: 180px;
+      height: 40px;
+      border: 3px solid black;
+      box-sizing: border-box;
+      background-color: pink;
+      line-height: 40px;
+      text-align: center;
+      margin-top: 15px;
+      margin-right: 15px;
+
+
+    }
+
+    span:hover {
+      background-color: red;
+    }
+
+
+    }
+
+    .zxcv {
+
+      width: 600px;
+      margin: 1px auto 220px;
+
+    }
+
+    .sada {
+      min-width: 600px;
+      background-color: pink;
+      margin-top: -200px;
+    }
+
+    .asddf {
+      color: black;
+      text-align: center;
+
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>hello world 请调整浏览器窗口大小查看效果</nav>
+  </header>
+  <main>
+    页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px
+    页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px 页面主体 宽度600px
+    <ul>
+      <li>宽180高40(包含边框)</li>
+      <li>水平间隙30px</li>
+      <li>垂直间隙15px</li>
+      <li>边框宽度3px</li>
+      <li>产品</li>
+      <li>产品</li>
+      <li>产品</li>
+      <li>产品</li>
+      <li>产品</li>
+      <li>产品</li>
+      <li>产品</li>
+      <li>产品</li>
+
+    </ul>
+
+
+  </main>
+  <div class="secondbox">
+    <span>宽180高40(包含边框)</span>
+    <span>产品</span>
+    <span>产品</span>
+    <span>水平间隙30px</span>
+    <span>产品</span>
+    <span>产品</span>
+    <span>垂直间隙15px</span>
+    <span>产品</span>
+    <span>产品</span>
+    <span>边框宽度3px</span>
+    <span>产品</span>
+    <span>产品</span>
+  </div>
+  <div class="zxcv">
+    <p>link</p>
+    <p>link</p>
+    <p>link</p>
+    <p>link</p>
+  </div>
+  <div class="sada">
+    <div class="asddf">©版权所有<br>
+      本页所有布局均使用块元素</div>
+  </div>
+
+
+
+</body>
+
+</html>

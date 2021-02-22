@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
+      border: 5px solid gray;
+      border-radius: 10px;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box" draggable="true"></div>
+  <script>
+    var div = document.querySelector('.box')
+    div.addEventListener('dragstart', e => {
+      console.log(dragstart);
+    })
+  </script>
+
+</body>
+
+</html>

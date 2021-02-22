@@ -1,0 +1,134 @@
+<style>
+  em {
+    font-style: normal;
+  }
+  em:nth-of-type(odd) {
+    background-color: #c6e3ff;
+  }
+  em:nth-of-type(even) {
+    background-color: #74c4ff;
+  }
+  i {
+    display: inline-block;
+    border-left: 2px dashed red;
+    height: 1.3em;
+    margin-left: -1px;
+    position: absolute;
+    box-shadow: 0 0 2px 0px white;;
+  }
+  #resultWrap {
+    position: relative;
+    font-size: 16px;
+    font-family: consolas;
+  }
+  #resultWrap textarea {
+    border: none;
+    padding: 0;
+    margin: 0px;
+    width: 342px;
+    height: 177px;
+    font: inherit;
+    background: transparent;
+    letter-spacing: 1px;
+    display: block;
+  }
+  #resultDiv {
+    letter-spacing: 1px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font: inherit;
+    z-index: -2;
+    margin: 0;
+    color: transparent;
+  }
+
+</style>
+正则表达式：<br><input oninput="run()" type="text" value="foo|(?=a)" id="reInput">
+<input type="checkbox" id="flagg" checked>g
+<input type="checkbox" id="flagm">m
+<input type="checkbox" id="flagi">i
+<input type="checkbox" id="flags">s
+<input type="checkbox" id="flagu">u
+<input type="checkbox" id="flagy">y
+<br>
+测试字符串： <button onclick="run()">Run</button><br>
+<div id="resultWrap">
+  <textarea oninput="run()" id="strInput" spellcheck="false" cols="30" rows="10">abfoocdefoobafoofoorbazfoobacc</textarea>
+  <div id="resultDiv"></div>
+</div>
+替换：<br>
+<input oninput="run()" type="text" id="replaceStr"><br>
+替换结果：<br>
+<div id="replaceResult"></div>
+
+<script>
+  run()
+
+  function run() {
+    // debugger
+    // console.log('run')
+    var reString = reInput.value
+    var reFlags = 'gmisuy'.split('').filter(char => {
+      var name = 'flag' + char
+      return window[name].checked
+    }).join('')
+
+    // if (flagg.checked) {
+    //   reFlags += 'g'
+    // }
+    // if (flagm.checked) {
+    //   reFlags += 'm'
+    // }
+    // if (flagi.checked) {
+    //   reFlags += 'i'
+    // }
+    // if (flags.checked) {
+    //   reFlags += 's'
+    // }
+    // if (flagu.checked) {
+    //   reFlags += 'u'
+    // }
+    // if (flagy.checked) {
+    //   reFlags += 'y'
+    // }
+
+    var str = strInput.value
+    try {
+      var re = new RegExp(reString, reFlags)
+    } catch(e) {
+      resultDiv.innerHTML = e
+      return
+    }
+    var match
+    result = ''
+    var prevLastIndex = 0
+    while (match = re.exec(str)) {
+      result += str.slice(prevLastIndex, match.index)
+      if (match[0] == '') {
+        result += '<i></i>'
+      } else {
+        result += '<em data-start-idx="' + match.index + '" data-end-idx="' + (match.index + match[0].length) + '">' + match[0] + '</em>'
+      }
+
+      if (!re.global) {
+        break
+      }
+
+      prevLastIndex = re.lastIndex
+
+      if (match[0].length == 0) {
+        re.lastIndex++
+      }
+    }
+
+    if (!re.global) {
+      result += str.slice(match.index + match[0].length)
+    } else {
+      result += str.slice(prevLastIndex)
+    }
+
+    resultDiv.innerHTML = result//高亮
+    replaceResult.innerHTML = str.replace(re, replaceStr.value)//替换
+  }
+</script>

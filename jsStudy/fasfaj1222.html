@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <table>
+    <thead>
+      <th>index</th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>z</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>0</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>5</td>
+        <td>8</td>
+        <td>12</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td></td>
+        <td>3</td>
+        <td>10</td>
+        <td>88</td>
+      </tr>
+    </tbody>
+
+  </table>
+
+  <script>
+    //table([{a:1,b:2,c:3}, {a:5,b:8,c:12}, {b:3,c:10,z:88}])
+    // function table(ary) {
+    //   let len = ary.length
+    //   ary.forEach(element => {
+    //     for (let k in element) {
+    //       console.log(k);
+    //     }
+
+    //   });
+
+    // }
+    var ary = [{ a: 1, b: 2, c: 3 }, { a: 5, b: 8, c: 12 }, { b: 3, c: 10, z: 88 }]
+    var len = ary.length
+    var s = []
+    ary.forEach(element => {
+
+      for (let k in element) {
+        s.push(k)
+      }
+
+    });
+    var a = [...new Set(s)]
+    console.log(s)
+    console.log(a);
+    var str = ''
+    for (let i = 0; i < a.length; i++) {
+      str += '<th>' + a[i] + '</th>'
+    }
+    var ssr = '<th>index</th>' + str
+    console.log(ssr)
+    console.log(str)
+    var ssp = ''
+    for (let i = 0; i < a.length + 1; i++) {
+
+
+      ssp += '<td>' + i + '</td>'
+
+    }
+    console.log(ssp)
+
+
+
+
+  </script>
+
+</body>
+
+</html>

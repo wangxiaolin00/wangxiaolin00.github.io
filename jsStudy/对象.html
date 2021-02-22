@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function bubblesort(ary) {
+      for (var i = 0; i < ary.length - 1; i++) {
+        for (let j = 0; j < ary.length - i - 1; j++) {
+          if (ary[j] > ary[j + 1]) {
+            var temp = ary[j]
+            ary[j] = ary[j + 1]
+            ary[j + 1] = temp
+          }
+        }
+      }
+      return ary
+    }
+    console.log(bubblesort([1, 3, 4, 8, 9, 2, 5, 7]));
+    function insertsort(ary) {
+      for (let i = 0; i < ary.length; i++) {
+        for (let j = i; j >= 0; j--) {
+          if (ary[j - 1] > ary[j]) {
+            var temp = ary[j - 1]
+            ary[j - 1] = ary[j]
+            ary[j] = temp
+          }
+        }
+      }
+      return ary
+    }
+    console.log(insertsort([1, 3, 4, 8, 9, 2, 5, 7]));
+    function selectsort(ary) {
+      for (let i = 0; i < ary.length; i++) {
+        var minindex = i
+        for (let j = i + 1; j < ary.length; j++) {
+          if (ary[j] < ary[minindex]) {
+            minindex = j
+          }
+        }
+        [ary[i], ary[minindex]] = [ary[minindex], ary[i]]
+      }
+      return ary
+    }
+    console.log(selectsort([1, 3, 4, 8, 9, 2, 5, 7]));
+    function quicksort(ary) {
+      if (ary.length < 2) {
+        return [...ary]
+      }
+      var baseval = ary[0]
+      var mid = []
+      var left = []
+      var right = []
+      ary.forEach(element => {
+        if (element == baseval) {
+          mid.push(element)
+        } else if (element < baseval) {
+          left.push(element)
+        } else if (element > baseval) {
+          right.push(element)
+        }
+      });
+      return quicksort(left).concat(mid).concat(quicksort(right))
+    }
+    console.log(quicksort([1, 3, 4, 8, 9, 2, 5, 7]))
+    function mergesort(ary) {
+      if (ary.length < 2) {
+        return [...ary]
+      }
+      var mid = ary.length / 2
+      var left = ary.slice(0, mid)
+      var right = ary.slice(mid)
+      var leftsorted = mergesort(left)
+      var rightsorted = mergesort(right)
+      var i = 0, j = 0;
+      var result = []
+      while (i < leftsorted.length && j < rightsorted.length) {
+        if (leftsorted[i] < rightsorted[j]) {
+          result.push(leftsorted[i++])
+        } else {
+          result.push(rightsorted[j++])
+        }
+      }
+      while (i < leftsorted.length) {
+        result.push(leftsorted[i++])
+      }
+      while (j < rightsorted.length) {
+        result.push(rightsorted[j++])
+      }
+      return result
+    }
+    console.log(mergesort([1, 3, 4, 8, 9, 2, 5, 7]))
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

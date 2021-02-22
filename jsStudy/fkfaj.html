@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var addDigits = function (num) {
+
+      while (num > 9) {
+        var sum = 0
+        while (num > 0) {
+          var digit = num % 10
+          sum += digit
+          sum = (num - digit) / 10
+        }
+        num = sum
+      }
+      return sum
+
+    };
+    function n3(n) {//判断一个数是不是一个数的3次方
+      if (n && 3 ** 19 % n == 0) {
+        return true
+      } else {
+        return false
+      }
+    }
+    function n33(n) {
+      if (n <= 0) {
+        return false
+      }
+      while (n % 3 == 0) {
+        n = n / 3
+      }
+      return n == 1
+    }
+    function hhh(n) {
+      var c = 0
+      for (var i = 5; i <= n; i += 5) {
+        var j = i
+        while (j % 5 == 0) {
+          j = j / 5
+          c++
+        }
+      }
+      return c
+    }
+    function sqrt1(n) {
+      var left = 0
+      var rigth = n
+      var mid = Math.floor((left + right) / 2)
+      var ss = mid * mid
+      while (right - left > 1) {
+        if (ss < n) {
+          left = mid
+        } else if (ss == n) {
+          return mid
+        } else if (ss > n) {
+          right = mid
+        }
+      }
+      return left
+    }
+
+  </script>
+
+</body>
+
+</html>

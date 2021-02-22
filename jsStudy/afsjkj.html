@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // var str = 'camelsHaveThreeHumps'
+    // var ssr = ''
+    // for (let i = 0; i < str.length; i++) {
+    //   let code = str[i].charCodeAt()
+    //   let dd = str[i]
+    //   if (code >= 65 && code <= 90) {
+    //     dd = '-' + (str[i].toLowerCase())
+    //   }
+    //   ssr += dd
+
+
+
+
+    // }
+    // console.log(ssr);
+    var s = "the-stealth-warrior"
+    var f = s.replace(/-[a-zA-Z]{1}/g, function (b) {
+      b = b.replace('-', '')
+      return b.toUpperCase()
+    })
+    // console.log(f);
+    var v = 'the_stealth_warrior'
+    var g = v.replace(/_[a-zA-Z]{1}/g, function (c) {
+      c = c.replace('_', '')
+      return c.toUpperCase()
+
+    })
+    console.log(g);
+
+  </script>
+
+</body>
+
+</html>

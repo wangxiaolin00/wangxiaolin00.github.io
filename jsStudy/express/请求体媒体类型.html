@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>请求体媒体类型</title>
+  <style>
+    #box {
+      height: 200px;
+      width: 300px;
+      border: 1px solid red;
+      box-shadow: 10px 10px 10px 10px cyan;
+    }
+  </style>
+</head>
+
+<body>
+  <button class="btn">我是一个按钮</button>
+  <div id="box"></div>
+  <script>
+    const btn = document.querySelector('.btn')
+    const div = document.querySelector('#box')
+    btn.addEventListener('click', function () {
+      const xhr = new XMLHttpRequest()
+      xhr.open('POST', 'http://127.0.0.1:8001/re', true)
+      xhr.addEventListener('load', function () {
+        console.log(xhr.readyState, xhr.statusCode);
+      })
+      xhr.setRequestHeader('Content-Type', 'application/rainbow+unicorns')
+      xhr.send('a=100&b=200&c=300')
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            div.innerHTML = xhr.response
+          }
+        }
+      }
+
+    }) 
+  </script>
+
+</body>
+
+</html>

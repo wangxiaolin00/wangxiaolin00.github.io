@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    h1 {
+      font-size: 600px;
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>
+    &#9760;
+    在网页中使用Unicode编码是用十进制&#+十进制形式Unicode编码+;
+  </h1>
+  <script>
+    // var n = 1234
+    // var sum = 0
+    // var nu = 1
+    // while (n) {
+    //   let digit = n % 10
+    //   sum += digit
+    //   nu *= digit
+    //   n = (n - digit) / 10
+    // }
+    // console.log(nu - sum);
+    // function plus(a, b) {
+    //   while (b) {
+    //     let temp = a ^ b
+    //     b = (a & b) << 1
+    //     a = temp
+    //   }
+    //   return a
+    // }
+    // console.log(plus(30, 40));
+    // Unicode 编码 十六进制
+    console.log("\u2620");//在字符串中使用转义字符输入Unicode编码
+
+
+
+    //在网页中使用Unicode编码是用十进制&#+十进制形式Unicode编码
+    var threeSum = function (nums) {
+      if (nums.length < 3) {
+        return []
+      }
+
+
+      var res = []
+      var nums = nums.sort((a, b) => (a - b))
+      for (let i = 0; i < nums.length; i++) {
+        if (nums[i] > 0) {
+          return res
+        }
+        let l = i + 1
+        var r = nums.length - 1
+
+        // if (i > 0 && nums[i + 1] == nums[i]) {
+        //   continue
+        // }
+        while (l < r) {
+          var nu = []
+          let temp = nums[l] + nums[i] + nums[r]
+          if (temp == 0) {
+            nu.push(nums[i])
+            nu.push(nums[l])
+            nu.push(nums[r])
+            res.push(nu)
+          }
+          while (l < r && nums[l + 1] == nums[l]) {
+            l++
+          }
+          while (l < r && nums[r - 1] == nums[r]) {
+            r--
+          }
+          l++;
+          r--;
+          if (temp < 0) {
+            l++
+          }
+          if (temp > 0) {
+            r--
+          }
+
+
+        }
+      }
+      return res
+
+    };
+    console.log(threeSum([-1, 0, 1, 2, -1, -4]));
+    console.log(threeSum([1, -1, -1, 0]));
+
+
+
+
+
+  </script>
+  UTF-8的编码的方式
+  一个字节:
+  0xxxxxxx 7bit
+  俩个字节:
+  110xxxxx 10xxxxxx 11bit
+  三个字节:
+  1110xxxx 10xxxxxx 10xxxxxx 16bit
+  四个字节:
+  11110xxx 10xxxxxx 10xxxxxx 10xxxxxx 21bit
+  五个字节:
+  111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 26bit
+
+
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table,td,th {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    .number, .boolean {
+      color: blue;
+    }
+    .string {
+      color: red;
+    }
+    .nil {
+      color: grey;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function table(array) {
+      var html = '<table>\n'
+      html += '  <tr>\n'
+      html += '    <th>(index)</th>\n'
+      for (var key in array[0]) {
+        html += '    <th>' + key + '</th>\n'
+      }
+      html += '  </tr>\n'
+      for (let i = 0; i < array.length; i++) {
+        html += '  <tr>\n'
+        html += '    <td>' + i + '</td>\n'
+        for (var key in array[i]) {
+          var val = array[i][key]
+          html += '    <td>' + val + '</td>\n'
+        }
+        html += '  </tr>\n'
+      }
+      html += '</table>'
+      return html
+    }
+
+    function uniqueStr(strs) {
+      var obj = {}
+      strs.forEach(str => {
+        obj[str] = true
+      })
+      return Object.keys(obj)
+    }
+
+    function flatten(arrays) {
+      var result = []
+
+      arrays.forEach(array => {
+        array.forEach(item => {
+          result.push(item)
+        })
+      })
+
+      return result
+    }
+
+    function table(array) {
+      var html = '<table>\n'
+      html += '  <tr>\n'
+      html += '    <th>(index)</th>\n'
+
+      var keys = array.map(Object.keys)
+      var uniqKeys = uniqueStr(flatten(keys))
+
+      uniqKeys.forEach(key => {
+        html += '    <th>' + key + '</th>\n'
+      })
+
+      html += '  </tr>\n'
+
+      for (let i = 0; i < array.length; i++) {
+        html += '  <tr>\n'
+        html += '    <td>' + i + '</td>\n'
+        uniqKeys.forEach(key => {
+          if (key in array[i]) {// Object.prototype.hasOwnProperty.call(array[i], key)
+            let val = array[i][key]
+            if (typeof val == 'string') {
+              html += '    <td class="string">"' + val + '"</td>\n'
+            } else if (val == null) {
+              html += '    <td class="nil">' + val + '</td>\n'
+            } else if (typeof val == 'number') {
+              html += '    <td class="number">' + val + '</td>\n'
+            } else if (typeof val == 'boolean') {
+              html += '    <td class="boolean">' + val + '</td>\n'
+            } else {
+              html += '    <td class="normal">' + val + '</td>\n'
+            }
+          } else {
+            html += '    <td></td>\n'
+          }
+        })
+        html += '  </tr>\n'
+      }
+      html += '</table>'
+      return html
+    }
+
+    var t = table([
+      {a:1, b: true, c: 3},
+      {b:"11", aa: 'foo', cc: false},
+      {a:"bar", b: "", c: 3},
+      {a:1, zb: null, c: true},
+      {a:1, b: undefined, c: 3, d: 5},
+    ])
+
+    console.log(t)
+    document.write(t)
+  </script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var ary = [1, 2, 3, 4, 5]
+    console.log(ary.reduce((x, y) => x + y, 0))
+    //实现reduce函数
+    function reduce(ary, reducer, result) {
+      var start = 0
+
+      if (result == undefined) {
+        result = ary[0]
+        start = 1
+      }
+
+      for (var i = start; i < ary.length; i++) {
+        result = reducer(result, ary[i], i, ary)
+      }
+
+      return result
+    }
+    //a.find(dd) 找到满足括号内条件的 在素组中找到第一个满足条件的元素,并返回元素
+    function find(ary, predicate) {
+      for (var i = 0; i < ary.length; i++) {
+        if (predicate(ary[i]), i, ary) {
+          return ary[i]
+        }
+      }
+    }
+    function findindex(ary, predicate) {
+      for (var i = 0; i < ary.length; i++) {
+        if (predicate(ary[i]), i, ary) {
+          return i
+        }
+      }
+    }
+    //数组的上的foreach没有break
+    //arr.every(f)数组的的元素每一个都满足括号里的条件都是真 返回值才是真
+    //arr.some(f)数组的每个元素只要有一个为真返回值就是真
+    function every(ary, test) {
+      for (var i = 0; i < ary.length; i++) {
+        if (!test(ary[i])) {
+          return false
+        }
+      }
+      return true
+    }
+    function some(ary, test) {
+      for (var i = 0; i < ary.length; i++) {
+        if (test(ary[i])) {
+          return true
+        }
+      }
+      return false
+    }
+    //数组通过下标值访问元素效率高
+    //LODASH js 函数库
+
+    function drop(ary, n = 1) {
+      if (n == 0) {
+        return ary
+      }
+      if (n > ary.length) {
+        return []
+      }
+      while (n > 0) {
+        ary.splice(0, 1)
+        n--
+      }
+      return ary
+    }
+    console.log(drop([1, 2, 3, 4],));
+    function chunk(ary, size = 1) {
+      var len = ary.length
+      var r = len / size || 0
+      var res = []
+      for (var i = 0; i < r; i++) {
+        res[i] = ary.slice(size * i, size * (i + 1))
+      }
+      return res
+    }
+    console.log(chunk([1, 2, 3, 4], 2));
+    function initial(ary) {
+      ary.splice(ary.length - 1, 1)
+      return ary
+    }
+    console.log(initial([1, 2, 3, 4]));
+    function nth(ary, n = 0) {
+      if (n >= 0) {
+        return ary[n]
+      }
+      if (n < 0) {
+        return ary[ary.length + n]
+      }
+    }
+    console.log(nth([1, 2, 3, 4, 5], -2));
+    function pull(ary, value) {
+      for (var i = 0; i < ary.length; i++) {
+        if (ary[i] == value) {
+          ary.splice(i, 1)
+        }
+      }
+      return ary
+    }
+    console.log(pull([1, 2, 3, 2, 5], 2));
+    function pullAll(ary, value) {
+      for (var i = 0; i < ary.length; i++) {
+        for (var j = 0; j < value.length; j++) {
+          if (ary[i] == value[j]) {
+            ary.splice(i, 1)
+          }
+        }
+      }
+      return ary
+    }
+    console.log(pullAll([1, 2, 3, 1, 2, 3], [2, 3]));
+    var array = [1, 2, 3]
+    function reverse(array) {
+      var newarr = []
+      for (var i = array.length - 1; i >= 0; i--) {
+        newarr.push(array[i])
+      }
+      for (var i = 0; i < array.length; i++) {
+        array[i] = newarr[i]
+      }
+      return array
+    }
+    console.log(reverse(array));
+    console.log(array);
+    function sortedindex(array, value) {
+      var arr = array.sort((a, b) => a - b)
+      for (var i = 0; i < arr.length; i++) {
+        if (value > arr[i]) {
+          return i + 1
+        }
+      }
+    }
+    console.log(sortedindex([30, 50], 40));
+    function uniq(array) {
+      var arr = []
+      for (var i = 0; i < array.length; i++) {
+        if (arr.indexOf(array[i]) === -1) {
+          arr.push(array[i])
+        }
+      }
+      return arr
+    }
+    console.log(uniq([1, 2, 4, 2, 4, 5, 3, 1]));
+    function max(array) {
+      if (array.length == 0) {
+        return undefined
+      } else {
+        return Math.max(...array)
+      }
+    }
+    console.log(max([1, 2, 3, 4, 5]));
+    function maxBy(array, iteratee = _.identity) {
+      var max = array[0]
+      for (var i = 0; i < array.length; i++) {
+        if (iteratee(array[i]) > iteratee(max)) {
+          max = array[i]
+        }
+      }
+      return max
+    }
+    console.log(maxBy([{ 'n': 1 }, { 'n': 2 }], function (o) { return o.n; }));
+    function sumBy(array, iteratee = _.identity) {
+      var res = 0
+      for (var i = 0; i < array.length; i++) {
+        res += iteratee(array[i])
+      }
+      return res
+    }
+    console.log(sumBy([{ 'n': 4 }, { 'n': 2 }, { 'n': 8 }, { 'n': 6 }], function (o) { return o.n; }));
+    function join(ary, separator = ',') {
+      var str = ''
+      for (var i = 0; i < ary.length - 1; i++) {
+        str += '' + ary[i] + separator
+      }
+      str = str + ary[ary.length - 1]
+      return str
+    }
+    console.log(join(['a', 'b', 'c'], '~'));
+    function filter(array, predicate = _.identity) {
+      var res = []
+      for (var k of array) {
+        if (predicate(k) && array[k] == predicate[k]) {
+          res.push(k)
+        }
+      }
+      return res
+    }
+    console.log(filter([
+      { 'user': 'barney', 'age': 36, 'active': true },
+      { 'user': 'fred', 'age': 40, 'active': false }
+    ], function (o) { return !o.active; }));
+    console.log([{ 'user': 'barney', 'age': 36, 'active': true },
+    { 'user': 'fred', 'age': 40, 'active': false }], { 'age': 36, 'active': true });
+    var dd = { a: 1, b: 1 }
+    console.log(typeof dd == 'object');
+    function flatten(array) {
+      var ss = array.flat(Infinity)
+      return ss
+
+    }
+    console.log(flatten([1, [2, [3, [4]], 5]]));
+    function intersection(...ary) {//求多个数组的交集
+      ary.forEach(i => {
+        minArr = i
+        if (i.length < minArr.length) {
+          minArr = i
+        }
+      })
+      var defaultArr = []
+      minArr.forEach(i => {
+        let state = []
+        //2、这里因为要知道arr每个数组里是否包含的minArr当前循环的值i，
+        //所有设置了一个状态的数组state=[]，
+        //arr里的数组j如果包含i就往state里面push一个true,否则push一个false
+        ary.forEach(j => {
+          if (j.includes(i)) {
+            state.push(true)
+          }
+          else state.push(false)
+        })
+
+        //3、最后一步通过对state状态数组对比每一个值是不是都是true，
+        //来判断是否把这个i存进defaultArr交集的数组里
+        const stutas = state.every(i => i === true)
+        //只有arr所有的数组都包含这个值才存进defaultArr里
+
+        if (stutas && !(defaultArr.includes(i))) {
+          defaultArr.push(i)
+        }
+
+      })
+      return defaultArr
+
+
+
+
+
+    }
+    console.log(intersection([2, 1], [4, 2], [1, 2]));
+    function ins(...ary) {//多个数组求交集返会交集元素组成的数组
+      var res = []
+      ary.forEach(i => {
+        minArr = i
+        if (minArr.length < i.length) {
+          minArr = i
+        }
+      })
+      minArr.forEach(i => {
+        var s = []
+        ary.forEach(j => {
+          if (j.includes(i)) {
+            s.push(true)
+          } else {
+            s.push(false)
+          }
+        })
+        let dd = s.every(i => i === true)
+        if (dd && !(res.includes(i))) {
+          res.push(i)
+        }
+      })
+      return res
+
+    }
+    console.log(ins([2, 1], [4, 2], [1, 2]))
+    function frompairs(ary) {
+      var res = {}
+      for (var i = 0; i < ary.length; i++) {
+        res[ary[i][0]] = ary[i][1]
+      }
+      return res
+    }
+    console.log(frompairs([['fred', 30], ['barney', 40]]))
+    var rrg = [1, 2, 3]
+    var rrg1 = { 'a': 1, 'b': 2 }
+    console.log(Array.isArray(rrg))
+    console.log(typeof 'a')
+    var sst = function () {
+      return 3
+    }
+    console.log(typeof sst)
+    function sortedUniq(array) {
+      return [...new Set(array)]
+    }
+    console.log(sortedUniq([1, 1, 2]))
+    var hhh = [1, 2, 3]
+    function dddd(arr) {
+      arr.shift()
+      return arr
+    }
+    console.log(dddd(hhh))
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+* {
+  background-color: rgba(0,0,0,0.1);
+  box-shadow: 0 0 1px red;
+}
+html {
+  zoom: 1;
+}
+ul {
+  list-style:none;
+}
+
+
+$count-per-column: 5;//每列个数
+$item-width: 80px;//每个元素的宽度
+$item-height: 30px;//每个元素的高度
+
+ul {
+  list-style: none;
+  padding: 0;
+  height: $count-per-column * $item-height;
+  border: 2px solid red;
+  xfloat: left;
+  xposition: absolute;
+  display: inline-block;
+}
+
+li {
+  height: $item-height;
+  width: $item-width;
+}
+@for $i from 1 to 15 {
+    ul li:nth-child(n + #{$i * $count-per-column + 1}) {
+        margin-left: $i * $item-width;
+    }
+}
+
+li:nth-child(#{$count-per-column}n + #{$count-per-column + 1}) {
+  margin-top: -$item-height * $count-per-column;
+}
+
+

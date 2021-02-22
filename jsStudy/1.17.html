@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<!--
+  问题:js引擎如何管理内存
+   1.内存生命的周期
+    *分配小内存空间,得到它的使用权
+    *存储数据 ,可以反复进行操作
+    *释放小内存空间
+   2释放内存
+    * 局部变量:函数执行完自动释放
+    *对象:成为垃圾对象===>垃圾回收器回收
+-->
+<!-- 什么是对象
+    * 对象是多个数据的封装体
+    *用来保存多个数据的容器
+    *一个对象代表现实中的一个事物
+     
+
+-->
+<script>
+  var a = 3
+  var obj = {}
+  obj = undefined
+  function fn() {
+    var b = {}
+  }
+  fn()//b是自动释放内存,b所指向的对象是在后面某个时刻由垃圾回收器回收
+</script>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function power(x, n) {
+      if (x == 0) {
+        return 0
+      }
+      if (n == 0 && x != 0) {
+        return 1
+      }
+      if (n % 2 == 0) {
+        var t = power(x, n / 2)
+        return t * t
+      } else if (n % 2 == 1) {
+        var t = power(x, (n - 1) / 2)
+        return t * t * x
+      }
+    }
+    function power1(x, n) {//利用位运算求x的n次方
+      var result = 1
+      while (n) {
+        if (n & 1) {//说明此时n个位上的数位1
+          result *= x
+        }
+        n >>= 1//右移一位
+        x = x * x
+      }
+      return result
+    }
+    console.log(power1(2, 10));
+    var countBits = function (num) {
+      if (num == 0) {
+        return [0]
+      }
+
+      var result = [0]
+      var sub = 1 // sub是i中最高位的1代表的数
+
+      for (var i = 1; i <= num; i++) {
+        if ((sub << 1) == i) {
+          sub = i
+        }
+        var t = i ^ sub // t就是i中最高位的1去掉以后
+        result[i] = result[t]/*t中1的个数*/ + 1
+      }
+
+      return result
+    };
+    //按位& 2进制位置上相同为1 不同为0
+    //先假定有n/2个素数
+  </script>
+
+</body>
+
+</html>

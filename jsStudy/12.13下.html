@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function fromPairs(ary) {
+      var res = {}
+      for (var i = 0; i < ary.length; i++) {
+        res[ary[i][0]] = ary[i][1]
+      }
+      return res
+    }
+    console.log(fromPairs([['fred', 30], ['barney', 40]]));
+  </script>
+  <script>
+    function lightEqual(a, b) {
+      if (a === b) return true;
+
+      if (a == null || typeof a != "object" ||
+        b == null || typeof b != "object")
+        return false;
+
+      var propsInA = 0,
+        propsInB = 0;
+
+      for (var prop in b)
+        propsInB += 1;
+
+      for (var prop in a) {
+        propsInA += 1;
+        if (!(prop in b) || !lightEqual(a[prop], b[prop]))
+          return false;
+      }
+
+      return propsInA <= propsInB;
+    }
+
+    function isEqual(a, b) {
+      if (a === b)
+        return true
+      if (a == null || typeof a != "object" || b == null || typeof b != "object")
+        return false
+      var propsInA = 0,
+        propsInB = 0
+      for (var prop in a) {
+        propsInA += 1
+      }
+      for (var prop in b) {
+        propsInB += 1
+        if (!(prop in a) || !isEqual(a[prop], b[prop]))
+          return false
+      }
+      return propsInA == propsInB
+    }
+
+    function vardictIteratee(iteratee) {
+      if (iteratee === null) {
+        return val => val;
+      }
+      if (typeof iteratee === "string") {
+        return val => val[iteratee];
+      }
+      if (typeof iteratee === "function") {
+        return iteratee;
+      }
+      if (iteratee instanceof Array) {
+        return function (obj) {
+          return obj[iteratee[0]] === iteratee[1];
+        }
+      } else if (typeof iteratee === "object") {
+        if (Object.prototype.toString.call(iteratee) === "[object RegExp]")
+          return val => iteratee.test(val);
+        else
+          return lightEqual.bind(null, iteratee);
+      }
+    }
+    function inordertraverse(root, action) {//中序遍历 左根右
+      if (root) {
+        traverse(root.left)
+        action(root)
+        traverse(root.right)
+      }
+    }
+    function preordertraverse(root, action) {
+      if (root) {
+        action(root)
+        preordertraverse(root.left, action)
+        preordertraverse(root.right, action)
+      }
+    }
+    function postordertraverse(root, action) {
+      postordertraverse(root.left, action)
+      postordertraverse(root.right, action)
+      action(root)
+    }
+    function sequencetraverse(root) {//层序遍历将树的每一层放到数组里
+      var res = []
+      var row = []
+      var newrow = []
+      if (!root) {
+        return []
+      } else {
+        row.push(root)
+      }
+      while (root.length) {
+        var rowval = []
+        for (let i = 0; i < row.length; i++) {
+          let node = row[i]
+          rowval.push(node.val)
+          if (node.left) {
+            newrow.push(node.left)
+          }
+          if (node.right) {
+            newrow.push(node.right)
+          }
+        }
+        row = newrow
+        newrow = []
+        res.push(rowval)
+      }
+      return res
+    }
+  </script>
+
+</body>
+
+</html>

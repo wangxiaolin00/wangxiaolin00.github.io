@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var a = '11'
+    var b = '1'
+    var x = parseInt(Number(a), 2)
+    var y = parseInt(Number(b), 2)
+    console.log(x);
+    console.log(y);
+    var weikunjiou = function (n) {
+      var s = String(n)
+      return s.length % 2 == 0
+    }
+    console.log(weikunjiou(1234));
+    var fff = function (arr) {
+      var o = {}
+      for (var i = 0; i < arr.length; i++) {
+        var s = arr[i]
+        if (o[s]) {
+          o[s]++
+        } else {
+          o[s] = 1
+        }
+      }
+      var max = 0
+      for (var k in o) {
+        if (o[k] > max) {
+          max = o[k]
+        }
+      }
+      return max
+    }
+    console.log(fff([1, 2, 2, 3, 1]));
+    console.log(fff([1, 2, 2, 3, 1, 4, 2]));
+    var n = 0.1
+    console.log(n.toString(2));
+    function ssr(str) {
+      var a = ''
+      var b = []
+      for (var i = 0; i < str.length; i++) {
+        if (str[i] == ' ') {
+          b.push(+a)
+          a = ''
+        } else {
+          a += str[i]
+        }
+      }
+      return b
+    }
+    // var s=str.charCodeAt(a)//将字符转为对的ACCII码中的数字
+    // console.log(s);
+    // var x=s+35
+    // var b=String.fromCharCode(x)//将数字转成ASCII码
+    // console.log(b);
+    //知识点：
+    //小写转大写：-32，因为在ASCII表上小写字母在大写字母的后面。
+    //大写转小写：+32，因为在ASCII表上大写字母在小写字母的前面。
+    //注：字母a-z的code为97 - 122，A-Z的code为65 - 90 这很重要。不过记不住也没关系
+    function lowercase(str) {
+      var result = ''
+      for (var i = 0; i < str.length; i++) {
+        var code = str.charCodeAt(i)
+        if (code >= 65 && code <= 90) {
+          result += String.fromCharCode(code + 32)
+        } else {
+          result += str[i]
+        }
+
+      }
+      return result
+    }
+    function push(ary, val) {
+      ary[ary.length] = val
+      return ary.length
+    }
+    function unshift(ary, val) {
+      for (var a = ary.length; i > 0; i--) {
+        ary[i] = ary[i - 1]
+      }
+      ary[0] = val
+      return ary.length
+    }
+    //ary.join()//将数组转成字符串
+    function join(ary, str) {
+      var result = ''
+      for (var i = 0; i < ary.length - 1; i++) {
+        result += ary[i] + String(str)
+      }
+      return result
+    }
+    //s.split('')//将字符串s转成数组
+    //对象是属性和方法的集合,任意数量属性与值得对应关系的结合
+    //数组的值的有序集合(值在数组中是有序的)
+    //对象是值得具名集合(值在对象中是有名字的)
+    //delete obj.c 删除obj的c属性 删掉了返回true 删不了返回false 比如arr.length 就删不掉
+    //for(var k  in obj) {}for in 遍历对象假如对象obj[k]表示属性值 k表示属性名
+    //typeof null 返回值是object typeof undefined 返回值是undefined
+    //基本数据类型
+    //String Number Boolean Null Undefined
+    //引用数据类型
+    //Object
+    //在js中给我么提供了三个包装类可以把我们的基本数据类型转化为对象
+    //String()可以将我们的字符串类型转化为对象
+    //Numebr()可以将我们的数字类型转化为Number对象
+    //Boolean()可以将我们布尔值类型转化为Boolean对象
+    function faa(arr) {
+      var o = {}
+      for (var i = 0; i < arr.length; i++) {
+        var s = arr[i]
+        if (o[s]) {
+          o[s]++
+        } else {
+          o[s] = 1
+        }
+      }
+      var max = 0
+      for (var k in o) {
+        if (o[k] > max) {//o[k]指属性值
+          max = o[k]
+        }
+      }
+      return k
+    }
+    //俩个对象比较的时候是比较的俩个对象的内存地址,
+    //俩个对象在堆中的内存地址各不相同
+
+
+  </script>
+
+</body>
+
+</html>

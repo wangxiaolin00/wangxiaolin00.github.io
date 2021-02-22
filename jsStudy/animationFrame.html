@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .s1 {
+      display: block;
+      margin: 250px auto;
+      height: 300px;
+      width: 300px;
+      background-color: gray;
+      border-radius: 150px;
+      border: 1px solid black;
+
+    }
+
+    .s2 {
+      position: fixed;
+      height: 50px;
+      width: 50px;
+      background-color: cyan;
+      border-radius: 25px;
+      border: 1px solid black;
+
+
+
+    }
+
+    .s3 {
+      position: absolute;
+      height: 50px;
+      width: 50px;
+      background-color: yellow;
+      border-radius: 25px;
+      border: 1px solid black;
+
+    }
+  </style>
+</head>
+
+<body>
+  <span class="s1"></span>
+  <span class="s2"></span>
+  <span class="s4"><span class="s3"></span></span>
+  <script>
+    var span = document.querySelector('.s2')
+    var angle = 0
+    var latime = null
+    function an(time) {
+      if (latime != null) {
+        angle += (time - latime) * 0.001
+      }
+      latime = time
+      span.style.left = (Math.sin(angle) * 150 + 650) + 'px'
+      span.style.top = (Math.cos(angle) * 150 + 270) + 'px'
+      requestAnimationFrame(an)
+    }
+    requestAnimationFrame(an)
+    var pp = document.querySelector('.s3')
+    var nu = 0
+    var last = null
+    function an2(time2) {
+      if (last != null) {
+        nu += (time2 - last) * 0.001
+      }
+      last = time2
+      pp.style.top = (Math.sin(nu) * 50 + 200) + 'px'
+      pp.style.left = (Math.cos(nu) * 50 + 200) + 'px'
+      requestAnimationFrame(an2)
+
+    }
+    requestAnimationFrame(an2)
+  </script>
+
+</body>
+
+</html>

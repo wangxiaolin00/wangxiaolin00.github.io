@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>请求超时和网路异常</title>
+  <style>
+    #box {
+      width: 300px;
+      height: 200px;
+      border: 1px solid blue;
+      box-shadow: 10px 10px 10px 10px cyan;
+    }
+  </style>
+</head>
+<button>我是一个按钮</button>
+<div id="box"></div>
+<script>
+  const btn = document.getElementsByTagName('button')[0]
+  const div = document.getElementById('box')
+  btn.addEventListener('click', function () {
+    const xhr = new XMLHttpRequest()
+    //设置超时设置
+    xhr.timeout = 2000
+    //超时回调
+    xhr.ontimeout = function () {
+      div.innerHTML = '网络请求超时,请稍后重试'
+    }
+    xhr.onerror = function () {
+      alert("没网了")
+    }
+    xhr.responseType = 'json'
+    xhr.open('GET', 'http://127.0.0.1:8001/delay')
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    xhr.send()
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          div.innerHTML = xhr.response.name
+        }
+      }
+    }
+  })
+</script>
+
+<body>
+
+</body>
+
+</html>

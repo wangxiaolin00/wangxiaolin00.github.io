@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script>
+  // const students = [
+  //   { id: 1, name: 'Ruler', grounp_id: 1, score: 92 },
+  //   { id: 2, name: 'Super', grounp_id: 1, score: 81 },
+  //   { id: 3, name: 'Dog', group_id: 2, score: 30 },
+  //   { id=4, name: 'Beaty', grounp_id: 2, socre: 75 },
+  //   { id=5, name: 'Jason', grounp_id: 2, socre: 88 },
+  //   { id=6, name: 'Water', grounp_id: 2, socre: 59 },
+  //   { id=7, name: 'Codez', grounp_id: 3, socre: 21 },
+  //   { id=8, name: 'Wandderful', grounp_id: 3, socre: 98 },
+  //   { id=9, name: 'Caous', grounp_id: 3, socre: 67 }]
+
+
+  // const grounp = [
+  //   { id: 1, grounp__name: 'Red' },
+  //   { id: 2, grounp__name: 'Yellow' },
+  //   { id: 3, grounp__name: 'Green' }
+  // ]
+  // //投射(projiection)
+  // //>60合格的
+  // const studentsWithGrade = students.map(
+  //   student => {
+  //     return {
+  //       ...student,//...student创建新对象,这样后续的操作就不会影响原来的sudents//有利于减少出现bug的可能
+  //       grade: student.score >= 60 ? '通过' : '不合格'
+  //     }
+  //   }
+  // )
+  // //过滤
+  // //通过的学生
+  // const passedStudents = studets.filter(x => x.score > 60)
+  // //组1的学生
+  // const grounp1Studets = students.filter(x => x.group_id === 1)
+  // //分组
+  // const studetnsInGrounps = students.reduce(
+  //   (groups, student) => {
+  //     grounps[student.group__id] = [...(groups[student.group_id] || []), student]
+  //     return grounps
+  //   },
+  //   {}
+  // )
+  var jki = [1, 2, 3, 4, 5, 6]
+  var s = jki.length
+  for (var i = 0; i < s / 2; i++) {//翻转数组的第二种写法
+    var temp = jki[i]
+    jki[i] = jki[s - i - 1]
+    jki[s - i - 1] = temp
+  }
+  console.log(jki);
+  var reverseOnlyLetters = function (S) {//翻转字符串的字符符号的位置不变,只翻转字母
+
+    var str = S.split("").reverse(), si, sx
+    for (var i = str.length; i >= 0; i--) {
+      si = str[i]
+      if ((si >= 'a' && si <= 'z') || (si >= 'A' && si <= 'Z')) {
+      } else {
+        str.splice(i, 1)
+      }
+    }
+
+    for (var i = 0; i < S.length; i++) {
+      sx = S[i]
+      if ((sx >= 'a' && sx <= 'z') || (sx >= 'A' && sx <= 'Z')) {
+      } else {
+        str.splice(i, 0, sx)
+      }
+    }
+    return str.join("")
+
+  };
+  // 基姆拉尔森计算公式
+
+  // W = (d + 2m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400) mod 7 *
+
+  //   w的值范围0～6（星期一～星期日）注意 / 是整除
+  // 在公式中d表示日期中的日数， m表示月份数， y表示年数。
+  // 注意： 在公式中有个与其他公式不同的地方：
+  // 把一月和二月看成是上一年的十三月和十四月， 例： 如果是2018 / 1 / 1 则换算成： 2017 / 13 / 1 来代入公式计算
+
+  function getWeek(y, m, d) {
+    const startWeek = 1;
+    if (m < 3) {
+      m += 12;
+      --y;
+    }
+    return (d + startWeek + 2 * m + Math.floor(3 * (m + 1) / 5) + y + Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400)) % 7;
+  }
+  var dayOfTheWeek = function (day, month, year) {
+    const aWeekTxt = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    return aWeekTxt[getWeek(year, month, day)];
+  };
+  // 在基姆拉尔森中 / 是整除，所以在JavaScript中我们要用Math.floor进行取整数的处理，不然计算结果就会有问题。在getWeek中定义了一个startWeek = 1的常量，在原公式返回的结果是0~6代表周一到周日，而在JavaScript：0代表周日，我们通过d + 1使返回的结果和getDay的结果一样。
+
+</script>
+
+<body>
+  <script>
+  </script>
+
+</body>
+
+</html>

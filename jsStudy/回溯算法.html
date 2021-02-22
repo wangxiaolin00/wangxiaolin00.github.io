@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function combineSum(ary, target) {//求出数组中所有和为target的元素组成数组放到一个数组
+      var result = []
+
+      var tmp = []
+
+      dfs()
+      return result
+
+      function dfs(startIdx = 0) {
+        var sum = tmp.reduce((a, b) => a + b, 0)
+        if (sum == target) {
+          result.push(tmp.slice())
+        }
+        if (sum > target) {
+          return
+        }
+        for (var i = startIdx; i < ary.length; i++) {
+          tmp.push(ary[i])
+          dfs(i + 1)
+          tmp.pop()
+        }
+      }
+    }
+    function fullqueue2(ary) {
+      var res = []
+      if (ary.length == 0) {
+        return []
+      }
+      if (ary.length == 1) {
+        return [ary.slice()]
+      } else {
+        var r1 = ary[0]
+        var rest = ary.slice(1)
+        var restqueue = fullqueue2(rest)
+        for (let k of restqueue) {
+
+          for (let i = 0; i <= k.length; i++) {
+            var arr = k.slice()
+            arr.splice(i, 0, r1)
+            res.push(arr)
+          }
+        }
+      }
+
+      return res
+    }
+    console.log(fullqueue2([1, 2, 3]));
+    function fullqueue3(ary) {
+      var res = []
+      function dfs(path, set) {
+        if (path.length == ary.length) {
+          res.push(path.slice())
+          return
+        }
+        for (let i = 0; i < ary.length; i++) {
+          if (!set.has(i)) {
+            path.push(ary[i])
+            set.add(i)
+            dfs(path, set)
+            path.pop(ary[i])
+            set.delete(i)
+          }
+        }
+      }
+      dfs([], new Set())
+      return res
+    }
+    console.log(fullqueue3([1, 2, 3]));
+    var n = 3
+    function dfskuohao(cur = "", l, r) {
+      if (r == n) {
+        console.log(cur);
+      }
+      if (l < n) {
+        dfskuohao(cur + '(', l + 1, r)
+      }
+      if (r < l) {
+        dfskuohao(cur + ')', l, r + 1)
+      }
+
+    }
+
+    function fullqueue3(ary) {//含有重复元素的数组,求全排的数组(不含重复的)的所有情况放到一个数组中
+      var res = []
+      var isUsed = ary.map(_ => false)
+      function dfsqueue(path, idx) {//将每一次回溯过程中值存放到数组path中
+        if (idx == ary.length) {
+          res.push(path.slice())
+        }
+        for (let i = 0; i < ary.length; i++) {
+          if (isUsed[i] || i > 0 && ary[i] == ary[i - 1] && !isUsed[i - 1]) {//将数组的中相同的元素跳过
+            continue
+          }
+          path.push(ary[i])
+          isUsed[i] = true
+          dfsqueue(path, idx + 1)
+          path.pop()
+          isUsed[i] = false
+        }
+
+      }
+      ary.sort((a, b) => (a - b))//先把数组排序一下
+      dfsqueue([], 0)
+      return res
+
+
+    }
+    console.log(fullqueue3([1, 1, 2]));
+
+
+
+
+  </script>
+
+</body>
+
+</html>

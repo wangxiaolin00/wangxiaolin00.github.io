@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    window.onload = function () {
+      function displayCoords(event) {
+        document.body.textContent = `Mouse at ${event.pageX}, ${event.pageY}`
+      }
+      var flag = false, lastEvent;
+      window.addEventListener('mousemove', function (e) {
+        lastEvent = e
+        if (!flag) {
+          flag = true
+          setTimeout(() => {
+            flag = false
+            displayCoords(lastEvent)
+          }, 250)
+        }
+      })
+    }
+    // function debounce(f, time) {
+    //   var id = null
+    //   return function (...args) {
+    //     clearTimeout(id)
+    //     id = setTimeout(() => {
+    //       f.call(this, ...args)
+    //     }, time)
+    //   }
+
+    // }
+    function debounce(f, time) {
+      var id = null
+
+      return function (...args) {
+        clearTimeout(id)
+        id = setTimeout(() => {
+          f.call(this, ...args)
+        }, time)
+      }
+    }
+
+    function throttle(f, time) {
+      var scheduled = false
+      var lastArgs = null
+
+      return function (...args) {
+        lastArgs = args
+
+        if (!scheduled) {
+          scheduled = true
+          setTimeout(() => {
+            scheduled = false
+            f.call(this, ...lastArgs)
+          }, time)
+        }
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+
+</body>
+
+</html>

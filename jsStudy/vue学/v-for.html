@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+
+    }
+
+    ul {
+      list-style-type: none;
+      color: red;
+      font-size: bolder;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="item in movies">{{item}}</li>
+    </ul>
+  </div>
+  <script src="vue1/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        movies: ['大话西游', '盗梦空间', '极盗者', '你好,李焕英'],
+        message: "你好"
+      }
+    })
+  </script>
+
+</body>
+
+</html>

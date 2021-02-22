@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      perspective: 800px;
+    }
+
+    section {
+      height: 300px;
+      width: 300px;
+      margin: 100px auto;
+      position: relative;
+      transform-style: preserve-3d;
+      animation-name: roat;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603555629121&di=aba645f0b5e1c28f133a6254b65500de&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201709%2F10%2F20170910145522_ydZML.jpeg) no-repeat center;
+    }
+
+    section:hover {
+      animation-play-state: paused;
+      cursor: pointer;
+    }
+
+    @keyframes roat {
+      0% {
+        transform: rotatey(0deg);
+      }
+
+      100% {
+        transform: rotateY(360deg);
+      }
+    }
+
+    section div {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    section div:nth-child(1) {
+      transform: translateZ(300px);
+      background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603555629129&di=2cd2d357e9c9e46de0376e358120c92d&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn19%2F344%2Fw1100h844%2F20180606%2F5f70-hcqccip5322592.jpg) no-repeat center;
+    }
+
+    section div:nth-child(2) {
+      transform: rotateY(60deg) translateZ(300px);
+      background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603555629130&di=6a51ce63cc500588dbe29a6776bf268b&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Ffront%2F291%2Fw690h401%2F20181003%2FJGXk-hktxqah5097778.jpg) no-repeat center;
+    }
+
+    section div:nth-child(3) {
+      transform: rotateY(120deg) translateZ(300px);
+      background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603555629180&di=d710d19e3a1d4ea5a61f4bd87d75216e&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201808%2F19%2F20180819135431_axovp.thumb.700_0.jpg) no-repeat center;
+    }
+
+    section div:nth-child(4) {
+      transform: rotateY(180deg) translateZ(300px);
+      background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603555629184&di=0765f4c308e378246c5682e5edf53841&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farchive%2Fcb2742d35849a320d38705b4c8eef12bec62914d.jpg) no-repeat center;
+    }
+
+    section div:nth-child(5) {
+      transform: rotateY(240deg) translateZ(300px);
+      background: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603555629200&di=926ed04e4d9f212d5a8c0b8a3ec235d2&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201806%2F28%2F20180628204849_j8MtH.jpeg) no-repeat center;
+    }
+
+    section div:nth-child(6) {
+      transform: rotateY(300deg) translateZ(300px);
+      background: url(https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2551372932,2517126698&fm=26&gp=0.jpg) no-repeat;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </section>
+
+
+</body>
+
+</html>

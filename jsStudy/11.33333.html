@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    section {
+      height: 900px;
+      width: 1600px;
+      border: 1px solid red;
+      margin: 20px auto;
+      position: relative;
+
+    }
+
+    @keyframes move {
+      0% {
+        left: 0;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+    input[class^=tab] {
+      position: absolute;
+      z-index: 200;
+    }
+
+    .tab1 {
+      left: 230px;
+      bottom: 120px;
+    }
+
+    .tab2 {
+      left: 250PX;
+      bottom: 120PX;
+    }
+
+    .tab3 {
+      left: 270px;
+      bottom: 120px;
+    }
+
+    .tab4 {
+      left: 290px;
+      bottom: 120px;
+    }
+
+    .tab5 {
+      left: 310px;
+      bottom: 120px;
+    }
+
+    div:nth-of-type(1) img {
+      object-fit: cover;
+      object-position: 0;
+    }
+
+    div:nth-of-type(2) img {
+      object-fit: cover;
+      object-position: -320px;
+    }
+
+    div:nth-of-type(3) img {
+      object-fit: cover;
+      object-position: -640px;
+    }
+
+    div:nth-of-type(4) img {
+      object-fit: cover;
+      object-position: -960px;
+    }
+
+    div:nth-of-type(5) img {
+      object-fit: cover;
+      object-position: -1280px;
+    }
+
+
+
+    div {
+      float: left;
+      height: 900px;
+      width: 320px;
+      overflow: hidden;
+      position: relative;
+
+    }
+
+
+    div img {
+      display: inline-block;
+      position: absolute;
+
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 100%;
+      bottom: 0;
+      transition: .6s;
+      animation: move 1s;
+    }
+
+    input:nth-child(1):checked~div img:nth-child(1),
+    input:nth-child(2):checked~div img:nth-child(2),
+    input:nth-child(3):checked~div img:nth-child(3),
+    input:nth-child(4):checked~div img:nth-child(4),
+    input:nth-child(5):checked~div img:nth-child(5) {
+      left: 0;
+      z-index: 20;
+      animation: none;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <input class="tab1" type="radio" name="s1" checked>
+    <input class="tab2" type="radio" name="s1">
+    <input class="tab3" type="radio" name="s1">
+    <input class="tab4" type="radio" name="s1">
+    <input class="tab5" type="radio" name="s1">
+    <div>
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461115020&di=131431540934cb0075278f6dd75f85cf&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F-4o3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2Fb03533fa828ba61eb45777a84a34970a314e59ff.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461115160&di=2cc8000571ebefe93d8c5d6ab232b7a8&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farchive%2Fb8209489b46105a1fa7bdf836d7d01e9e1c1faed.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461239092&di=82ad696686c6cd8e28575d4562995eb6&imgtype=0&src=http%3A%2F%2Fforum.neubt.com%2Fdata%2Fattachment%2Fforum%2F201411%2F19%2F155037sqqq1vzq1tevqvfp.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461295212&di=77a823eafb5252e93eee227fb7eb8783&imgtype=0&src=http%3A%2F%2Fimage.samanlehua.com%2Ffile%2Fuserfiles%2Fimages%2Fauto59%2F2017031617504221868.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461329391&di=755350392d68474bafaf1f1d4c0630f1&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201811%2F29%2F20181129182204_Ymiv4.jpeg"
+        alt="">
+    </div>
+    <div>
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461115020&di=131431540934cb0075278f6dd75f85cf&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F-4o3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2Fb03533fa828ba61eb45777a84a34970a314e59ff.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461115160&di=2cc8000571ebefe93d8c5d6ab232b7a8&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farchive%2Fb8209489b46105a1fa7bdf836d7d01e9e1c1faed.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461239092&di=82ad696686c6cd8e28575d4562995eb6&imgtype=0&src=http%3A%2F%2Fforum.neubt.com%2Fdata%2Fattachment%2Fforum%2F201411%2F19%2F155037sqqq1vzq1tevqvfp.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461295212&di=77a823eafb5252e93eee227fb7eb8783&imgtype=0&src=http%3A%2F%2Fimage.samanlehua.com%2Ffile%2Fuserfiles%2Fimages%2Fauto59%2F2017031617504221868.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461329391&di=755350392d68474bafaf1f1d4c0630f1&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201811%2F29%2F20181129182204_Ymiv4.jpeg"
+        alt="">
+    </div>
+    <div>
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461115020&di=131431540934cb0075278f6dd75f85cf&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F-4o3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2Fb03533fa828ba61eb45777a84a34970a314e59ff.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461115160&di=2cc8000571ebefe93d8c5d6ab232b7a8&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farchive%2Fb8209489b46105a1fa7bdf836d7d01e9e1c1faed.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461239092&di=82ad696686c6cd8e28575d4562995eb6&imgtype=0&src=http%3A%2F%2Fforum.neubt.com%2Fdata%2Fattachment%2Fforum%2F201411%2F19%2F155037sqqq1vzq1tevqvfp.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461295212&di=77a823eafb5252e93eee227fb7eb8783&imgtype=0&src=http%3A%2F%2Fimage.samanlehua.com%2Ffile%2Fuserfiles%2Fimages%2Fauto59%2F2017031617504221868.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461329391&di=755350392d68474bafaf1f1d4c0630f1&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201811%2F29%2F20181129182204_Ymiv4.jpeg"
+        alt="">
+    </div>
+    <div>
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461115020&di=131431540934cb0075278f6dd75f85cf&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F-4o3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2Fb03533fa828ba61eb45777a84a34970a314e59ff.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461115160&di=2cc8000571ebefe93d8c5d6ab232b7a8&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farchive%2Fb8209489b46105a1fa7bdf836d7d01e9e1c1faed.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461239092&di=82ad696686c6cd8e28575d4562995eb6&imgtype=0&src=http%3A%2F%2Fforum.neubt.com%2Fdata%2Fattachment%2Fforum%2F201411%2F19%2F155037sqqq1vzq1tevqvfp.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461295212&di=77a823eafb5252e93eee227fb7eb8783&imgtype=0&src=http%3A%2F%2Fimage.samanlehua.com%2Ffile%2Fuserfiles%2Fimages%2Fauto59%2F2017031617504221868.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461329391&di=755350392d68474bafaf1f1d4c0630f1&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201811%2F29%2F20181129182204_Ymiv4.jpeg"
+        alt="">
+    </div>
+    <div>
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461115020&di=131431540934cb0075278f6dd75f85cf&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F-4o3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2Fb03533fa828ba61eb45777a84a34970a314e59ff.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461115160&di=2cc8000571ebefe93d8c5d6ab232b7a8&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farchive%2Fb8209489b46105a1fa7bdf836d7d01e9e1c1faed.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461239092&di=82ad696686c6cd8e28575d4562995eb6&imgtype=0&src=http%3A%2F%2Fforum.neubt.com%2Fdata%2Fattachment%2Fforum%2F201411%2F19%2F155037sqqq1vzq1tevqvfp.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461295212&di=77a823eafb5252e93eee227fb7eb8783&imgtype=0&src=http%3A%2F%2Fimage.samanlehua.com%2Ffile%2Fuserfiles%2Fimages%2Fauto59%2F2017031617504221868.jpg"
+        alt="">
+      <img
+        src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1604461329391&di=755350392d68474bafaf1f1d4c0630f1&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201811%2F29%2F20181129182204_Ymiv4.jpeg"
+        alt="">
+    </div>
+  </section>
+
+</body>
+
+</html>

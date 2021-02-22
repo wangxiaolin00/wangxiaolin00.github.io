@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1 {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box1"></div>
+  <script>
+    var div = document.querySelector('.box1')
+    div.addEventListener('click', function () {
+      console.log(1);
+    })
+    div.addEventListener('click', function () {
+      console.log(2);
+    })
+    //addEventListener() 函数接三个参数,第一个 事件触发方式的字符串  'click'  //不带on
+    //第二个参数 回调函数,第三个参数布尔值  默认false   true表示事件捕获
+    // Ie8及以下不支持这个函数 Ie8 也没有事件捕获
+    //addEventListener()函数中this 是事件触发的对象
+
+
+    /*Ie8 及以下的浏览器 使用 attachEevnt()这个函数接俩个参数
+     *第一个参数 事件触发的方式 字符串 如 'onclick' 第二参数是回调函数
+     *attachEvent()函数中this指向window //同一个事件绑定多个函数 执行的顺序是倒着的
+     */
+
+
+    //实现一个bindAll函数解决兼容性问题
+    function bindAll(obj, eventStr, callback) {
+      if (obj.addEventListener) {
+        return obj.addEventListener(eventStr, callback, false)
+      } else {
+        return obj.attchEvent('on' + eventStr, function () {
+          //在匿名函数中调用回调函数 改变原来回调的函数的调用对象
+          callback.call(obj)//改变函数中this  改成事件触发的对象
+        })
+      }
+    }
+  </script>
+
+</body>
+
+</html>

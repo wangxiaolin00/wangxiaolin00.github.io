@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      position: relative;
+      width: 500px;
+      height: 375px;
+      margin: 50px auto;
+      background-color: greenyellow;
+      text-align: center;
+    }
+
+    #pre {
+      position: absolute;
+      left: 200px;
+      bottom: 20px;
+      z-index: 10;
+    }
+
+    #next {
+      position: absolute;
+      right: 200px;
+      bottom: 20px;
+      z-index: 10;
+    }
+
+    img {
+      height: 375px;
+      width: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <img src="img/img1.jpg" alt="秦时明月" id="img11">
+    <button id="pre">上一张</button><button id="next">下一张</button>
+  </div>
+  <script>
+    var pre = document.getElementById('pre')
+    var next = document.getElementById('next')
+    var img = document.getElementsByTagName('img')[0];
+    var arr = ["img/img1.jpg", "img/img3.jpg", "img/img4.jpg", "img/img5.jpg", "img/img6.jpg"]
+    var img2 = document.getElementById('img11')
+    var idx = 0
+    var nu = 0
+    setInterval(function () {//定时调用无限执行, 
+      //clearInterval (timer) 可以清除定时器
+      idx++;
+      idx %= arr.length
+      img2.src = arr[idx]
+    }, 1500)
+    pre.onclick = function () {
+      nu--;
+      if (nu < 0) {
+        nu = arr.length - 1
+      }
+      img.src = arr[nu]
+    }
+    next.onclick = function () {
+      nu++;
+      if (nu > arr.length - 1) {
+        nu = 0
+      }
+      img.src = arr[nu]
+    }
+    //setTimeout(function(){},1000) 延时调用 只执行一次
+    //clearTimeout来清理定时器
+  </script>
+
+</body>
+
+</html>

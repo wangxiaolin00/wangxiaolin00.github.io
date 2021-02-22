@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const a = [1, 2, 3]
+    const b = [2, 3, 4]
+    var set = new Set([...a, ...b])//求数组ab得并集
+    var intersect = new Set([...a].fliter(x => b.includes(x)))//求集合的交集
+    var difference = new Set([...a].filter(x => !b.includes(x)))//求集合的差集
+    console.log(set);
+    console.log(intersect);
+    console.log(difference);
+    // function Set() {
+    //   this.items = {}
+    //   Set.prototype.add = function (value) {
+    //     if (this.items.has(value)) {
+    //       return false
+    //     }
+    //     this.items[value] = value
+    //     return true
+    //   }
+    //   //has方法
+    //   Set.prototype.has = function (value) {
+    //     return this.items.hasOwnProperty(value)
+    //   }
+    //   Set.prototype.remove = function (value) {
+    //     if (!this.items.has(value)) {
+    //       return false
+    //     }
+    //     delete this.items[value]
+    //     return true
+    //   }
+    //   Set.prototype.clear = function () {
+    //     this.items = {}
+    //   }
+    //   Set.prototype.size = function () {
+    //     return Object(this.items).length
+    //   }
+    //   Set.prototype.values = function () {
+    //     return Object.keys(this.items)
+    //   }
+    // }
+    function qiubingji(thisset, thatset) {
+      var set = new Set()
+      for (var i = 0; i < thisset.length; i++) {
+        if (!set.has(thisset[i])) {
+          set.add(thisset[i])
+        }
+      }
+      for (var i = 0; i < thatset.length; i++) {
+        if (!set.has(thatset[i])) {
+          set.add(thatset[i])
+        }
+      }
+      return [...set]//将对象集合set转化为数组的方法[...set]
+    }
+    console.log(qiubingji(a, b));
+    console.log(typeof qiubingji(a, b));
+  </script>
+
+</body>
+
+</html>

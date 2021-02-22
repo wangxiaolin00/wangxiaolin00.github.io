@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,
+   initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .a {
+      font-size: 20px;
+      font-style: italic;
+      font-weight: bold;
+      font-family: "Micrsoft YaHei";
+    }
+
+    /* 把class属性中有barren的所有元素变为斜体 */
+    span[class~="barren"] {
+      font-style: italic;
+      color: red;
+    }
+
+    /* [foo^="bar"] 选择foo属性值以"bar"开头的所有元素。 */
+    /* [foo$="bar"] 选择foo属性值以"bar"结尾的所有元素。 */
+    /* [foo*="bar"] 选择foo属性值中包含字串"bar" 的所有元素 */
+    /* [lang |="en"] {color:red;}选择lang属性等于en或en-开头的所有元素。 */
+    img[src |="figure"] {
+      border: 1px solid gray;
+    }
+
+    h2:first-letter {
+      font-size: 20em;
+    }
+
+    h2:before,
+    h2:after {
+      content:"{{}}";
+      color: royalblue;
+    }
+
+    .nav {
+      height: 300px;
+      width: 300px;
+      border-left: 200px solid #000;
+      border-top: 200px solid red;
+      border-bottom: 200px solid yellow;
+      border-right: 200px solid fuchsia;
+    }
+
+    .afa {
+      height: 0;
+      width: 0;
+      border: 200px solid white;
+      border-color: yellow red black pink;
+
+    }
+
+    .fas {
+      height: 1000px;
+      width: 1000px;
+      background-color: red;
+      background-image: url(image111/img.jpg);
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .fhhj {
+      height: 100%;
+      width: 100%;
+      background-image: url(image/guanyu.igp);
+      background-repeat: no-repeat;
+      background-position: center top;
+    }
+
+    /* 背景图片会压住背景颜色 */
+    /* 选择图片文件名为figure或者figure-的所有图片设置边框为1px灰色实线 */
+    /* background-position:center;
+    后面只有一个值时，默认第二个值水平或垂直居中； */
+  </style>
+
+</head>
+
+<body>
+  <h2>asfkjalfalj</h2>
+  <div class="a">fafdakfk
+  </div>
+  <div>
+    <span class="barren warning">
+      decoration
+    </span>
+  </div>
+  <div class="nav">hello world</div>
+  <div class="afa">hello world</div>
+  <div class="fas"></div>
+  <div class="fghj"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width= , initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="file" name="" id="">
+  <script>
+    var input = document.querySelector('input')
+    input.addEventListener('change', function () {
+      if (input.files.length > 0) {
+        var file = input.files[0];
+        console.log('YOU CHANGE', file.name);
+        if (file.type) {
+          console.log('It has type', file.type);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+@font-face {
+  font-family:FontAwesome;
+  src:url('fontawesome-webfont.woff2');
+}
+.fa {
+  display:inline-block;
+  font-weight:normal;
+  font-family: FontAwesome;
+  font-style:normal;
+}
+fa-fw {
+  width: 1.3em;
+}
+.fa-2x {
+  font-size: 2em;
+}
+.fa-3x {
+  font-size:3em;
+}
+.fa-4x {
+  font-size: 4em;
+
+}
+
+.fa-5x {
+  font-size: 5em;
+}
+
+
+
+
+.fa-ul {
+  list-style: none;
+}
+.fa-lg {
+  font-size: 1.333333em;
+  line-height: 0.75em;
+  vertical-align:-15%
+}
+.fa-star::before {
+  content:"\f005";
+}
+.fa-heart::before {
+  content:"\f002";
+}
+.fa-star-o::before {
+  content:"\f006";
+}
+.fa-linux::before {
+  content:"\f003";
+}

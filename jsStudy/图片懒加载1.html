@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img {
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+
+<body>
+  <img width="500" height="400"
+    data-src="https://travel.12306.cn/imgs/resources/uploadfiles/images/fcd7173f-7651-46e7-a126-bdc199e1f6f7_product_W572_H370.jpg"
+    alt="">
+  <img width="500" height="400"
+    data-src="https://travel.12306.cn/imgs/resources/uploadfiles/images/243945e6-c45d-4870-9cf5-77e488068646_product_W572_H370.jpg"
+    alt="">
+  <img width="500" height="400"
+    data-src="https://travel.12306.cn/imgs/resources/uploadfiles/images/b0c76b21-531b-4af4-a607-cf5672c72ded_product_W572_H370.jpg"
+    alt="">
+  <img width="500" height="400"
+    data-src="https://travel.12306.cn/imgs/resources/uploadfiles/images/d9ae79de-2f3f-4e9f-ad6e-bdc291dda92a_product_W572_H370.jpg"
+    alt="">
+  <img width="500" height="400"
+    data-src="https://travel.12306.cn/imgs/resources/uploadfiles/images/c7c03732-3c86-4308-aea7-df747d4999e8_product_W572_H370.jpg"
+    alt="">
+  <img width="500" height="400"
+    data-src="https://travel.12306.cn/imgs/resources/uploadfiles/images/8b36f9a7-f780-4e71-b719-9300109a9ff2_product_W572_H370.jpg"
+    alt="">
+
+  <script>
+    var imgs = Array.from(document.querySelectorAll('img'))
+
+    window.addEventListener('scroll', function (e) {
+      var visibleImgs = imgs.filter(img => {
+        return img.dataset.src
+      }).filter(img => {
+        var top = img.getBoundingClientRect().top
+        return top < window.innerHeight && top > 0
+      })
+
+
+      visibleImgs.forEach(img => {
+        img.src = img.dataset.src
+        delete img.dataset.src
+        img.style.opacity = '0'
+        img.onload = function (e) {
+          requestAnimationFrame(() => {
+            img.style.transition = '1s'
+            img.style.opacity = '1'
+          })
+        }
+      })
+    })
+
+    window.onscroll = function () {
+      console.log(1)
+    }
+    // window.onscroll()
+
+    window.dispatchEvent(new Event('scroll'))
+
+  </script>
+</body>
+
+</html>

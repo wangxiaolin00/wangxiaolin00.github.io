@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1 {
+      width: 100px;
+      height: 70px;
+      background-color: cyan;
+    }
+  </style>
+</head>
+
+
+<body>
+  <button class="bt1">gasdf</button>
+  <div class="box1">aaa</div>
+  <script>
+    //window.onload=function() {
+    //window绑定一个事件 onload 
+    // 对应的响应函数会在页面加载完成之后执行
+    //}
+    function gettime() {
+      let date = new Date()//获得当前系统时间
+      let year = date.getFullYear()//获得当前时间的年份
+      let month = date.getMonth() + 1//获得当前时间的月份 要加一
+      let dates = date.getDate()// 获得当前时间的日 
+      let day = date.getDay()//获得0-6 7个数字表示的星期几 
+      let arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+      return '当前时间是:' + year + '年' + month + '月' + dates + '日' + arr[day]
+
+    }
+    var bt = document.querySelector('.bt1')
+    var div1 = document.querySelector('.box1')
+    bt.onclick = function () {
+      div1.innerHTML = gettime()
+      div1.backgroundColor = 'red'
+    }
+
+
+
+
+
+    var dateTime = /(\d{1,2})-(\d{1,2})-(\d{4})/
+    var str = "30-1-2003"
+    var m = dateTime.exec(str)
+    //正则.exec(字符串)
+    //返回一个数组 将正个的匹配结果放在 数组索引0的位置
+    //   将第一个分组最后匹配的结果放在数组索引1的位置 如果没有返回undefined
+    //   将第二个分组最后匹配的结果放在数组索引2的位置 如果没有返回undefined
+    //   将第三个分组最后匹配的结果放在索引3的位置
+    console.log(m);
+    function daojishi(time) {
+      let nowtime = +new Date()//现在的时间戳
+      let futuretime = +new Date(time)//输入的将来的时间戳
+      let times = (futuretime - nowtime) / 1000
+      var d = parseInt(times / 60 / 60 / 24)//总秒数 除以3600化成小时数 再除以24得到天数
+      var d = d < 0 ? '0' + d : d;
+      var h = parseInt(times / 60 / 60 % 60)
+      var h = h < 0 ? '0' + h : h;
+      var m = parseInt(times / 60 % 60)
+      var m = m < 0 ? '0' + m : m;
+      var s = parseInt(times % 60)
+      var s = s < 0 ? '0' + s : s;
+      return '倒计时' + d + '天' + h + '小时' + m + '分钟' + s + '秒'
+    }
+    console.log(daojishi('2021-01-01 00:00:00'));
+  </script>
+  utc 世界协调世界
+  格林威治世界
+  d.setFullYear(2021)
+
+</body>
+
+</html>

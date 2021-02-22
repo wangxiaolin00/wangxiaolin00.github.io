@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //算法复杂度:算法所花的时间与空间(运行过程中所占的内存)数据结构与算法 ---c语言描述
+    //当一个函数用自己来定义叫递归
+    //函数调用栈
+    //基准情形
+    //推进情形
+    //设计法则
+    //循环效益法则
+    // var cache = []
+    // function fibb(n) {
+    //   if (n == 1 || n == 2) {
+    //     return 1
+    //   } else {
+    //     if (cache[n] != undefined) {
+    //       return cache[n]
+    //     }
+    //     var answer = fibb(n - 1) + f(n - 2)
+    //     cache[n] = answer
+    //     return answer
+    //   }
+    // }
+    function clone(obj) {//深度拷贝/复制
+      if (obj == null || typeof obj == 'object') {
+        return obj
+      }
+      const newobj = new obj.constructor()//获得对象的构造函数.可以重复利用其来实力恶化同类对象
+      for (let key in Object.getOwnPropertyDescriptor(obj)) {
+        newobj[key] = clone(obj[key])
+      }
+      return newobj
+    }
+
+    //递归数组的 深度等于log2n 时间复杂度是n*log2n
+    //插入排序
+    function charusort(b) {//插入排序
+      const a = b
+      for (var i = 0; i < a.length; i++) {
+        let card = a[i]//抓到的牌
+        let j = i//j代表最终牌插入的位置
+        while (j > 0 && card < a[j - 1]) {
+          a[j] = a[j - 1]
+          j--
+        }
+        a[j] = card
+      }
+      return a
+    }
+    const A = [2, 3, 5, 3]
+    const B = charusort(A)
+    console.log(B);
+    //深度比较
+    function deepComepare(a, b) {
+      if (a === null || typeof a !== 'object' || b === null || typeof b !== 'object') {
+        return a === b
+      }
+      const proA = Object.getOwnPropertyDescriptor(a)
+      const proB = Object.getOwnPropertyDescriptor(b)
+      if (Object.keys(proA).length !== Object.keys(proB).length) {
+        return false
+      }
+      return Object.keys(proA).every(
+        key => deepComepare(a[key], b[key])
+      )
+    }
+    //函数运行完成就就会销毁
+    //暴力破解法有几个for循环嵌套就有时间复杂度T(N)=O(N^3)//这是有三个for循环嵌套
+    //分而治之法,时间复杂度为T(N)=O(NlogN)
+    //在线处理法时间复杂度为T(N)=O(N)
+    //时间复杂度:指的是算法执行语句的次数而不是时间复杂度的计算不是就算程序的集体运行时间
+    //空间复杂度:是对一个算法在运行过程中临时占用存储占据空间大小的量度
+    //方法指和一个对象实列有联系成为Method
+    //尾递归在一些情况会被优化
+    //indexOf()复杂度是O(N)
+    //~~可以将undefined转为0
+    // function wuchongfuzichuang(s) {//无重复最长子串滑动窗口的方法
+    //   var start = 0;
+    //   var end = 0;
+    //   var map = {}
+    //   for (var end = 0; end < s.length; end++) {
+    //     var char = s[end]
+    //     if (char in map) {
+    //       map[char]++
+    //     } else {
+    //       map[char] = 1
+    //     }
+    //     if (map[char == 2]) {
+    //       while (ture) {
+    //         let char = s[start++]
+    //         map[char]--
+    //         if (map[char] == 1) {//一旦剪成一说明它刚刚是2
+    //           break
+
+    //         }
+    //       }
+    //     } else {
+    //       max = Math.max(max, end - start + 1)
+    //     }
+    //   }
+    //   return max
+
+    // }
+    //sort()排序默认就是按照字母顺序排的
+    function isisomeorphic(s, t) {
+      let obj1 = {}
+      let obj2 = {}
+      for (var i = 0; i < t.length; i++) {
+        if (!obj1.hasOwnProperty(t[i])) {
+          obj1[t[i]] = s[i]
+        } else {
+          if (obj1[t[i]] !== s[i]) {
+            return false
+          }
+        }
+        if (!obj2.hasOwnProperty(s[i])) {
+          obj2[s[i]] = t[i]
+        } else {
+          if (obj2[s[i]] !== t[i]) {
+            return false
+          }
+        }
+      }
+      return true
+    }
+
+
+
+
+  </script>
+
+</body>
+
+</html>
